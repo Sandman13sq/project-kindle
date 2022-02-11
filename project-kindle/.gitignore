@@ -58,3 +58,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Misc. files
+project-kindle/Packages/manifest.json
+project-kindle/Packages/packages-lock.json
+project-kindle/ProjectSettings/ProjectVersion.txt
