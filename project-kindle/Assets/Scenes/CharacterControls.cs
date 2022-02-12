@@ -3,11 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class CharacterControls : MonoBehaviour
 {
-    private float moveSpeed = 10;
-    private CharacterController controller;
+    private float moveSpeed = 8;
+    private float jumpBump = 1.0f;
+    
+    private Rigidbody2D rigBod;
 
     private void Start() {
-        controller = gameObject.GetComponent<CharacterController>();
+        rigBod = gameObject.GetComponent<Rigidbody2D>();
         Debug.Log("Tatu wuz here!");
     }
 
@@ -18,13 +20,11 @@ public class CharacterControls : MonoBehaviour
     }
 
     void movementHandler() {
-        float upDown = Input.GetAxis("Vertical"); //Up = 1, Down = -1
         float leftRite = Input.GetAxis("Horizontal"); //left = -1, right = 1
 
-        //Debug.Log("upDown is: " + upDown);
-        //Debug.Log("leftRite is: " + leftRite);
+        Vector3 moveVect = new Vector3(leftRite, 0.0f, 0.0f) * Time.deltaTime * moveSpeed;
+        transform.position += moveVect;
 
-        Vector3 moveVect = new Vector3(leftRite, upDown, 0.0f) * Time.deltaTime * moveSpeed;
-        controller.Move(moveVect);
+        //if()
     }
 }
