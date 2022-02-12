@@ -14,7 +14,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.2d.common": {
-      "version": "4.0.4",
+      "version": "4.1.0",
       "depth": 1,
       "source": "registry",
       "dependencies": {
