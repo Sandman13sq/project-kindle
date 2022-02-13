@@ -1,7 +1,7 @@
 # Project Kindle
 A platformer-shooter where you take control of Kindle and help her defeat evil monsters called the Onyx and stop the mastermind Coro from sending the Dream World into doom!
 
-Made in Unity. Semester project for CMSC 493 Spring 2020 at UMBC.
+Made in Unity. Semester project for CMSC 493 Spring 2022 at UMBC.
 
 ## Team Members
 - Isaiah Hull (Programmer)
