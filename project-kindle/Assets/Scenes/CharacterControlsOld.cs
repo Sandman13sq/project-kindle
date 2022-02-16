@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 //Make sure the name of the class is the same as the name of the file!!!
-public class CharacterControls : MonoBehaviour
+public class CharacterControlsOld : MonoBehaviour
 {
     //Constants
     private float moveSpeed = 8;
@@ -34,7 +34,7 @@ public class CharacterControls : MonoBehaviour
         //Input.GetAxis() gets the value of whatever is being pressed down. "Horizontal" checks for the left and right arrows,
         //A and D, and the left and right stick of a controller. for keyboard controls, slowly builds up to -1 and 1.
         float leftRite = Input.GetAxis("Horizontal"); //left = -1, right = 1
-
+ 
         //Vectors are basically arrays of floats. access them using moveVect.x, y, z
         //timedelta is the time it takes for 1 frame to process. we use it here to smooth out
         //the movement
@@ -44,6 +44,8 @@ public class CharacterControls : MonoBehaviour
         //transform.position gets the current position of the sprite, you can mess with it however you like
         transform.position += moveVect;
 
+        //if the z key is being pushed down, and while we are not already in the air, we jump.
+        //the second part of this condition is so the player can't double jump.
         if(Input.GetKeyDown("z") && Mathf.Abs(rigBod.velocity.y) < 0.001f){
             //adds a force that causes the sprite to move with a certain strength.
             rigBod.AddForce(jumpStr, ForceMode2D.Impulse);
