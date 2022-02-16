@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5982961697772257262}
   - component: {fileID: 1031831665815643687}
-  - component: {fileID: 3438221310191812404}
   m_Layer: 0
   m_Name: kindle_early
   m_TagString: Untagged
@@ -83,18 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3438221310191812404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1581602760741384674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bee4a22357e0994eb66a49a360cdf29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9180626447112833982
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,6 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4152284372441027064}
   - component: {fileID: 3390753258947208251}
+  - component: {fileID: 587598538154807327}
   m_Layer: 0
   m_Name: prf_entity
   m_TagString: Untagged
@@ -143,9 +131,31 @@ MonoBehaviour:
   entitytype: 0
   entityflag: 0
   state: 0
+  x: 0
+  y: 0
+  xspeed: 0
+  yspeed: 0
+  xacc: 0
+  yacc: 0
   hitpointsmax: 0
   hitpoints: 0
   attack: 0
   energy: 0
   radius: 
   radiusmode: 0
+--- !u!114 &587598538154807327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9180626447112833982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bee4a22357e0994eb66a49a360cdf29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 0
+  y: 0
+  xspeed: 0
+  yspeed: 0
