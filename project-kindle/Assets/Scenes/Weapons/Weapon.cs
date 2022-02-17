@@ -22,9 +22,12 @@ public class Weapon : MonoBehaviour
     public WeaponLvl activeweaponlvl;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         weaponlvlenergy = new int[] {10, 20, 30};
+        levelmax = 2;
+
+        Debug.Log(weaponlvlenergy.ToString());
     }
 
     // Update is called once per frame
@@ -47,6 +50,7 @@ public class Weapon : MonoBehaviour
     int CalcLevelEnergy(int _level)
     {
         int outenergy = 0;
+        Debug.Log("Level: " + _level.ToString());
         for (int i = 0; i <= _level; i++)
         {
             outenergy += weaponlvlenergy[i];
@@ -84,6 +88,8 @@ public class Weapon : MonoBehaviour
     // Adds energy to weapon, increasing level if sufficient
     public int AddEnergy(int value, bool showgraphic = false)
     {
+        Debug.Log(value);
+
         int e = value; // Leftover energy (if any)
         int elvl;
 
@@ -98,7 +104,7 @@ public class Weapon : MonoBehaviour
                 e -= elvl-energy;   // Subtract out enrgy by distance to next level
                 energy = elvl;
                 level++;
-                activeweaponlvl = weaponlvldata[level];
+                //activeweaponlvl = weaponlvldata[level];
                 elvl = CalcLevelEnergy(level);
             }
 
@@ -118,14 +124,28 @@ public class Weapon : MonoBehaviour
         // Value is negative
         else if (value < 0)
         {
+            elvl = CalcLevelEnergy(level-1);
+
             // New energy drops below current level
-            if (level > 0)
+            while (level > 0 && energy+e < CalcLevelEnergy(level-1))
             {
-                if (energy + e < CalcLevelEnergy(level-1))
-                {
-                    energy += e;
-                    e = 0;
-                }
+                level--;
+                e += energy-elvl;
+                energy = elvl;
+                elvl = CalcLevelEnergy(level-1);
+            }
+
+            // Clamp energy
+            if (level == 0 && energy+e < 0)
+            {
+                e += energy-elvl;
+                energy = 0;
+            }
+            // Just add energy
+            else
+            {
+                energy += e;
+                e = 0;
             }
         }
 
