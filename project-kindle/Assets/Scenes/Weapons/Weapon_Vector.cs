@@ -5,12 +5,10 @@ using UnityEngine;
 
 public class Weapon_Vector : Weapon
 {
-
-
     // Start is called before the first frame update
     void Start()
     {
-        
+        base.Start();
     }
 
     // Update is called once per frame
@@ -18,7 +16,12 @@ public class Weapon_Vector : Weapon
     {
         if (Input.GetKeyDown("e"))
         {
-            AddEnergy(4);
+            AddEnergy(3);
+        }
+
+        if (Input.GetKeyDown("r"))
+        {
+            AddEnergy(-7);
         }
     }
 }
