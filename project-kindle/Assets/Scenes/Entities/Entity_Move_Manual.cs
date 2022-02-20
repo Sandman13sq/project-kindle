@@ -2,16 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Entity_Move_Manual : MonoBehaviour
+public class Entity_Move_Manual : Entity
 {
 	// Variables =========================================
 
-	public float x, y;
-	public float xspeed, yspeed;
 	private const float floory = 136.0f;
 
-	public bool onground;
-	public bool inair;
 	public bool jumpheld;
 	public float jumpbuffer;
     private float jumpbuffertime = 7.0f; // Max number of frames ahead of time where a jump press will still be read
@@ -25,11 +21,6 @@ public class Entity_Move_Manual : MonoBehaviour
 		Application.targetFrameRate = 60; // Temporary. Will remove later
 
 		spriterdr = GetComponent<SpriteRenderer>();
-		
-		x = transform.position.x;
-		y = transform.position.y;
-		xspeed = 0.0f;
-		yspeed = 0.0f;
 	}
 
 	// Update is called once per frame
@@ -119,34 +110,15 @@ public class Entity_Move_Manual : MonoBehaviour
 		}
 
 		// Update speeds
-		x += xspeed;
-		y += yspeed;    // No values yet
+		UpdateMovement();
 
-		// Ground Check
-		float ydiff = Mathf.Abs(spriterdr.sprite.bounds.min.y-spriterdr.sprite.bounds.center.y);
-		
-		RaycastHit2D groundcollision = Physics2D.Raycast(
-            new Vector2(x, y), 
-            new Vector2(0.0f, -1.0f), 
-            ydiff+1.0f
-            );
-		
-		if (groundcollision.collider != null)
+		// Collision
+		CollisionFlag collisionresult = EvaluateCollision(
+			CollisionFlag.CHANGESPEED | CollisionFlag.DOUBLEX);
+		if ( collisionresult.HasFlag(CollisionFlag.DOWN) )
 		{
-			//Debug.Log(groundcollision.collider.name);
-			y = groundcollision.point.y+ydiff;
 			yspeed = Mathf.Max(yspeed, 0.0f);
-			onground = true;
 		}
-		else
-		{
-			onground = false;
-		}
-
-		inair = !onground;
-
-		// Update object position
-		transform.position = new Vector3(x, y, 0.0f);
 	}
 
 }

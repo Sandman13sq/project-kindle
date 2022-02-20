@@ -5,16 +5,16 @@ using UnityEngine;
 public class Entity_Energy0 : Entity
 {
     private float gravity = -0.16f;
-    private float terminal = -8.0f;
-    [SerializeField] private float colorstep = 0.0f;
+    private float terminalvelocity = -8.0f;
+    private float colorstep = 0.0f;
 
-    [SerializeField] private Color color1;
-    [SerializeField] private Color color2;
+    private Color color1 = new Color(0.5f, 1.0f, 1.0f);
+    private Color color2 = new Color(1.0f, 1.0f, 1.0f);
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        colorstep = Random.Range(0.0f, 1.0f);
     }
 
     // Update is called once per frame
@@ -25,10 +25,15 @@ public class Entity_Energy0 : Entity
         spriterenderer.color = Color.Lerp(color1, color2, Mathf.Sin(colorstep*colorstep));
 
         // Move
-        yspeed += gravity;
-
-        if ( (EasyCollision() & (1 <<3) ) != 0 )
+        if (yspeed > terminalvelocity)
         {
+            yspeed = Mathf.Max(yspeed+gravity, terminalvelocity);
+        }
+
+        // If ground collision...
+        if ( (EvaluateCollision() & CollisionFlag.DOWN ) != 0 )
+        {
+            // Dampen yspeed on each bounce
             yspeed = Mathf.Max( Mathf.Abs(yspeed) * 0.8f, 3.0f);
         };
 
