@@ -1866,11 +1866,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1941051062}
   - component: {fileID: 1941051061}
-  - component: {fileID: 1941051060}
   - component: {fileID: 1941051063}
+  - component: {fileID: 1941051064}
+  - component: {fileID: 1941051060}
   m_Layer: 0
   m_Name: kindle_manual
-  m_TagString: Player
+  m_TagString: player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1890,6 +1891,7 @@ MonoBehaviour:
   spriterenderer: {fileID: 1941051061}
   worldcollider: {fileID: 1941051063}
   hitcollider: {fileID: 1941051063}
+  rigidbody: {fileID: 1941051064}
   entityindex: 0
   entitytype: 0
   eventkey: 
@@ -1987,6 +1989,27 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 39, y: 72}
   m_Direction: 0
+--- !u!50 &1941051064
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941051059}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &1984117839
 GameObject:
   m_ObjectHideFlags: 0
@@ -2684,6 +2707,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8879900616047269888, guid: 2749cde8c97173c4ab991ea7d244bc69, type: 3}
+      propertyPath: m_UseFullKinematicContacts
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2749cde8c97173c4ab991ea7d244bc69, type: 3}
 --- !u!1001 &5839127625602043420
@@ -2775,6 +2802,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Energy 20
       objectReference: {fileID: 0}
+    - target: {fileID: 7462035720977977038, guid: e9c2bcc733be82a48acb3a216d9b5539, type: 3}
+      propertyPath: m_UseFullKinematicContacts
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8405208467720477270, guid: e9c2bcc733be82a48acb3a216d9b5539, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -2833,6 +2864,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5258224757377145157, guid: 8ff8b62af118a4143981b1d1a5b74ee1, type: 3}
+      propertyPath: m_UseFullKinematicContacts
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8193625256471519397, guid: 8ff8b62af118a4143981b1d1a5b74ee1, type: 3}
       propertyPath: m_Name
       value: Energy 5

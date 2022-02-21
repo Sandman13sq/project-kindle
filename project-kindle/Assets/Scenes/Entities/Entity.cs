@@ -24,6 +24,7 @@ public class Entity : MonoBehaviour
     public SpriteRenderer spriterenderer;
     public Collider2D worldcollider;    // Used to interact with the world
     public Collider2D hitcollider;  // Used for hitbox collisions
+    public Rigidbody2D rigidbody;  // Necessary for collision detection
 
     // Internal
     public int entityindex; // Represents the position of entity when instanced
@@ -49,12 +50,14 @@ public class Entity : MonoBehaviour
     public int attack;  // Damage dealt to player on contact
     public int energy;  // Energy dropped when defeated
 
+    // Common ================================================================
+
     // Start is called before the first frame update
     void Start()
     {
         
     }
-
+    
     // Update is called once per frame
     void Update()
     {

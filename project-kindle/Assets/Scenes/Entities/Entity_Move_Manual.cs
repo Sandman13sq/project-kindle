@@ -12,15 +12,14 @@ public class Entity_Move_Manual : Entity
 	public float jumpbuffer;
     private float jumpbuffertime = 7.0f; // Max number of frames ahead of time where a jump press will still be read
 
-	public Collider2D collider;
-	private SpriteRenderer spriterdr;
+	[SerializeField] private PlayerData playerdata;	// Holds health, energy, level, etc.
 
+	// Common ===============================================================
+	
 	// Start is called before the first frame update
 	void Start()
 	{
 		Application.targetFrameRate = 60; // Temporary. Will remove later
-
-		spriterdr = GetComponent<SpriteRenderer>();
 	}
 
 	// Update is called once per frame
@@ -41,7 +40,7 @@ public class Entity_Move_Manual : Entity
 		// Flip sprite if moving left
         if (xlev != 0.0)
         {
-            spriterdr.flipX = xlev < 0.0f;
+            spriterenderer.flipX = xlev < 0.0f;
         }
 
 		// Jump buffer
@@ -121,4 +120,7 @@ public class Entity_Move_Manual : Entity
 		}
 	}
 
+	// Methods ===============================================================
+
+	public PlayerData GetPlayerData() {return playerdata;}
 }

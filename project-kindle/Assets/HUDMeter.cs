@@ -67,7 +67,7 @@ public class HUDMeter : MonoBehaviour
     }
 
     // Updates values
-    void SetValue(int _value)
+    public void SetValue(int _value)
     {
         if (_value < 0) {value = 0;}
         else if (_value > valuemax) {value = valuemax;}
@@ -75,12 +75,12 @@ public class HUDMeter : MonoBehaviour
 
         provisionalstep = provisionaltime;
     }
-    void SetValueMax(int _value) {valuemax = _value < 0? 0: value;}
-    void AddValue(int _value) {SetValue(value+_value);}
-    void AddValueMax(int _value) {SetValueMax(valuemax+_value);}
+    public void SetValueMax(int _value) {valuemax = _value < 0? 0: value;}
+    public void AddValue(int _value) {SetValue(value+_value);}
+    public void AddValueMax(int _value) {SetValueMax(valuemax+_value);}
 
     // Updates mask graphic and text to represent value
-    void UpdateMeterDisplay()
+    protected void UpdateMeterDisplay()
     {
         // Move meter objs
         var xx = spritewidth * (1.0f - (float)value/(float)valuemax);

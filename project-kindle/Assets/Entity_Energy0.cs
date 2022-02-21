@@ -17,6 +17,19 @@ public class Entity_Energy0 : Entity
         colorstep = Random.Range(0.0f, 1.0f);
     }
 
+    void OnCollisionEnter2D(Collision2D c)
+    {
+        if (c.gameObject.tag == "player")
+        {
+            int leftoverenergy = c.gameObject.GetComponent<Entity_Move_Manual>().GetPlayerData().AddEnergy(energy);
+            energy = leftoverenergy;
+            if (energy == 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
