@@ -19,6 +19,9 @@ public class Entity : MonoBehaviour
         DOUBLEY = 1 << 2,   // Use two raycasts when checking up/down
     }
 
+    protected int LAYER_WORLD = 1 << 3;
+    protected int LAYER_ENTITY; 
+
     // Variables ======================================================
 
     public SpriteRenderer spriterenderer;
