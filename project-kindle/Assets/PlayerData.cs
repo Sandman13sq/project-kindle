@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
-    [SerializeField] private int health;
-    [SerializeField] private int healthmax;
-    [SerializeField] private int energy;
-    [SerializeField] private int energymax;
-    
     [SerializeField] private HUDMeter healthmeter;
     [SerializeField] private HUDMeter energymeter;
 
@@ -27,6 +22,24 @@ public class PlayerData : MonoBehaviour
     }
 
     // Methods ==================================================
+
+    public int SetHealth(int value)
+    {
+        healthmeter.SetValue(value);
+        return 0;
+    }
+
+    public int AddHealth(int value)
+    {
+        healthmeter.AddValue(value);
+        return 0;
+    }
+
+    public int SetEnergy(int value)
+    {
+        energymeter.SetValue(value);
+        return 0;
+    }
     
     public int AddEnergy(int value)
     {

@@ -45,8 +45,8 @@ public class Entity : MonoBehaviour
     protected bool onground;
     
     // Stats
-    public int hitpointsmax;    // Number of hits an entity can take
-    public int hitpoints;   // Remaining hitpoints
+    public int health;   // Remaining hitpoints
+    public int healthmax;    // Number of hits an entity can take
     public int attack;  // Damage dealt to player on contact
     public int energy;  // Energy dropped when defeated
 
@@ -67,12 +67,44 @@ public class Entity : MonoBehaviour
     // Entity ================================================================
     
     // Called when pressing down on an entity
-    public void Interact()
+    public virtual void Interact()
     {
         if (eventkey != "")
         {
             // Run Event
         }
+    }
+
+    // Called when resulting health from ChangeHealth is zero
+    public virtual void Defeat()
+    {
+        Destroy(gameObject);
+    }
+
+    // Changes health value by amount. Returns change in health
+    public virtual int ChangeHealth(int value)
+    {
+        int prehealth = health;
+
+        // Losing health
+        if (value < 0)
+        {
+            health += value;
+
+            if (health < 0) 
+            {
+                health = 0;
+                Defeat();
+            }
+        }
+        // Gaining health
+        else if (value > 0)
+        {
+            health += value;
+            if (health > healthmax) {health = healthmax;}
+        }
+
+        return health-prehealth; // Return change in health
     }
 
     // Adds speed to positions
@@ -93,8 +125,6 @@ public class Entity : MonoBehaviour
     {
         CollisionFlag collhit = 0;
         RaycastHit2D rayhit;
-        float offset;
-        int n;
 
         float x = transform.position.x;
         float y = transform.position.y;

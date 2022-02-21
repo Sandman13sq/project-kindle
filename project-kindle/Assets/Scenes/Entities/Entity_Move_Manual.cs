@@ -20,6 +20,8 @@ public class Entity_Move_Manual : Entity
 	void Start()
 	{
 		Application.targetFrameRate = 60; // Temporary. Will remove later
+
+		playerdata.SetHealth(health);
 	}
 
 	// Update is called once per frame
@@ -123,4 +125,12 @@ public class Entity_Move_Manual : Entity
 	// Methods ===============================================================
 
 	public PlayerData GetPlayerData() {return playerdata;}
+
+	public override int ChangeHealth(int value)
+	{
+		int healthdiff = base.ChangeHealth(value);
+		playerdata.SetHealth(health);
+
+		return healthdiff;
+	}
 }
