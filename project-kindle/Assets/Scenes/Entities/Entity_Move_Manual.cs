@@ -13,6 +13,10 @@ public class Entity_Move_Manual : Entity
     private float jumpbuffertime = 7.0f; // Max number of frames ahead of time where a jump press will still be read
 
 	[SerializeField] private PlayerData playerdata;	// Holds health, energy, level, etc.
+	[SerializeField] private GameObject projectile;	// Temporary until we find a better way that doesn't require the inspector
+	[SerializeField] private Sprite[] sprites;
+	private int spriteindex;
+	private int recentshot;
 
 	// Common ===============================================================
 	
@@ -42,6 +46,7 @@ public class Entity_Move_Manual : Entity
 		// Flip sprite if moving left
         if (xlev != 0.0)
         {
+			rightsign = (xlev > 0.0f)? 1.0f: -1.0f;
             spriterenderer.flipX = xlev < 0.0f;
         }
 
@@ -83,7 +88,7 @@ public class Entity_Move_Manual : Entity
 					xspeed -= Mathf.Sign(xspeed) * movedeceleration;
 				}
 			}
-
+			
 			// Jump
             if ( jumpbuffer > 0.0f )
             {
@@ -119,6 +124,52 @@ public class Entity_Move_Manual : Entity
 		if ( collisionresult.HasFlag(CollisionFlag.DOWN) )
 		{
 			yspeed = Mathf.Max(yspeed, 0.0f);
+		}
+
+		// temp schüt
+		if (Input.GetKeyDown("x"))
+		{
+			float xaim, yaim;
+
+			if (ylev != 0.0f)
+			{
+				xaim = 0.0f;
+				yaim = ylev;
+			}
+			else
+			{
+				xaim = rightsign;
+				yaim = 0.0f;
+			}
+
+			WeaponProjectile proj = Instantiate(projectile).GetComponent<WeaponProjectile>();
+			proj.transform.position = transform.position + new Vector3(xaim*40.0f, yaim*48.0f, 0.0f);
+			proj.SetDirectionRad(Mathf.Atan2(yaim, xaim), rightsign);
+			recentshot = 0;
+		}
+
+		recentshot += 1;
+
+		// Temporary Spriting
+		if (ylev > 0)
+		{
+			spriterenderer.sprite = sprites[recentshot < 5? 4: 5];
+		}
+		else
+		{
+			if (recentshot < 5)
+			{
+				spriterenderer.sprite = sprites[7];
+			}
+			else if (recentshot < 50)
+			{
+				spriterenderer.sprite = sprites[6];
+			}
+			else
+			{
+				spriterenderer.sprite = sprites[(recentshot / 10) % 4];
+				spriteindex = (spriteindex + 1) % 4;
+			}
 		}
 	}
 

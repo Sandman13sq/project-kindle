@@ -12,11 +12,12 @@ public class WeaponProjectile : MonoBehaviour
 
     [SerializeField] private float speed;
     [SerializeField] private int damage;
-    private float direction;    // Angle of projectile in degrees
 
     [SerializeField] float lifemax;
     float life;
 
+    const int LAYER_WORLD = 3;
+    const int LAYER_WORLD_BIT = 1 << LAYER_WORLD;
     const int LAYER_ENTITY = 6;
     const int LAYER_ENTITY_BIT = 1 << LAYER_ENTITY;
 
@@ -26,8 +27,7 @@ public class WeaponProjectile : MonoBehaviour
     void Start()
     {
         life = lifemax;
-        
-        SetDirection(direction);
+        SetDirectionDeg(transform.localRotation.eulerAngles[2]);
     }
 
     // Update is called once per frame
@@ -45,23 +45,31 @@ public class WeaponProjectile : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D c)
     {
+        // Interact with entity
         if (c.gameObject.layer == LAYER_ENTITY)
         {
             Entity e = c.gameObject.GetComponent<Entity>();
 
+            // Entity has the shootable flag set
             if (e.isshootable)
             {
                 e.ChangeHealth(-damage);
                 Destroy(gameObject);
             }
         }
+        // Interact with world
+        else if (c.gameObject.layer == LAYER_WORLD)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Methods ===========================================================
 
+    // Update position
     void UpdateMovement(float ts = 1.0f)
     {
-        float directionradians = direction * Mathf.Deg2Rad;
+        float directionradians = transform.localRotation.eulerAngles[2] * Mathf.Deg2Rad;
 
         transform.position = new Vector3(
             transform.position.x + Mathf.Cos(directionradians) * speed * ts,
@@ -70,19 +78,37 @@ public class WeaponProjectile : MonoBehaviour
         );
     }
 
-    void SetDirection(float _direction)
+    // Set projectile direction using radians
+    public void SetDirectionRad(float _direction, float _right = 0.0f)
     {
-        direction = _direction;
-        transform.localRotation = Quaternion.Euler(0.0f, 0.0f, direction);
+        SetDirectionDeg(Mathf.Rad2Deg*_direction, _right);
+    }
+
+    // Set projectile direction using degrees
+    public void SetDirectionDeg(float _direction, float _right = 0.0f)
+    {
+        // Flip y based on direction
+        float cos = Mathf.Cos(_direction*Mathf.Deg2Rad);
+        if (Mathf.Abs(cos) > 0.01f)
+        {
+            spriterenderer.flipY = cos < 0.0f;
+        }
+        else if (Mathf.Abs(_right) > 0.01f)
+        {
+            spriterenderer.flipY = _right < 0.0f;
+        }
+
+        // Update transforms
+        transform.localRotation = Quaternion.Euler(0.0f, 0.0f, _direction);
         spriterenderer.transform.localRotation = transform.localRotation;
     }
 
-    void SetDirection(float _xdir, float _ydir)
+    public void SetDirectionXY(float _xdir, float _ydir)
     {
-        SetDirection( Mathf.Atan2(_ydir, _xdir) );
+        SetDirectionRad( Mathf.Atan2(_ydir, _xdir) );
     }
 
-    void SetSpeed(float _speed)
+    public void SetSpeed(float _speed)
     {
         speed = _speed;
     }

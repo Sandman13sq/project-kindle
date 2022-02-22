@@ -129,3 +129,4 @@ MonoBehaviour:
   healthmax: 2
   attack: 0
   energy: 0
+  energydrops: []

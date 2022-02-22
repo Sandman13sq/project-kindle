@@ -48,13 +48,15 @@ public class Entity : MonoBehaviour
     protected bool onground;
     protected float damageshake = 0.0f;
     protected float damageshaketime = 10.0f;
+    protected float rightsign = 1.0f; // 1 when facing right, -1 when facing left
     
     // Stats
     public int health;   // Remaining hitpoints
     public int healthmax;    // Number of hits an entity can take
     public int attack;  // Damage dealt to player on contact
-    public int energy;  // Energy dropped when defeated
-
+    public int energy; // Energy dropped when defeated (CURRENTLY UNUSED)
+    [SerializeField] private GameObject[] energydrops;  // Energy objects dropped when defeated
+    
     // Common ================================================================
 
     // Start is called before the first frame update
@@ -66,7 +68,9 @@ public class Entity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        UpdateDamageShake();    // Update shake when damaged
+        UpdateMovement();       // Add x and y speeds to position
+        EvaluateCollision();    // Evaluate collision with world geometry
     }
     
     // Entity ================================================================
@@ -80,9 +84,31 @@ public class Entity : MonoBehaviour
         }
     }
 
+    // Drops energy amount
+    protected void DropEnergy()
+    {
+        Entity e;
+        foreach (GameObject obj in energydrops)
+        {
+            e = Instantiate(obj).GetComponent<Entity>();
+            e.transform.position = transform.position;
+            e.SpeedSetDeg(
+                Random.Range(2.0f, 5.0f),
+                Random.Range(80.0f, 100.0f)
+                );
+        }
+    }
+
+    // Called in Defeat() call before destruction
+    public virtual void OnDefeat()
+    {
+        DropEnergy();
+    }
+
     // Called when resulting health from ChangeHealth is zero
     public virtual void Defeat()
     {
+        OnDefeat();
         Destroy(gameObject);
     }
 
@@ -130,6 +156,27 @@ public class Entity : MonoBehaviour
             transform.position.y + yspeed,
             0.0f
         );
+    }
+
+    // Updates shaking when taking damage
+    protected void UpdateDamageShake()
+    {
+        if (damageshake > 0)
+        {
+            damageshake = Mathf.Max(0.0f, damageshake - 1.0f);
+
+            // Set x offset
+            if (damageshake > 0)
+            {
+                float xshift = ((Mathf.Repeat(damageshake, 4.0f) < 2.0f)? -3: 3); // Shift left/right every 4 frames
+                spriterenderer.transform.localPosition = new Vector3(xshift, 0.0f, 0.0f);
+            }
+            // Reset offset
+            else
+            {
+                spriterenderer.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+            }
+        }
     }
 
     // Evaluates collision using "worldcollider" component
@@ -280,11 +327,22 @@ public class Entity : MonoBehaviour
     }
     public void PositionSetX(float x) {transform.position = new Vector3(x, transform.position.y, transform.position.z);}
     public void PositionSetY(float y) {transform.position = new Vector3(transform.position.x, y, transform.position.z);}
+    
     public void SpeedSetX(float spd) {xspeed = spd;}
     public void SpeedSetY(float spd) {yspeed = spd;}
     public void SpeedAddX(float spd) {xspeed += spd;}
     public void SpeedAddY(float spd) {yspeed += spd;}
 
-    
-
+    public void SpeedSetRad(float _speed, float _direction)
+    {
+        xspeed = Mathf.Cos(_direction) * _speed;
+        yspeed = Mathf.Sin(_direction) * _speed;
+    }
+    public void SpeedAddRad(float _speed, float _direction)
+    {
+        xspeed = Mathf.Cos(_direction) * _speed;
+        yspeed = Mathf.Sin(_direction) * _speed;
+    }
+    public void SpeedSetDeg(float _speed, float _direction) {SpeedSetRad(_speed, _direction * Mathf.Deg2Rad);}
+    public void SpeedAddDeg(float _speed, float _direction) {SpeedAddRad(_speed, _direction * Mathf.Deg2Rad);}
 }
