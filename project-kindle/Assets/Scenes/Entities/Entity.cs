@@ -46,6 +46,8 @@ public class Entity : MonoBehaviour
     protected float xspeed;
     protected float yspeed;
     protected bool onground;
+    protected float damageshake = 0.0f;
+    protected float damageshaketime = 10.0f;
     
     // Stats
     public int health;   // Remaining hitpoints
@@ -84,6 +86,14 @@ public class Entity : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public virtual void OnHealthChange(int change)
+    {
+        if (change < 0)
+        {
+            damageshake = damageshaketime;
+        }
+    }
+
     // Changes health value by amount. Returns change in health
     public virtual int ChangeHealth(int value)
     {
@@ -106,6 +116,8 @@ public class Entity : MonoBehaviour
             health += value;
             if (health > healthmax) {health = healthmax;}
         }
+
+        OnHealthChange(health-prehealth);
 
         return health-prehealth; // Return change in health
     }

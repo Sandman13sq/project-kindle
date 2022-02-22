@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2602060391377940079}
   - component: {fileID: 7972263337526761999}
   - component: {fileID: 467661260703228038}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Energy 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,8 +96,8 @@ MonoBehaviour:
   isshootable: 0
   eventondefeat: 0
   state: 0
-  hitpointsmax: 0
-  hitpoints: 0
+  health: 0
+  healthmax: 0
   attack: 0
   energy: 1
 --- !u!212 &467661260703228038
