@@ -6,6 +6,7 @@ public class PlayerData : MonoBehaviour
 {
     [SerializeField] private HUDMeter healthmeter;
     [SerializeField] private HUDMeter energymeter;
+    [SerializeField] private HUD_ActiveWeapon weaponinfo;
 
     // Common ==================================================
 
@@ -35,15 +36,23 @@ public class PlayerData : MonoBehaviour
         return 0;
     }
 
-    public int SetEnergy(int value)
+    public int SetEnergy(int value, int valuemax, bool matchprovisional = false)
     {
-        energymeter.SetValue(value);
+        Debug.Log("PlayerData: " + valuemax.ToString());
+        energymeter.SetValue(value, matchprovisional);
+        energymeter.SetValueMax(valuemax);
         return 0;
     }
     
     public int AddEnergy(int value)
     {
         energymeter.AddValue(value);
+        return 0;
+    }
+
+    public int SetLevel(int value)
+    {
+        weaponinfo.SetLevel(value);
         return 0;
     }
 }

@@ -27,7 +27,7 @@ public class Entity_Energy0 : Entity
     {
         if (c.gameObject.tag == "player")
         {
-            int leftoverenergy = c.gameObject.GetComponent<Entity_Move_Manual>().GetPlayerData().AddEnergy(energy);
+            int leftoverenergy = c.gameObject.GetComponent<Entity_Move_Manual>().AddEnergy(energy);
             energy = leftoverenergy;
             if (energy == 0)
             {
