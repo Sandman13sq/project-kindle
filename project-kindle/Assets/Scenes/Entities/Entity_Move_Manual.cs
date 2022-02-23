@@ -2,34 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Entity_Move_Manual : MonoBehaviour
+public class Entity_Move_Manual : Entity
 {
 	// Variables =========================================
 
-	public float x, y;
-	public float xspeed, yspeed;
 	private const float floory = 136.0f;
 
-	public bool onground;
-	public bool inair;
 	public bool jumpheld;
 	public float jumpbuffer;
     private float jumpbuffertime = 7.0f; // Max number of frames ahead of time where a jump press will still be read
 
-	public Collider2D collider;
-	private SpriteRenderer spriterdr;
+	[SerializeField] private PlayerData playerdata;	// Holds health, energy, level, etc.
+	[SerializeField] private GameObject projectile;	// Temporary until we find a better way that doesn't require the inspector
+	[SerializeField] private Sprite[] sprites;
+	private int spriteindex;
+	private int recentshot;
 
+	private float hsign;    // Horizontal sign. {-1, 1}
+    private float vsign;    // Vertical sign. {-1, 0, 1} 
+
+	[SerializeField] private Weapon weapon;
+
+	// Common ===============================================================
+	
 	// Start is called before the first frame update
 	void Start()
 	{
 		Application.targetFrameRate = 60; // Temporary. Will remove later
+		playerdata.SetHealth(health);
 
-		spriterdr = GetComponent<SpriteRenderer>();
-		
-		x = transform.position.x;
-		y = transform.position.y;
-		xspeed = 0.0f;
-		yspeed = 0.0f;
+		weapon.SetPlayer(this);
 	}
 
 	// Update is called once per frame
@@ -50,8 +52,10 @@ public class Entity_Move_Manual : MonoBehaviour
 		// Flip sprite if moving left
         if (xlev != 0.0)
         {
-            spriterdr.flipX = xlev < 0.0f;
+			hsign = (xlev > 0.0f)? 1.0f: -1.0f;
+            spriterenderer.flipX = xlev < 0.0f;
         }
+		vsign = ylev;
 
 		// Jump buffer
         if (jumpbuffer >= 0.0f)
@@ -91,7 +95,7 @@ public class Entity_Move_Manual : MonoBehaviour
 					xspeed -= Mathf.Sign(xspeed) * movedeceleration;
 				}
 			}
-
+			
 			// Jump
             if ( jumpbuffer > 0.0f )
             {
@@ -119,34 +123,65 @@ public class Entity_Move_Manual : MonoBehaviour
 		}
 
 		// Update speeds
-		x += xspeed;
-		y += yspeed;    // No values yet
+		UpdateMovement();
 
-		// Ground Check
-		float ydiff = Mathf.Abs(spriterdr.sprite.bounds.min.y-spriterdr.sprite.bounds.center.y);
-		
-		RaycastHit2D groundcollision = Physics2D.Raycast(
-            new Vector2(x, y), 
-            new Vector2(0.0f, -1.0f), 
-            ydiff+1.0f
-            );
-		
-		if (groundcollision.collider != null)
+		// Collision
+		CollisionFlag collisionresult = EvaluateCollision(
+			CollisionFlag.CHANGESPEED | CollisionFlag.DOUBLEX);
+		if ( collisionresult.HasFlag(CollisionFlag.DOWN) )
 		{
-			//Debug.Log(groundcollision.collider.name);
-			y = groundcollision.point.y+ydiff;
 			yspeed = Mathf.Max(yspeed, 0.0f);
-			onground = true;
+		}
+
+		recentshot += 1;
+
+		// Temporary Spriting
+		if (ylev > 0)
+		{
+			spriterenderer.sprite = sprites[recentshot < 5? 4: 5];
 		}
 		else
 		{
-			onground = false;
+			if (recentshot < 5)
+			{
+				spriterenderer.sprite = sprites[7];
+			}
+			else if (recentshot < 50)
+			{
+				spriterenderer.sprite = sprites[6];
+			}
+			else
+			{
+				spriterenderer.sprite = sprites[(recentshot / 10) % 4];
+				spriteindex = (spriteindex + 1) % 4;
+			}
 		}
-
-		inair = !onground;
-
-		// Update object position
-		transform.position = new Vector3(x, y, 0.0f);
 	}
 
+	// Methods ===============================================================
+
+	public PlayerData GetPlayerData() {return playerdata;}
+
+	public void OnShoot()
+	{
+		recentshot = 0;
+	}
+
+	public override int ChangeHealth(int value)
+	{
+		int healthdiff = base.ChangeHealth(value);
+		playerdata.SetHealth(health);
+
+		return healthdiff;
+	}
+
+	public int AddEnergy(int _energy)
+	{
+		return weapon.AddEnergy(_energy);
+	}
+
+	// Utility ================================================================
+
+	public float GetHSign() {return hsign;}
+	public float GetVSign() {return vsign;}
 }
