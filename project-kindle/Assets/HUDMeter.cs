@@ -7,9 +7,9 @@ public class HUDMeter : MonoBehaviour
     public Color metercolor;
     public Color backcolor;
 
-    [SerializeField] private int value;    // Current value for meter
-    private int valueprovisional;    // White health to show change
-    [SerializeField] private int valuemax; // Max value for meter
+    [SerializeField] private int metervalue;    // Current value for meter
+    private int provisionalvalue;    // White health to show change
+    [SerializeField] private int metermax; // Max value for meter
 
     private float provisionalstep;
     private float provisionaltime = 80.0f;
@@ -27,7 +27,6 @@ public class HUDMeter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(metercolor);
         meterobj.GetComponent<UnityEngine.UI.Image>().color = metercolor;
         meterbackobj.GetComponent<UnityEngine.UI.Image>().color = backcolor;
 
@@ -40,16 +39,15 @@ public class HUDMeter : MonoBehaviour
     {
         if (Input.GetKeyDown("h")) {AddValue(1);}
         if (Input.GetKeyDown("j")) {AddValue(-5);}
-        //AddValue(-1);
 
         // Sync up to real value if provisional is low
-        if (valueprovisional < value)
+        if (provisionalvalue < metervalue)
         {
-            valueprovisional = value;
+            provisionalvalue = metervalue;
             provisionalstep = 0.0f;
         }
         // Provisional is greater than real value...
-        else if (valueprovisional > value)
+        else if (provisionalvalue > metervalue)
         {
             // Progress timer
             if (provisionalstep > 0.0f)
@@ -59,7 +57,7 @@ public class HUDMeter : MonoBehaviour
             // Decrement provisional value to real value
             else
             {
-                valueprovisional -= 1;
+                provisionalvalue -= 1;
             }
         }
 
@@ -67,24 +65,40 @@ public class HUDMeter : MonoBehaviour
     }
 
     // Updates values
-    public void SetValue(int _value)
+    public void SetValue(int _value, bool matchprovisional = false)
     {
-        if (_value < 0) {value = 0;}
-        else if (_value > valuemax) {value = valuemax;}
-        else {value = _value;}
+        if (_value < 0) {metervalue = 0;}
+        else if (_value > metermax) {metervalue = metermax;}
+        else {metervalue = _value;}
 
-        provisionalstep = provisionaltime;
+        if (matchprovisional)
+        {
+            provisionalvalue = _value;
+        }
+        else
+        {
+            provisionalstep = provisionaltime;
+        }
+        
+        UpdateMeterDisplay();
     }
-    public void SetValueMax(int _value) {valuemax = _value < 0? 0: value;}
-    public void AddValue(int _value) {SetValue(value+_value);}
-    public void AddValueMax(int _value) {SetValueMax(valuemax+_value);}
+    public void SetValueMax(int _value) 
+    {
+        metermax = (_value < 0)? 0: _value; 
+        Debug.Log("SetValueMax: " + metermax.ToString());
+        UpdateMeterDisplay();
+    }
+    public void AddValue(int _value) {SetValue(metervalue+_value);}
+    public void AddValueMax(int _value) {SetValueMax(metermax+_value);}
 
     // Updates mask graphic and text to represent value
     protected void UpdateMeterDisplay()
     {
+        if (metermax == 0) {return;}
+
         // Move meter objs
-        var xx = spritewidth * (1.0f - (float)value/(float)valuemax);
-        var xx2 = spritewidth * (1.0f - (float)valueprovisional/(float)valuemax);
+        var xx = spritewidth * (1.0f - (float)metervalue/(float)metermax);
+        var xx2 = spritewidth * (1.0f - (float)provisionalvalue/(float)metermax);
         
         // Real value
         metermaskobj.transform.localPosition = new Vector2(-xx, 0.0f);  // Move mask left
@@ -95,7 +109,7 @@ public class HUDMeter : MonoBehaviour
         provisionalobj.transform.localPosition = new Vector2(xx2, 0.0f);   // Move sprite right to correct for parenting
 
         // Update text strings
-        numeratorobj.GetComponent<UnityEngine.UI.Text>().text = value.ToString();
-        denominatorobj.GetComponent<UnityEngine.UI.Text>().text = valuemax.ToString();
+        numeratorobj.GetComponent<UnityEngine.UI.Text>().text = metervalue.ToString();
+        denominatorobj.GetComponent<UnityEngine.UI.Text>().text = metermax.ToString();
     }
 }

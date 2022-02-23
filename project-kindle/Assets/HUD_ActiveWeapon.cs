@@ -28,19 +28,19 @@ public class HUD_ActiveWeapon : MonoBehaviour
 
     // Method ===============================================
 
-    void SetLevel(int _value)
+    public void SetLevel(int _value)
     {
         level = _value;
         levelstringobj.GetComponent<UnityEngine.UI.Text>().text = "Lv " + level.ToString();
     }
 
-    void SetAmmo(int _value)
+    public void SetAmmo(int _value)
     {
         ammo = _value;
         numeratorobj.GetComponent<UnityEngine.UI.Text>().text = ammo.ToString();
     }
 
-    void SetAmmoMax(int _value)
+    public void SetAmmoMax(int _value)
     {
         ammomax = _value;
         denominatorobj.GetComponent<UnityEngine.UI.Text>().text = ammomax.ToString();

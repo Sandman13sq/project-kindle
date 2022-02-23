@@ -18,14 +18,20 @@ public class Entity_Move_Manual : Entity
 	private int spriteindex;
 	private int recentshot;
 
+	private float hsign;    // Horizontal sign. {-1, 1}
+    private float vsign;    // Vertical sign. {-1, 0, 1} 
+
+	[SerializeField] private Weapon weapon;
+
 	// Common ===============================================================
 	
 	// Start is called before the first frame update
 	void Start()
 	{
 		Application.targetFrameRate = 60; // Temporary. Will remove later
-
 		playerdata.SetHealth(health);
+
+		weapon.SetPlayer(this);
 	}
 
 	// Update is called once per frame
@@ -46,9 +52,10 @@ public class Entity_Move_Manual : Entity
 		// Flip sprite if moving left
         if (xlev != 0.0)
         {
-			rightsign = (xlev > 0.0f)? 1.0f: -1.0f;
+			hsign = (xlev > 0.0f)? 1.0f: -1.0f;
             spriterenderer.flipX = xlev < 0.0f;
         }
+		vsign = ylev;
 
 		// Jump buffer
         if (jumpbuffer >= 0.0f)
@@ -126,28 +133,6 @@ public class Entity_Move_Manual : Entity
 			yspeed = Mathf.Max(yspeed, 0.0f);
 		}
 
-		// temp schüt
-		if (Input.GetKeyDown("x"))
-		{
-			float xaim, yaim;
-
-			if (ylev != 0.0f)
-			{
-				xaim = 0.0f;
-				yaim = ylev;
-			}
-			else
-			{
-				xaim = rightsign;
-				yaim = 0.0f;
-			}
-
-			WeaponProjectile proj = Instantiate(projectile).GetComponent<WeaponProjectile>();
-			proj.transform.position = transform.position + new Vector3(xaim*40.0f, yaim*48.0f, 0.0f);
-			proj.SetDirectionRad(Mathf.Atan2(yaim, xaim), rightsign);
-			recentshot = 0;
-		}
-
 		recentshot += 1;
 
 		// Temporary Spriting
@@ -177,6 +162,11 @@ public class Entity_Move_Manual : Entity
 
 	public PlayerData GetPlayerData() {return playerdata;}
 
+	public void OnShoot()
+	{
+		recentshot = 0;
+	}
+
 	public override int ChangeHealth(int value)
 	{
 		int healthdiff = base.ChangeHealth(value);
@@ -184,4 +174,14 @@ public class Entity_Move_Manual : Entity
 
 		return healthdiff;
 	}
+
+	public int AddEnergy(int _energy)
+	{
+		return weapon.AddEnergy(_energy);
+	}
+
+	// Utility ================================================================
+
+	public float GetHSign() {return hsign;}
+	public float GetVSign() {return vsign;}
 }

@@ -19,8 +19,6 @@ public class Entity_Energy0 : Entity
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(name + ": " + transform.position.ToString());
-
         colorstep = Random.Range(0.0f, 1.0f);
         castfilter.SetLayerMask(~LAYER_WORLD); // Ignore the "world" layer
     }
@@ -29,7 +27,7 @@ public class Entity_Energy0 : Entity
     {
         if (c.gameObject.tag == "player")
         {
-            int leftoverenergy = c.gameObject.GetComponent<Entity_Move_Manual>().GetPlayerData().AddEnergy(energy);
+            int leftoverenergy = c.gameObject.GetComponent<Entity_Move_Manual>().AddEnergy(energy);
             energy = leftoverenergy;
             if (energy == 0)
             {

@@ -14,6 +14,8 @@ public class Weapon_Vector : Weapon
     // Update is called once per frame
     void Update()
     {
+        base.Update();
+        
         if (Input.GetKeyDown("e"))
         {
             AddEnergy(3);
@@ -26,7 +28,3 @@ public class Weapon_Vector : Weapon
     }
 }
 
-public class Weapon_Vector_Lvl1 : WeaponLvl
-{
-
-}
