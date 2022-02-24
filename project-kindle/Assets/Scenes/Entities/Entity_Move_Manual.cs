@@ -31,6 +31,8 @@ public class Entity_Move_Manual : Entity
 	// Start is called before the first frame update
 	void Start()
 	{
+		hsign = 1.0f;
+		recentshot = 100;
 		Application.targetFrameRate = 60; // Temporary. Will remove later
 		playerdata.SetHealth(health);
 		weapon.SetPlayer(this);
@@ -50,6 +52,8 @@ public class Entity_Move_Manual : Entity
 		// Grab input values
 		float xlev = Input.GetAxisRaw("Horizontal");
 		float ylev = Input.GetAxisRaw("Vertical");
+		float lastvsign = vsign;
+		float lasthsign = hsign;
 
 		// Flip sprite if moving left
         if (xlev != 0.0)
@@ -138,6 +142,14 @@ public class Entity_Move_Manual : Entity
 		// Temporary Spriting
 		recentshot += 1;
 
+		if (
+			(lastvsign != vsign && vsign == 0.0f) ||
+			(lasthsign != hsign && recentshot > 10)
+		)
+		{
+			recentshot = 100;
+		}
+
 		if (ylev > 0)
 		{
 			spriterenderer.sprite = sprites[recentshot < 5? 4: 5];
@@ -219,8 +231,19 @@ public class Entity_Move_Manual : Entity
 		if (value >= 0 || iframes == 0.0f)
 		{
 			int healthdiff = base.ChangeHealth(value);
-			playerdata.SetHealth(health);
-			playerdata.AddEnergy(healthdiff);
+			playerdata.SetHealth(health); // Update HUD
+
+			// Subtract energy when health is lost
+			if (healthdiff < 0)
+			{
+				weapon.AddEnergy(healthdiff);
+			}
+			// Flash when health is gained
+			else
+			{
+				playerdata.HealthFlashMeter();
+			}
+			
 			return healthdiff;
 		}
 		else

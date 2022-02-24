@@ -81,8 +81,20 @@ public class Entity_EyeDrop : Entity
                     {
                         if (playercast.collider.gameObject.tag == "player")
                         {
-                            state = (int)State.Flash;
-                            statestep = 40.0f;
+                            Vector3 ptransform = playercast.collider.transform.position;
+                            
+                            // If player is in sight
+                            if (
+                                !Physics2D.Linecast(
+                                    new Vector2(transform.position.x, transform.position.y),
+                                    new Vector2(ptransform.x, ptransform.y),
+                                    LAYER_WORLD_BIT
+                                    )
+                                )
+                            {
+                                state = (int)State.Flash;
+                                statestep = 40.0f;
+                            }
                         }
                     }
                 }

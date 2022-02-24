@@ -38,22 +38,33 @@ public class Entity_Crawler : Entity
                 // Hit player
                 if (e.collider.gameObject.tag == "player")
                 {
-                    float px = e.transform.position.x;
+                    Vector3 ptransform = e.transform.position;
 
-                    // To the left of player, move right
-                    if (transform.position.x < px)
+                    // If player is in sight
+                    if (
+                        !Physics2D.Linecast(
+                            new Vector2(transform.position.x, transform.position.y),
+                            new Vector2(ptransform.x, ptransform.y),
+                            LAYER_WORLD_BIT
+                            )
+                        )
                     {
-                        xspeed = Mathf.Min(xspeed+acc, maxspeed);
-                    }
-                    // To the right of player, move left
-                    else
-                    {
-                        xspeed = Mathf.Max(xspeed-acc, -maxspeed);
-                    }
+                        // To the left of player, move right
+                        if (transform.position.x < ptransform.x)
+                        {
+                            xspeed = Mathf.Min(xspeed+acc, maxspeed);
+                        }
+                        // To the right of player, move left
+                        else
+                        {
+                            xspeed = Mathf.Max(xspeed-acc, -maxspeed);
+                        }
 
-                    // Update sprite direction
-                    spriterenderer.flipX = transform.position.x > px;
-                    break;
+                        // Update sprite direction
+                        spriterenderer.flipX = transform.position.x > ptransform.x;
+                        break;
+                    }
+                    
                 }
             }
         }

@@ -144,7 +144,7 @@ MonoBehaviour:
   - {fileID: 8193625256471519397, guid: 8ff8b62af118a4143981b1d1a5b74ee1, type: 3}
   - {fileID: 2729756977164773599, guid: 2749cde8c97173c4ab991ea7d244bc69, type: 3}
   - {fileID: 2729756977164773599, guid: 2749cde8c97173c4ab991ea7d244bc69, type: 3}
-  heartdrop: {fileID: 0}
+  heartdrop: {fileID: 7930945488634972734, guid: b73fc0604d2857f46bc4f8c0f64ca193, type: 3}
   sprites:
   - {fileID: 1204679229157163619, guid: 79f7b5085aa010b42bdb22f8781a3451, type: 3}
   - {fileID: -6689062368031877115, guid: 79f7b5085aa010b42bdb22f8781a3451, type: 3}
