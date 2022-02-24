@@ -15,10 +15,9 @@ public class Entity_Effigy : Entity
     // Update is called once per frame
     void Update()
     {
-        yspeed += -0.1f;
         UpdateDamageShake();
         UpdateMovement();
-        EvaluateCollision(CollisionFlag.CHANGESPEED);
+        EvaluateCollision();
     }
 
     // Methods ====================================================================

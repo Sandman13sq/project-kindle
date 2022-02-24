@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7425427950325871558, guid: f353ddea1accd3246be0ea7f8b59db20, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b1c79213657c198418ddfef56c89d57a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -138,6 +138,6 @@ MonoBehaviour:
   worldcollider: {fileID: 3444606476975869834}
   hitcollider: {fileID: 3444606476975869834}
   rigidbody: {fileID: 3444606476975869847}
-  speed: 19
-  damage: 2
+  speed: 14
+  damage: 1
   lifemax: 12

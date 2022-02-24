@@ -6,13 +6,13 @@ using UnityEngine;
 public class Weapon_Vector : Weapon
 {
     // Start is called before the first frame update
-    protected override void Start()
+    void Start()
     {
         base.Start();
     }
 
     // Update is called once per frame
-    protected override void Update()
+    void Update()
     {
         base.Update();
         

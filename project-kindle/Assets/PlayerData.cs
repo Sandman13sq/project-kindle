@@ -30,38 +30,29 @@ public class PlayerData : MonoBehaviour
         return 0;
     }
 
-    public void HealthFlashMeter()
+    public int AddHealth(int value)
     {
-        healthmeter.Flash();
+        healthmeter.AddValue(value);
+        return 0;
     }
 
     public int SetEnergy(int value, int valuemax, bool matchprovisional = false)
     {
+        Debug.Log("PlayerData: " + valuemax.ToString());
         energymeter.SetValue(value, matchprovisional);
         energymeter.SetValueMax(valuemax);
         return 0;
     }
-
-    public void EnergyMaximizeProvisional()
-    {
-        energymeter.MaximizeProvisional();
-    }
-
-    public void EnergyFlashMeter()
-    {
-        energymeter.Flash();
-    }
     
-    public int SetLevel(int value)
+    public int AddEnergy(int value)
     {
-        weaponinfo.SetLevel(value);
+        energymeter.AddValue(value);
         return 0;
     }
 
-    public int SetAmmo(int value, int valuemax)
+    public int SetLevel(int value)
     {
-        weaponinfo.SetAmmo(value);
-        weaponinfo.SetAmmoMax(valuemax);
+        weaponinfo.SetLevel(value);
         return 0;
     }
 }
