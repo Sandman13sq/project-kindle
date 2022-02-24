@@ -30,11 +30,10 @@ public class Weapon : MonoBehaviour
     [SerializeField] private PlayerData playerdata;
 
     // Start is called before the first frame update
-    public void Start()
+    protected virtual void Start()
     {
         levelmax = 2;
 
-        Debug.Log("Weapon: " + CurrentLevelEnergyMax().ToString());
         playerdata.SetEnergy(CurrentLevelEnergy(), CurrentLevelEnergyMax());
         playerdata.SetLevel(level);
     }
@@ -108,7 +107,7 @@ public class Weapon : MonoBehaviour
     int CalcLevelEnergy(int _level)
     {
         int outenergy = 0;
-        Debug.Log("Level: " + _level.ToString());
+
         for (int i = 0; i <= _level; i++)
         {
             outenergy += weaponlvlenergy[i];

@@ -20,7 +20,7 @@ public class Entity_Energy0 : Entity
     void Start()
     {
         colorstep = Random.Range(0.0f, 1.0f);
-        castfilter.SetLayerMask(~LAYER_WORLD); // Ignore the "world" layer
+        castfilter.SetLayerMask(~LAYER_WORLD_BIT); // Ignore the "world" layer
     }
 
     void OnCollisionEnter2D(Collision2D c)

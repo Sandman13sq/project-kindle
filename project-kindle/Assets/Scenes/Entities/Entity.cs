@@ -9,18 +9,25 @@ public class Entity : MonoBehaviour
     [System.Flags]
     public enum CollisionFlag
     {
+        NONE = 0,
+        
         RIGHT = 1 << 0, // Collision found on right side
         UP = 1 << 1,    // ^ top side
         LEFT = 1 << 2,  // ^ left side
         DOWN = 1 << 3,  // ^ bottom side
+        ALL = 0xF,  // All sides
 
         CHANGESPEED = 1 << 0,   // Clamp speeds when a collision is found
         DOUBLEX = 1 << 1,   // Use two raycasts when checking left/right
         DOUBLEY = 1 << 2,   // Use two raycasts when checking up/down
     }
 
-    protected int LAYER_WORLD = 1 << 3;
-    protected int LAYER_ENTITY; 
+    protected const int LAYER_WORLD = 3;
+    protected const int LAYER_WORLD_BIT = 1 << LAYER_WORLD;
+    protected const int LAYER_ENTITY = 6; 
+    protected const int LAYER_ENTITY_BIT = 1 << LAYER_ENTITY;
+    protected const int LAYER_HITBOX = 7; 
+    protected const int LAYER_HITBOX_BIT = 1 << LAYER_HITBOX;
 
     // Variables ======================================================
 
@@ -30,13 +37,13 @@ public class Entity : MonoBehaviour
     public Rigidbody2D rigidbody;  // Necessary for collision detection
 
     // Internal
-    public int entityindex; // Represents the position of entity when instanced
-    public int entitytype;  // Marks class of entity. Value in EntityType enum
-    public string eventkey; // Key for event
+    //public int entityindex; // Represents the position of entity when instanced
+    //public int entitytype;  // Marks class of entity. Value in EntityType enum
+    //public string eventkey; // Key for event
 
     // Flags
-    public bool solid;
-    public bool ishostile;  // Damages player on contact
+    //public bool solid;
+    //public bool ishostile;  // Damages player on contact
     public bool showdamage; // Shows damage numbers
     public bool isshootable;    // Takes damage from projectiles
     public bool eventondefeat;  // Calls event on defeat
@@ -56,6 +63,7 @@ public class Entity : MonoBehaviour
     public int attack;  // Damage dealt to player on contact
     public int energy; // Energy dropped when defeated (CURRENTLY UNUSED)
     [SerializeField] private GameObject[] energydrops;  // Energy objects dropped when defeated
+    [SerializeField] private GameObject heartdrop;
     
     // Common ================================================================
 
@@ -78,7 +86,7 @@ public class Entity : MonoBehaviour
     // Called when pressing down on an entity
     public virtual void Interact()
     {
-        if (eventkey != "")
+        //if (eventkey != "")
         {
             // Run Event
         }
@@ -99,10 +107,26 @@ public class Entity : MonoBehaviour
         }
     }
 
+    protected void DropHeart()
+    {
+        if (heartdrop)
+        {
+            Entity e = Instantiate(heartdrop).GetComponent<Entity>();
+            e.transform.position = transform.position;
+        }
+    }
+
     // Called in Defeat() call before destruction
     public virtual void OnDefeat()
     {
-        DropEnergy();
+        if (heartdrop && Random.Range(0.0f, 1.0f) < 0.3f)
+        {
+            DropHeart();
+        }
+        else
+        {
+            DropEnergy();
+        }
     }
 
     // Called when resulting health from ChangeHealth is zero
@@ -148,6 +172,11 @@ public class Entity : MonoBehaviour
         return health-prehealth; // Return change in health
     }
 
+    public virtual int DoDamage(int value)
+    {
+        return ChangeHealth(-value);
+    }
+
     // Adds speed to positions
     public void UpdateMovement()
     {
@@ -182,19 +211,25 @@ public class Entity : MonoBehaviour
     // Evaluates collision using "worldcollider" component
     public CollisionFlag EvaluateCollision(
         CollisionFlag settingsflag = CollisionFlag.CHANGESPEED,
-        int layermask = 1<<3
+        int layermask = LAYER_WORLD_BIT
         )
     {
+        // Yeet out if there's no world collider
+        if (worldcollider == null) {return CollisionFlag.NONE;}
+
         CollisionFlag collhit = 0;
         RaycastHit2D rayhit;
 
         float x = transform.position.x;
         float y = transform.position.y;
 
-        float offsetdown = Mathf.Abs(worldcollider.bounds.min.y-worldcollider.bounds.center.y);
-        float offsetup = Mathf.Abs(worldcollider.bounds.max.y-worldcollider.bounds.center.y);
-        float offsetright = Mathf.Abs(worldcollider.bounds.max.x-worldcollider.bounds.center.x);
-        float offsetleft = Mathf.Abs(worldcollider.bounds.min.x-worldcollider.bounds.center.x);
+        Bounds cbounds = worldcollider.bounds;
+        Vector2 coffset = worldcollider.offset;
+
+        float offsetdown = Mathf.Abs(cbounds.min.y-cbounds.center.y+coffset.y);
+        float offsetup = Mathf.Abs(cbounds.max.y-cbounds.center.y+coffset.y);
+        float offsetright = Mathf.Abs(cbounds.max.x-cbounds.center.x+coffset.x);
+        float offsetleft = Mathf.Abs(cbounds.min.x-cbounds.center.x+coffset.x);
 
         bool Cast(
             float xdir, 
@@ -216,8 +251,6 @@ public class Entity : MonoBehaviour
 
             return castresult.collider != null;
         }
-
-        //float[2] crossrange;
 
         // Down -----------------------------------------------------------------------
         if ( Cast(0.0f, -1.0f, offsetdown, out rayhit, x, y) )    // Collision found
@@ -345,4 +378,6 @@ public class Entity : MonoBehaviour
     }
     public void SpeedSetDeg(float _speed, float _direction) {SpeedSetRad(_speed, _direction * Mathf.Deg2Rad);}
     public void SpeedAddDeg(float _speed, float _direction) {SpeedAddRad(_speed, _direction * Mathf.Deg2Rad);}
+
+    public int GetAttack() {return attack;}
 }

@@ -26,7 +26,7 @@ public class Entity_Move : MonoBehaviour
     private float jumpbuffertime = 7.0f; // Max number of frames ahead of time where a jump press will still be read
 
     private Rigidbody2D rb;
-    private Collider2D collider;
+    private Collider2D collider2d;
     private SpriteRenderer spriterdr;
 
     [SerializeField] private MoveAttributes mvattr;
@@ -37,7 +37,7 @@ public class Entity_Move : MonoBehaviour
         Application.targetFrameRate = 60; // Temporary. Will remove later
 
         rb = GetComponent<Rigidbody2D>();
-        collider = GetComponent<Collider2D>();
+        collider2d = GetComponent<Collider2D>();
         spriterdr = GetComponent<SpriteRenderer>();
         mvattr = new MoveAttributes();
 
@@ -154,15 +154,15 @@ public class Entity_Move : MonoBehaviour
         // Check ground collision
         bool lastonground = onground;
 
-        float ydiff = collider.bounds.extents.y;
+        float ydiff = collider2d.bounds.extents.y;
         
-        collider.enabled = false;   // Disable this collider so it doesn't hit itself
+        collider2d.enabled = false;   // Disable this collider so it doesn't hit itself
         RaycastHit2D groundcollision = Physics2D.Raycast(
             new Vector2(transform.position.x, transform.position.y-ydiff), 
             new Vector2(0.0f, -1.0f), 
             10.0f
             );
-        collider.enabled = true;    // Re-enable collider
+        collider2d.enabled = true;    // Re-enable collider
         onground = groundcollision.collider != null;
         inair = !onground;
 

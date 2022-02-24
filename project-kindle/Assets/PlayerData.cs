@@ -38,7 +38,6 @@ public class PlayerData : MonoBehaviour
 
     public int SetEnergy(int value, int valuemax, bool matchprovisional = false)
     {
-        Debug.Log("PlayerData: " + valuemax.ToString());
         energymeter.SetValue(value, matchprovisional);
         energymeter.SetValueMax(valuemax);
         return 0;

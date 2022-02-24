@@ -99,7 +99,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 32, y: 8}
+  m_Size: {x: 32, y: 16}
   m_Direction: 1
 --- !u!50 &3444606476975869847
 Rigidbody2D:
@@ -138,6 +138,6 @@ MonoBehaviour:
   worldcollider: {fileID: 3444606476975869834}
   hitcollider: {fileID: 3444606476975869834}
   rigidbody: {fileID: 3444606476975869847}
-  speed: 14
+  speed: 18
   damage: 1
   lifemax: 12

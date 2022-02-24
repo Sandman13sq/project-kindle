@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3444606476975869847}
   - component: {fileID: 3444606476975869835}
   m_Layer: 0
-  m_Name: Vector P Lv2
+  m_Name: Vector P Lv3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7425427950325871558, guid: f353ddea1accd3246be0ea7f8b59db20, type: 3}
+  m_Sprite: {fileID: -3231199050487851611, guid: f353ddea1accd3246be0ea7f8b59db20, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -138,6 +138,6 @@ MonoBehaviour:
   worldcollider: {fileID: 3444606476975869834}
   hitcollider: {fileID: 3444606476975869834}
   rigidbody: {fileID: 3444606476975869847}
-  speed: 19
-  damage: 2
+  speed: 20
+  damage: 4
   lifemax: 12

@@ -85,7 +85,6 @@ public class HUDMeter : MonoBehaviour
     public void SetValueMax(int _value) 
     {
         metermax = (_value < 0)? 0: _value; 
-        Debug.Log("SetValueMax: " + metermax.ToString());
         UpdateMeterDisplay();
     }
     public void AddValue(int _value) {SetValue(metervalue+_value);}
