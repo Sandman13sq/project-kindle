@@ -16,7 +16,7 @@ public class HUD_ActiveWeapon : MonoBehaviour
     void Start()
     {
         SetLevel(1);
-        SetAmmo(100);
+        SetAmmo(70);
         SetAmmoMax(100);
     }
 

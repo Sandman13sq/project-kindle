@@ -170,6 +170,11 @@ MonoBehaviour:
   worldcollider: {fileID: 350204462260166774}
   hitcollider: {fileID: 350204462260166774}
   rigidbody: {fileID: 350204462260166777}
+  entityindex: 0
+  entitytype: 0
+  eventkey: 
+  solid: 0
+  ishostile: 0
   showdamage: 0
   isshootable: 0
   eventondefeat: 0
@@ -179,7 +184,6 @@ MonoBehaviour:
   attack: 0
   energy: 0
   energydrops: []
-  heartdrop: {fileID: 0}
   jumpheld: 0
   jumpbuffer: 0
   playerdata: {fileID: 0}
@@ -207,17 +211,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energy: 0
-  levelmax: 2
-  ammomax: 32
-  shotcountmax: 2
-  delaytime: 7
-  rechargetime: 12
-  autofiretime: 16
+  levelmax: 0
+  level: 0
   projectiles:
   - {fileID: 3444606476975869836, guid: e3cb67778e59b584bac8716fa3ebb90c, type: 3}
-  - {fileID: 3444606476975869836, guid: 1fcb80f003d19314fb03d1f51ffc78f5, type: 3}
-  - {fileID: 3444606476975869836, guid: 2a43f7bdd7931a041a9c76dac82b9403, type: 3}
-  weaponlvlenergy: 0c0000001c00000028000000
+  - {fileID: 3444606476975869836, guid: e3cb67778e59b584bac8716fa3ebb90c, type: 3}
+  - {fileID: 3444606476975869836, guid: e3cb67778e59b584bac8716fa3ebb90c, type: 3}
+  weaponlvlenergy: 14000000100000000a000000
   activeweaponlvl: {fileID: 0}
   player: {fileID: 350204462260166773}
-  playerdata: {fileID: 0}

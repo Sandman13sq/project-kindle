@@ -16,15 +16,11 @@ public class Entity_Energy0 : Entity
     private List<RaycastHit2D> castresults = new List<RaycastHit2D>();
     private ContactFilter2D castfilter = new ContactFilter2D();
 
-    private float lifemax = 360.0f;
-    private float life;
-
     // Start is called before the first frame update
     void Start()
     {
-        life = lifemax;
         colorstep = Random.Range(0.0f, 1.0f);
-        castfilter.SetLayerMask(~LAYER_WORLD_BIT); // Ignore the "world" layer
+        castfilter.SetLayerMask(~LAYER_WORLD); // Ignore the "world" layer
     }
 
     void OnCollisionEnter2D(Collision2D c)
@@ -84,21 +80,5 @@ public class Entity_Energy0 : Entity
         }
 
         UpdateMovement();
-
-        // Destroy after life timer runs out
-        if (lifemax > 0.0f)
-        {
-            if (life > 0.0f)
-            {
-                life -= 1.0f;
-                
-                // Sprite flicker
-                spriterenderer.enabled = life > (lifemax/3.0f) || Mathf.Repeat(life, 6.0f) < 3.0f;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
     }
 }
