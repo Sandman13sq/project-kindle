@@ -16,6 +16,8 @@ public class WeaponProjectile : MonoBehaviour
     [SerializeField] float lifemax;
     float life;
 
+    [SerializeField] private Weapon sourceweapon = null; // Weapon component that the projectile was fired from
+
     const int LAYER_WORLD = 3;
     const int LAYER_WORLD_BIT = 1 << LAYER_WORLD;
     const int LAYER_ENTITY = 6;
@@ -39,6 +41,7 @@ public class WeaponProjectile : MonoBehaviour
         life -= 1.0f;
         if (life <= 0.0)
         {
+            DecrementShotCount();
             Destroy(gameObject);
         }
     }
@@ -54,13 +57,23 @@ public class WeaponProjectile : MonoBehaviour
             if (e.isshootable)
             {
                 e.ChangeHealth(-damage);
+                DecrementShotCount();
                 Destroy(gameObject);
             }
         }
         // Interact with world
         else if (c.gameObject.layer == LAYER_WORLD)
         {
+            DecrementShotCount();
             Destroy(gameObject);
+        }
+    }
+
+    void DecrementShotCount()
+    {
+        if (sourceweapon != null)
+        {
+            sourceweapon.DecrementShotCount();
         }
     }
 
@@ -111,5 +124,10 @@ public class WeaponProjectile : MonoBehaviour
     public void SetSpeed(float _speed)
     {
         speed = _speed;
+    }
+
+    public void SetSourceWeapon(Weapon _weapon)
+    {
+        sourceweapon = _weapon;
     }
 }

@@ -22,6 +22,9 @@ public class HUDMeter : MonoBehaviour
     [SerializeField] private GameObject numeratorobj; 
     [SerializeField] private GameObject denominatorobj;
 
+    private float flashstep = 0.0f;
+    private float flashtime = 20.0f;
+
     private float spritewidth;
 
     // Start is called before the first frame update
@@ -37,9 +40,6 @@ public class HUDMeter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("h")) {AddValue(1);}
-        if (Input.GetKeyDown("j")) {AddValue(-5);}
-
         // Sync up to real value if provisional is low
         if (provisionalvalue < metervalue)
         {
@@ -58,6 +58,20 @@ public class HUDMeter : MonoBehaviour
             else
             {
                 provisionalvalue -= 1;
+            }
+        }
+
+        if (flashstep > 0.0f) 
+        {
+            flashstep = Mathf.Max(flashstep - 1.0f, 0.0f);
+
+            if (flashstep > 0.0f && Mathf.Repeat(flashstep, 6.0f) < 3.0f)
+            {
+                meterobj.GetComponent<UnityEngine.UI.Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+            }
+            else
+            {
+                meterobj.GetComponent<UnityEngine.UI.Image>().color = metercolor;
             }
         }
 
@@ -82,14 +96,23 @@ public class HUDMeter : MonoBehaviour
         
         UpdateMeterDisplay();
     }
+
+    public void Flash()
+    {
+        flashstep = flashtime;
+    }
+
     public void SetValueMax(int _value) 
     {
         metermax = (_value < 0)? 0: _value; 
-        Debug.Log("SetValueMax: " + metermax.ToString());
         UpdateMeterDisplay();
     }
-    public void AddValue(int _value) {SetValue(metervalue+_value);}
-    public void AddValueMax(int _value) {SetValueMax(metermax+_value);}
+
+    public void MaximizeProvisional()
+    {
+        provisionalvalue = metermax;
+        provisionalstep = provisionaltime;
+    }
 
     // Updates mask graphic and text to represent value
     protected void UpdateMeterDisplay()

@@ -21,6 +21,9 @@ public class Entity_Move_Manual : Entity
 	private float hsign;    // Horizontal sign. {-1, 1}
     private float vsign;    // Vertical sign. {-1, 0, 1} 
 
+	private float iframes = 0.0f;	// Frames of invincibility after taking damage
+	private float iframestime = 100.0f;
+
 	[SerializeField] private Weapon weapon;
 
 	// Common ===============================================================
@@ -28,9 +31,10 @@ public class Entity_Move_Manual : Entity
 	// Start is called before the first frame update
 	void Start()
 	{
+		hsign = 1.0f;
+		recentshot = 100;
 		Application.targetFrameRate = 60; // Temporary. Will remove later
 		playerdata.SetHealth(health);
-
 		weapon.SetPlayer(this);
 	}
 
@@ -48,6 +52,8 @@ public class Entity_Move_Manual : Entity
 		// Grab input values
 		float xlev = Input.GetAxisRaw("Horizontal");
 		float ylev = Input.GetAxisRaw("Vertical");
+		float lastvsign = vsign;
+		float lasthsign = hsign;
 
 		// Flip sprite if moving left
         if (xlev != 0.0)
@@ -133,9 +139,17 @@ public class Entity_Move_Manual : Entity
 			yspeed = Mathf.Max(yspeed, 0.0f);
 		}
 
+		// Temporary Spriting
 		recentshot += 1;
 
-		// Temporary Spriting
+		if (
+			(lastvsign != vsign && vsign == 0.0f) ||
+			(lasthsign != hsign && recentshot > 10)
+		)
+		{
+			recentshot = 100;
+		}
+
 		if (ylev > 0)
 		{
 			spriterenderer.sprite = sprites[recentshot < 5? 4: 5];
@@ -156,6 +170,51 @@ public class Entity_Move_Manual : Entity
 				spriteindex = (spriteindex + 1) % 4;
 			}
 		}
+
+		// Hitbox collision
+		if (hitcollider)
+		{
+			RaycastHit2D[] hitresults = new RaycastHit2D[8];
+			ContactFilter2D filter = new ContactFilter2D();
+			filter.layerMask = LAYER_HITBOX_BIT;
+			
+			hitcollider.Cast(
+				new Vector2(0.0f, 0.0f),
+				filter,
+				hitresults,
+				0.0f
+			);
+
+			// Iterate through hits
+			foreach (RaycastHit2D hit in hitresults)
+			{
+				if (hit.collider != null)
+				{
+					if (hit.collider.gameObject.TryGetComponent(out ParentEntity p))
+					{
+						Entity e = p.GetEntity();
+						DoDamage(e.GetAttack());
+						break;
+					}
+					
+				}
+			}
+		}
+
+		// Iframes
+		if (iframes > 0.0f)
+		{
+			iframes = Mathf.Max(0.0f, iframes-1.0f);
+
+			if (iframes > 0.0f)
+			{
+				spriterenderer.enabled = Mathf.Repeat(iframes, 8.0f) < 4.0f;
+			}
+			else
+			{
+				spriterenderer.enabled = true;
+			}
+		}
 	}
 
 	// Methods ===============================================================
@@ -169,10 +228,40 @@ public class Entity_Move_Manual : Entity
 
 	public override int ChangeHealth(int value)
 	{
-		int healthdiff = base.ChangeHealth(value);
-		playerdata.SetHealth(health);
+		if (value >= 0 || iframes == 0.0f)
+		{
+			int healthdiff = base.ChangeHealth(value);
+			playerdata.SetHealth(health); // Update HUD
 
-		return healthdiff;
+			// Subtract energy when health is lost
+			if (healthdiff < 0)
+			{
+				weapon.AddEnergy(healthdiff);
+			}
+			// Flash when health is gained
+			else
+			{
+				playerdata.HealthFlashMeter();
+			}
+			
+			return healthdiff;
+		}
+		else
+		{
+			return 0;
+		}
+		
+
+	}
+
+	public override void OnHealthChange(int diff)
+	{
+		if (diff < 0)
+		{
+			iframes = iframestime;
+			yspeed = 5.0f;
+			jumpheld = true;
+		}
 	}
 
 	public int AddEnergy(int _energy)
