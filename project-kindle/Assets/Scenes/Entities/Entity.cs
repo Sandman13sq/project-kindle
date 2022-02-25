@@ -64,6 +64,7 @@ public class Entity : MonoBehaviour
     public int energy; // Energy dropped when defeated (CURRENTLY UNUSED)
     [SerializeField] private GameObject[] energydrops;  // Energy objects dropped when defeated
     [SerializeField] private GameObject heartdrop;
+    [SerializeField] private GameObject[] destroygraphic;
     
     // Common ================================================================
 
@@ -116,6 +117,14 @@ public class Entity : MonoBehaviour
         }
     }
 
+    protected void ShowDestroyGraphic()
+    {
+        foreach (GameObject prefab in destroygraphic)
+        {
+            Instantiate(prefab).transform.position = transform.position;
+        }
+    }
+
     // Called in Defeat() call before destruction
     public virtual void OnDefeat()
     {
@@ -127,6 +136,8 @@ public class Entity : MonoBehaviour
         {
             DropEnergy();
         }
+
+        ShowDestroyGraphic();
     }
 
     // Called when resulting health from ChangeHealth is zero
@@ -136,7 +147,7 @@ public class Entity : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public virtual void OnHealthChange(int change)
+    protected virtual void OnHealthChange(int change)
     {
         if (change < 0)
         {
@@ -198,12 +209,20 @@ public class Entity : MonoBehaviour
             if (damageshake > 0)
             {
                 float xshift = ((Mathf.Repeat(damageshake, 4.0f) < 2.0f)? -3: 3); // Shift left/right every 4 frames
-                spriterenderer.transform.localPosition = new Vector3(xshift, 0.0f, 0.0f);
+                spriterenderer.transform.localPosition = new Vector3(
+                    xshift, 
+                    spriterenderer.transform.localPosition.y, 
+                    spriterenderer.transform.localPosition.z
+                    );
             }
             // Reset offset
             else
             {
-                spriterenderer.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+                spriterenderer.transform.localPosition = new Vector3(
+                    spriterenderer.transform.localPosition.x, 
+                    spriterenderer.transform.localPosition.y, 
+                    spriterenderer.transform.localPosition.z
+                    );
             }
         }
     }

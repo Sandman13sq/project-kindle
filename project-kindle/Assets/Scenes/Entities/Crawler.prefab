@@ -131,11 +131,13 @@ MonoBehaviour:
   energy: 0
   energydrops:
   - {fileID: 8193625256471519397, guid: 8ff8b62af118a4143981b1d1a5b74ee1, type: 3}
-  - {fileID: 8193625256471519397, guid: 8ff8b62af118a4143981b1d1a5b74ee1, type: 3}
   - {fileID: 2729756977164773599, guid: 2749cde8c97173c4ab991ea7d244bc69, type: 3}
   - {fileID: 2729756977164773599, guid: 2749cde8c97173c4ab991ea7d244bc69, type: 3}
   - {fileID: 2729756977164773599, guid: 2749cde8c97173c4ab991ea7d244bc69, type: 3}
   heartdrop: {fileID: 7930945488634972734, guid: b73fc0604d2857f46bc4f8c0f64ca193, type: 3}
+  destroygraphic:
+  - {fileID: 4741169176835607102, guid: c57ff7aa1b78aa1438e4acf55e7d6486, type: 3}
+  - {fileID: 4741169176835607102, guid: c57ff7aa1b78aa1438e4acf55e7d6486, type: 3}
 --- !u!61 &3442646793113366637
 BoxCollider2D:
   m_ObjectHideFlags: 0

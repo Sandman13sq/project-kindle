@@ -1,13 +1,22 @@
 fileFormatVersion: 2
-guid: 79f7b5085aa010b42bdb22f8781a3451
+guid: aee9d600979188249ba645425527f7d0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1204679229157163619
-    second: eyedrop_0
+      213: 2302220380354814978
+    second: popsmoke_0
   - first:
-      213: -6689062368031877115
-    second: eyedrop_1
+      213: 690381064085442183
+    second: popsmoke_1
+  - first:
+      213: -9062346107536289834
+    second: popsmoke_2
+  - first:
+      213: -3457206530446457891
+    second: popsmoke_3
+  - first:
+      213: -6920651519340479386
+    second: popsmoke_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -97,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: eyedrop_0
+      name: popsmoke_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +120,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36244325061e7b010800000000000000
-      internalID: 1204679229157163619
+      spriteID: 204a6bdfc3123ff10800000000000000
+      internalID: 2302220380354814978
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: eyedrop_1
+      name: popsmoke_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 48
         y: 0
-        width: 64
-        height: 64
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,8 +141,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 508d609673dab23a0800000000000000
-      internalID: -6689062368031877115
+      spriteID: 78e08748be9b49900800000000000000
+      internalID: 690381064085442183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: popsmoke_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6dfc7a4ca341c3280800000000000000
+      internalID: -9062346107536289834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: popsmoke_3
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd304954af88500d0800000000000000
+      internalID: -3457206530446457891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: popsmoke_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66c717f3c18e4ff90800000000000000
+      internalID: -6920651519340479386
       vertices: []
       indices: 
       edges: []

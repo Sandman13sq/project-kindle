@@ -251,6 +251,7 @@ GameObject:
   - component: {fileID: 4337022192039189080}
   - component: {fileID: 2927494694363281763}
   - component: {fileID: 2927847352585722121}
+  - component: {fileID: 452799180589418600}
   m_Layer: 5
   m_Name: numerator
   m_TagString: Untagged
@@ -319,6 +320,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: NUM
+--- !u!114 &452799180589418600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998428592035040069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &3106374863074456552
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,6 +346,7 @@ GameObject:
   - component: {fileID: 5558480528350196336}
   - component: {fileID: 213167521208819014}
   - component: {fileID: 1575744446486497080}
+  - component: {fileID: 7626991631828289614}
   m_Layer: 5
   m_Name: denominator
   m_TagString: Untagged
@@ -398,6 +415,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: DEN
+--- !u!114 &7626991631828289614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3106374863074456552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &3340033967545512384
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,8 +487,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   metercolor: {r: 1, g: 0.2028302, b: 0.3997066, a: 1}
   backcolor: {r: 0.3679245, g: 0.012148458, b: 0.18986751, a: 1}
-  value: 100
-  valuemax: 100
+  metervalue: 0
+  metermax: 0
   meterobj: {fileID: 5363708814381641779}
   meterbackobj: {fileID: 22057502959708225}
   metermaskobj: {fileID: 4892168631294449505}

@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 6797948237656279775}
   - component: {fileID: 6797948237656279585}
   - component: {fileID: 6797948237656279774}
+  - component: {fileID: 5298826736855676344}
   m_Layer: 5
   m_Name: numerator
   m_TagString: Untagged
@@ -212,6 +213,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: NUM
+--- !u!114 &5298826736855676344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6797948237656279772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &6797948237842661845
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,6 +239,7 @@ GameObject:
   - component: {fileID: 6797948237842661844}
   - component: {fileID: 6797948237842661846}
   - component: {fileID: 6797948237842661847}
+  - component: {fileID: 2481079748703481343}
   m_Layer: 0
   m_Name: level
   m_TagString: Untagged
@@ -293,6 +310,21 @@ MonoBehaviour:
   m_Text: 'Lv X
 
 '
+--- !u!114 &2481079748703481343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6797948237842661845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &6797948238468011210
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,6 +336,7 @@ GameObject:
   - component: {fileID: 6797948238468011213}
   - component: {fileID: 6797948238468011215}
   - component: {fileID: 6797948238468011212}
+  - component: {fileID: 4670479547769215987}
   m_Layer: 5
   m_Name: denominator
   m_TagString: Untagged
@@ -372,3 +405,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: NUM
+--- !u!114 &4670479547769215987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6797948238468011210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -2}
+  m_UseGraphicAlpha: 1

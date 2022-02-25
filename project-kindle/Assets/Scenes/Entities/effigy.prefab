@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6241962120040659166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6241962120882235965}
@@ -128,7 +128,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -16}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -157,11 +157,6 @@ MonoBehaviour:
   worldcollider: {fileID: 6241962120882235967}
   hitcollider: {fileID: 6241962120882235967}
   rigidbody: {fileID: 0}
-  entityindex: 0
-  entitytype: 0
-  eventkey: 
-  solid: 0
-  ishostile: 1
   showdamage: 0
   isshootable: 1
   eventondefeat: 0
@@ -173,4 +168,8 @@ MonoBehaviour:
   energydrops:
   - {fileID: 8193625256471519397, guid: 8ff8b62af118a4143981b1d1a5b74ee1, type: 3}
   - {fileID: 8193625256471519397, guid: 8ff8b62af118a4143981b1d1a5b74ee1, type: 3}
-  - {fileID: 2729756977164773599, guid: 2749cde8c97173c4ab991ea7d244bc69, type: 3}
+  heartdrop: {fileID: 0}
+  destroygraphic:
+  - {fileID: 4741169176835607102, guid: c57ff7aa1b78aa1438e4acf55e7d6486, type: 3}
+  - {fileID: 4741169176835607102, guid: c57ff7aa1b78aa1438e4acf55e7d6486, type: 3}
+  - {fileID: 4741169176835607102, guid: c57ff7aa1b78aa1438e4acf55e7d6486, type: 3}

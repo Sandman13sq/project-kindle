@@ -6,7 +6,7 @@ public class Entity_Crawler : Entity
 {
     private const float alertradius = 400.0f;
     private const float acc = 0.1f;
-    private const float maxspeed = 2.5f;
+    private const float maxspeed = 2.2f;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +29,7 @@ public class Entity_Crawler : Entity
             castresults,
             0.0f
         );
-        
+
         // Iterate cast results
         foreach (RaycastHit2D e in castresults)
         {
@@ -77,5 +77,15 @@ public class Entity_Crawler : Entity
 		{
 			yspeed = Mathf.Max(yspeed, 0.0f);
 		}
+    }
+
+    protected override void OnHealthChange(int diff)
+    {
+        base.OnHealthChange(diff);
+
+        if (diff < 0)
+        {
+            xspeed *= 0.2f;
+        }
     }
 }

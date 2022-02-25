@@ -22,7 +22,7 @@ public class Entity_Move_Manual : Entity
     private float vsign;    // Vertical sign. {-1, 0, 1} 
 
 	private float iframes = 0.0f;	// Frames of invincibility after taking damage
-	private float iframestime = 100.0f;
+	private float iframestime = 150.0f;
 
 	[SerializeField] private Weapon weapon;
 
@@ -55,8 +55,8 @@ public class Entity_Move_Manual : Entity
 		float lastvsign = vsign;
 		float lasthsign = hsign;
 
-		// Flip sprite if moving left
-        if (xlev != 0.0)
+		// Flip sprite if moving left. If shift is held, lock direction
+        if (xlev != 0.0 && !Input.GetKey(KeyCode.LeftShift))
         {
 			hsign = (xlev > 0.0f)? 1.0f: -1.0f;
             spriterenderer.flipX = xlev < 0.0f;
@@ -254,7 +254,7 @@ public class Entity_Move_Manual : Entity
 
 	}
 
-	public override void OnHealthChange(int diff)
+	protected override void OnHealthChange(int diff)
 	{
 		if (diff < 0)
 		{
@@ -273,4 +273,5 @@ public class Entity_Move_Manual : Entity
 
 	public float GetHSign() {return hsign;}
 	public float GetVSign() {return vsign;}
+	public bool GetOnGround() {return onground;}
 }

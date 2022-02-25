@@ -182,6 +182,7 @@ MonoBehaviour:
   energy: 0
   energydrops: []
   heartdrop: {fileID: 0}
+  destroygraphic: []
   sprites:
   - {fileID: 7750989685811222772, guid: c6c1d672ae01c934395e60a4bb639d9a, type: 3}
   - {fileID: -1616952997604726807, guid: c6c1d672ae01c934395e60a4bb639d9a, type: 3}
@@ -209,5 +210,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 32, y: 41.77942}
+  m_Size: {x: 16, y: 41.77942}
   m_EdgeRadius: 0

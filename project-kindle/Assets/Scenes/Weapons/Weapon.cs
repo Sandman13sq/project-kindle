@@ -112,7 +112,7 @@ public class Weapon : MonoBehaviour
 
                 float xaim, yaim;
 
-                if (vsign != 0.0f)
+                if (vsign != 0.0f && !(vsign == -1.0f && player.GetOnGround()) )
                 {
                     xaim = 0.0f;
                     yaim = vsign;

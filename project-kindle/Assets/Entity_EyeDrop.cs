@@ -9,6 +9,7 @@ public class Entity_EyeDrop : Entity
     private float statestep = 0.0f;
     private const float maxspeed = 1.5f;
     private const float speedslowmod = 0.95f;
+    private float hoverstep = 0.0f;
 
     [SerializeField] private Sprite[] sprites;
     [SerializeField] private GameObject strikeobj;
@@ -60,6 +61,9 @@ public class Entity_EyeDrop : Entity
                 {
                     xspeed = Mathf.Min(maxspeed, Mathf.Abs(xspeed)+0.1f) * Mathf.Sign(xspeed);
                 }
+
+                hoverstep = Mathf.Repeat(hoverstep+0.05f, 2.0f*Mathf.PI);
+                yspeed = Mathf.Sin(hoverstep) * 0.4f;
                 
                 if (statestep > 0) {statestep -= 1.0f;}
                 else
@@ -115,7 +119,7 @@ public class Entity_EyeDrop : Entity
                     statestep = 20.0f;
 
                     GameObject obj = Instantiate(strikeobj);
-                    obj.transform.position = transform.position;
+                    obj.transform.position = transform.position + new Vector3(0.0f, -16.0f, 0.0f);
                 }
                 break;
             }
