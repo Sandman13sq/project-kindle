@@ -22,15 +22,15 @@ Feel free to ask questions, as always.
     - Onyx uses black, shades of purple, bright pink, and deep blues as main colors. 
     See [Coro and Enemy Concept Art](https://raw.githubusercontent.com/Dreamer13sq/project-kindle/main/ref/coro.png).  
       Feel free to experiment but keep total palette size as low as you can.
-  - Ideas on 3/2/22: Colander Tortoise, Rusty Octopus, Trashbag Stork, Fridge Monster, Junk Mimic, Junky Jumbie (save for boss?)
+  - Ideas on 3/1/22: Colander Tortoise, Rusty Octopus, Trashbag Stork, Fridge Monster, Junk Mimic, Junky Jumbie (save for boss?)
 
 ## **Scenery** (Art)
 - Points of interest ideas
-  - Ideas on 3/2/22:
+  - Ideas on 3/1/22:
     - Magnet moving junk around
     - Giant Coro statue (made of junk or soap)
 - Come up with something to interact with
-  - Idea on 3/2/22: build a bridge with debris to access an area
+  - Idea on 3/1/22: build a bridge with debris to access an area
 - Design a health upgrade sprite that fits in a 32x32 tile
   - Only criteria is that it needs a heart somewhere on it
 
