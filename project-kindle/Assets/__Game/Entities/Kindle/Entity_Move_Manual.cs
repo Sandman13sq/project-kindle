@@ -113,7 +113,7 @@ public class Entity_Move_Manual : Entity
 		// In Air
 		else
 		{
-			jumpheld = jumpheld && Input.GetKey("z") && yspeed > 0.0f;
+			jumpheld = jumpheld && Input.GetButton("Jump") && yspeed > 0.0f;
 
 			if (xlev > 0.0f) // Moving Right
 			{
