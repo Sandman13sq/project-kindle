@@ -17,15 +17,11 @@ public class Entity_Crawler : Entity
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D[] castresults = new RaycastHit2D[8];
-        ContactFilter2D filter = new ContactFilter2D();
-        filter.layerMask = LAYER_ENTITY_BIT;
-        
         Physics2D.CircleCast(
             new Vector2(transform.position.x, transform.position.y),
             alertradius,
             new Vector2(0.0f, 0.0f),
-            filter,
+            new ContactFilter2D() {layerMask=LAYER_ENTITY_BIT},
             castresults,
             0.0f
         );

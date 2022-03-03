@@ -7,8 +7,8 @@ public class WeaponProjectile : MonoBehaviour
 {
     public SpriteRenderer spriterenderer;
     public Collider2D worldcollider;    // Used to interact with the world
-    public Collider2D hitcollider;  // Used for hitbox collisions
-    public Rigidbody2D rigidbody;  // Necessary for collision detection
+    public Collider2D hitboxcollider;  // Used for hitbox collisions
+    public Rigidbody2D rbody;  // Necessary for collision detection
 
     [SerializeField] private float speed;
     [SerializeField] private int damage;
@@ -18,10 +18,14 @@ public class WeaponProjectile : MonoBehaviour
 
     [SerializeField] private Weapon sourceweapon = null; // Weapon component that the projectile was fired from
 
-    const int LAYER_WORLD = 3;
-    const int LAYER_WORLD_BIT = 1 << LAYER_WORLD;
-    const int LAYER_ENTITY = 6;
-    const int LAYER_ENTITY_BIT = 1 << LAYER_ENTITY;
+    protected const int LAYER_WORLD = 3;
+    protected const int LAYER_WORLD_BIT = 1 << LAYER_WORLD;
+    protected const int LAYER_ENTITY = 6; 
+    protected const int LAYER_ENTITY_BIT = 1 << LAYER_ENTITY;
+    protected const int LAYER_HITBOX = 7; 
+    protected const int LAYER_HITBOX_BIT = 1 << LAYER_HITBOX;
+    protected const int LAYER_HURTBOX = 8; 
+    protected const int LAYER_HURTBOX_BIT = 1 << LAYER_HURTBOX;
 
     // Common ============================================================
     
@@ -37,6 +41,31 @@ public class WeaponProjectile : MonoBehaviour
     {
         UpdateMovement();
 
+        // Enemy Collision
+        if (hitboxcollider)
+        {
+            RaycastHit2D[] hitresults = new RaycastHit2D[8];
+            CastHitbox(hitresults);
+
+            foreach (RaycastHit2D hit in hitresults)
+            {
+                Entity e = GetEntityFromCollider(hit.collider);
+                
+                if (e = GetEntityFromCollider(hit.collider))
+                {
+                    // Entity has the shootable flag set
+                    if (e.isshootable)
+                    {
+                        e.ChangeHealth(-damage);
+                        DecrementShotCount();
+                        Destroy(gameObject);
+                    }
+                }
+
+                
+            }
+        }
+
         // Progress life
         life -= 1.0f;
         if (life <= 0.0)
@@ -48,21 +77,8 @@ public class WeaponProjectile : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D c)
     {
-        // Interact with entity
-        if (c.gameObject.layer == LAYER_ENTITY)
-        {
-            Entity e = c.gameObject.GetComponent<Entity>();
-
-            // Entity has the shootable flag set
-            if (e.isshootable)
-            {
-                e.ChangeHealth(-damage);
-                DecrementShotCount();
-                Destroy(gameObject);
-            }
-        }
         // Interact with world
-        else if (c.gameObject.layer == LAYER_WORLD)
+        if (c.gameObject.layer == LAYER_WORLD)
         {
             DecrementShotCount();
             Destroy(gameObject);
@@ -129,5 +145,39 @@ public class WeaponProjectile : MonoBehaviour
     public void SetSourceWeapon(Weapon _weapon)
     {
         sourceweapon = _weapon;
+    }
+
+    // Casts hitbox against hurtboxes and populates results in given variable. Returns number of results
+    protected int CastHitbox(RaycastHit2D[] hitresults)
+    {
+        if (!hitboxcollider) {return 0;}
+        
+        hitboxcollider.Cast(
+            new Vector2(0.0f, 0.0f),
+            new ContactFilter2D() {layerMask=LAYER_HURTBOX_BIT},
+            hitresults,
+            0.0f
+        );
+
+        return hitresults.Length;
+    }
+
+    // Returns root entity from collider if exists, null otherwise.
+    protected Entity GetEntityFromCollider(Collider2D c)
+    {
+        if (c != null)
+        {
+            if (c.gameObject.TryGetComponent(out ParentEntity p))
+            {
+                return p.GetEntity();
+            }
+
+            if (c.gameObject.TryGetComponent(out Entity e))
+            {
+                return e;
+            }
+        }
+        
+        return null;
     }
 }

@@ -13,8 +13,6 @@ public class Entity_Energy0 : Entity
 
     private const float attractspeed = 0.02f; // Speed that energy will move towards player
     private const float attractrange = 64.0f; // Range that energy will start moving towards player
-    private List<RaycastHit2D> castresults = new List<RaycastHit2D>();
-    private ContactFilter2D castfilter = new ContactFilter2D();
 
     private float lifemax = 360.0f;
     private float life;
@@ -24,7 +22,6 @@ public class Entity_Energy0 : Entity
     {
         life = lifemax;
         colorstep = Random.Range(0.0f, 1.0f);
-        castfilter.SetLayerMask(~LAYER_WORLD_BIT); // Ignore the "world" layer
     }
 
     void OnCollisionEnter2D(Collision2D c)
@@ -66,19 +63,19 @@ public class Entity_Energy0 : Entity
             new Vector2(transform.position.x, transform.position.y),
             attractrange,
             new Vector2(0.0f, 0.0f),
-            castfilter,
+            new ContactFilter2D() {layerMask=~LAYER_WORLD_BIT},
             castresults,
             attractrange
         );
 
-        foreach (RaycastHit2D e in castresults)
+        foreach (var hit in castresults)
         {
-            if (e.collider != null)
+            if (hit.collider != null)
             {
-                if (e.collider.gameObject.tag == "player")
+                if (hit.collider.gameObject.tag == "player")
                 {
                     xspeed += attractspeed * Mathf.Sign(
-                        e.collider.gameObject.transform.position.x-transform.position.x);
+                        hit.collider.gameObject.transform.position.x-transform.position.x);
                 }
             }
         }

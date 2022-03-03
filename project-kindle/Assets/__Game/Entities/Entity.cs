@@ -28,13 +28,16 @@ public class Entity : MonoBehaviour
     protected const int LAYER_ENTITY_BIT = 1 << LAYER_ENTITY;
     protected const int LAYER_HITBOX = 7; 
     protected const int LAYER_HITBOX_BIT = 1 << LAYER_HITBOX;
+    protected const int LAYER_HURTBOX = 8; 
+    protected const int LAYER_HURTBOX_BIT = 1 << LAYER_HURTBOX;
 
     // Variables ======================================================
 
     public SpriteRenderer spriterenderer;
+    public Collider2D hitboxcollider;  // Used for damaging player on contact
+    public Collider2D hurtboxcollider;  // Used for damaging this entity on contact
     public Collider2D worldcollider;    // Used to interact with the world
-    public Collider2D hitcollider;  // Used for hitbox collisions
-    public Rigidbody2D rigidbody;  // Necessary for collision detection
+    public Rigidbody2D rbody;  // Necessary for collision detection
 
     // Internal
     //public int entityindex; // Represents the position of entity when instanced
@@ -56,6 +59,8 @@ public class Entity : MonoBehaviour
     protected float damageshake = 0.0f;
     protected float damageshaketime = 10.0f;
     protected float rightsign = 1.0f; // 1 when facing right, -1 when facing left
+
+    protected RaycastHit2D[] castresults = new RaycastHit2D[8]; // Used for cast results. Initialized once for optimization
     
     // Stats
     public int health;   // Remaining hitpoints
@@ -204,6 +209,9 @@ public class Entity : MonoBehaviour
         if (damageshake > 0)
         {
             damageshake = Mathf.Max(0.0f, damageshake - 1.0f);
+
+            // Exit if there's no sprite renderer set
+            if (spriterenderer == null) {return;}
 
             // Set x offset
             if (damageshake > 0)
@@ -399,4 +407,33 @@ public class Entity : MonoBehaviour
     public void SpeedAddDeg(float _speed, float _direction) {SpeedAddRad(_speed, _direction * Mathf.Deg2Rad);}
 
     public int GetAttack() {return attack;}
+
+    // Returns root entity from collider if exists, null otherwise.
+    protected Entity GetEntityFromCollider(Collider2D c)
+    {
+        if (c != null)
+        {
+            if (c.gameObject.TryGetComponent(out ParentEntity p))
+            {
+                return p.GetEntity();
+            }
+        }
+        
+        return null;
+    }
+
+    // Casts hurtbox against hurtboxes and populates results in given variable. Returns number of results
+    protected int CastHurtbox(RaycastHit2D[] hitresults)
+    {
+        if (!hurtboxcollider) {return 0;}
+
+        hurtboxcollider.Cast(
+            new Vector2(0.0f, 0.0f),
+            new ContactFilter2D() {layerMask=LAYER_HITBOX_BIT},
+            hitresults,
+            0.0f
+        );
+
+        return hitresults.Length;
+    }
 }

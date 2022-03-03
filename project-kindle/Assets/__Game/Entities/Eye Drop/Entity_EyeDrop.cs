@@ -70,7 +70,7 @@ public class Entity_EyeDrop : Entity
                 {
                     // Raycast for player
                     worldcollider.enabled = false;
-                    hitcollider.enabled = false;
+                    hitboxcollider.enabled = false;
                     playercast = Physics2D.Raycast(
                         new Vector2(transform.position.x, transform.position.y), 
                         new Vector2(0.0f, -1.0f), 
@@ -78,7 +78,7 @@ public class Entity_EyeDrop : Entity
                         LAYER_ENTITY_BIT
                         );
                     worldcollider.enabled = true;
-                    hitcollider.enabled = true;
+                    hitboxcollider.enabled = true;
                     
                     // Check collider
                     if (playercast.collider != null)

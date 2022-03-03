@@ -114,8 +114,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriterenderer: {fileID: 7336412358944654655}
   worldcollider: {fileID: 5767018644069807880}
-  hitcollider: {fileID: 0}
-  rigidbody: {fileID: 0}
+  hitboxcollider: {fileID: 0}
+  rbody: {fileID: 0}
   entityindex: 0
   entitytype: 0
   eventkey: 

@@ -169,9 +169,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriterenderer: {fileID: 5279603936323483284}
+  hitboxcollider: {fileID: 5015337290040266783}
+  hurtboxcollider: {fileID: 0}
   worldcollider: {fileID: 2477030256745746612}
-  hitcollider: {fileID: 5015337290040266783}
-  rigidbody: {fileID: 0}
+  rbody: {fileID: 0}
   showdamage: 0
   isshootable: 0
   eventondefeat: 0
