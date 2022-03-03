@@ -1,0 +1,12 @@
+== Entity Structure ==
+
+Objects
+
+Root - An empty that is the root object of an entity. The entity script is set here.
+Sprite - An object with the Sprite Renderer component.
+Hitbox - An object with some Collider 2D component used for damaging the player on contact.
+Hurtbox - An object with some Collider 2D component used for damaging the entity.
+Collision - An 
+
+
+- Entity Script is set on a parent empty

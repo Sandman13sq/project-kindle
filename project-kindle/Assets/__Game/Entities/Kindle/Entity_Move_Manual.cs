@@ -172,31 +172,19 @@ public class Entity_Move_Manual : Entity
 		}
 
 		// Hitbox collision
-		if (hitcollider)
+		if (hurtboxcollider)
 		{
 			RaycastHit2D[] hitresults = new RaycastHit2D[8];
-			ContactFilter2D filter = new ContactFilter2D();
-			filter.layerMask = LAYER_HITBOX_BIT;
-			
-			hitcollider.Cast(
-				new Vector2(0.0f, 0.0f),
-				filter,
-				hitresults,
-				0.0f
-			);
+			CastHurtbox(hitresults);
 
 			// Iterate through hits
 			foreach (RaycastHit2D hit in hitresults)
 			{
-				if (hit.collider != null)
+				Entity e = GetEntityFromCollider(hit.collider);
+				if (e)
 				{
-					if (hit.collider.gameObject.TryGetComponent(out ParentEntity p))
-					{
-						Entity e = p.GetEntity();
-						DoDamage(e.GetAttack());
-						break;
-					}
-					
+					// Do damage from hitbox
+					DoDamage(e.GetAttack());
 				}
 			}
 		}

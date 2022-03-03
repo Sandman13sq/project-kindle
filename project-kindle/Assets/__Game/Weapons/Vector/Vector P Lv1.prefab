@@ -136,8 +136,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriterenderer: {fileID: 3444606476975869833}
   worldcollider: {fileID: 3444606476975869834}
-  hitcollider: {fileID: 3444606476975869834}
-  rigidbody: {fileID: 3444606476975869847}
+  hitboxcollider: {fileID: 3444606476975869834}
+  rbody: {fileID: 3444606476975869847}
   speed: 18
   damage: 1
   lifemax: 12
