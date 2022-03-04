@@ -140,6 +140,7 @@ MonoBehaviour:
   destroygraphic:
   - {fileID: 4741169176835607102, guid: c57ff7aa1b78aa1438e4acf55e7d6486, type: 3}
   - {fileID: 4741169176835607102, guid: c57ff7aa1b78aa1438e4acf55e7d6486, type: 3}
+  shownumberprefab: {fileID: 850697109702244616, guid: 9edcd6967739f21468e782a98685c4f2, type: 3}
 --- !u!1 &3225147857792809181
 GameObject:
   m_ObjectHideFlags: 0

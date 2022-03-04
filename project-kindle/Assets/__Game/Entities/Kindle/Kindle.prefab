@@ -183,6 +183,7 @@ MonoBehaviour:
   energydrops: []
   heartdrop: {fileID: 0}
   destroygraphic: []
+  shownumberprefab: {fileID: 850697109702244616, guid: 9edcd6967739f21468e782a98685c4f2, type: 3}
   jumpheld: 0
   jumpbuffer: 0
   playerdata: {fileID: 0}
