@@ -70,6 +70,9 @@ public class Entity : MonoBehaviour
     [SerializeField] private GameObject[] energydrops;  // Energy objects dropped when defeated
     [SerializeField] private GameObject heartdrop;
     [SerializeField] private GameObject[] destroygraphic;
+
+    [SerializeField] private GameObject shownumberprefab;
+    private GameObject shownumberobj = null;
     
     // Common ================================================================
 
@@ -169,6 +172,19 @@ public class Entity : MonoBehaviour
         if (value < 0)
         {
             health += value;
+
+            // Show damage
+            if (showdamage)
+            {
+                if (shownumberobj == null)
+                {
+                    shownumberobj = Instantiate(shownumberprefab);
+                    shownumberobj.GetComponent<ShowNumber>().SetTargetObject(gameObject);
+                    shownumberobj.GetComponent<ShowNumber>().ZeroValue();
+                }
+
+                shownumberobj.GetComponent<ShowNumber>().AddValue(ShowNumber.NumberType.HEALTH, value);
+            }
 
             if (health < 0) 
             {
@@ -435,5 +451,9 @@ public class Entity : MonoBehaviour
         );
 
         return hitresults.Length;
+    }
+    public void ClearNumberObject()
+    {
+        shownumberobj = null;
     }
 }
