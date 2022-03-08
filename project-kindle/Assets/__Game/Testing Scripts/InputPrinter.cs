@@ -13,8 +13,8 @@ public class InputPrinter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.anyKey){
-            print(Input.inputString);
+        if(Input.GetButton("A Button")){
+            Debug.Log("A button is being pressed!");
         }
     }
 }
