@@ -64,13 +64,13 @@ public class Weapon : MonoBehaviour
         }
 
         // Shoot
-        if ( Input.GetKeyDown("x") )
+        if ( Input.GetButtonDown("Fire1") )
         {
             firebuffer = firebuffertime;
         }
 
         // Autofire
-        if ( Input.GetKey("x") )
+        if ( Input.GetButton("Fire1") )
         {
             if (autofireprogress > 0.0f)
             {

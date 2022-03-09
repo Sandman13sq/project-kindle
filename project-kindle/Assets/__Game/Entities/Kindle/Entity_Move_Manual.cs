@@ -39,7 +39,7 @@ public class Entity_Move_Manual : Entity
 	}
 
 	// Update is called once per frame
-	void Update()
+	async void Update()
 	{
 		float moveacceleration = 0.3f;
 		float movedeceleration = 0.5f;
@@ -69,7 +69,7 @@ public class Entity_Move_Manual : Entity
             jumpbuffer -= 1.0f;
         }
 
-		if (Input.GetKeyDown("z"))
+		if (Input.GetButton("Jump"))
         {
             jumpbuffer = jumpbuffertime;
         }
@@ -113,8 +113,7 @@ public class Entity_Move_Manual : Entity
 		// In Air
 		else
 		{
-			jumpheld = jumpheld && Input.GetKey("z") && yspeed > 0.0f;
-
+			jumpheld = jumpheld && Input.GetButton("Jump") && yspeed > 0.0f;
 			if (xlev > 0.0f) // Moving Right
 			{
 				xspeed = Mathf.Min(xspeed + moveaccelerationair, movespeedmax);
