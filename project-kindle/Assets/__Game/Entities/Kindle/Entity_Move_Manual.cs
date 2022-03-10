@@ -69,7 +69,7 @@ public class Entity_Move_Manual : Entity
             jumpbuffer -= 1.0f;
         }
 
-		if (Input.GetButton("Jump"))
+		if (Input.GetButtonDown("Jump"))
         {
             jumpbuffer = jumpbuffertime;
         }
