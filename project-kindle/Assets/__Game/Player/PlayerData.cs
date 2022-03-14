@@ -64,4 +64,9 @@ public class PlayerData : MonoBehaviour
         weaponinfo.SetAmmoMax(valuemax);
         return 0;
     }
+
+    public void SetWeapon(int weaponindex)
+    {
+        weaponinfo.SetWeapon(weaponindex);
+    }
 }

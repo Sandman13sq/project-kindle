@@ -9,6 +9,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     // Internal
+    private bool active;
     [SerializeField] private int energy;  // Amount of energy weapon has
     [SerializeField] private int levelmax;   // Max weapon level
     private int level;   // Current weapon level (Index 0 = Level 1)
@@ -20,11 +21,11 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] private float delaytime;    // Time between shots
     private float delayprogress;    // Used to delay shots
-    [SerializeField] private float rechargetime;    // Time between adding ammo
-    private float rechargeprogress;    // Used to delay shots
     [SerializeField] private float autofiretime;    // Time between automatically shooting again
     private float autofireprogress;    // Used to delay shots
-
+    [SerializeField] private float rechargetime;    // Time between adding ammo
+    private float rechargeprogress;    // Used to delay shots
+    
     private float firebuffer;
     private float firebuffertime = 5.0f;
 
@@ -35,6 +36,10 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Entity_Move_Manual player;
     private float hsign;    // Horizontal sign. {-1, 1}
     private float vsign;    // Vertical sign. {-1, 0, 1}
+
+    private float shootoffset_leftright = 40.0f;
+    private float shootoffset_up = 56.0f;
+    private float shootoffset_down = 56.0f;
 
     [SerializeField] private PlayerData playerdata;
 
@@ -102,43 +107,73 @@ public class Weapon : MonoBehaviour
         }
 
         // Check for fire projectile
-        if ( UpdateDelay() && BelowShotCount() && HasAmmo() )
+        if ( IsActive() )
         {
-            // temp schüt
-            if (firebuffer > 0.0f)
+            if ( UpdateDelay() && BelowShotCount() && HasAmmo() )
             {
-                firebuffer = 0.0f;
-                delayprogress = delaytime;
-
-                float xaim, yaim;
-
-                if (vsign != 0.0f && !(vsign == -1.0f && player.GetOnGround()) )
+                // temp schüt
+                if (firebuffer > 0.0f)
                 {
-                    xaim = 0.0f;
-                    yaim = vsign;
+                    firebuffer = 0.0f;
+                    delayprogress = delaytime;
+
+                    float xaim, yaim;
+
+                    if (vsign != 0.0f && !(vsign == -1.0f && player.GetOnGround()) )
+                    {
+                        xaim = 0.0f;
+                        yaim = vsign;
+                    }
+                    else
+                    {
+                        xaim = hsign;
+                        yaim = 0.0f;
+                    }
+
+                    IncrementShotCount();
+                    AddAmmo(-1);
+                    
+                    Fire(Mathf.Atan2(yaim, xaim));
+                    player.OnShoot();
                 }
-                else
-                {
-                    xaim = hsign;
-                    yaim = 0.0f;
-                }
-
-                IncrementShotCount();
-                AddAmmo(-1);
-
-                WeaponProjectile proj = Instantiate(projectiles[level]).GetComponent<WeaponProjectile>();
-                proj.transform.position = transform.position + new Vector3(xaim*40.0f, yaim*48.0f, 0.0f);
-                proj.SetDirectionRad(Mathf.Atan2(yaim, xaim), hsign);
-                proj.SetSourceWeapon(this);
-
-                player.OnShoot();
             }
-        }
 
-        playerdata.SetAmmo(ammo, ammomax);
+            playerdata.SetAmmo(ammo, ammomax);  // Update Ammo Counts
+        }
     }
 
     // Methods ====================================================
+
+    public void SetActive(bool isactive)
+    {
+        active = isactive;
+        if (active)
+        {
+            playerdata.SetAmmo(ammo, ammomax);
+        }
+    }
+
+    public bool IsActive() {return active;}
+
+    public virtual void Fire(float dir)
+    {
+        ShootProjectile(level, dir);
+    }
+
+    public WeaponProjectile ShootProjectile(int projectileindex, float dir)
+    {
+        WeaponProjectile proj = Instantiate(projectiles[projectileindex]).GetComponent<WeaponProjectile>();
+
+        proj.transform.position = transform.position + new Vector3(
+            Mathf.Cos(dir)*shootoffset_leftright, 
+            Mathf.Max(0.0f, Mathf.Sin(dir))*shootoffset_up + Mathf.Min(0.0f, Mathf.Sin(dir))*shootoffset_down, 
+            0.0f);
+        
+        proj.SetDirectionRad(dir, hsign);
+        proj.SetSourceWeapon(this);
+
+        return proj;
+    }
 
     public void SetPlayer(Entity_Move_Manual p) {player = p;} 
 
@@ -193,7 +228,9 @@ public class Weapon : MonoBehaviour
     // Returns level using energy
     int GetCurrentLevelIndex()
     {
+        if (levelmax == 0) {return 0;}
         int e = energy;
+        
         for (int i = 0; i < levelmax; i++)
         {
             if (e < weaponlvlenergy[i]) {return i;}
@@ -218,6 +255,8 @@ public class Weapon : MonoBehaviour
     // Adds energy to weapon, increasing level if sufficient
     public int AddEnergy(int value, bool showgraphic = false)
     {
+        if (levelmax == 0) {return value;}
+
         int e = value; // Leftover energy (if any)
         int lastlevel = level;
 

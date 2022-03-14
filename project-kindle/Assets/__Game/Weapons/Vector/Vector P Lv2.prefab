@@ -135,9 +135,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriterenderer: {fileID: 3444606476975869833}
+  sprites: []
+  image_index: 0
+  image_speed: 0
   worldcollider: {fileID: 3444606476975869834}
   hitboxcollider: {fileID: 3444606476975869834}
   rbody: {fileID: 3444606476975869847}
   speed: 19
   damage: 2
   lifemax: 12
+  obj_on_hit: {fileID: 0}
+  obj_on_miss: {fileID: 5660040404222689485, guid: 6f75a49ece4f7f84e82d0b7688f336f8, type: 3}
+  sourceweapon: {fileID: 0}

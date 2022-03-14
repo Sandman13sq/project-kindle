@@ -28,7 +28,7 @@ public class Particle_Popsmoke : MonoBehaviour
         spritecount = sprites.Length;
         spriteindex = 0;
     }
-
+    
     // Update is called once per frame
     void Update()
     {
