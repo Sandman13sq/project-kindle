@@ -19,6 +19,9 @@ public class WeaponProjectile : MonoBehaviour
     [SerializeField] float lifemax;
     float life;
 
+    [SerializeField] private GameObject obj_on_hit; // Object to create on hit. (a particle)
+    [SerializeField] private GameObject obj_on_miss; // Object to create when life timer expires (a particle)
+
     [SerializeField] private Weapon sourceweapon = null; // Weapon component that the projectile was fired from
 
     protected const int LAYER_WORLD = 3;
@@ -61,6 +64,11 @@ public class WeaponProjectile : MonoBehaviour
                     {
                         e.ChangeHealth(-damage);
                         DecrementShotCount();
+                        if (obj_on_hit)
+                        {
+                            Instantiate(obj_on_hit).transform.position = transform.position;
+                        }
+                        
                         Destroy(gameObject);
                         return;
                     }
@@ -83,6 +91,12 @@ public class WeaponProjectile : MonoBehaviour
         {
             DecrementShotCount();
             Destroy(gameObject);
+
+            if (obj_on_miss)
+            {
+                Instantiate(obj_on_miss).transform.position = transform.position;
+            }
+            
             return;
         }
     }
