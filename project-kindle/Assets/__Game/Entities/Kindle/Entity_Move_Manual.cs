@@ -13,7 +13,6 @@ public class Entity_Move_Manual : Entity
     private float jumpbuffertime = 7.0f; // Max number of frames ahead of time where a jump press will still be read
 
 	[SerializeField] private PlayerData playerdata;	// Holds health, energy, level, etc.
-	[SerializeField] private GameObject projectile;	// Temporary until we find a better way that doesn't require the inspector
 	[SerializeField] private Sprite[] sprites;
 	private int spriteindex;
 	private int recentshot;
@@ -24,7 +23,9 @@ public class Entity_Move_Manual : Entity
 	private float iframes = 0.0f;	// Frames of invincibility after taking damage
 	private float iframestime = 150.0f;
 
-	[SerializeField] private Weapon weapon;
+	private int weaponindex = 0;
+	[SerializeField] private Weapon[] weapons;
+	private Weapon activeweapon;
 
 	// Common ===============================================================
 	
@@ -35,11 +36,17 @@ public class Entity_Move_Manual : Entity
 		recentshot = 100;
 		Application.targetFrameRate = 60; // Temporary. Will remove later
 		playerdata.SetHealth(health);
-		weapon.SetPlayer(this);
+
+		foreach (var w in weapons)
+		{
+			w.SetPlayer(this);
+		}
+
+		SetActiveWeapon(1);
 	}
 
 	// Update is called once per frame
-	async void Update()
+	void Update()
 	{
 		float moveacceleration = 0.3f;
 		float movedeceleration = 0.5f;
@@ -223,7 +230,7 @@ public class Entity_Move_Manual : Entity
 			// Subtract energy when health is lost
 			if (healthdiff < 0)
 			{
-				weapon.AddEnergy(healthdiff);
+				activeweapon.AddEnergy(healthdiff);
 			}
 			// Flash when health is gained
 			else
@@ -253,7 +260,20 @@ public class Entity_Move_Manual : Entity
 
 	public int AddEnergy(int _energy)
 	{
-		return weapon.AddEnergy(_energy);
+		return activeweapon.AddEnergy(_energy);
+	}
+
+	public void SetActiveWeapon(int index)
+	{
+		weaponindex = index;
+		activeweapon = weapons[weaponindex];
+
+		foreach (var w in weapons)
+		{
+			w.SetActive(false);
+		}
+
+		activeweapon.SetActive(true);
 	}
 
 	// Utility ================================================================

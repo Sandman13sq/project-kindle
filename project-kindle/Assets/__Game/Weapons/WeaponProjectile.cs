@@ -6,6 +6,9 @@ using UnityEngine;
 public class WeaponProjectile : MonoBehaviour
 {
     public SpriteRenderer spriterenderer;
+    [SerializeField] private Sprite[] sprites;
+    [SerializeField] private float image_index = 0.0f;
+    [SerializeField] private float image_speed = 0.0f;
     public Collider2D worldcollider;    // Used to interact with the world
     public Collider2D hitboxcollider;  // Used for hitbox collisions
     public Rigidbody2D rbody;  // Necessary for collision detection
@@ -59,11 +62,19 @@ public class WeaponProjectile : MonoBehaviour
                         e.ChangeHealth(-damage);
                         DecrementShotCount();
                         Destroy(gameObject);
+                        return;
                     }
                 }
 
                 
             }
+        }
+
+        // Update sprite if array is populated
+        if (sprites.Length > 0)
+        {
+            spriterenderer.sprite = sprites[Mathf.FloorToInt(Mathf.Clamp(image_index, 0.0f, sprites.Length-1))];
+            image_index = Mathf.Repeat(image_index+image_speed, sprites.Length);
         }
 
         // Progress life
@@ -72,6 +83,7 @@ public class WeaponProjectile : MonoBehaviour
         {
             DecrementShotCount();
             Destroy(gameObject);
+            return;
         }
     }
     
@@ -137,10 +149,9 @@ public class WeaponProjectile : MonoBehaviour
         SetDirectionRad( Mathf.Atan2(_ydir, _xdir) );
     }
 
-    public void SetSpeed(float _speed)
-    {
-        speed = _speed;
-    }
+    public void SetSpeed(float _speed) {speed = _speed;}
+    public void AddSpeed(float _speed) {speed += _speed;}
+    public void MultiplySpeed(float _speed) {speed *= _speed;}
 
     public void SetSourceWeapon(Weapon _weapon)
     {

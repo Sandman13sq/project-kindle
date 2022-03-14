@@ -26,5 +26,7 @@ public class Weapon_Vector : Weapon
             AddEnergy(-7);
         }
     }
+
+    
 }
 
