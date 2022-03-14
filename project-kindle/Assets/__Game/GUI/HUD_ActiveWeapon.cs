@@ -11,6 +11,8 @@ public class HUD_ActiveWeapon : MonoBehaviour
     [SerializeField] private GameObject levelstringobj; 
     [SerializeField] private GameObject numeratorobj; 
     [SerializeField] private GameObject denominatorobj;
+    [SerializeField] private UnityEngine.UI.Image weaponiconrdr;
+    [SerializeField] private Sprite[] weaponiconsprites;
 
     // Start is called before the first frame update
     void Start()
@@ -55,5 +57,10 @@ public class HUD_ActiveWeapon : MonoBehaviour
     {
         ammomax = _value;
         denominatorobj.GetComponent<UnityEngine.UI.Text>().text = ammomax.ToString();
+    }
+
+    public void SetWeapon(int weaponindex)
+    {
+        weaponiconrdr.sprite = weaponiconsprites[weaponindex];
     }
 }

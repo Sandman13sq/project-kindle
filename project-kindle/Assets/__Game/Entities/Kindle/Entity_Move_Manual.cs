@@ -209,6 +209,19 @@ public class Entity_Move_Manual : Entity
 				spriterenderer.enabled = true;
 			}
 		}
+
+		// Switch Weapon
+		if (Input.GetButtonDown("WeaponNext"))
+		{
+			weaponindex = (weaponindex+1) % 2;
+			SetActiveWeapon(weaponindex);
+		}
+		
+		if (Input.GetButtonDown("WeaponPrev"))
+		{
+			weaponindex = weaponindex==0? 1: weaponindex-1;
+			SetActiveWeapon(weaponindex);
+		}
 	}
 
 	// Methods ===============================================================
@@ -244,8 +257,6 @@ public class Entity_Move_Manual : Entity
 		{
 			return 0;
 		}
-		
-
 	}
 
 	protected override void OnHealthChange(int diff)
@@ -274,6 +285,8 @@ public class Entity_Move_Manual : Entity
 		}
 
 		activeweapon.SetActive(true);
+
+		playerdata.SetWeapon(weaponindex);
 	}
 
 	// Utility ================================================================
