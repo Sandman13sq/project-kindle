@@ -50,9 +50,6 @@ public class Weapon : MonoBehaviour
         autofireprogress = autofiretime;
 
         level = GetCurrentLevelIndex();
-        playerdata.SetEnergy(CurrentLevelEnergy(), CurrentLevelEnergyMax());
-        playerdata.SetLevel(GetLevel());
-        playerdata.SetAmmo(ammo, ammomax);
     }
 
     // Update is called once per frame
@@ -149,6 +146,8 @@ public class Weapon : MonoBehaviour
         active = isactive;
         if (active)
         {
+            playerdata.SetEnergy(CurrentLevelEnergy(), CurrentLevelEnergyMax());
+            playerdata.SetLevel(GetLevel());
             playerdata.SetAmmo(ammo, ammomax);
         }
     }
@@ -175,7 +174,11 @@ public class Weapon : MonoBehaviour
         return proj;
     }
 
-    public void SetPlayer(Entity_Move_Manual p) {player = p;} 
+    public void SetPlayer(Entity_Move_Manual p) 
+    {
+        player = p;
+        playerdata = player.GetPlayerData();
+    } 
 
     // Progress delay timer. Returns true if delay is zero
     protected bool UpdateDelay(float ts = 1.0f)
