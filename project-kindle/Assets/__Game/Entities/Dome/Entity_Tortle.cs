@@ -37,7 +37,7 @@ public class Entity_Tortle : Entity
     }
 
     // Update is called once per frame
-    async void Update()
+    void Update()
     {
         UpdateMovement();
         UpdateDamageShake();
