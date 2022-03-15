@@ -5,7 +5,7 @@ using UnityEngine;
 public class Entity_Tortle : Entity
 {
     private RaycastHit2D playercast;
-    private float strikeradius = 150.0f;
+    private float strikeradius = 100.0f;
     private float statestep = 0.0f;
     private const float maxspeed = 0.7f;
     private const float speedslowmod = 0.95f;
@@ -32,18 +32,19 @@ public class Entity_Tortle : Entity
     // Start is called before the first frame update
     void Start()
     {
-        xspeed = spriterenderer.flipX? 1.0f: -1.0f; 
+        xspeed = spriterenderer.flipX? -1.0f: 1.0f; 
         state = (int)State.Cruising;
     }
 
     // Update is called once per frame
-    void Update()
+    async void Update()
     {
         UpdateMovement();
         UpdateDamageShake();
 
         CollisionFlag coll = EvaluateCollision(0);
 
+        // Change direction if wall is hit
         if (
             (coll.HasFlag(CollisionFlag.RIGHT) && !spriterenderer.flipX) ||
             (coll.HasFlag(CollisionFlag.LEFT) && spriterenderer.flipX)
@@ -52,7 +53,6 @@ public class Entity_Tortle : Entity
             spriterenderer.flipX = !spriterenderer.flipX;
             xspeed = Mathf.Max(0.01f, Mathf.Abs(xspeed)) * (spriterenderer.flipX? -1.0f: 1.0f);
             UpdateMovement();
-            Debug.Log("Tatu hit a wall, ow.");
         }
 
         spriterenderer.sprite = sprites[0];
@@ -137,8 +137,12 @@ public class Entity_Tortle : Entity
                     state = (int)State.Strike;
                     statestep = 20.0f;
 
-                    GameObject obj = Instantiate(strikeobj);
-                    obj.transform.position = transform.position + new Vector3(0.0f, -16.0f, 0.0f);
+                    //Spawn 5 bullets, set each with a unique number
+                    for(int i = 0; i < 5; i++){ 
+                        GameObject obj = Instantiate(strikeobj);
+                        obj.transform.position = transform.position + new Vector3(0, -16.0f, 0.0f);
+                        obj.GetComponent<Entity_Dome_projectiles>().bulletNum = i;
+                    }
                 }
                 break;
             }
