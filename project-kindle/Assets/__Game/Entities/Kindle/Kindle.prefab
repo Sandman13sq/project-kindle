@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 350204461698224277}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 12, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 350204462260166775}
@@ -132,7 +132,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -12}
   m_Size: {x: 39, y: 72}
   m_Direction: 0
 --- !u!50 &350204462260166777
@@ -188,15 +188,7 @@ MonoBehaviour:
   jumpheld: 0
   jumpbuffer: 0
   playerdata: {fileID: 0}
-  sprites:
-  - {fileID: 1600164473263688581, guid: 62eb557f9e231a94e9f64d254ab4d7c3, type: 3}
-  - {fileID: 7092806492854255017, guid: 62eb557f9e231a94e9f64d254ab4d7c3, type: 3}
-  - {fileID: 2447039086281458597, guid: 62eb557f9e231a94e9f64d254ab4d7c3, type: 3}
-  - {fileID: -7116219985446798858, guid: 62eb557f9e231a94e9f64d254ab4d7c3, type: 3}
-  - {fileID: -1635582504652792733, guid: 62eb557f9e231a94e9f64d254ab4d7c3, type: 3}
-  - {fileID: -4553369653161914842, guid: 62eb557f9e231a94e9f64d254ab4d7c3, type: 3}
-  - {fileID: -2252140618510573974, guid: 62eb557f9e231a94e9f64d254ab4d7c3, type: 3}
-  - {fileID: 2212714366450486161, guid: 62eb557f9e231a94e9f64d254ab4d7c3, type: 3}
+  animator: {fileID: 0}
   weapons:
   - {fileID: 8695970762921383474}
   - {fileID: 5385092575231758291}
@@ -277,7 +269,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5363778043867703211}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 350204462260166775}
