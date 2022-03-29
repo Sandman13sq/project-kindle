@@ -13,9 +13,10 @@ public class Entity_Move_Manual : Entity
     private float jumpbuffertime = 7.0f; // Max number of frames ahead of time where a jump press will still be read
 
 	[SerializeField] private PlayerData playerdata;	// Holds health, energy, level, etc.
-	[SerializeField] private Sprite[] sprites;
-	private int spriteindex;
-	private int recentshot;
+	//stuff for animation:
+	[SerializeField] private Animator animator;
+
+	private bool aimingUp; //bool to check if kindle is aiming up
 
 	private float hsign;    // Horizontal sign. {-1, 1}
     private float vsign;    // Vertical sign. {-1, 0, 1} 
@@ -33,7 +34,6 @@ public class Entity_Move_Manual : Entity
 	void Start()
 	{
 		hsign = 1.0f;
-		recentshot = 100;
 		Application.targetFrameRate = 60; // Temporary. Will remove later
 		playerdata.SetHealth(health);
 
@@ -48,6 +48,8 @@ public class Entity_Move_Manual : Entity
 	// Update is called once per frame
 	void Update()
 	{
+		animator.SetFloat("Speed", Mathf.Abs(xspeed));//set animator parameter to xspeed
+
 		float moveacceleration = 0.3f;
 		float movedeceleration = 0.5f;
 		float moveaccelerationair = 0.2f;
@@ -145,36 +147,17 @@ public class Entity_Move_Manual : Entity
 			yspeed = Mathf.Max(yspeed, 0.0f);
 		}
 
-		// Temporary Spriting
-		recentshot += 1;
-
-		if (
-			(lastvsign != vsign && vsign == 0.0f) ||
-			(lasthsign != hsign && recentshot > 10)
-		)
+		// Aiming up and down
+		if(ylev > 0)
 		{
-			recentshot = 100;
+			aimingUp = true;
+			animator.SetBool("AimingUp", aimingUp);
 		}
 
-		if (ylev > 0)
-		{
-			spriterenderer.sprite = sprites[recentshot < 5? 4: 5];
-		}
 		else
 		{
-			if (recentshot < 5)
-			{
-				spriterenderer.sprite = sprites[7];
-			}
-			else if (recentshot < 50)
-			{
-				spriterenderer.sprite = sprites[6];
-			}
-			else
-			{
-				spriterenderer.sprite = sprites[(recentshot / 10) % 4];
-				spriteindex = (spriteindex + 1) % 4;
-			}
+			aimingUp = false;
+			animator.SetBool("AimingUp", aimingUp);
 		}
 
 		// Hitbox collision
@@ -222,15 +205,28 @@ public class Entity_Move_Manual : Entity
 			weaponindex = weaponindex==0? 1: weaponindex-1;
 			SetActiveWeapon(weaponindex);
 		}
+
+		//turn off shootingside when fire button is let go
+		if (Input.GetButtonUp("Fire1"))
+		{
+			animator.SetBool("ShootingUp", false);
+			animator.SetBool("ShootingSide", false);
+		}
 	}
 
 	// Methods ===============================================================
 
 	public PlayerData GetPlayerData() {return playerdata;}
 
-	public void OnShoot()
-	{
-		recentshot = 0;
+	//Can check for animation stuff in OnShoot
+	public void OnShoot(){
+		if(aimingUp){
+			animator.SetBool("ShootingUp", true);
+		}
+
+		else{
+			animator.SetBool("ShootingSide", true);
+		}
 	}
 
 	public override int ChangeHealth(int value)
