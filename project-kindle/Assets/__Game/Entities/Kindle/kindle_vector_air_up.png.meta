@@ -1,25 +1,19 @@
 fileFormatVersion: 2
-guid: 9b25221ac4b2e8047a888bbacc5913ab
+guid: dbee8c5686d757d4eb036716334ffb1f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2372742111262983667
-    second: kindle_vector_run_up_0
+      213: 7089491875932104653
+    second: kindle_vector_air_up_0
   - first:
-      213: 7988792749491952653
-    second: kindle_vector_run_up_1
+      213: 4268068072694487971
+    second: kindle_vector_air_up_1
   - first:
-      213: -9180612424124617267
-    second: kindle_vector_run_up_2
+      213: 3348305837450031997
+    second: kindle_vector_air_up_2
   - first:
-      213: -5285314682265584057
-    second: kindle_vector_run_up_3
-  - first:
-      213: 5790877377121812771
-    second: kindle_vector_run_up_4
-  - first:
-      213: -4281964177726430942
-    second: kindle_vector_run_up_5
+      213: 721248612577977670
+    second: kindle_vector_air_up_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -109,7 +103,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: kindle_vector_run_up_0
+      name: kindle_vector_air_up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -123,14 +117,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0a3f820f93521fd0800000000000000
-      internalID: -2372742111262983667
+      spriteID: dc763f6ac4fe26260800000000000000
+      internalID: 7089491875932104653
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kindle_vector_run_up_1
+      name: kindle_vector_air_up_1
       rect:
         serializedVersion: 2
         x: 96
@@ -144,14 +138,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0c1fa1eda4edde60800000000000000
-      internalID: 7988792749491952653
+      spriteID: 3ab14268c493b3b30800000000000000
+      internalID: 4268068072694487971
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kindle_vector_run_up_2
+      name: kindle_vector_air_up_2
       rect:
         serializedVersion: 2
         x: 192
@@ -165,14 +159,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dcda38724a9e79080800000000000000
-      internalID: -9180612424124617267
+      spriteID: d7373984b62977e20800000000000000
+      internalID: 3348305837450031997
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kindle_vector_run_up_3
+      name: kindle_vector_air_up_3
       rect:
         serializedVersion: 2
         x: 288
@@ -186,50 +180,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74e376d9c4ac6a6b0800000000000000
-      internalID: -5285314682265584057
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: kindle_vector_run_up_4
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 32101390b445d5050800000000000000
-      internalID: 5790877377121812771
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: kindle_vector_run_up_5
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 0
-        width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2212ba564486394c0800000000000000
-      internalID: -4281964177726430942
+      spriteID: 6452473bac3620a00800000000000000
+      internalID: 721248612577977670
       vertices: []
       indices: 
       edges: []
