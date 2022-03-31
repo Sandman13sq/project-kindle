@@ -11,11 +11,13 @@ Made in Unity. Semester project for CMSC 493 Spring 2022 at UMBC.
 - Camille Ollivierre (Artist)
 
 ## Repository Links
+### [Sprint 2 Outline](https://github.com/Dreamer13sq/project-kindle/blob/main/ref/outline_sprint2.md)
+- Goals for the second sprint (March 17th - April 4th).
 ### [Sprint 1 Outline](https://github.com/Dreamer13sq/project-kindle/blob/main/ref/outline_sprint1.md)
-- Goals for the first sprint.
+- Goals for the first sprint (March 1st - March 15th).
 ### [Idea Pool](https://docs.google.com/document/d/1-96zIEkCUSJoKvBSTkOfNKu0dOEZz3Vq_8hJu5ehNgs/edit?usp=sharing)
 - A loose GDD to drop ideas onto.
 ### [Prototype Outline](https://github.com/Dreamer13sq/project-kindle/blob/main/ref/outline_prototype.md)
-- Tasks to do during the prototype phase.
+- Tasks to do during the prototype phase (February 10th - February 24th).
 ### [Sprite Style Guide](https://github.com/Dreamer13sq/project-kindle/blob/main/ref/sprite_style_guide.md)
 - Reference for entity sprite art.
