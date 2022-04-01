@@ -155,24 +155,26 @@ public class Entity_Move_Manual : Entity
 		// Aiming up and down
 		if(ylev > 0)
 		{
+			animator.SetBool("IgnoreInAir", true);
 			aimingUp = true;
 			aimingDown = false;
-			animator.SetBool("AimingUp", aimingUp);
 		}
 
 		else if(ylev < 0)
 		{
+			animator.SetBool("IgnoreInAir", true);
 			aimingDown = true;
 			aimingUp = false;
-			animator.SetBool("AimingUp", aimingUp);
 		}
 
 		else
 		{
 			aimingDown = false;
 			aimingUp = false;
-			animator.SetBool("AimingUp", aimingUp);
 		}
+
+		animator.SetBool("AimingUp", aimingUp);
+		animator.SetBool("AimingDown", aimingDown);
 
 		// Hitbox collision
 		if (hurtboxcollider)
