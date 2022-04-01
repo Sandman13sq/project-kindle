@@ -17,6 +17,7 @@ public class Entity_Move_Manual : Entity
 	[SerializeField] private Animator animator;
 
 	private bool aimingUp; //bool to check if kindle is aiming up
+	private bool aimingDown; //bool to check if kindle is aiming down
 
 	private float hsign;    // Horizontal sign. {-1, 1}
     private float vsign;    // Vertical sign. {-1, 0, 1} 
@@ -91,6 +92,8 @@ public class Entity_Move_Manual : Entity
 		*/
 		if (onground)
 		{
+			animator.SetBool("InAir", false);
+			animator.SetBool("IgnoreInAir", false);
 			if (xlev > 0.0f) // Moving Right
 			{
 				xspeed = Mathf.Min(xspeed + (xlev==Mathf.Sign(xspeed)? moveacceleration: movedeceleration), movespeedmax);
@@ -122,6 +125,8 @@ public class Entity_Move_Manual : Entity
 		// In Air
 		else
 		{
+				animator.SetBool("InAir", true);
+
 			jumpheld = jumpheld && Input.GetButton("Jump") && yspeed > 0.0f;
 			if (xlev > 0.0f) // Moving Right
 			{
@@ -151,11 +156,20 @@ public class Entity_Move_Manual : Entity
 		if(ylev > 0)
 		{
 			aimingUp = true;
+			aimingDown = false;
+			animator.SetBool("AimingUp", aimingUp);
+		}
+
+		else if(ylev < 0)
+		{
+			aimingDown = true;
+			aimingUp = false;
 			animator.SetBool("AimingUp", aimingUp);
 		}
 
 		else
 		{
+			aimingDown = false;
 			aimingUp = false;
 			animator.SetBool("AimingUp", aimingUp);
 		}
@@ -205,13 +219,6 @@ public class Entity_Move_Manual : Entity
 			weaponindex = weaponindex==0? 1: weaponindex-1;
 			SetActiveWeapon(weaponindex);
 		}
-
-		//turn off shootingside when fire button is let go
-		if (Input.GetButtonUp("Fire1"))
-		{
-			animator.SetBool("ShootingUp", false);
-			animator.SetBool("ShootingSide", false);
-		}
 	}
 
 	// Methods ===============================================================
@@ -220,12 +227,29 @@ public class Entity_Move_Manual : Entity
 
 	//Can check for animation stuff in OnShoot
 	public void OnShoot(){
-		if(aimingUp){
-			animator.SetBool("ShootingUp", true);
+		//Shooting up from idle
+		if(aimingUp && Mathf.Abs(xspeed) < 0.001 && Mathf.Abs(yspeed) < 0.001)
+		{
+			animator.Play("Base Layer.Kindle_shootup", 0, 0.0f);
 		}
 
-		else{
-			animator.SetBool("ShootingSide", true);
+		//Shooting up while jumping 
+		else if(aimingUp && Mathf.Abs(yspeed) > 0.001)
+		{
+			animator.SetBool("IgnoreInAir", true);
+			animator.Play("Base Layer.Kindle_jump_shootup", 0, 0.0f);
+		}
+		//Shooting to the side from idle 
+		else if(Mathf.Abs(xspeed) < 0.001 && Mathf.Abs(yspeed) < 0.001)
+		{
+			animator.Play("Base Layer.Kindle_shootside", 0, 0.0f);
+		}
+
+		//Shooting down (can only be done when jumping!)
+		else if(aimingDown && Mathf.Abs(yspeed) > 0.001)
+		{
+			animator.SetBool("IgnoreInAir", true);
+			animator.Play("Base Layer.Kindle_jump_shootdown", 0, 0.0f);
 		}
 	}
 
