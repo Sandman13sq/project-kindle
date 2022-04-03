@@ -312,7 +312,7 @@ public class Entity : MonoBehaviour
         }
 
         // Up -----------------------------------------------------------------------
-        if ( Cast(0.0f, 1.0f, offsetdown, out rayhit, x, y) )    // Collision found
+        if ( Cast(0.0f, 1.0f, offsetup, out rayhit, x, y) )    // Collision found
         {
             y = rayhit.point.y-offsetup;
             collhit |= CollisionFlag.UP;
