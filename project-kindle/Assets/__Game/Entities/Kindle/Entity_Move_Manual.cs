@@ -31,6 +31,11 @@ public class Entity_Move_Manual : Entity
 
 	// Common ===============================================================
 	
+	void Awake()
+    {
+        game.SetPlayer(this);
+    }
+
 	// Start is called before the first frame update
 	void Start()
 	{

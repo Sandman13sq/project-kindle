@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Entity : MonoBehaviour
+public class Entity : MasterObject
 {
     // Constants ======================================================
 
@@ -32,7 +32,7 @@ public class Entity : MonoBehaviour
     protected const int LAYER_HURTBOX_BIT = 1 << LAYER_HURTBOX;
 
     // Variables ======================================================
-
+    
     public SpriteRenderer spriterenderer;
     public Collider2D hitboxcollider;  // Used for damaging player on contact
     public Collider2D hurtboxcollider;  // Used for damaging this entity on contact
@@ -73,7 +73,7 @@ public class Entity : MonoBehaviour
 
     [SerializeField] private GameObject shownumberprefab;
     private GameObject shownumberobj = null;
-    
+
     // Common ================================================================
 
     // Start is called before the first frame update

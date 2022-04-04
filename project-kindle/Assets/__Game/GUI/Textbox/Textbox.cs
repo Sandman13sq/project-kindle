@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Textbox : MonoBehaviour
+public class TextBox : MasterObject
 {
     // ====================================================================
 
     // Variables
-
     [SerializeField] private UnityEngine.UI.Image boxsprite;
     [SerializeField] private UnityEngine.UI.Image arrowsprite;
     [SerializeField] private RectTransform boxrect;
@@ -39,7 +38,7 @@ public class Textbox : MonoBehaviour
     // Functions
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         textstringshow = "";
         textpos = 0.0f;
