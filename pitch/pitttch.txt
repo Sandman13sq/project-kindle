@@ -1,0 +1,17 @@
+- I'm Isaiah
+	- Favorite game is Cave Story. Got me in to development. Reference the game in my works a lot.
+		- Probably the biggest fan of Cave Story on campus. Also probably the only one since no one knows about it.
+	- I have experience in all parts of game development with programming being my strongest.
+	- Worked on many games but only released one for a Game Jam (Smell The Air)
+	- Most recent project is an exporter for moving models from Blender to GMS2
+
+- Hunter
+	- This is the game I worked on with a team of 6 people for the Game Dev Club last semester. A hack-n-slash platformer.
+	- I was a programmer, artist, and did a bit of sounds for the project.
+	- Since our team is looking to be busy this semester the project's going on a hiatus. Indefinetly? idk.
+	- We have the link in the club Discord if you want to try it.
+
+- Strike!!!
+	- What I have for today
+
+
