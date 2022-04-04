@@ -269,7 +269,7 @@ MonoBehaviour:
   arrowsprite: {fileID: 6584545996744285329}
   boxrect: {fileID: 3907915523282577030}
   textcomponent: {fileID: 7509993478773801466}
-  textstring: Hello World!
+  textstring: Hello World! \nAnd goodbye boredom!
 --- !u!1 &7788248285975331043
 GameObject:
   m_ObjectHideFlags: 0

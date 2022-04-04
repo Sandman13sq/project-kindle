@@ -15,6 +15,7 @@ public class Textbox : MonoBehaviour
 
     enum State
     {
+        zero,
         open,
         print,
         wait,
@@ -28,7 +29,9 @@ public class Textbox : MonoBehaviour
 
     [SerializeField] string textstring;
     private string textstringshow;
-    private int textpos;
+    private float textpos;
+    private float textspeed;
+
     private float arrowxstart;
 
     // ====================================================================
@@ -39,7 +42,8 @@ public class Textbox : MonoBehaviour
     void Start()
     {
         textstringshow = "";
-        textpos = 0;
+        textpos = 0.0f;
+        textspeed = 1.0f;
         textcomponent.text = "";
 
         boxrect.sizeDelta = new Vector2(0.0f, 0.0f);
@@ -47,7 +51,7 @@ public class Textbox : MonoBehaviour
         arrowsprite.enabled = false;
 
         statestep = 0.0f;
-        state = State.open;
+        state = State.zero;
     }
 
     // Update is called once per frame
@@ -89,8 +93,16 @@ public class Textbox : MonoBehaviour
                 // Increase text position every frame
                 if (textpos < textstring.Length)
                 {
-                    textpos += 1;
-                    textstringshow = textstring.Substring(0, textpos);
+                    float tspd = textspeed;
+
+                    // Increase print speed if FIRE is held
+                    if ( Input.GetButton("Fire1") )
+                    {
+                        tspd *= 3.0f;
+                    }
+
+                    textpos = Mathf.Min(textpos + tspd, textstring.Length);
+                    textstringshow = textstring.Substring(0, (int)textpos);
                     textcomponent.text = textstringshow;
                 }
                 // Move to "wait" state
@@ -115,11 +127,10 @@ public class Textbox : MonoBehaviour
                     arrowsprite.transform.position.y
                     );
                 
-                // Move to close state (temporary)
-                if (statestep >= 20.0f)
+                // Advance event (temporary)
+                if ( Input.GetButtonDown("Jump") )
                 {
-                    statestep = 0.0f;
-                    state = State.close;
+                    Close();
                 }
             }
             break;
@@ -130,7 +141,8 @@ public class Textbox : MonoBehaviour
                 const float statetime = 10.0f;
                 arrowsprite.enabled = false;
                 textcomponent.enabled = false;
-                
+
+                // Update rectangle size
                 if (statestep < statetime)
                 {
                     statestep += 1.0f;
@@ -146,5 +158,43 @@ public class Textbox : MonoBehaviour
             }
             break;
         }
+    }
+
+    public void AddText(string text)
+    {
+        textstring += text;
+        statestep = 0.0f;
+        state = (state == State.wait)? State.print: State.open;
+    }
+
+    public void ClearText()
+    {
+        textstring = "";
+        textstringshow = "";
+        textcomponent.text = "";
+        textpos = 0.0f;
+    }
+
+    public void SetSpeed(float characterssperframe)
+    {
+        textspeed = characterssperframe;
+    }
+
+    public void Open()
+    {
+        statestep = 0.0f;
+        state = State.open;
+    }
+
+    public void Print()
+    {
+        statestep = 0.0f;
+        state = State.print;
+    }
+
+    public void Close()
+    {
+        statestep = 0.0f;
+        state = State.close;
     }
 }
