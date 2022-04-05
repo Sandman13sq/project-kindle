@@ -7377,3 +7377,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
+--- !u!1 &1712364249021023891 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1712364249276888921, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
+  m_PrefabInstance: {fileID: 1712364249021023890}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1712364249021023892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712364249021023891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e77399d5f0e0bf4a9eebebc4bed51a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventtext: "playerlock()\ntextPrint(\"Number 15: \") adv()\ntextPrint(\"Burger
+    King Foot Lettuce.\") adv() textClear()\ntextPrint(\"The last thing you'd want
+    in your Burger King burger is someone's foot fungus.\") adv() textClear()\ntextPrint(\"But
+    as it turns out, \") wait(30) textPrint(\"that might be what you get.\") adv()
+    \ntextClear() textClose()\nplayerfree() "

@@ -6,10 +6,12 @@ public class GameHeader : MonoBehaviour
 {
     // Variables
 
-    private GameObject eventmanager;
+    private EventRunner eventrunner;
     [SerializeField] private GameObject textbox_prefab;
     private TextBox textbox_object;
     private Entity_Move_Manual player_object;
+
+    private bool lockplayercontrols;
     
     // =====================================================================
     
@@ -21,14 +23,14 @@ public class GameHeader : MonoBehaviour
 
         player_object = null;
         textbox_object = null;
+
+        lockplayercontrols = false;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Game Header Start()");
-        GetTextbox().AddText("Hello World\nAnd Goodbye Boredom!");
-        Debug.Log(textbox_object);
+        
     }
 
     // Update is called once per frame
@@ -40,6 +42,22 @@ public class GameHeader : MonoBehaviour
     public void RunEvent(string eventkey)
     {
 
+    }
+
+    public void RunEvent(EventRunner e)
+    {
+        eventrunner = e;
+        e.ContinueEvent();
+    }
+
+    public bool ContinueEvent()
+    {
+        if (eventrunner != null)
+        {
+            eventrunner.ContinueEvent();
+            return true;
+        }
+        return false;
     }
 
     public void SetPlayer(Entity_Move_Manual plyr)
@@ -60,4 +78,14 @@ public class GameHeader : MonoBehaviour
             {textbox_object = Instantiate(textbox_prefab).GetComponent<TextBox>();}
         return textbox_object;
     }
+
+    public EventRunner GetEventRunner()
+    {
+        if (eventrunner == null)
+            {eventrunner = (new GameObject("__eventrunner")).GetComponent<EventRunner>();}
+        return eventrunner;
+    }
+
+    public void SetContolsLocked(bool locked) {lockplayercontrols = locked;}
+    public bool GetContolsLocked() {return lockplayercontrols;}
 }

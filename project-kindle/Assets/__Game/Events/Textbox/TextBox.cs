@@ -109,6 +109,8 @@ public class TextBox : MasterObject
                 {
                     statestep = 0.0f;
                     state = State.wait;
+
+                    game.ContinueEvent();
                 }
             }
             break;
@@ -125,12 +127,6 @@ public class TextBox : MasterObject
                     arrowxstart + Mathf.Sin(statestep)*4.0f,
                     arrowsprite.transform.position.y
                     );
-                
-                // Advance event (temporary)
-                if ( Input.GetButtonDown("Jump") )
-                {
-                    Close();
-                }
             }
             break;
 

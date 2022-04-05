@@ -6,7 +6,7 @@ using UnityEngine;
     Weapons inherit from this class.
     This class should NOT be used on it's own
 */
-public class Weapon : MonoBehaviour
+public class Weapon : MasterObject
 {
     // Internal
     private bool active;
@@ -55,6 +55,8 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+        bool cancontrol = !game.GetContolsLocked();
+
         if (player == null) {return;}
 
         hsign = player.GetHSign();
@@ -66,13 +68,13 @@ public class Weapon : MonoBehaviour
         }
 
         // Shoot
-        if ( Input.GetButtonDown("Fire1") )
+        if ( cancontrol && Input.GetButtonDown("Fire1") )
         {
             firebuffer = firebuffertime;
         }
 
         // Autofire
-        if ( Input.GetButton("Fire1") )
+        if ( cancontrol && Input.GetButton("Fire1") )
         {
             if (autofireprogress > 0.0f)
             {

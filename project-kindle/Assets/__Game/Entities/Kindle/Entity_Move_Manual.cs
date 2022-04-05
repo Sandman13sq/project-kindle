@@ -70,24 +70,33 @@ public class Entity_Move_Manual : Entity
 		float lastvsign = vsign;
 		float lasthsign = hsign;
 
-		// Flip sprite if moving left. If shift is held, lock direction
-        if (xlev != 0.0 && !Input.GetKey(KeyCode.LeftShift))
-        {
-			hsign = (xlev > 0.0f)? 1.0f: -1.0f;
-            spriterenderer.flipX = xlev < 0.0f;
-        }
-		vsign = ylev;
+		// Use controls if controls are free
+		if ( !game.GetContolsLocked() )
+		{
+			// Flip sprite if moving left. If shift is held, lock direction
+			if (xlev != 0.0 && !Input.GetKey(KeyCode.LeftShift))
+			{
+				hsign = (xlev > 0.0f)? 1.0f: -1.0f;
+				spriterenderer.flipX = xlev < 0.0f;
+			}
+			vsign = ylev;
 
-		// Jump buffer
-        if (jumpbuffer >= 0.0f)
-        {
-            jumpbuffer -= 1.0f;
-        }
+			// Jump buffer
+			if (jumpbuffer >= 0.0f)
+			{
+				jumpbuffer -= 1.0f;
+			}
 
-		if (Input.GetButtonDown("Jump"))
-        {
-            jumpbuffer = jumpbuffertime;
-        }
+			if (Input.GetButtonDown("Jump"))
+			{
+				jumpbuffer = jumpbuffertime;
+			}
+		}
+		else
+		{
+			xlev = 0.0f;
+			ylev = 0.0f;
+		}
 
 		// Ground Movement
 		/*
