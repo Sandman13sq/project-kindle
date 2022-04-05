@@ -65661,6 +65661,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6241962120882235965, guid: 8ecba20af6f0f104bbc6e19987442ae7, type: 3}
   m_PrefabInstance: {fileID: 574024892}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &556873736 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1712364249276888921, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
+  m_PrefabInstance: {fileID: 2064762276}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &556873737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556873736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e77399d5f0e0bf4a9eebebc4bed51a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventtext: 'playerLock()
+
+    textPrint("Greetings, player!") adv() textClear()
+
+    textPrint("Your
+    mission is to find all 4 effigies on the map and destroy them!") adv() textClear()
+
+    textPrint("Good
+    luck!") adv() textClose()
+
+    playerFree()
+
+'
 --- !u!1001 &567080058
 PrefabInstance:
   m_ObjectHideFlags: 0
