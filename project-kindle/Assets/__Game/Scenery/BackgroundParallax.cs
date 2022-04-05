@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BackgroundParallax : MasterObject
 {
-    [SerializeField] private float xspeed = 0.0f; // Speed to move horizontally
-    [SerializeField] private float yspeed = 0.0f;
+    [SerializeField] private float xspeed = 0.0f;   // Speed to move horizontally
+    [SerializeField] private float yspeed = 0.0f;   // Speed to move vertically
     [SerializeField] private float loopwidth, loopheight;
     private Vector3 startingposition;
     private Vector3 campos;
