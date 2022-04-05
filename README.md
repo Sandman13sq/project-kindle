@@ -21,3 +21,5 @@ Made in Unity. Semester project for CMSC 493 Spring 2022 at UMBC.
 - Tasks to do during the prototype phase (February 10th - February 24th).
 ### [Sprite Style Guide](https://github.com/Dreamer13sq/project-kindle/blob/main/ref/sprite_style_guide.md)
 - Reference for entity sprite art.
+### [Task Tracking](https://docs.google.com/spreadsheets/d/1LchqbdYjL0EP2P7erlTysNbTiirZbGM33EB8j6Jl4yQ/edit?usp=sharing)
+- Document of tasks that each member has completed over time.
