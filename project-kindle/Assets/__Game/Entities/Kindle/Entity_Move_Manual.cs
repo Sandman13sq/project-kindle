@@ -29,6 +29,16 @@ public class Entity_Move_Manual : Entity
 	[SerializeField] private Weapon[] weapons;
 	private Weapon activeweapon;
 
+
+	// Movement constants -------------------------------
+	float moveacceleration = 0.4f;
+	float movedeceleration = 0.6f;
+	float moveaccelerationair = 0.25f;
+	float movespeedmax = 5.0f;
+	float jumpstrength = 5.5f;
+	float gravity = -0.26f;
+	float gravityjump = -0.12f;
+
 	// Common ===============================================================
 	
 	void Awake()
@@ -55,14 +65,6 @@ public class Entity_Move_Manual : Entity
 	void Update()
 	{
 		animator.SetFloat("Speed", Mathf.Abs(xspeed));//set animator parameter to xspeed
-
-		float moveacceleration = 0.3f;
-		float movedeceleration = 0.5f;
-		float moveaccelerationair = 0.2f;
-		float movespeedmax = 4.0f;
-		float jumpstrength = 4.5f;
-		float gravity = -0.24f;
-		float gravityjump = -0.10f;
 
 		// Grab input values
 		float xlev = Input.GetAxisRaw("Horizontal");
