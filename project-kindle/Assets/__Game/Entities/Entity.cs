@@ -16,10 +16,13 @@ public class Entity : MasterObject
         LEFT = 1 << 2,  // ^ left side
         DOWN = 1 << 3,  // ^ bottom side
         ALL = 0xF,  // All sides
+        EDGERIGHT = 1 << 4,
+        EDGELEFT = 1 << 5,
 
         CHANGESPEED = 1 << 0,   // Clamp speeds when a collision is found
         DOUBLEX = 1 << 1,   // Use two raycasts when checking left/right
         DOUBLEY = 1 << 2,   // Use two raycasts when checking up/down
+        FINDEDGES = 1 << 3, // Check for bottom-right and bottom-left edges
     }
 
     protected const int LAYER_WORLD = 3;
@@ -215,7 +218,7 @@ public class Entity : MasterObject
         transform.position = new Vector3(
             transform.position.x + xspeed,
             transform.position.y + yspeed,
-            0.0f
+            transform.position.z
         );
     }
 
@@ -388,8 +391,22 @@ public class Entity : MasterObject
             }
         }
 
+        // Edges ---------------------------------------------------------------------
+        if ( settingsflag.HasFlag(CollisionFlag.FINDEDGES) )
+        {
+            if ( Cast(0.0f, -1.0f, offsetdown, out rayhit, x+offsetright, y-1.0f) ) // Right edge
+            {
+                collhit |= CollisionFlag.EDGERIGHT;
+            }
+
+            if ( Cast(0.0f, -1.0f, offsetdown, out rayhit, x-offsetleft, y-1.0f) ) // Left edge
+            {
+                collhit |= CollisionFlag.EDGELEFT;
+            }
+        }
+
         // Update position
-        transform.position = new Vector3(x, y, 0.0f);
+        transform.position = new Vector3(x, y, transform.position.z);
 
         //  Return bitmask of collision hits
         return collhit;

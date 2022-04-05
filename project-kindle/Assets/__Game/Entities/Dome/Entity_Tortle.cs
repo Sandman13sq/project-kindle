@@ -44,20 +44,25 @@ public class Entity_Tortle : Entity
         UpdateMovement();
         UpdateDamageShake();
 
-        CollisionFlag coll = EvaluateCollision(0);
+        CollisionFlag coll = EvaluateCollision(CollisionFlag.FINDEDGES);
 
-        // Change direction if wall is hit
-        if (coll.HasFlag(CollisionFlag.RIGHT) && xspeed > 0.0f)
+        // Change direction if wall is hit or no floor is detected
+        if (xspeed > 0.0f)
         {
-            spriterenderer.flipX = true;
-            xspeed = -1.0f;
+            if (coll.HasFlag(CollisionFlag.RIGHT) || !coll.HasFlag(CollisionFlag.EDGERIGHT))
+            {
+                spriterenderer.flipX = true;
+                xspeed = -1.0f;
+            }
         }
-        else if (coll.HasFlag(CollisionFlag.LEFT) && xspeed < 0.0f)
+        else if (xspeed < 0.0f)
         {
-            spriterenderer.flipX = false;
-            xspeed = 1.0f;
+            if (coll.HasFlag(CollisionFlag.LEFT) || !coll.HasFlag(CollisionFlag.EDGELEFT))
+            {
+                spriterenderer.flipX = false;
+                xspeed = 1.0f;
+            }
         }
-
         if (coll.HasFlag(CollisionFlag.DOWN))
         {
             yspeed = 0.0f;
