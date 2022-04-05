@@ -12,6 +12,8 @@ public class GameHeader : MonoBehaviour
     private Entity_Move_Manual player_object;
 
     private bool lockplayercontrols;
+
+    private GameObject camera_object;
     
     // =====================================================================
     
@@ -21,8 +23,14 @@ public class GameHeader : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        player_object = null;
-        textbox_object = null;
+        //player_object = null;
+        //textbox_object = null;
+        //camera_object = null;
+
+        if (camera_object == null)
+        {
+            camera_object = GameObject.Find("__camera");
+        }
 
         lockplayercontrols = false;
     }
@@ -88,4 +96,6 @@ public class GameHeader : MonoBehaviour
 
     public void SetContolsLocked(bool locked) {lockplayercontrols = locked;}
     public bool GetContolsLocked() {return lockplayercontrols;}
+
+    public Vector3 GetCameraPosition() {return camera_object.transform.position;}
 }
