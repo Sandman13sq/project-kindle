@@ -38,6 +38,7 @@ public class Weapon : MasterObject
     private float vsign;    // Vertical sign. {-1, 0, 1}
 
     private float shootoffset_leftright = 40.0f;
+    private float shootoffset_centery = -16.0f;
     private float shootoffset_up = 56.0f;
     private float shootoffset_down = 56.0f;
 
@@ -167,7 +168,11 @@ public class Weapon : MasterObject
 
         proj.transform.position = transform.position + new Vector3(
             Mathf.Cos(dir)*shootoffset_leftright, 
-            Mathf.Max(0.0f, Mathf.Sin(dir))*shootoffset_up + Mathf.Min(0.0f, Mathf.Sin(dir))*shootoffset_down, 
+            (
+                Mathf.Max(0.0f, Mathf.Sin(dir))*shootoffset_up + 
+                Mathf.Min(0.0f, Mathf.Sin(dir))*shootoffset_down + 
+                Mathf.Abs(Mathf.Cos(dir))*shootoffset_centery
+            ), 
             0.0f);
         
         proj.SetDirectionRad(dir, hsign);
