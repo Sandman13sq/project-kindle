@@ -39,7 +39,7 @@ public class Entity_Tortle : Entity
     // Update is called once per frame
     void Update()
     {
-        //yspeed -= 0.1f;
+        yspeed -= 0.1f;
 
         UpdateMovement();
         UpdateDamageShake();
@@ -47,14 +47,20 @@ public class Entity_Tortle : Entity
         CollisionFlag coll = EvaluateCollision(0);
 
         // Change direction if wall is hit
-        if (
-            (coll.HasFlag(CollisionFlag.RIGHT) && !spriterenderer.flipX) ||
-            (coll.HasFlag(CollisionFlag.LEFT) && spriterenderer.flipX)
-            )
+        if (coll.HasFlag(CollisionFlag.RIGHT) && xspeed > 0.0f)
         {
-            spriterenderer.flipX = !spriterenderer.flipX;
-            xspeed = Mathf.Max(0.01f, Mathf.Abs(xspeed)) * (spriterenderer.flipX? -1.0f: 1.0f);
-            UpdateMovement();
+            spriterenderer.flipX = true;
+            xspeed = -1.0f;
+        }
+        else if (coll.HasFlag(CollisionFlag.LEFT) && xspeed < 0.0f)
+        {
+            spriterenderer.flipX = false;
+            xspeed = 1.0f;
+        }
+
+        if (coll.HasFlag(CollisionFlag.DOWN))
+        {
+            yspeed = 0.0f;
         }
 
         spriterenderer.sprite = sprites[0];

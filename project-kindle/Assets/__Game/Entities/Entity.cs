@@ -314,7 +314,7 @@ public class Entity : MasterObject
         // Up -----------------------------------------------------------------------
         if ( Cast(0.0f, 1.0f, offsetup, out rayhit, x, y) )    // Collision found
         {
-            y = rayhit.point.y-offsetup;
+            y = rayhit.point.y-offsetup-1.0f;
             collhit |= CollisionFlag.UP;
             if ( settingsflag.HasFlag(CollisionFlag.CHANGESPEED) )
             {
@@ -325,7 +325,7 @@ public class Entity : MasterObject
         // Right -----------------------------------------------------------------------
         if ( Cast(1.0f, 0.0f, offsetright, out rayhit, x, y) )    // Collision found
 		{
-			x = rayhit.point.x-offsetright;
+			x = rayhit.point.x-offsetright-1.0f;
             if ( settingsflag.HasFlag(CollisionFlag.CHANGESPEED) )
             {
                 xspeed = Mathf.Min(xspeed, 0.0f);
@@ -336,7 +336,7 @@ public class Entity : MasterObject
         {
             if ( Cast(1.0f, 0.0f, offsetright, out rayhit, x, y-offsetdown*0.5f) )    // Collision found
             {
-                x = rayhit.point.x-offsetright;
+                x = rayhit.point.x-offsetright-1.0f;
                 collhit |= CollisionFlag.RIGHT;
                 if ( settingsflag.HasFlag(CollisionFlag.CHANGESPEED) )
                 {
@@ -346,7 +346,7 @@ public class Entity : MasterObject
 
             if ( Cast(1.0f, 0.0f, offsetright, out rayhit, x, y+offsetup*0.5f) )    // Collision found
             {
-                x = rayhit.point.x-offsetright;
+                x = rayhit.point.x-offsetright-1.0f;
                 collhit |= CollisionFlag.RIGHT;
                 if ( settingsflag.HasFlag(CollisionFlag.CHANGESPEED) )
                 {
@@ -358,7 +358,7 @@ public class Entity : MasterObject
         // Left -----------------------------------------------------------------------
         if ( Cast(-1.0f, 0.0f, offsetleft, out rayhit, x, y) )    // Collision found
 		{
-			x = rayhit.point.x+offsetleft;
+			x = rayhit.point.x+offsetleft+1.0f;
             collhit |= CollisionFlag.LEFT;
             if ( settingsflag.HasFlag(CollisionFlag.CHANGESPEED) )
             {
@@ -369,7 +369,7 @@ public class Entity : MasterObject
         {
             if ( Cast(-1.0f, 0.0f, offsetright, out rayhit, x, y-offsetdown*0.5f) )    // Collision found
             {
-                x = rayhit.point.x+offsetleft;
+                x = rayhit.point.x+offsetleft+1.0f;
                 collhit |= CollisionFlag.LEFT;
                 if ( settingsflag.HasFlag(CollisionFlag.CHANGESPEED) )
                 {
@@ -379,7 +379,7 @@ public class Entity : MasterObject
 
             if ( Cast(-1.0f, 0.0f, offsetright, out rayhit, x, y+offsetup*0.5f) )    // Collision found
             {
-                x = rayhit.point.x+offsetleft;
+                x = rayhit.point.x+offsetleft+1.0f;
                 collhit |= CollisionFlag.LEFT;
                 if ( settingsflag.HasFlag(CollisionFlag.CHANGESPEED) )
                 {
