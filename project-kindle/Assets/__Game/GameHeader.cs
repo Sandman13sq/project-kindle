@@ -30,6 +30,7 @@ public class GameHeader : MonoBehaviour
         if (camera_object == null)
         {
             camera_object = GameObject.Find("__camera");
+            DontDestroyOnLoad(camera_object);
         }
 
         lockplayercontrols = false;

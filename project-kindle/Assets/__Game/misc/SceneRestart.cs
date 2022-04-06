@@ -10,7 +10,7 @@ public class SceneRestart : MonoBehaviour
         // Restart scene
         if (Input.GetKeyDown("r")) 
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("sc_prototype"); // Load scene called Game
+            UnityEngine.SceneManagement.SceneManager.LoadScene("sc_area1"); // Load scene called Game
         }
 
         // Exit Game
