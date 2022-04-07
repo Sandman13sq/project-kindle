@@ -65651,7 +65651,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventtext: 'playerLock()
 
-    textPrint("Hello Prof Jordan!") adv() textClear()
+    textPrint("Welcome, Player!") adv() textClear()
 
     textPrint("Your
     mission is to find all 4 effigies on the map and destroy them!") adv() textClear()
