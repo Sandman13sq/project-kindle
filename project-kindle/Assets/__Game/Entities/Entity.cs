@@ -42,11 +42,6 @@ public class Entity : MasterObject
     public Collider2D worldcollider;    // Used to interact with the world
     public Rigidbody2D rbody;  // Necessary for collision detection
 
-    // Internal
-    //public int entityindex; // Represents the position of entity when instanced
-    //public int entitytype;  // Marks class of entity. Value in EntityType enum
-    //public string eventkey; // Key for event
-
     // Flags
     //public bool solid;
     //public bool ishostile;  // Damages player on contact
@@ -55,6 +50,7 @@ public class Entity : MasterObject
     public bool eventondefeat;  // Calls event on defeat
 
     // Update
+    public string eventkey = ""; // Key for event
     public int state;   // Current state of entity. Used in Update()
     protected float xspeed;
     protected float yspeed;
@@ -155,6 +151,10 @@ public class Entity : MasterObject
     public virtual void Defeat()
     {
         OnDefeat();
+        if (game.EventExists(eventkey))
+        {
+            game.RunEvent(eventkey);
+        }
         Destroy(gameObject);
     }
 
