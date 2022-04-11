@@ -15,6 +15,10 @@ public class GameHeader : MonoBehaviour
     private GameObject camera_object;
 
     private Dictionary<string, List<EventRunner.CommandDef>> eventmap;
+
+    private int[] gameflags;
+    private int[] sceneflags;
+    const int FLAGDIV = sizeof(int) * 8;
     
     // =====================================================================
     
@@ -27,7 +31,7 @@ public class GameHeader : MonoBehaviour
         //player_object = null;
         //textbox_object = null;
         //camera_object = null;
-        
+
         if (camera_object == null)
         {
             camera_object = GameObject.Find("__camera");
@@ -37,6 +41,9 @@ public class GameHeader : MonoBehaviour
         lockplayercontrols = false;
 
         eventmap = new Dictionary<string, List<EventRunner.CommandDef>>();
+
+        gameflags = new int[32];
+        sceneflags = new int[32];
 
     }
 
@@ -52,13 +59,31 @@ public class GameHeader : MonoBehaviour
         
     }
 
+    // Flags --------------------------------------------------
+
+    public void GameFlagSet(int flagindex) {gameflags[flagindex / FLAGDIV] |= 1 << (flagindex % FLAGDIV);}
+    public void GameFlagToggle(int flagindex) {gameflags[flagindex / FLAGDIV] ^= 1 << (flagindex % FLAGDIV);}
+    public void GameFlagClear(int flagindex) {gameflags[flagindex / FLAGDIV] &= ~(1 << (flagindex % FLAGDIV));}
+    public bool GameFlagGet(int flagindex) {return (gameflags[flagindex / FLAGDIV] & (1 << (flagindex % FLAGDIV))) != 0;}
+
+    public void SceneFlagSet(int flagindex) {sceneflags[flagindex / FLAGDIV] |= 1 << (flagindex % FLAGDIV);}
+    public void SceneFlagToggle(int flagindex) {sceneflags[flagindex / FLAGDIV] ^= 1 << (flagindex % FLAGDIV);}
+    public void SceneFlagClear(int flagindex) {sceneflags[flagindex / FLAGDIV] &= ~(1 << (flagindex % FLAGDIV));}
+    public bool SceneFlagGet(int flagindex) {return (sceneflags[flagindex / FLAGDIV] & (1 << (flagindex % FLAGDIV))) != 0;}
+
     // Events --------------------------------------------------
     
     // Executes event with key
     public void RunEvent(string eventkey)
     {
-        if ( EventExists(eventkey) )
+        if (eventkey == "")
         {
+            eventrunner.Clear();
+        }
+        else if ( EventExists(eventkey) )
+        {
+            Debug.Log(string.Format("Running Event \"{0}\"", eventkey));
+            eventrunner.Clear();
             eventrunner.SetEventCommands(eventmap[eventkey].ToArray());
             eventrunner.ContinueEvent();
         }

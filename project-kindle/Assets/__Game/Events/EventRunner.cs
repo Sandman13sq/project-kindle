@@ -11,9 +11,19 @@ public class EventRunner : MasterObject
         zero,
 
         // Control -----------------------------
+        jump,
         advance,    // Go to next event
         wait,   // Wait X frames
 
+        gameflag_set,
+        gameflag_clear,
+        gameflag_jump,
+
+        sceneflag_set,
+        sceneflag_clear,
+        sceneflag_jump,
+
+        // Player
         lock_controls,  // Lock player controls
         free_controls,  // Enable player cotrols
 
@@ -22,7 +32,7 @@ public class EventRunner : MasterObject
         text_clear,
         text_close,
         
-        // Entity
+        // Entity -------------------------------
         entity_create,
         entity_destroy,
         entity_move,
@@ -34,9 +44,19 @@ public class EventRunner : MasterObject
     static Dictionary<string, Command> cmdmap = new Dictionary<string, Command>() {
         {"end", Command.zero},
 
+        {"jump", Command.jump},
         {"wait", Command.wait},
         {"advance", Command.advance},
         {"adv", Command.advance},
+
+        {"gameflagset", Command.gameflag_set},
+        {"gameflagclear", Command.gameflag_clear},
+        {"gameflagjump", Command.gameflag_jump},
+
+        {"sceneflagset", Command.sceneflag_set},
+        {"sceneflagclear", Command.sceneflag_clear},
+        {"sceneflagjump", Command.sceneflag_jump},
+
         {"playerlock", Command.lock_controls},
         {"playerfree", Command.free_controls},
 
@@ -122,6 +142,12 @@ public class EventRunner : MasterObject
             }
             break;
         }
+    }
+
+    public void Clear()
+    {
+        state = State.zero;
+        commanddata = null;
     }
 
     public void SetEventCommands(CommandDef[] _commands)
@@ -321,6 +347,12 @@ public class EventRunner : MasterObject
                     break;
                 
                 // Control ---------------------------------------------------------------
+
+                // Advance Event
+                case(Command.jump):
+                    Clear();
+                    game.RunEvent(activecommand.text);
+                    break;
                 
                 // Advance Event
                 case(Command.advance):
@@ -332,6 +364,47 @@ public class EventRunner : MasterObject
                     waitstep = activecommand.values[0];
                     state = State.wait;
                     break;
+                
+                // Game Flags
+                case(Command.gameflag_set):
+                    game.GameFlagSet((int)activecommand.values[0]);
+                    break;
+                case(Command.gameflag_clear):
+                    game.GameFlagClear((int)activecommand.values[0]);
+                    break;
+                case(Command.gameflag_jump): {
+                    int flagindex = (int)activecommand.values[0];
+                    // Test if flag is set if flag index is positive
+                    // Test if flag is not set if flag index is negative
+                    if (flagindex >= 0? game.GameFlagGet(flagindex): !game.GameFlagGet(-flagindex))
+                    {
+                        Clear();
+                        game.RunEvent(activecommand.text);
+                    }
+                    break;
+                }
+                    
+                
+                // Scene Flags
+                case(Command.sceneflag_set):
+                    game.SceneFlagSet((int)activecommand.values[0]);
+                    break;
+                case(Command.sceneflag_clear):
+                    game.SceneFlagClear((int)activecommand.values[0]);
+                    break;
+                case(Command.sceneflag_jump): {
+                    int flagindex = (int)activecommand.values[0];
+                    // Test if flag is set if flag index is positive
+                    // Test if flag is not set if flag index is negative
+                    if (flagindex >= 0? game.SceneFlagGet(flagindex): !game.SceneFlagGet(-flagindex))
+                    {
+                        Clear();
+                        game.RunEvent(activecommand.text);
+                    }
+                    break;
+                }
+
+                // Player ------------------------------------------------------------------
 
                 // Lock Player Controls
                 case(Command.lock_controls):
