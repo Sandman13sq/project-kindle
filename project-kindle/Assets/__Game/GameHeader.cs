@@ -5,8 +5,7 @@ using UnityEngine;
 public class GameHeader : MonoBehaviour
 {
     // Variables
-
-    private EventRunner eventrunner;
+    [SerializeField] private EventRunner eventrunner;
     [SerializeField] private GameObject textbox_prefab;
     private TextBox textbox_object;
     private Entity_Move_Manual player_object;
@@ -14,6 +13,8 @@ public class GameHeader : MonoBehaviour
     private bool lockplayercontrols;
 
     private GameObject camera_object;
+
+    private Dictionary<string, List<EventRunner.CommandDef>> eventmap;
     
     // =====================================================================
     
@@ -26,7 +27,7 @@ public class GameHeader : MonoBehaviour
         //player_object = null;
         //textbox_object = null;
         //camera_object = null;
-
+        
         if (camera_object == null)
         {
             camera_object = GameObject.Find("__camera");
@@ -34,6 +35,9 @@ public class GameHeader : MonoBehaviour
         }
 
         lockplayercontrols = false;
+
+        eventmap = new Dictionary<string, List<EventRunner.CommandDef>>();
+
     }
 
     // Start is called before the first frame update
@@ -48,17 +52,26 @@ public class GameHeader : MonoBehaviour
         
     }
 
+    // Events --------------------------------------------------
+    
+    // Executes event with key
     public void RunEvent(string eventkey)
     {
-
+        if ( EventExists(eventkey) )
+        {
+            eventrunner.SetEventCommands(eventmap[eventkey].ToArray());
+            eventrunner.ContinueEvent();
+        }
+        else
+        {
+            Debug.Log(string.Format("Event \"{0}\" not found", eventkey));
+        }
     }
+    
+    // Returns true if event with given key exists
+    public bool EventExists(string key) {return eventmap.ContainsKey(key);}
 
-    public void RunEvent(EventRunner e)
-    {
-        eventrunner = e;
-        e.ContinueEvent();
-    }
-
+    // Executes next event commmand
     public bool ContinueEvent()
     {
         if (eventrunner != null)
@@ -69,6 +82,17 @@ public class GameHeader : MonoBehaviour
         return false;
     }
 
+    // Creates and returns new event command list
+    public List<EventRunner.CommandDef> DefineEvent(string event_key)
+    {
+        var evcommands = new List<EventRunner.CommandDef>();
+        eventmap[event_key] = evcommands;
+
+        Debug.Log(string.Format("New Event \"{0}\"", event_key));
+        return evcommands;
+    }
+
+    // Get/Set ------------------------------------------------
     public void SetPlayer(Entity_Move_Manual plyr)
     {
         player_object = plyr;

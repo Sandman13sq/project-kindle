@@ -65649,19 +65649,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e77399d5f0e0bf4a9eebebc4bed51a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventtext: 'playerLock()
-
-    textPrint("Welcome, Player!") adv() textClear()
-
-    textPrint("Your
-    mission is to find all 4 effigies on the map and destroy them!") adv() textClear()
-
-    textPrint("Good
-    luck!") adv() textClose()
-
-    playerFree()
-
-'
 --- !u!1001 &567080058
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66119,6 +66106,82 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7756702851066250509, guid: f484ee7453a9f8d4d8276a70c314f8e1, type: 3}
   m_PrefabInstance: {fileID: 79953656}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &970129588
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 970129590}
+  - component: {fileID: 970129589}
+  m_Layer: 0
+  m_Name: _events
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &970129589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970129588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80fef0ce983d4ea448aed6c86e5eb3b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventtext: '// Runs on game startup
+
+    #100
+
+    playerLock()
+
+    textPrint("Welcome,
+    Player!") adv() textClear()
+
+    textPrint("Your mission is to find all 4 effigies
+    on the map and destroy them!") adv() textClear()
+
+    textPrint("Good luck!")
+    adv() textClose()
+
+    playerFree()
+
+
+    // Runs when objective is complete
+
+    #101
+
+    playerLock()
+
+    textPrint("CONGRATULATION!")
+    adv() textClear()
+
+    textPrint("A WINNER ") wait(30) textPrint("IS YOU!") adv()
+    textClear()
+
+    playerFree()
+
+'
+--- !u!4 &970129590
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970129588}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 619.5549, y: 220.56384, z: -3334.2544}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &991939513
 GameObject:
   m_ObjectHideFlags: 0

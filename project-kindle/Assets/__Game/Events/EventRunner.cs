@@ -6,7 +6,7 @@ using System.IO;
 
 public class EventRunner : MasterObject
 {
-    public enum Command 
+    public enum Command
     {
         zero,
 
@@ -28,6 +28,9 @@ public class EventRunner : MasterObject
         entity_move,
     }
 
+    // ----------------------------------------------------------------------------
+
+    // Used when parsing event strings
     static Dictionary<string, Command> cmdmap = new Dictionary<string, Command>() {
         {"end", Command.zero},
 
@@ -46,6 +49,8 @@ public class EventRunner : MasterObject
         {"entitymove", Command.entity_move},
     };
 
+    // ----------------------------------------------------------------------------
+
     enum State
     {
         zero,
@@ -53,6 +58,8 @@ public class EventRunner : MasterObject
         wait,
         advance,
     }
+
+    // ----------------------------------------------------------------------------
 
     public struct CommandDef
     {
@@ -68,7 +75,6 @@ public class EventRunner : MasterObject
     private CommandDef activecommand;
     private State state;
     private float waitstep;
-    [SerializeField][TextArea(10, 10)] private string eventtext = "";
 
     // ============================================================
 
@@ -77,12 +83,6 @@ public class EventRunner : MasterObject
     {
         state = State.running;
         waitstep = 0.0f;
-
-        if (eventtext != "")
-        {
-            commanddata = ParseEventText(eventtext);
-            game.RunEvent(this);
-        }
     }
 
     // Update is called once per frame
@@ -153,15 +153,41 @@ public class EventRunner : MasterObject
 
             switch(readmode)
             {
-                // Read function name
+                // Read function names and event keys
                 case(0):
                 {
+                    // Comments
+                    if ( c == '/' )
+                    {
+                        if (pos < n-1 && textchar[pos] == '/')
+                        {
+                            while (textchar[pos] > '\n') // Skip until newline
+                            {
+                                pos++;
+                            }
+                        }
+                    }
+
+                    // Keys
+                    if ( c == '#' )
+                    {
+                        string eventkey = "";
+                        pos++;
+                        c = textchar[pos];
+                        while ( ( (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') ) && pos < n )
+                        {
+                            eventkey += c;
+                            pos++;
+                            c = textchar[pos];
+                        }
+
+                        commandlist = game.DefineEvent(eventkey);
+                    }
                     // Legal characters
-                    if ( (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') )
+                    else if ( (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') )
                     {
                         word += c;
                     }
-
                     // New Command
                     else if (c == '(')
                     {
