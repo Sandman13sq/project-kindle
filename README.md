@@ -11,6 +11,8 @@ Made in Unity. Semester project for CMSC 493 Spring 2022 at UMBC.
 - Camille Ollivierre (Artist)
 
 ## Repository Links
+### [Pre-URCAD Outline](https://github.com/Dreamer13sq/project-kindle/blob/main/ref/outline_preurcad.md)
+- Goals for URCAD presentation (April 5th - April 17th).
 ### [Sprint 2 Outline](https://github.com/Dreamer13sq/project-kindle/blob/main/ref/outline_sprint2.md)
 - Goals for the second sprint (March 17th - April 4th).
 ### [Sprint 1 Outline](https://github.com/Dreamer13sq/project-kindle/blob/main/ref/outline_sprint1.md)
