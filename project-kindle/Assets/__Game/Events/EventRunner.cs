@@ -99,10 +99,9 @@ public class EventRunner : MasterObject
     // ============================================================
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        state = State.running;
-        waitstep = 0.0f;
+        Clear();
     }
 
     // Update is called once per frame
@@ -142,6 +141,11 @@ public class EventRunner : MasterObject
             }
             break;
         }
+    }
+
+    public bool IsRunning()
+    {
+        return commanddata != null;
     }
 
     public void Clear()
@@ -326,7 +330,7 @@ public class EventRunner : MasterObject
             // End of command data
             if (commandpos >= commanddata.Length)
             {
-                state = State.zero;
+                Clear();
                 return;
             }
             
@@ -343,7 +347,7 @@ public class EventRunner : MasterObject
                     Debug.Log(string.Format("Unknown/undefined command \"{0}\" at position {1}", activecommand.command, commandpos));
                     goto case(Command.zero);
                 case(Command.zero):
-                    state = State.zero;
+                    Clear();
                     break;
                 
                 // Control ---------------------------------------------------------------
@@ -385,7 +389,7 @@ public class EventRunner : MasterObject
                 }
                     
                 
-                // Scene Flags
+                // Scene Flags -----------------------------------------------------------
                 case(Command.sceneflag_set):
                     game.SceneFlagSet((int)activecommand.values[0]);
                     break;
@@ -433,6 +437,19 @@ public class EventRunner : MasterObject
                 case(Command.text_close):
                     game.GetTextbox().Close();
                     //state = State.zero;
+                    break;
+                
+                // Entities ------------------------------------------------------------
+                case(Command.entity_destroy): {
+                    var entities = FindObjectsOfType<Entity>();
+                    foreach (Entity e in entities)
+                    {
+                        if (e.GetTag() == activecommand.text)
+                        {
+                            Destroy(e.gameObject);
+                        }
+                    }
+                }
                     break;
             }
 

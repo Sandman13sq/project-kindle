@@ -74,16 +74,20 @@ public class GameHeader : MonoBehaviour
     // Events --------------------------------------------------
     
     // Executes event with key
+    public void EndEvent()
+    {
+        eventrunner.Clear();
+    }
     public void RunEvent(string eventkey)
     {
         if (eventkey == "")
         {
-            eventrunner.Clear();
+            EndEvent();
         }
         else if ( EventExists(eventkey) )
         {
             Debug.Log(string.Format("Running Event \"{0}\"", eventkey));
-            eventrunner.Clear();
+            EndEvent();
             eventrunner.SetEventCommands(eventmap[eventkey].ToArray());
             eventrunner.ContinueEvent();
         }
@@ -95,6 +99,7 @@ public class GameHeader : MonoBehaviour
     
     // Returns true if event with given key exists
     public bool EventExists(string key) {return eventmap.ContainsKey(key);}
+    public bool EventIsRunning() {return eventrunner.IsRunning();}
 
     // Executes next event commmand
     public bool ContinueEvent()

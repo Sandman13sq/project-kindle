@@ -35,6 +35,9 @@ public class Entity : MasterObject
     protected const int LAYER_HURTBOX_BIT = 1 << LAYER_HURTBOX;
 
     // Variables ======================================================
+
+    [SerializeField] protected string eventkey = ""; // Key for event
+    [SerializeField] protected string entitytag = ""; // Tag used to reference by event/entity
     
     public SpriteRenderer spriterenderer;
     public Collider2D hitboxcollider;  // Used for damaging player on contact
@@ -50,7 +53,6 @@ public class Entity : MasterObject
     public bool eventondefeat;  // Calls event on defeat
 
     // Update
-    public string eventkey = ""; // Key for event
     public int state;   // Current state of entity. Used in Update()
     protected float xspeed;
     protected float yspeed;
@@ -450,27 +452,38 @@ public class Entity : MasterObject
             {
                 return p.GetEntity();
             }
+            
+            if (c.gameObject.transform.parent != null && c.gameObject.transform.parent.TryGetComponent(out Entity e))
+            {
+                return e;
+            }
         }
         
         return null;
     }
 
-    // Casts hurtbox against hurtboxes and populates results in given variable. Returns number of results
-    protected int CastHurtbox(RaycastHit2D[] hitresults)
+    // Casts hurtbox against hitboxes and populates results in given variable. Returns number of results
+    protected int CastHurtbox(RaycastHit2D[] hitresults, int mask = LAYER_HITBOX_BIT)
     {
         if (!hurtboxcollider) {return 0;}
 
         hurtboxcollider.Cast(
             new Vector2(0.0f, 0.0f),
-            new ContactFilter2D() {layerMask=LAYER_HITBOX_BIT},
+            new ContactFilter2D() {layerMask=mask},
             hitresults,
             0.0f
         );
 
         return hitresults.Length;
     }
+
     public void ClearNumberObject()
     {
         shownumberobj = null;
+    }
+
+    public string GetTag()
+    {
+        return entitytag;
     }
 }
