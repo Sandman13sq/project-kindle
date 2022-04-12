@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1712364249276888927}
   - component: {fileID: 1712364249276888926}
+  - component: {fileID: 6897314216893150638}
   m_Layer: 0
   m_Name: __game
   m_TagString: Untagged
@@ -43,4 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03de6ffcf38b34f419555ff120270ded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventrunner: {fileID: 6897314216893150638}
   textbox_prefab: {fileID: 3907915523757519073, guid: 9b34dab3192837e4cb6d533b646d5a69, type: 3}
+--- !u!114 &6897314216893150638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712364249276888921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e77399d5f0e0bf4a9eebebc4bed51a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventtext: 

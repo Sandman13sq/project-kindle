@@ -168,6 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a4836331f8002d419685ca495f06086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventkey: 
+  entitytag: player
   spriterenderer: {fileID: 350204461698224276}
   hitboxcollider: {fileID: 350204462260166774}
   hurtboxcollider: {fileID: 4989002298374109868}

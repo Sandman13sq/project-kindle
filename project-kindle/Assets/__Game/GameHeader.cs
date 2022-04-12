@@ -5,8 +5,7 @@ using UnityEngine;
 public class GameHeader : MonoBehaviour
 {
     // Variables
-
-    private EventRunner eventrunner;
+    [SerializeField] private EventRunner eventrunner;
     [SerializeField] private GameObject textbox_prefab;
     private TextBox textbox_object;
     private Entity_Move_Manual player_object;
@@ -14,6 +13,12 @@ public class GameHeader : MonoBehaviour
     private bool lockplayercontrols;
 
     private GameObject camera_object;
+
+    private Dictionary<string, List<EventRunner.CommandDef>> eventmap;
+
+    private int[] gameflags;
+    private int[] sceneflags;
+    const int FLAGDIV = sizeof(int) * 8;
     
     // =====================================================================
     
@@ -34,6 +39,12 @@ public class GameHeader : MonoBehaviour
         }
 
         lockplayercontrols = false;
+
+        eventmap = new Dictionary<string, List<EventRunner.CommandDef>>();
+
+        gameflags = new int[32];
+        sceneflags = new int[32];
+
     }
 
     // Start is called before the first frame update
@@ -48,17 +59,49 @@ public class GameHeader : MonoBehaviour
         
     }
 
+    // Flags --------------------------------------------------
+
+    public void GameFlagSet(int flagindex) {gameflags[flagindex / FLAGDIV] |= 1 << (flagindex % FLAGDIV);}
+    public void GameFlagToggle(int flagindex) {gameflags[flagindex / FLAGDIV] ^= 1 << (flagindex % FLAGDIV);}
+    public void GameFlagClear(int flagindex) {gameflags[flagindex / FLAGDIV] &= ~(1 << (flagindex % FLAGDIV));}
+    public bool GameFlagGet(int flagindex) {return (gameflags[flagindex / FLAGDIV] & (1 << (flagindex % FLAGDIV))) != 0;}
+
+    public void SceneFlagSet(int flagindex) {sceneflags[flagindex / FLAGDIV] |= 1 << (flagindex % FLAGDIV);}
+    public void SceneFlagToggle(int flagindex) {sceneflags[flagindex / FLAGDIV] ^= 1 << (flagindex % FLAGDIV);}
+    public void SceneFlagClear(int flagindex) {sceneflags[flagindex / FLAGDIV] &= ~(1 << (flagindex % FLAGDIV));}
+    public bool SceneFlagGet(int flagindex) {return (sceneflags[flagindex / FLAGDIV] & (1 << (flagindex % FLAGDIV))) != 0;}
+
+    // Events --------------------------------------------------
+    
+    // Executes event with key
+    public void EndEvent()
+    {
+        eventrunner.Clear();
+    }
     public void RunEvent(string eventkey)
     {
-
+        if (eventkey == "")
+        {
+            EndEvent();
+        }
+        else if ( EventExists(eventkey) )
+        {
+            Debug.Log(string.Format("Running Event \"{0}\"", eventkey));
+            EndEvent();
+            eventrunner.SetEventCommands(eventmap[eventkey].ToArray());
+            eventrunner.ContinueEvent();
+        }
+        else
+        {
+            Debug.Log(string.Format("Event \"{0}\" not found", eventkey));
+        }
     }
+    
+    // Returns true if event with given key exists
+    public bool EventExists(string key) {return eventmap.ContainsKey(key);}
+    public bool EventIsRunning() {return eventrunner.IsRunning();}
 
-    public void RunEvent(EventRunner e)
-    {
-        eventrunner = e;
-        e.ContinueEvent();
-    }
-
+    // Executes next event commmand
     public bool ContinueEvent()
     {
         if (eventrunner != null)
@@ -69,6 +112,17 @@ public class GameHeader : MonoBehaviour
         return false;
     }
 
+    // Creates and returns new event command list
+    public List<EventRunner.CommandDef> DefineEvent(string event_key)
+    {
+        var evcommands = new List<EventRunner.CommandDef>();
+        eventmap[event_key] = evcommands;
+
+        Debug.Log(string.Format("New Event \"{0}\"", event_key));
+        return evcommands;
+    }
+
+    // Get/Set ------------------------------------------------
     public void SetPlayer(Entity_Move_Manual plyr)
     {
         player_object = plyr;
