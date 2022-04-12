@@ -51,6 +51,8 @@ public class Entity_Move_Manual : Entity
 	{
 		hsign = 1.0f;
 		Application.targetFrameRate = 60; // Temporary. Will remove later
+		
+		playerdata = game.GetPlayerData();
 		playerdata.SetHealth(health);
 
 		foreach (var w in weapons)

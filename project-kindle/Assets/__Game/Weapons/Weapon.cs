@@ -42,7 +42,7 @@ public class Weapon : MasterObject
     private float shootoffset_up = 56.0f;
     private float shootoffset_down = 56.0f;
 
-    [SerializeField] private PlayerData playerdata;
+    private PlayerData playerdata;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -51,6 +51,8 @@ public class Weapon : MasterObject
         autofireprogress = autofiretime;
 
         level = GetCurrentLevelIndex();
+
+        playerdata = game.GetPlayerData();
     }
 
     // Update is called once per frame
