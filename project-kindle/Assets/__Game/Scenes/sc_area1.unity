@@ -64974,7 +64974,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7229868877862046617, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
   m_PrefabInstance: {fileID: 232953728}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &69329549
+--- !u!114 &69329551
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65255,7 +65255,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7229868876848550042, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
   m_PrefabInstance: {fileID: 232953728}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &250594899
+--- !u!114 &250594901
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65706,6 +65706,11 @@ MonoBehaviour:
     playerFree()
 
 '
+--- !u!4 &556873739 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1712364249276888927, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
+  m_PrefabInstance: {fileID: 2064762276}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &567080058
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65935,7 +65940,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7229868876321646338, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
   m_PrefabInstance: {fileID: 232953728}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &781872748
+--- !u!114 &781872750
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66525,7 +66530,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7229868878061018646, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
   m_PrefabInstance: {fileID: 232953728}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1099188387
+--- !u!114 &1099188389
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133085,11 +133090,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136813531}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 240.10663, y: -44.13057, z: -15}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
-  m_Father: {fileID: 2006935217}
-  m_RootOrder: 6
+  m_Father: {fileID: 556873739}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &2136813533
 PolygonCollider2D:
