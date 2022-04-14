@@ -65116,6 +65116,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1387955545, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2006935218, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
+      propertyPath: targetobj
+      value: 
+      objectReference: {fileID: 1218746879}
     - target: {fileID: 7229868876321646339, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
       propertyPath: m_Follow
       value: 
@@ -65701,19 +65709,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e77399d5f0e0bf4a9eebebc4bed51a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventtext: 'playerLock()
-
-    textPrint("Hello Prof Jordan!") adv() textClear()
-
-    textPrint("Your
-    mission is to find all 4 effigies on the map and destroy them!") adv() textClear()
-
-    textPrint("Good
-    luck!") adv() textClose()
-
-    playerFree()
-
-'
 --- !u!4 &556873739 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1712364249276888927, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
@@ -65936,17 +65931,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &710859452 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8408585969499469307, guid: 95ee70171f5d08a4ea8bd0d3a4c3fee4, type: 3}
-  m_PrefabInstance: {fileID: 1653819717}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d90fdb546d0960d4d8cc3ba1d1c3996b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &781872747 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7229868876321646338, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
@@ -132281,41 +132265,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &2006935213 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7229868878053391231, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
-  m_PrefabInstance: {fileID: 232953728}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2006935217 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7229868878053391227, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
   m_PrefabInstance: {fileID: 232953728}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2006935218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2006935213}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ba2d9c6f1b6913489e914f8fd1192e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetobj: {fileID: 1218746879}
---- !u!114 &2006935219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2006935213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 335105b3bc430444c8a71202644abfdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2020132363
 GameObject:
   m_ObjectHideFlags: 0
@@ -132534,6 +132488,10 @@ PrefabInstance:
     - target: {fileID: 1712364249276888927, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6293979452482978328, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
