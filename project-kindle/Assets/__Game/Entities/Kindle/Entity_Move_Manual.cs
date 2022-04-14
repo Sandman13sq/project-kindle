@@ -192,7 +192,7 @@ public class Entity_Move_Manual : Entity
 			foreach (RaycastHit2D hit in hitresults)
 			{
 				Entity e = GetEntityFromCollider(hit.collider);
-				if (e)
+				if (e && e.GetAttack() > 0)
 				{
 					// Do damage from hitbox
 					DoDamage(e.GetAttack());
@@ -269,7 +269,7 @@ public class Entity_Move_Manual : Entity
 			// Subtract energy when health is lost
 			if (healthdiff < 0)
 			{
-				//activeweapon.AddEnergy(healthdiff);
+				playerdata.AddEnergy(healthdiff);
 			}
 			// Flash when health is gained
 			else
