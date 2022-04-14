@@ -12,7 +12,7 @@ public class Entity_Move_Manual : Entity
 	public float jumpbuffer;
     private float jumpbuffertime = 7.0f; // Max number of frames ahead of time where a jump press will still be read
 
-	[SerializeField] private PlayerData playerdata;	// Holds health, energy, level, etc.
+	private PlayerData playerdata;	// Holds health, energy, level, etc.
 	//stuff for animation:
 	[SerializeField] private Animator animator;
 
@@ -24,11 +24,6 @@ public class Entity_Move_Manual : Entity
 
 	private float iframes = 0.0f;	// Frames of invincibility after taking damage
 	private float iframestime = 150.0f;
-
-	private int weaponindex = 0;
-	[SerializeField] private Weapon[] weapons;
-	private Weapon activeweapon;
-
 
 	// Movement constants -------------------------------
 	float moveacceleration = 0.4f;
@@ -51,14 +46,9 @@ public class Entity_Move_Manual : Entity
 	{
 		hsign = 1.0f;
 		Application.targetFrameRate = 60; // Temporary. Will remove later
+
+		playerdata = game.GetPlayerData();
 		playerdata.SetHealth(health);
-
-		foreach (var w in weapons)
-		{
-			w.SetPlayer(this);
-		}
-
-		SetActiveWeapon(1);
 	}
 
 	// Update is called once per frame
@@ -82,7 +72,7 @@ public class Entity_Move_Manual : Entity
 				spriterenderer.flipX = xlev < 0.0f;
 			}
 			vsign = ylev;
-
+			
 			// Jump buffer
 			if (jumpbuffer >= 0.0f)
 			{
@@ -92,6 +82,17 @@ public class Entity_Move_Manual : Entity
 			if (Input.GetButtonDown("Jump"))
 			{
 				jumpbuffer = jumpbuffertime;
+			}
+
+			// Switch Weapon
+			if (Input.GetButtonDown("WeaponNext"))
+			{
+				playerdata.NextWeapon();
+			}
+			
+			if (Input.GetButtonDown("WeaponPrev"))
+			{
+				playerdata.PrevWeapon();
 			}
 		}
 		else
@@ -204,7 +205,7 @@ public class Entity_Move_Manual : Entity
 			foreach (RaycastHit2D hit in hitresults)
 			{
 				Entity e = GetEntityFromCollider(hit.collider);
-				if (e)
+				if (e && e.GetAttack() > 0)
 				{
 					// Do damage from hitbox
 					DoDamage(e.GetAttack());
@@ -225,19 +226,6 @@ public class Entity_Move_Manual : Entity
 			{
 				spriterenderer.enabled = true;
 			}
-		}
-
-		// Switch Weapon
-		if (Input.GetButtonDown("WeaponNext"))
-		{
-			weaponindex = (weaponindex+1) % 2;
-			SetActiveWeapon(weaponindex);
-		}
-		
-		if (Input.GetButtonDown("WeaponPrev"))
-		{
-			weaponindex = weaponindex==0? 1: weaponindex-1;
-			SetActiveWeapon(weaponindex);
 		}
 	}
 
@@ -283,7 +271,7 @@ public class Entity_Move_Manual : Entity
 			// Subtract energy when health is lost
 			if (healthdiff < 0)
 			{
-				activeweapon.AddEnergy(healthdiff);
+				playerdata.AddEnergy(healthdiff);
 			}
 			// Flash when health is gained
 			else
@@ -307,26 +295,6 @@ public class Entity_Move_Manual : Entity
 			yspeed = 5.0f;
 			jumpheld = true;
 		}
-	}
-
-	public int AddEnergy(int _energy)
-	{
-		return activeweapon.AddEnergy(_energy);
-	}
-
-	public void SetActiveWeapon(int index)
-	{
-		weaponindex = index;
-		activeweapon = weapons[weaponindex];
-
-		foreach (var w in weapons)
-		{
-			w.SetActive(false);
-		}
-
-		activeweapon.SetActive(true);
-
-		playerdata.SetWeapon(weaponindex);
 	}
 
 	// Utility ================================================================

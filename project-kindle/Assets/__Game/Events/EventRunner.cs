@@ -6,14 +6,24 @@ using System.IO;
 
 public class EventRunner : MasterObject
 {
-    public enum Command 
+    public enum Command
     {
         zero,
 
         // Control -----------------------------
+        jump,
         advance,    // Go to next event
         wait,   // Wait X frames
 
+        gameflag_set,
+        gameflag_clear,
+        gameflag_jump,
+
+        sceneflag_set,
+        sceneflag_clear,
+        sceneflag_jump,
+
+        // Player
         lock_controls,  // Lock player controls
         free_controls,  // Enable player cotrols
 
@@ -22,18 +32,31 @@ public class EventRunner : MasterObject
         text_clear,
         text_close,
         
-        // Entity
+        // Entity -------------------------------
         entity_create,
         entity_destroy,
         entity_move,
     }
 
+    // ----------------------------------------------------------------------------
+
+    // Used when parsing event strings
     static Dictionary<string, Command> cmdmap = new Dictionary<string, Command>() {
         {"end", Command.zero},
 
+        {"jump", Command.jump},
         {"wait", Command.wait},
         {"advance", Command.advance},
         {"adv", Command.advance},
+
+        {"gameflagset", Command.gameflag_set},
+        {"gameflagclear", Command.gameflag_clear},
+        {"gameflagjump", Command.gameflag_jump},
+
+        {"sceneflagset", Command.sceneflag_set},
+        {"sceneflagclear", Command.sceneflag_clear},
+        {"sceneflagjump", Command.sceneflag_jump},
+
         {"playerlock", Command.lock_controls},
         {"playerfree", Command.free_controls},
 
@@ -46,6 +69,8 @@ public class EventRunner : MasterObject
         {"entitymove", Command.entity_move},
     };
 
+    // ----------------------------------------------------------------------------
+
     enum State
     {
         zero,
@@ -53,6 +78,8 @@ public class EventRunner : MasterObject
         wait,
         advance,
     }
+
+    // ----------------------------------------------------------------------------
 
     public struct CommandDef
     {
@@ -68,25 +95,17 @@ public class EventRunner : MasterObject
     private CommandDef activecommand;
     private State state;
     private float waitstep;
-    [SerializeField][TextArea(10, 10)] private string eventtext = "";
 
     // ============================================================
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        state = State.running;
-        waitstep = 0.0f;
-
-        if (eventtext != "")
-        {
-            commanddata = ParseEventText(eventtext);
-            game.RunEvent(this);
-        }
+        Clear();
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         switch(state)
         {
@@ -124,6 +143,17 @@ public class EventRunner : MasterObject
         }
     }
 
+    public bool IsRunning()
+    {
+        return commanddata != null;
+    }
+
+    public void Clear()
+    {
+        state = State.zero;
+        commanddata = null;
+    }
+
     public void SetEventCommands(CommandDef[] _commands)
     {
         commanddata = _commands;
@@ -153,15 +183,41 @@ public class EventRunner : MasterObject
 
             switch(readmode)
             {
-                // Read function name
+                // Read function names and event keys
                 case(0):
                 {
+                    // Comments
+                    if ( c == '/' )
+                    {
+                        if (pos < n-1 && textchar[pos] == '/')
+                        {
+                            while (textchar[pos] > '\n') // Skip until newline
+                            {
+                                pos++;
+                            }
+                        }
+                    }
+
+                    // Keys
+                    if ( c == '#' )
+                    {
+                        string eventkey = "";
+                        pos++;
+                        c = textchar[pos];
+                        while ( ( (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') ) && pos < n )
+                        {
+                            eventkey += c;
+                            pos++;
+                            c = textchar[pos];
+                        }
+
+                        commandlist = game.DefineEvent(eventkey);
+                    }
                     // Legal characters
-                    if ( (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') )
+                    else if ( (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') )
                     {
                         word += c;
                     }
-
                     // New Command
                     else if (c == '(')
                     {
@@ -274,7 +330,7 @@ public class EventRunner : MasterObject
             // End of command data
             if (commandpos >= commanddata.Length)
             {
-                state = State.zero;
+                Clear();
                 return;
             }
             
@@ -291,10 +347,16 @@ public class EventRunner : MasterObject
                     Debug.Log(string.Format("Unknown/undefined command \"{0}\" at position {1}", activecommand.command, commandpos));
                     goto case(Command.zero);
                 case(Command.zero):
-                    state = State.zero;
+                    Clear();
                     break;
                 
                 // Control ---------------------------------------------------------------
+
+                // Advance Event
+                case(Command.jump):
+                    Clear();
+                    game.RunEvent(activecommand.text);
+                    break;
                 
                 // Advance Event
                 case(Command.advance):
@@ -306,6 +368,47 @@ public class EventRunner : MasterObject
                     waitstep = activecommand.values[0];
                     state = State.wait;
                     break;
+                
+                // Game Flags
+                case(Command.gameflag_set):
+                    game.GameFlagSet((int)activecommand.values[0]);
+                    break;
+                case(Command.gameflag_clear):
+                    game.GameFlagClear((int)activecommand.values[0]);
+                    break;
+                case(Command.gameflag_jump): {
+                    int flagindex = (int)activecommand.values[0];
+                    // Test if flag is set if flag index is positive
+                    // Test if flag is not set if flag index is negative
+                    if (flagindex >= 0? game.GameFlagGet(flagindex): !game.GameFlagGet(-flagindex))
+                    {
+                        Clear();
+                        game.RunEvent(activecommand.text);
+                    }
+                    break;
+                }
+                    
+                
+                // Scene Flags -----------------------------------------------------------
+                case(Command.sceneflag_set):
+                    game.SceneFlagSet((int)activecommand.values[0]);
+                    break;
+                case(Command.sceneflag_clear):
+                    game.SceneFlagClear((int)activecommand.values[0]);
+                    break;
+                case(Command.sceneflag_jump): {
+                    int flagindex = (int)activecommand.values[0];
+                    // Test if flag is set if flag index is positive
+                    // Test if flag is not set if flag index is negative
+                    if (flagindex >= 0? game.SceneFlagGet(flagindex): !game.SceneFlagGet(-flagindex))
+                    {
+                        Clear();
+                        game.RunEvent(activecommand.text);
+                    }
+                    break;
+                }
+
+                // Player ------------------------------------------------------------------
 
                 // Lock Player Controls
                 case(Command.lock_controls):
@@ -334,6 +437,19 @@ public class EventRunner : MasterObject
                 case(Command.text_close):
                     game.GetTextbox().Close();
                     //state = State.zero;
+                    break;
+                
+                // Entities ------------------------------------------------------------
+                case(Command.entity_destroy): {
+                    var entities = FindObjectsOfType<Entity>();
+                    foreach (Entity e in entities)
+                    {
+                        if (e.GetTag() == activecommand.text)
+                        {
+                            Destroy(e.gameObject);
+                        }
+                    }
+                }
                     break;
             }
 

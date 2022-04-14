@@ -35,17 +35,15 @@ public class Entity : MasterObject
     protected const int LAYER_HURTBOX_BIT = 1 << LAYER_HURTBOX;
 
     // Variables ======================================================
+
+    [SerializeField] protected string eventkey = ""; // Key for event
+    [SerializeField] protected string entitytag = ""; // Tag used to reference by event/entity
     
     public SpriteRenderer spriterenderer;
     public Collider2D hitboxcollider;  // Used for damaging player on contact
     public Collider2D hurtboxcollider;  // Used for damaging this entity on contact
     public Collider2D worldcollider;    // Used to interact with the world
     public Rigidbody2D rbody;  // Necessary for collision detection
-
-    // Internal
-    //public int entityindex; // Represents the position of entity when instanced
-    //public int entitytype;  // Marks class of entity. Value in EntityType enum
-    //public string eventkey; // Key for event
 
     // Flags
     //public bool solid;
@@ -155,6 +153,10 @@ public class Entity : MasterObject
     public virtual void Defeat()
     {
         OnDefeat();
+        if (game.EventExists(eventkey))
+        {
+            game.RunEvent(eventkey);
+        }
         Destroy(gameObject);
     }
 
@@ -450,27 +452,38 @@ public class Entity : MasterObject
             {
                 return p.GetEntity();
             }
+            
+            if (c.gameObject.transform.parent != null && c.gameObject.transform.parent.TryGetComponent(out Entity e))
+            {
+                return e;
+            }
         }
         
         return null;
     }
 
-    // Casts hurtbox against hurtboxes and populates results in given variable. Returns number of results
-    protected int CastHurtbox(RaycastHit2D[] hitresults)
+    // Casts hurtbox against hitboxes and populates results in given variable. Returns number of results
+    protected int CastHurtbox(RaycastHit2D[] hitresults, int mask = LAYER_HITBOX_BIT)
     {
         if (!hurtboxcollider) {return 0;}
 
         hurtboxcollider.Cast(
             new Vector2(0.0f, 0.0f),
-            new ContactFilter2D() {layerMask=LAYER_HITBOX_BIT},
+            new ContactFilter2D() {layerMask=mask},
             hitresults,
             0.0f
         );
 
         return hitresults.Length;
     }
+
     public void ClearNumberObject()
     {
         shownumberobj = null;
+    }
+
+    public string GetTag()
+    {
+        return entitytag;
     }
 }

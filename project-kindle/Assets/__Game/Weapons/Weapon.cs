@@ -33,7 +33,7 @@ public class Weapon : MasterObject
     [SerializeField] public int[] weaponlvlenergy;  // Value of energy checkpoints for levels, each more than the last
     public WeaponLvl activeweaponlvl;
 
-    [SerializeField] private Entity_Move_Manual player;
+    private Entity_Move_Manual player;
     private float hsign;    // Horizontal sign. {-1, 1}
     private float vsign;    // Vertical sign. {-1, 0, 1}
 
@@ -42,7 +42,7 @@ public class Weapon : MasterObject
     private float shootoffset_up = 56.0f;
     private float shootoffset_down = 56.0f;
 
-    [SerializeField] private PlayerData playerdata;
+    private PlayerData playerdata;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -51,6 +51,9 @@ public class Weapon : MasterObject
         autofireprogress = autofiretime;
 
         level = GetCurrentLevelIndex();
+
+        playerdata = game.GetPlayerData();
+        player = game.GetPlayer();
     }
 
     // Update is called once per frame
@@ -166,7 +169,7 @@ public class Weapon : MasterObject
     {
         WeaponProjectile proj = Instantiate(projectiles[projectileindex]).GetComponent<WeaponProjectile>();
 
-        proj.transform.position = transform.position + new Vector3(
+        proj.transform.position = player.transform.position + new Vector3(
             Mathf.Cos(dir)*shootoffset_leftright, 
             (
                 Mathf.Max(0.0f, Mathf.Sin(dir))*shootoffset_up + 
@@ -216,19 +219,19 @@ public class Weapon : MasterObject
         return (GetLevelIndex() > 0)? energy - weaponlvlenergy[GetLevelIndex()]: energy;
     }
 
-    int GetMaxEnergy()
+    public int GetMaxEnergy()
     {
         return weaponlvlenergy[levelmax];
     }
 
     // Returns energy value for level (displayed in meter)
-    int CurrentLevelEnergy()
+    public int CurrentLevelEnergy()
     {
         return (GetLevelIndex() > 0)? energy - weaponlvlenergy[GetLevelIndex()-1]: energy;
     }
     
     // Returns energy value for level (displayed in meter)
-    int CurrentLevelEnergyMax()
+    public int CurrentLevelEnergyMax()
     {
         return (GetLevelIndex() == 0)? 
             weaponlvlenergy[0]: 
@@ -236,7 +239,7 @@ public class Weapon : MasterObject
     }
 
     // Returns level using energy
-    int GetCurrentLevelIndex()
+    public int GetCurrentLevelIndex()
     {
         if (levelmax == 0) {return 0;}
         int e = energy;
