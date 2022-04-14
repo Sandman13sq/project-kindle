@@ -72,7 +72,7 @@ public class Entity_Move_Manual : Entity
 				spriterenderer.flipX = xlev < 0.0f;
 			}
 			vsign = ylev;
-
+			
 			// Jump buffer
 			if (jumpbuffer >= 0.0f)
 			{
@@ -82,6 +82,17 @@ public class Entity_Move_Manual : Entity
 			if (Input.GetButtonDown("Jump"))
 			{
 				jumpbuffer = jumpbuffertime;
+			}
+
+			// Switch Weapon
+			if (Input.GetButtonDown("WeaponNext"))
+			{
+				playerdata.NextWeapon();
+			}
+			
+			if (Input.GetButtonDown("WeaponPrev"))
+			{
+				playerdata.PrevWeapon();
 			}
 		}
 		else
@@ -213,17 +224,6 @@ public class Entity_Move_Manual : Entity
 			{
 				spriterenderer.enabled = true;
 			}
-		}
-
-		// Switch Weapon
-		if (Input.GetButtonDown("WeaponNext"))
-		{
-			playerdata.NextWeapon();
-		}
-		
-		if (Input.GetButtonDown("WeaponPrev"))
-		{
-			playerdata.PrevWeapon();
 		}
 	}
 
