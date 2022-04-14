@@ -109,8 +109,10 @@ public class Entity_Move_Manual : Entity
 		*/
 		if (onground)
 		{
+			yspeed = 0;
 			animator.SetBool("InAir", false);
 			animator.SetBool("IgnoreInAir", false);
+			
 			if (xlev > 0.0f) // Moving Right
 			{
 				xspeed = Mathf.Min(xspeed + (xlev==Mathf.Sign(xspeed)? moveacceleration: movedeceleration), movespeedmax);
@@ -142,7 +144,7 @@ public class Entity_Move_Manual : Entity
 		// In Air
 		else
 		{
-				animator.SetBool("InAir", true);
+			animator.SetBool("InAir", true);
 
 			jumpheld = jumpheld && Input.GetButton("Jump") && yspeed > 0.0f;
 			if (xlev > 0.0f) // Moving Right
