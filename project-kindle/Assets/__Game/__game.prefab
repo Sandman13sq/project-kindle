@@ -31,6 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6293979452482978328}
+  - {fileID: 5896152862093588936}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -76,6 +77,9 @@ MonoBehaviour:
   healthmeter: {fileID: 8031943227054856880}
   energymeter: {fileID: 3566737442661839803}
   weaponinfo: {fileID: 3387804287746288800}
+  weapons:
+  - {fileID: 543963899502257081}
+  - {fileID: 416659573601586833}
 --- !u!1 &3577867890185681861
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,6 +182,86 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &8919943307281603106
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5896152862093588936}
+  - component: {fileID: 543963899502257081}
+  - component: {fileID: 416659573601586833}
+  m_Layer: 0
+  m_Name: Weapons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5896152862093588936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8919943307281603106}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1712364249276888927}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &543963899502257081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8919943307281603106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f64933647f77093428bffc918d3c48ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energy: 0
+  levelmax: 2
+  ammomax: 32
+  shotcountmax: 2
+  delaytime: 7
+  autofiretime: 16
+  rechargetime: 12
+  projectiles:
+  - {fileID: 3444606476975869836, guid: e3cb67778e59b584bac8716fa3ebb90c, type: 3}
+  - {fileID: 3444606476975869836, guid: 1fcb80f003d19314fb03d1f51ffc78f5, type: 3}
+  - {fileID: 3444606476975869836, guid: 2a43f7bdd7931a041a9c76dac82b9403, type: 3}
+  weaponlvlenergy: 0c0000001c00000028000000
+  activeweaponlvl: {fileID: 0}
+--- !u!114 &416659573601586833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8919943307281603106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 075162ed74dbffa4f977db6b046dfeb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energy: 0
+  levelmax: 2
+  ammomax: 40
+  shotcountmax: 1
+  delaytime: 10
+  autofiretime: 20
+  rechargetime: 18
+  projectiles:
+  - {fileID: 6035830911987733133, guid: 67f21c2b76515ef47a4384a81b26bb78, type: 3}
+  weaponlvlenergy: 100000001e00000028000000
+  activeweaponlvl: {fileID: 0}
 --- !u!1001 &1418056291027114255
 PrefabInstance:
   m_ObjectHideFlags: 0

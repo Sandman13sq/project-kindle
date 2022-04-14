@@ -12,7 +12,7 @@ public class Entity_Move_Manual : Entity
 	public float jumpbuffer;
     private float jumpbuffertime = 7.0f; // Max number of frames ahead of time where a jump press will still be read
 
-	[SerializeField] private PlayerData playerdata;	// Holds health, energy, level, etc.
+	private PlayerData playerdata;	// Holds health, energy, level, etc.
 	//stuff for animation:
 	[SerializeField] private Animator animator;
 
@@ -24,11 +24,6 @@ public class Entity_Move_Manual : Entity
 
 	private float iframes = 0.0f;	// Frames of invincibility after taking damage
 	private float iframestime = 150.0f;
-
-	private int weaponindex = 0;
-	[SerializeField] private Weapon[] weapons;
-	private Weapon activeweapon;
-
 
 	// Movement constants -------------------------------
 	float moveacceleration = 0.4f;
@@ -51,16 +46,9 @@ public class Entity_Move_Manual : Entity
 	{
 		hsign = 1.0f;
 		Application.targetFrameRate = 60; // Temporary. Will remove later
-		
+
 		playerdata = game.GetPlayerData();
 		playerdata.SetHealth(health);
-
-		foreach (var w in weapons)
-		{
-			w.SetPlayer(this);
-		}
-
-		SetActiveWeapon(1);
 	}
 
 	// Update is called once per frame
@@ -230,14 +218,12 @@ public class Entity_Move_Manual : Entity
 		// Switch Weapon
 		if (Input.GetButtonDown("WeaponNext"))
 		{
-			weaponindex = (weaponindex+1) % 2;
-			SetActiveWeapon(weaponindex);
+			playerdata.NextWeapon();
 		}
 		
 		if (Input.GetButtonDown("WeaponPrev"))
 		{
-			weaponindex = weaponindex==0? 1: weaponindex-1;
-			SetActiveWeapon(weaponindex);
+			playerdata.PrevWeapon();
 		}
 	}
 
@@ -283,7 +269,7 @@ public class Entity_Move_Manual : Entity
 			// Subtract energy when health is lost
 			if (healthdiff < 0)
 			{
-				activeweapon.AddEnergy(healthdiff);
+				//activeweapon.AddEnergy(healthdiff);
 			}
 			// Flash when health is gained
 			else
@@ -307,26 +293,6 @@ public class Entity_Move_Manual : Entity
 			yspeed = 5.0f;
 			jumpheld = true;
 		}
-	}
-
-	public int AddEnergy(int _energy)
-	{
-		return activeweapon.AddEnergy(_energy);
-	}
-
-	public void SetActiveWeapon(int index)
-	{
-		weaponindex = index;
-		activeweapon = weapons[weaponindex];
-
-		foreach (var w in weapons)
-		{
-			w.SetActive(false);
-		}
-
-		activeweapon.SetActive(true);
-
-		playerdata.SetWeapon(weaponindex);
 	}
 
 	// Utility ================================================================

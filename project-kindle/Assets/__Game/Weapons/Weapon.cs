@@ -33,7 +33,7 @@ public class Weapon : MasterObject
     [SerializeField] public int[] weaponlvlenergy;  // Value of energy checkpoints for levels, each more than the last
     public WeaponLvl activeweaponlvl;
 
-    [SerializeField] private Entity_Move_Manual player;
+    private Entity_Move_Manual player;
     private float hsign;    // Horizontal sign. {-1, 1}
     private float vsign;    // Vertical sign. {-1, 0, 1}
 
@@ -53,6 +53,7 @@ public class Weapon : MasterObject
         level = GetCurrentLevelIndex();
 
         playerdata = game.GetPlayerData();
+        player = game.GetPlayer();
     }
 
     // Update is called once per frame
@@ -168,7 +169,7 @@ public class Weapon : MasterObject
     {
         WeaponProjectile proj = Instantiate(projectiles[projectileindex]).GetComponent<WeaponProjectile>();
 
-        proj.transform.position = transform.position + new Vector3(
+        proj.transform.position = player.transform.position + new Vector3(
             Mathf.Cos(dir)*shootoffset_leftright, 
             (
                 Mathf.Max(0.0f, Mathf.Sin(dir))*shootoffset_up + 
