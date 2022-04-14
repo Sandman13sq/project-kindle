@@ -8,12 +8,16 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private HUDMeter energymeter;
     [SerializeField] private HUD_ActiveWeapon weaponinfo;
 
+    [SerializeField] private Weapon[] weapons;
+    private Weapon activeweapon;
+    private int weaponindex;
+
     // Common ==================================================
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetActiveWeapon(0);
     }
 
     // Update is called once per frame
@@ -42,6 +46,11 @@ public class PlayerData : MonoBehaviour
         return 0;
     }
 
+    public int AddEnergy(int e)
+    {
+        return activeweapon.AddEnergy(e);
+    }
+
     public void EnergyMaximizeProvisional()
     {
         energymeter.MaximizeProvisional();
@@ -65,8 +74,31 @@ public class PlayerData : MonoBehaviour
         return 0;
     }
 
-    public void SetWeapon(int weaponindex)
+    public void SetActiveWeapon(int _weaponindex)
     {
+        // Set all weapons to inactive
+        foreach (var w in weapons)
+		{
+			w.SetActive(false);
+		}
+
+        // Set target weapon to active
+        weaponindex = _weaponindex;
+        activeweapon = weapons[weaponindex];
+        activeweapon.SetActive(true);
         weaponinfo.SetWeapon(weaponindex);
+        energymeter.SetValueDirect(activeweapon.CurrentLevelEnergy(), activeweapon.CurrentLevelEnergyMax());
     }
+
+    public void NextWeapon()
+    {
+        SetActiveWeapon((weaponindex+1) % 2);
+    }
+
+    public void PrevWeapon()
+    {
+        SetActiveWeapon(weaponindex==0? weapons.Length-1: weaponindex-1);
+    }
+
+    public Weapon GetActiveWeapon() {return activeweapon;}
 }

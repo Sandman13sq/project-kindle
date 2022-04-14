@@ -97,6 +97,17 @@ public class HUDMeter : MonoBehaviour
         UpdateMeterDisplay();
     }
 
+    public void SetValueDirect(int _value, int _valuemax)
+    {
+        metervalue = _value;
+        metermax = _valuemax;
+        provisionalvalue = _value;
+        provisionalstep = 0.0f;
+
+        UpdateMeterDisplay();
+
+    }
+
     public void Flash()
     {
         flashstep = flashtime;

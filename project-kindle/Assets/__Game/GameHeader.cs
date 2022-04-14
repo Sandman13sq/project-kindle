@@ -7,6 +7,7 @@ public class GameHeader : MonoBehaviour
     // Variables
     [SerializeField] private EventRunner eventrunner;
     [SerializeField] private GameObject textbox_prefab;
+    [SerializeField] private PlayerData playerdata;
     private TextBox textbox_object;
     private Entity_Move_Manual player_object;
 
@@ -153,4 +154,6 @@ public class GameHeader : MonoBehaviour
     public bool GetContolsLocked() {return lockplayercontrols;}
 
     public Vector3 GetCameraPosition() {return camera_object.transform.position;}
+
+    public PlayerData GetPlayerData() {return playerdata;}
 }

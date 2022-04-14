@@ -105,7 +105,7 @@ public class EventRunner : MasterObject
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         switch(state)
         {
