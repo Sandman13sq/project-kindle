@@ -111,6 +111,7 @@ public class Entity_Move_Manual : Entity
 			yspeed = 0;
 			animator.SetBool("InAir", false);
 			animator.SetBool("IgnoreInAir", false);
+			
 			if (xlev > 0.0f) // Moving Right
 			{
 				xspeed = Mathf.Min(xspeed + (xlev==Mathf.Sign(xspeed)? moveacceleration: movedeceleration), movespeedmax);
@@ -142,7 +143,7 @@ public class Entity_Move_Manual : Entity
 		// In Air
 		else
 		{
-				animator.SetBool("InAir", true);
+			animator.SetBool("InAir", true);
 
 			jumpheld = jumpheld && Input.GetButton("Jump") && yspeed > 0.0f;
 			if (xlev > 0.0f) // Moving Right
@@ -250,7 +251,6 @@ public class Entity_Move_Manual : Entity
 		if(aimingUp && Mathf.Abs(xspeed) < 0.001 && Mathf.Abs(yspeed) < 0.001)
 		{
 			animator.Play("Base Layer.Kindle_shootup", 0, 0.0f);
-			Debug.Log("Shoot up from idle!");
 		}
 
 		//Shooting up while jumping 
@@ -258,13 +258,11 @@ public class Entity_Move_Manual : Entity
 		{
 			animator.SetBool("IgnoreInAir", true);
 			animator.Play("Base Layer.Kindle_jump_shootup", 0, 0.0f);
-			Debug.Log("Shoot up from jump!");
 		}
 		//Shooting to the side from idle 
 		else if(Mathf.Abs(xspeed) < 0.001 && Mathf.Abs(yspeed) < 0.001)
 		{
 			animator.Play("Base Layer.Kindle_shootside", 0, 0.0f);
-			Debug.Log("Shoot side from idle!");
 		}
 
 		//Shooting down (can only be done when jumping!)
@@ -272,10 +270,7 @@ public class Entity_Move_Manual : Entity
 		{
 			animator.SetBool("IgnoreInAir", true);
 			animator.Play("Base Layer.Kindle_jump_shootdown", 0, 0.0f);
-			Debug.Log("Shoot down from jump!");
 		}
-
-		Debug.Log("Xspeed: " + Mathf.Abs(xspeed) + " Yspeed: " + Mathf.Abs(yspeed));
 	}
 
 	public override int ChangeHealth(int value)
