@@ -219,19 +219,19 @@ public class Weapon : MasterObject
         return (GetLevelIndex() > 0)? energy - weaponlvlenergy[GetLevelIndex()]: energy;
     }
 
-    int GetMaxEnergy()
+    public int GetMaxEnergy()
     {
         return weaponlvlenergy[levelmax];
     }
 
     // Returns energy value for level (displayed in meter)
-    int CurrentLevelEnergy()
+    public int CurrentLevelEnergy()
     {
         return (GetLevelIndex() > 0)? energy - weaponlvlenergy[GetLevelIndex()-1]: energy;
     }
     
     // Returns energy value for level (displayed in meter)
-    int CurrentLevelEnergyMax()
+    public int CurrentLevelEnergyMax()
     {
         return (GetLevelIndex() == 0)? 
             weaponlvlenergy[0]: 
@@ -239,7 +239,7 @@ public class Weapon : MasterObject
     }
 
     // Returns level using energy
-    int GetCurrentLevelIndex()
+    public int GetCurrentLevelIndex()
     {
         if (levelmax == 0) {return 0;}
         int e = energy;

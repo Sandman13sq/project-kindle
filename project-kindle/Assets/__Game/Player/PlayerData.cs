@@ -87,6 +87,7 @@ public class PlayerData : MonoBehaviour
         activeweapon = weapons[weaponindex];
         activeweapon.SetActive(true);
         weaponinfo.SetWeapon(weaponindex);
+        energymeter.SetValueDirect(activeweapon.CurrentLevelEnergy(), activeweapon.CurrentLevelEnergyMax());
     }
 
     public void NextWeapon()

@@ -104,6 +104,8 @@ public class HUDMeter : MonoBehaviour
         provisionalvalue = _value;
         provisionalstep = 0.0f;
 
+        UpdateMeterDisplay();
+
     }
 
     public void Flash()
