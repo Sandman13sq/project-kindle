@@ -20,7 +20,7 @@ public class TextBox : MasterObject
         wait,
         close
     }
-
+    
     private State state;
     private float statestep;
     private const float maxwidth = 700.0f;
