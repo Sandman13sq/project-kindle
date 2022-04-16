@@ -129,6 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d25bdb596c0fbc94496c0db244eb578a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventkey: 
+  entitytag: 
   spriterenderer: {fileID: 3663298095249108977}
   hitboxcollider: {fileID: 8795525712055972280}
   hurtboxcollider: {fileID: 7938653739636484930}
@@ -137,6 +139,7 @@ MonoBehaviour:
   showdamage: 1
   isshootable: 1
   eventondefeat: 0
+  dorespawn: 1
   state: 0
   health: 4
   healthmax: 4

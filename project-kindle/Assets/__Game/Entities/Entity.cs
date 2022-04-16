@@ -51,6 +51,7 @@ public class Entity : MasterObject
     public bool showdamage; // Shows damage numbers
     public bool isshootable;    // Takes damage from projectiles
     public bool eventondefeat;  // Calls event on defeat
+    public bool dorespawn;  // Respawns when 1.5 screens away
 
     // Update
     public int state;   // Current state of entity. Used in Update()
@@ -80,7 +81,10 @@ public class Entity : MasterObject
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (dorespawn)
+        {
+            //Instantiate();
+        }
     }
     
     // Update is called once per frame

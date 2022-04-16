@@ -54,7 +54,7 @@ public class Entity_Move_Manual : Entity
 	// Update is called once per frame
 	void Update()
 	{
-		animator.SetFloat("Speed", Mathf.Abs(xspeed));//set animator parameter to xspeed
+		animator.SetFloat("Speed", Mathf.Abs(xspeed)); //set animator parameter to xspeed
 
 		// Grab input values
 		float xlev = Input.GetAxisRaw("Horizontal");
