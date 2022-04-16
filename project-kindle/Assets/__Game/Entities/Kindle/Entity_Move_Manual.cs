@@ -204,12 +204,16 @@ public class Entity_Move_Manual : Entity
 			// Iterate through hits
 			foreach (RaycastHit2D hit in hitresults)
 			{
-				Entity e = GetEntityFromCollider(hit.collider);
-				if (e && e.GetAttack() > 0)
+				if (hit.collider != null && hit.collider.enabled)
 				{
-					// Do damage from hitbox
-					DoDamage(e.GetAttack());
+					Entity e = GetEntityFromCollider(hit.collider);
+					if (e && e.GetAttack() > 0)
+					{
+						// Do damage from hitbox
+						DoDamage(e.GetAttack());
+					}
 				}
+				
 			}
 		}
 

@@ -59,7 +59,6 @@ public class Entity_Respawner : MasterObject
         entity = e;
         entityactive = true;
         entityposition = entity.transform.position;
-        Debug.Log(entityposition);
     }
 
     public void ResetState(bool _cantrigger = false)

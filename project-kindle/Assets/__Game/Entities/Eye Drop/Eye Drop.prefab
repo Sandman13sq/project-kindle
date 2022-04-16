@@ -140,6 +140,7 @@ MonoBehaviour:
   isshootable: 1
   eventondefeat: 0
   dorespawn: 1
+  enableinrange: 0
   state: 0
   health: 4
   healthmax: 4
@@ -190,7 +191,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2870223418895419110}
-  - component: {fileID: 6725685007739244367}
   - component: {fileID: 8795525712055972280}
   m_Layer: 7
   m_Name: hitbox
@@ -213,19 +213,6 @@ Transform:
   m_Father: {fileID: 3396667412919932568}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6725685007739244367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6121147906117681949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa822bb42e3ec124489138297fa9bdc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entity: {fileID: 7258927093420033704}
 --- !u!61 &8795525712055972280
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -261,7 +248,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5073790208717626888}
-  - component: {fileID: 3139641967052813916}
   - component: {fileID: 7938653739636484930}
   m_Layer: 8
   m_Name: hurtbox
@@ -284,19 +270,6 @@ Transform:
   m_Father: {fileID: 3396667412919932568}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3139641967052813916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6437128225281186369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa822bb42e3ec124489138297fa9bdc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entity: {fileID: 7258927093420033704}
 --- !u!61 &7938653739636484930
 BoxCollider2D:
   m_ObjectHideFlags: 0

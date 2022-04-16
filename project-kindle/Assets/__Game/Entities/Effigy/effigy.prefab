@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7921447038203428758}
   - component: {fileID: 7493177918343879064}
-  - component: {fileID: 2361135897589280026}
   m_Layer: 8
   m_Name: hurtbox
   m_TagString: Untagged
@@ -58,19 +57,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 32, y: 64}
   m_EdgeRadius: 0
---- !u!114 &2361135897589280026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6008311971152622745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa822bb42e3ec124489138297fa9bdc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entity: {fileID: 6241962120882235966}
 --- !u!1 &6241962120040659166
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67e393b07f580974baf543ba27ce1450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventkey: 
+  entitytag: 
   spriterenderer: {fileID: 6241962120040659167}
   hitboxcollider: {fileID: 0}
   hurtboxcollider: {fileID: 7493177918343879064}
@@ -207,6 +195,8 @@ MonoBehaviour:
   showdamage: 0
   isshootable: 1
   eventondefeat: 0
+  dorespawn: 0
+  enableinrange: 0
   state: 0
   health: 10
   healthmax: 10
@@ -231,7 +221,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3670627295973785553}
   - component: {fileID: 1026836148404447031}
-  - component: {fileID: 3353691050565564256}
   m_Layer: 0
   m_Name: collision
   m_TagString: Untagged
@@ -279,16 +268,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 32, y: 64}
   m_EdgeRadius: 0
---- !u!114 &3353691050565564256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8765559337725078319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa822bb42e3ec124489138297fa9bdc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entity: {fileID: 6241962120882235966}

@@ -86,6 +86,17 @@ public class Entity : MasterObject
     {
         startingstate = state;
 
+        // Add parent entity component to colliders
+        if (hitboxcollider != null && hitboxcollider.gameObject != this)
+        {(hitboxcollider.gameObject.AddComponent(typeof(ParentEntity)) as ParentEntity).SetEntity(this);}
+
+        if (hurtboxcollider != null && hurtboxcollider.gameObject != this)
+        {(hurtboxcollider.gameObject.AddComponent(typeof(ParentEntity)) as ParentEntity).SetEntity(this);}
+
+        if (worldcollider != null && worldcollider.gameObject != this)
+        {(worldcollider.gameObject.AddComponent(typeof(ParentEntity)) as ParentEntity).SetEntity(this);}
+
+        // Create respawn component
         if (dorespawn || enableinrange)
         {
             // Create respawner component
@@ -129,7 +140,7 @@ public class Entity : MasterObject
 
         xspeed = 0.0f;
         yspeed = 0.0f;
-        
+
         //state = startingstate;
     }
 
@@ -189,7 +200,7 @@ public class Entity : MasterObject
     }
 
     // Called in Defeat() call before destruction
-    public virtual void OnDefeat()
+    protected virtual void OnDefeat()
     {
         if (heartdrop && Random.Range(0.0f, 1.0f) < 0.3f)
         {
@@ -525,6 +536,8 @@ public class Entity : MasterObject
         return Mathf.Sqrt(xx*xx+yy*yy);
     }
 
+    public float SignToX(Entity e) {return Mathf.Sign(e.transform.position.x-transform.position.x);}
+
     public int GetAttack() {return attack;}
 
     // Returns root entity from collider if exists, null otherwise.
@@ -549,13 +562,14 @@ public class Entity : MasterObject
     // Casts hurtbox against hitboxes and populates results in given variable. Returns number of results
     protected int CastHurtbox(RaycastHit2D[] hitresults, int mask = LAYER_HITBOX_BIT)
     {
-        if (!hurtboxcollider) {return 0;}
+        if (hurtboxcollider == null) {return 0;}
 
         hurtboxcollider.Cast(
             new Vector2(0.0f, 0.0f),
-            new ContactFilter2D() {layerMask=mask},
+            new ContactFilter2D() {layerMask=mask, useLayerMask=true},
             hitresults,
-            0.0f
+            0.0f,
+            true
         );
 
         return hitresults.Length;

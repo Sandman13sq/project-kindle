@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4712522368248401155}
-  - component: {fileID: 5226020972070535811}
   - component: {fileID: 4410549532487311342}
   m_Layer: 7
   m_Name: hitbox
@@ -32,19 +31,6 @@ Transform:
   m_Father: {fileID: 1511146627621132380}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5226020972070535811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1459573900495907172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa822bb42e3ec124489138297fa9bdc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entity: {fileID: 289946618821939606}
 --- !u!61 &4410549532487311342
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -118,6 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e69ebda123c0d0f459178c0f215e6179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventkey: 
+  entitytag: 
   spriterenderer: {fileID: 181457588331968908}
   hitboxcollider: {fileID: 4410549532487311342}
   hurtboxcollider: {fileID: 3988029555038160136}
@@ -126,6 +114,8 @@ MonoBehaviour:
   showdamage: 1
   isshootable: 1
   eventondefeat: 0
+  dorespawn: 0
+  enableinrange: 0
   state: 0
   health: 9
   healthmax: 9
@@ -150,7 +140,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3150263269998654950}
-  - component: {fileID: 7598422202394199455}
   - component: {fileID: 3988029555038160136}
   m_Layer: 8
   m_Name: hurtbox
@@ -173,19 +162,6 @@ Transform:
   m_Father: {fileID: 1511146627621132380}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7598422202394199455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3225147857792809181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa822bb42e3ec124489138297fa9bdc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entity: {fileID: 289946618821939606}
 --- !u!61 &3988029555038160136
 BoxCollider2D:
   m_ObjectHideFlags: 0
