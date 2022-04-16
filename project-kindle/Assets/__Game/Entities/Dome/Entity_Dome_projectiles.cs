@@ -11,7 +11,7 @@ public class Entity_Dome_projectiles : Entity
     public int bulletNum = 0;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         spriterenderer.sprite = sprites[0];
         if (bulletNum == 0){ xspeed = -10; }
@@ -23,7 +23,7 @@ public class Entity_Dome_projectiles : Entity
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         UpdateMovement();
 

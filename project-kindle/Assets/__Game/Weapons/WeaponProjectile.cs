@@ -175,11 +175,11 @@ public class WeaponProjectile : MonoBehaviour
     // Casts hitbox against hurtboxes and populates results in given variable. Returns number of results
     protected int CastHitbox(RaycastHit2D[] hitresults)
     {
-        if (!hitboxcollider) {return 0;}
+        if (hitboxcollider == null) {return 0;}
         
         hitboxcollider.Cast(
             new Vector2(0.0f, 0.0f),
-            new ContactFilter2D() {layerMask=LAYER_HURTBOX_BIT},
+            new ContactFilter2D() {layerMask=LAYER_HURTBOX_BIT, useLayerMask=true},
             hitresults,
             0.0f
         );

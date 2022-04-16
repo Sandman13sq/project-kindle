@@ -51,6 +51,8 @@ public class Entity : MasterObject
     public bool showdamage; // Shows damage numbers
     public bool isshootable;    // Takes damage from projectiles
     public bool eventondefeat;  // Calls event on defeat
+    public bool dorespawn;  // Respawns when 1.5 screens away
+    public bool enableinrange; // Enabled when 1.5 screens away
 
     // Update
     public int state;   // Current state of entity. Used in Update()
@@ -74,17 +76,52 @@ public class Entity : MasterObject
 
     [SerializeField] private GameObject shownumberprefab;
     private GameObject shownumberobj = null;
+    private Entity_Respawner respawner = null;
+    private int startingstate;
 
     // Common ================================================================
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        startingstate = state;
+
+        // Add parent entity component to colliders
+        if (hitboxcollider != null && hitboxcollider.gameObject != this)
+        {(hitboxcollider.gameObject.AddComponent(typeof(ParentEntity)) as ParentEntity).SetEntity(this);}
+
+        if (hurtboxcollider != null && hurtboxcollider.gameObject != this)
+        {(hurtboxcollider.gameObject.AddComponent(typeof(ParentEntity)) as ParentEntity).SetEntity(this);}
+
+        if (worldcollider != null && worldcollider.gameObject != this)
+        {(worldcollider.gameObject.AddComponent(typeof(ParentEntity)) as ParentEntity).SetEntity(this);}
+
+        // Create respawn component
+        if (dorespawn || enableinrange)
+        {
+            // Create respawner component
+            respawner = gameObject.AddComponent(typeof(Entity_Respawner)) as Entity_Respawner;
+            respawner.SetEntity(this);
+
+            // Trigger respawner only once
+            if (!dorespawn)
+            {
+                respawner.OnlyOnce();
+            }
+
+            // Disable until Kindle is in range
+            if (enableinrange)
+            {
+                respawner.ResetState(true);
+                return;
+            }
+        }
     }
+
+    protected virtual void Start() {}
     
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         UpdateDamageShake();    // Update shake when damaged
         UpdateMovement();       // Add x and y speeds to position
@@ -92,6 +129,34 @@ public class Entity : MasterObject
     }
     
     // Entity ================================================================
+
+    public void ResetValues()
+    {
+        health = healthmax;
+        if (spriterenderer != null) {spriterenderer.enabled = true;}
+        if (hitboxcollider != null) {hitboxcollider.enabled = true;}
+        if (hurtboxcollider != null) {hurtboxcollider.enabled = true;}
+        if (worldcollider != null) {worldcollider.enabled = true;}
+
+        xspeed = 0.0f;
+        yspeed = 0.0f;
+
+        //state = startingstate;
+    }
+
+    public void DisableComponents()
+    {
+        if (spriterenderer != null) {spriterenderer.enabled = false;}
+        if (hitboxcollider != null) {hitboxcollider.enabled = false;}
+        if (hurtboxcollider != null) {hurtboxcollider.enabled = false;}
+        if (worldcollider != null) {worldcollider.enabled = false;}
+    }
+
+    public void Restore()
+    {
+        ResetValues();
+        Start();
+    }
     
     // Called when pressing down on an entity
     public virtual void Interact()
@@ -135,7 +200,7 @@ public class Entity : MasterObject
     }
 
     // Called in Defeat() call before destruction
-    public virtual void OnDefeat()
+    protected virtual void OnDefeat()
     {
         if (heartdrop && Random.Range(0.0f, 1.0f) < 0.3f)
         {
@@ -150,14 +215,25 @@ public class Entity : MasterObject
     }
 
     // Called when resulting health from ChangeHealth is zero
-    public virtual void Defeat()
+    public void Defeat()
     {
         OnDefeat();
-        if (game.EventExists(eventkey))
+
+        // Run death event
+        if (eventondefeat && game.EventExists(eventkey))
         {
             game.RunEvent(eventkey);
         }
-        Destroy(gameObject);
+
+        // Run 
+        if (dorespawn)
+        {
+            respawner.ResetState();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected virtual void OnHealthChange(int change)
@@ -441,10 +517,31 @@ public class Entity : MasterObject
     public void SpeedSetDeg(float _speed, float _direction) {SpeedSetRad(_speed, _direction * Mathf.Deg2Rad);}
     public void SpeedAddDeg(float _speed, float _direction) {SpeedAddRad(_speed, _direction * Mathf.Deg2Rad);}
 
+    public float DistanceTo(Entity e)
+    {
+        float xx = e.transform.position.x - transform.position.x;
+        float yy = e.transform.position.y - transform.position.y;
+        return Mathf.Sqrt(xx*xx+yy*yy);
+    }
+    public float DistanceTo(Vector3 v)
+    {
+        float xx = v.x - transform.position.x;
+        float yy = v.y - transform.position.y;
+        return Mathf.Sqrt(xx*xx+yy*yy);
+    }
+    public float DistanceTo(Vector2 v)
+    {
+        float xx = v.x - transform.position.x;
+        float yy = v.y - transform.position.y;
+        return Mathf.Sqrt(xx*xx+yy*yy);
+    }
+
+    public float SignToX(Entity e) {return Mathf.Sign(e.transform.position.x-transform.position.x);}
+
     public int GetAttack() {return attack;}
 
     // Returns root entity from collider if exists, null otherwise.
-    protected Entity GetEntityFromCollider(Collider2D c)
+    static protected Entity GetEntityFromCollider(Collider2D c)
     {
         if (c != null)
         {
@@ -465,13 +562,14 @@ public class Entity : MasterObject
     // Casts hurtbox against hitboxes and populates results in given variable. Returns number of results
     protected int CastHurtbox(RaycastHit2D[] hitresults, int mask = LAYER_HITBOX_BIT)
     {
-        if (!hurtboxcollider) {return 0;}
+        if (hurtboxcollider == null) {return 0;}
 
         hurtboxcollider.Cast(
             new Vector2(0.0f, 0.0f),
-            new ContactFilter2D() {layerMask=mask},
+            new ContactFilter2D() {layerMask=mask, useLayerMask=true},
             hitresults,
-            0.0f
+            0.0f,
+            true
         );
 
         return hitresults.Length;

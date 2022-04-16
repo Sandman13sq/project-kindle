@@ -42,7 +42,7 @@ public class Entity_Move_Manual : Entity
     }
 
 	// Start is called before the first frame update
-	void Start()
+	protected override void Start()
 	{
 		hsign = 1.0f;
 		Application.targetFrameRate = 60; // Temporary. Will remove later
@@ -52,9 +52,9 @@ public class Entity_Move_Manual : Entity
 	}
 
 	// Update is called once per frame
-	void Update()
+	protected override void Update()
 	{
-		animator.SetFloat("Speed", Mathf.Abs(xspeed));//set animator parameter to xspeed
+		animator.SetFloat("Speed", Mathf.Abs(xspeed)); //set animator parameter to xspeed
 
 		// Grab input values
 		float xlev = Input.GetAxisRaw("Horizontal");
@@ -172,7 +172,7 @@ public class Entity_Move_Manual : Entity
 		}
 
 		// Aiming up and down
-		if(ylev > 0)
+		if (ylev > 0)
 		{
 			animator.SetBool("IgnoreInAir", true);
 			aimingUp = true;
@@ -204,12 +204,16 @@ public class Entity_Move_Manual : Entity
 			// Iterate through hits
 			foreach (RaycastHit2D hit in hitresults)
 			{
-				Entity e = GetEntityFromCollider(hit.collider);
-				if (e && e.GetAttack() > 0)
+				if (hit.collider != null && hit.collider.enabled)
 				{
-					// Do damage from hitbox
-					DoDamage(e.GetAttack());
+					Entity e = GetEntityFromCollider(hit.collider);
+					if (e && e.GetAttack() > 0)
+					{
+						// Do damage from hitbox
+						DoDamage(e.GetAttack());
+					}
 				}
+				
 			}
 		}
 
@@ -263,7 +267,7 @@ public class Entity_Move_Manual : Entity
 
 	public override int ChangeHealth(int value)
 	{
-		if (value >= 0 || iframes == 0.0f)
+		if (value != 0 && iframes == 0.0f)
 		{
 			int healthdiff = base.ChangeHealth(value);
 			playerdata.SetHealth(health); // Update HUD
@@ -294,6 +298,7 @@ public class Entity_Move_Manual : Entity
 			iframes = iframestime;
 			yspeed = 5.0f;
 			jumpheld = true;
+			onground = false;
 		}
 	}
 

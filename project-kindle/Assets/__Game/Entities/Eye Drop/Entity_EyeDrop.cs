@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static DmrMath;
 
 public class Entity_EyeDrop : Entity
 {
@@ -23,14 +24,13 @@ public class Entity_EyeDrop : Entity
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        xspeed = spriterenderer.flipX? -1.0f: 1.0f; 
         state = (int)State.Floating;
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         UpdateMovement();
         UpdateDamageShake();
@@ -44,22 +44,22 @@ public class Entity_EyeDrop : Entity
             )
         {
             spriterenderer.flipX = !spriterenderer.flipX;
-            xspeed = Mathf.Max(0.01f, Mathf.Abs(xspeed)) * (spriterenderer.flipX? -1.0f: 1.0f);
+            xspeed = -Polarize(spriterenderer.flipX);
             UpdateMovement();
         }
 
         spriterenderer.sprite = sprites[0];
 
         // States
-        switch(state)
+        switch((State)state)
         {
             // Move left/right and check for player below ----------------------------------------
-            case((int)State.Floating):
+            case(State.Floating):
             {
                 // Increase speed to maxspeed
                 if (Mathf.Abs(xspeed) < maxspeed)
                 {
-                    xspeed = Mathf.Min(maxspeed, Mathf.Abs(xspeed)+0.1f) * Mathf.Sign(xspeed);
+                    xspeed = Approach(xspeed, maxspeed*-Polarize(spriterenderer.flipX), 0.1f);
                 }
 
                 hoverstep = Mathf.Repeat(hoverstep+0.05f, 2.0f*Mathf.PI);
@@ -106,7 +106,7 @@ public class Entity_EyeDrop : Entity
             }
 
             // Flash before striking -------------------------------------------------------------
-            case((int)State.Flash):
+            case(State.Flash):
             {
                 xspeed *= speedslowmod;
 
@@ -125,7 +125,7 @@ public class Entity_EyeDrop : Entity
             }
 
             // Wait period after striking -----------------------------------------------------
-            case((int)State.Strike):
+            case(State.Strike):
             {
                 xspeed *= speedslowmod;
 

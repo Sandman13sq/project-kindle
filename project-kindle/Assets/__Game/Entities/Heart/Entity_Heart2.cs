@@ -12,7 +12,7 @@ public class Entity_Heart2 : Entity
     // Common ======================================================
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         scalestep = Random.Range(0.0f, 1.0f);
     }
@@ -29,7 +29,7 @@ public class Entity_Heart2 : Entity
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         // Pulse heart
         scalestep = Mathf.Repeat(scalestep + 0.04f, 2.0f*Mathf.PI);
