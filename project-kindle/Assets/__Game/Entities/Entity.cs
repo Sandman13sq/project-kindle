@@ -75,20 +75,28 @@ public class Entity : MasterObject
 
     [SerializeField] private GameObject shownumberprefab;
     private GameObject shownumberobj = null;
+    private Entity_Respawner respawner = null;
+    private int startingstate;
 
     // Common ================================================================
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (dorespawn)
         {
             //Instantiate();
+            respawner = gameObject.AddComponent(typeof(Entity_Respawner)) as Entity_Respawner;
+            respawner.SetEntity(this);
         }
+
+        startingstate = state;
     }
+
+    protected virtual void Start() {}
     
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         UpdateDamageShake();    // Update shake when damaged
         UpdateMovement();       // Add x and y speeds to position
@@ -96,6 +104,31 @@ public class Entity : MasterObject
     }
     
     // Entity ================================================================
+
+    public void ResetValues()
+    {
+        health = healthmax;
+        if (spriterenderer != null) {spriterenderer.enabled = true;}
+        if (hitboxcollider != null) {hitboxcollider.enabled = true;}
+        if (hurtboxcollider != null) {hurtboxcollider.enabled = true;}
+        if (worldcollider != null) {worldcollider.enabled = true;}
+
+        state = startingstate;
+    }
+
+    public void DisableComponents()
+    {
+        if (spriterenderer != null) {spriterenderer.enabled = false;}
+        if (hitboxcollider != null) {hitboxcollider.enabled = false;}
+        if (hurtboxcollider != null) {hurtboxcollider.enabled = false;}
+        if (worldcollider != null) {worldcollider.enabled = false;}
+    }
+
+    public void Restore()
+    {
+        ResetValues();
+        Start();
+    }
     
     // Called when pressing down on an entity
     public virtual void Interact()
@@ -154,14 +187,25 @@ public class Entity : MasterObject
     }
 
     // Called when resulting health from ChangeHealth is zero
-    public virtual void Defeat()
+    public void Defeat()
     {
         OnDefeat();
-        if (game.EventExists(eventkey))
+
+        // Run death event
+        if (eventondefeat && game.EventExists(eventkey))
         {
             game.RunEvent(eventkey);
         }
-        Destroy(gameObject);
+
+        // Run 
+        if (dorespawn)
+        {
+            respawner.ResetState();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected virtual void OnHealthChange(int change)
@@ -445,10 +489,29 @@ public class Entity : MasterObject
     public void SpeedSetDeg(float _speed, float _direction) {SpeedSetRad(_speed, _direction * Mathf.Deg2Rad);}
     public void SpeedAddDeg(float _speed, float _direction) {SpeedAddRad(_speed, _direction * Mathf.Deg2Rad);}
 
+    public float DistanceTo(Entity e)
+    {
+        float xx = e.transform.position.x - transform.position.x;
+        float yy = e.transform.position.y - transform.position.y;
+        return Mathf.Sqrt(xx*xx+yy*yy);
+    }
+    public float DistanceTo(Vector3 v)
+    {
+        float xx = v.x - transform.position.x;
+        float yy = v.y - transform.position.y;
+        return Mathf.Sqrt(xx*xx+yy*yy);
+    }
+    public float DistanceTo(Vector2 v)
+    {
+        float xx = v.x - transform.position.x;
+        float yy = v.y - transform.position.y;
+        return Mathf.Sqrt(xx*xx+yy*yy);
+    }
+
     public int GetAttack() {return attack;}
 
     // Returns root entity from collider if exists, null otherwise.
-    protected Entity GetEntityFromCollider(Collider2D c)
+    static protected Entity GetEntityFromCollider(Collider2D c)
     {
         if (c != null)
         {
