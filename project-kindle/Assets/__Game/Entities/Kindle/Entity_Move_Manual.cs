@@ -42,7 +42,7 @@ public class Entity_Move_Manual : Entity
     }
 
 	// Start is called before the first frame update
-	void Start()
+	protected override void Start()
 	{
 		hsign = 1.0f;
 		Application.targetFrameRate = 60; // Temporary. Will remove later
@@ -52,7 +52,7 @@ public class Entity_Move_Manual : Entity
 	}
 
 	// Update is called once per frame
-	void Update()
+	protected override void Update()
 	{
 		animator.SetFloat("Speed", Mathf.Abs(xspeed)); //set animator parameter to xspeed
 

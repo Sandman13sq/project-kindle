@@ -9,13 +9,13 @@ public class Entity_Crawler : Entity
     private const float maxspeed = 2.2f;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         Physics2D.CircleCast(
             new Vector2(transform.position.x, transform.position.y),

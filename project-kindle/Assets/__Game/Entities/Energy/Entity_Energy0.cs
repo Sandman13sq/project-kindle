@@ -18,7 +18,7 @@ public class Entity_Energy0 : Entity
     private float life;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         life = lifemax;
         colorstep = Random.Range(0.0f, 1.0f);
@@ -38,7 +38,7 @@ public class Entity_Energy0 : Entity
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         // Update color
         colorstep = Mathf.Repeat(colorstep + 0.02f, Mathf.PI);

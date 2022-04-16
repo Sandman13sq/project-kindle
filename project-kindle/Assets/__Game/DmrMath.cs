@@ -5,7 +5,10 @@ using UnityEngine;
 
 public static class DmrMath
 {
-    public static float Sign(float x) { return x > 0.0f ? 1.0f : -1.0f; }
+    public static float Sign(float x) { return x == 0.0f? 0.0f: x > 0.0f ? 1.0f : -1.0f; }
+
+    public static float Polarize(bool x) { return x? 1.0f: -1.0f; }
+    public static float Polarize(float x) { return x > 0.0f ? 1.0f : -1.0f; }
 
     public static float Quantize(float x, float step) { return (float)Math.Floor(x / step) * step; }
 
@@ -18,7 +21,7 @@ public static class DmrMath
     {
         return (float)Math.Sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
     }
-    
+
     public static float Approach(float x, float target, float step)
     {
         return (x < target) ?

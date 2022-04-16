@@ -52,6 +52,7 @@ public class Entity : MasterObject
     public bool isshootable;    // Takes damage from projectiles
     public bool eventondefeat;  // Calls event on defeat
     public bool dorespawn;  // Respawns when 1.5 screens away
+    public bool enableinrange; // Enabled when 1.5 screens away
 
     // Update
     public int state;   // Current state of entity. Used in Update()
@@ -83,14 +84,27 @@ public class Entity : MasterObject
     // Start is called before the first frame update
     void Awake()
     {
-        if (dorespawn)
+        startingstate = state;
+
+        if (dorespawn || enableinrange)
         {
-            //Instantiate();
+            // Create respawner component
             respawner = gameObject.AddComponent(typeof(Entity_Respawner)) as Entity_Respawner;
             respawner.SetEntity(this);
-        }
 
-        startingstate = state;
+            // Trigger respawner only once
+            if (!dorespawn)
+            {
+                respawner.OnlyOnce();
+            }
+
+            // Disable until Kindle is in range
+            if (enableinrange)
+            {
+                respawner.ResetState(true);
+                return;
+            }
+        }
     }
 
     protected virtual void Start() {}
@@ -113,7 +127,10 @@ public class Entity : MasterObject
         if (hurtboxcollider != null) {hurtboxcollider.enabled = true;}
         if (worldcollider != null) {worldcollider.enabled = true;}
 
-        state = startingstate;
+        xspeed = 0.0f;
+        yspeed = 0.0f;
+        
+        //state = startingstate;
     }
 
     public void DisableComponents()
