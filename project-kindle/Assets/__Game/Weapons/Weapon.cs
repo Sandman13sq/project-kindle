@@ -137,6 +137,7 @@ public class Weapon : MasterObject
                     AddAmmo(-1);
                     
                     Fire(Mathf.Atan2(yaim, xaim));
+                    OnShoot();
                     player.OnShoot();
                 }
             }
@@ -146,6 +147,11 @@ public class Weapon : MasterObject
     }
 
     // Methods ====================================================
+
+    protected virtual void OnShoot()
+    {
+
+    }
 
     public void SetActive(bool isactive)
     {

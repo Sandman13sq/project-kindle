@@ -53,4 +53,10 @@ public class Weapon_Dragon : Weapon
         }
         
     }
+
+    protected override void OnShoot()
+    {
+        game.PlaySound("DragonShoot");
+    }   
+
 }

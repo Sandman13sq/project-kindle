@@ -27,6 +27,9 @@ public class Weapon_Vector : Weapon
         }
     }
 
-    
+    protected override void OnShoot()
+    {
+        game.PlaySound("VectorShoot");
+    }    
 }
 

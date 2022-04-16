@@ -154,7 +154,7 @@ public class GameHeader : MonoBehaviour
 
     public void SetContolsLocked(bool locked) {lockplayercontrols = locked;}
     public bool GetContolsLocked() {return lockplayercontrols;}
-
+    
     public Vector3 GetCameraPosition() {return camera_object.transform.position;}
 
     public PlayerData GetPlayerData() {return playerdata;}
