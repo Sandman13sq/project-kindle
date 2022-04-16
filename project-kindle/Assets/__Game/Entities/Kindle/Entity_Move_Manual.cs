@@ -263,7 +263,7 @@ public class Entity_Move_Manual : Entity
 
 	public override int ChangeHealth(int value)
 	{
-		if (value >= 0 || iframes == 0.0f)
+		if (value != 0 && iframes == 0.0f)
 		{
 			int healthdiff = base.ChangeHealth(value);
 			playerdata.SetHealth(health); // Update HUD
