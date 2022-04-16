@@ -82,6 +82,7 @@ public class Entity_Move_Manual : Entity
 			if (Input.GetButtonDown("Jump"))
 			{
 				jumpbuffer = jumpbuffertime;
+				FindObjectOfType<AudioManager>().Play("Jump");
 			}
 
 			// Switch Weapon
@@ -259,6 +260,13 @@ public class Entity_Move_Manual : Entity
 			animator.SetBool("IgnoreInAir", true);
 			animator.Play("Base Layer.Kindle_jump_shootdown", 0, 0.0f);
 		}
+
+		int currWep = playerdata.GetWeaponIndex();
+		//0 = Vector, 1 = Dragons Breath
+		if(currWep == 0)
+			FindObjectOfType<AudioManager>().Play("VectorShoot");
+		else if(currWep == 1)
+			FindObjectOfType<AudioManager>().Play("DragonShoot");
 	}
 
 	public override int ChangeHealth(int value)

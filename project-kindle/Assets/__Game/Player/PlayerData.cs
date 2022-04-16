@@ -10,7 +10,7 @@ public class PlayerData : MonoBehaviour
 
     [SerializeField] private Weapon[] weapons;
     private Weapon activeweapon;
-    private int weaponindex;
+    private int weaponindex; //0 = Vector, 1 = Dragons Breath
 
     // Common ==================================================
 
@@ -101,4 +101,5 @@ public class PlayerData : MonoBehaviour
     }
 
     public Weapon GetActiveWeapon() {return activeweapon;}
+    public int GetWeaponIndex() {return weaponindex;}
 }
