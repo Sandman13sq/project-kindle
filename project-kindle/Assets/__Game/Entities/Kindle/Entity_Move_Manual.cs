@@ -172,7 +172,7 @@ public class Entity_Move_Manual : Entity
 		}
 
 		// Aiming up and down
-		if(ylev > 0)
+		if (ylev > 0)
 		{
 			animator.SetBool("IgnoreInAir", true);
 			aimingUp = true;
@@ -294,6 +294,7 @@ public class Entity_Move_Manual : Entity
 			iframes = iframestime;
 			yspeed = 5.0f;
 			jumpheld = true;
+			onground = false;
 		}
 	}
 
