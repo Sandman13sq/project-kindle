@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1712364249276888927}
   - component: {fileID: 1712364249276888926}
-  - component: {fileID: 6897314216893150638}
   - component: {fileID: 6711122291899214379}
+  - component: {fileID: 2521553371264269455}
   m_Layer: 0
   m_Name: __game
   m_TagString: Untagged
@@ -47,21 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03de6ffcf38b34f419555ff120270ded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventrunner: {fileID: 6897314216893150638}
   textbox_prefab: {fileID: 3907915523757519073, guid: 9b34dab3192837e4cb6d533b646d5a69, type: 3}
+  audiomanager: {fileID: 2521553371264269455}
   playerdata: {fileID: 6711122291899214379}
---- !u!114 &6897314216893150638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1712364249276888921}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e77399d5f0e0bf4a9eebebc4bed51a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6711122291899214379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,6 +68,43 @@ MonoBehaviour:
   weapons:
   - {fileID: 543963899502257081}
   - {fileID: 416659573601586833}
+--- !u!114 &2521553371264269455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712364249276888921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec206093259fa31448e4234df6d1fa98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: BackgroundMusic
+    clip: {fileID: 8300000, guid: 439165fd27882df459e4253c6b0991c6, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+    loop: 1
+  - name: VectorShoot
+    clip: {fileID: 8300000, guid: 0ba82320354399547a7cafd89d3ab134, type: 3}
+    volume: 0.6
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: DragonShoot
+    clip: {fileID: 8300000, guid: 1f0a85512d0da254dbdac5a89f77867d, type: 3}
+    volume: 0.6
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Jump
+    clip: {fileID: 8300000, guid: 543ca10382de37344aa4880431cd7b54, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
 --- !u!1 &3577867890185681861
 GameObject:
   m_ObjectHideFlags: 0

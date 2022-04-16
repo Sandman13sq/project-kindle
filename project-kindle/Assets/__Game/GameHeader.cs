@@ -5,8 +5,8 @@ using UnityEngine;
 public class GameHeader : MonoBehaviour
 {
     // Variables
-    [SerializeField] private EventRunner eventrunner;
     [SerializeField] private GameObject textbox_prefab;
+    [SerializeField] private AudioManager audiomanager;
     [SerializeField] private PlayerData playerdata;
     private TextBox textbox_object;
     private Entity_Move_Manual player_object;
@@ -14,6 +14,7 @@ public class GameHeader : MonoBehaviour
     private bool lockplayercontrols;
 
     private GameObject camera_object;
+    private EventRunner eventrunner;
 
     private Dictionary<string, List<EventRunner.CommandDef>> eventmap;
 
@@ -46,6 +47,7 @@ public class GameHeader : MonoBehaviour
         gameflags = new int[32];
         sceneflags = new int[32];
 
+        eventrunner = gameObject.AddComponent(typeof(EventRunner)) as EventRunner;
     }
 
     // Start is called before the first frame update
@@ -156,4 +158,12 @@ public class GameHeader : MonoBehaviour
     public Vector3 GetCameraPosition() {return camera_object.transform.position;}
 
     public PlayerData GetPlayerData() {return playerdata;}
+    public AudioManager GetAudioManager() {return audiomanager;}
+
+    // Events --------------------------------------------------
+
+    public Sound PlaySound(string key)
+    {
+        return audiomanager.Play(key);
+    }
 }

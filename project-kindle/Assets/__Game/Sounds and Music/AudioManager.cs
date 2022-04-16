@@ -34,13 +34,15 @@ public class AudioManager : MonoBehaviour
         Play("BackgroundMusic");
     }
 
-    public void Play (string name)
+    public Sound Play (string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
         {
-            return;
+            return s;
         }
         s.source.Play();
+
+        return s;
     }
 }
