@@ -182,7 +182,7 @@ public class Weapon : MasterObject
                 Mathf.Min(0.0f, Mathf.Sin(dir))*shootoffset_down + 
                 Mathf.Abs(Mathf.Cos(dir))*shootoffset_centery
             ), 
-            0.0f);
+            -6.0f);
         
         proj.SetDirectionRad(dir, hsign);
         proj.SetSourceWeapon(this);
