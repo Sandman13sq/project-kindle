@@ -28,8 +28,9 @@ public class PlayerData : MonoBehaviour
 
     // Methods ==================================================
 
-    public int SetHealth(int value)
+    public int SetHealth(int value, int valuemax)
     {
+        healthmeter.SetValueMax(valuemax);
         healthmeter.SetValue(value);
         return 0;
     }
@@ -41,8 +42,8 @@ public class PlayerData : MonoBehaviour
 
     public int SetEnergy(int value, int valuemax, bool matchprovisional = false)
     {
-        energymeter.SetValue(value, matchprovisional);
         energymeter.SetValueMax(valuemax);
+        energymeter.SetValue(value, matchprovisional);
         return 0;
     }
 
@@ -102,4 +103,12 @@ public class PlayerData : MonoBehaviour
 
     public Weapon GetActiveWeapon() {return activeweapon;}
     public int GetWeaponIndex() {return weaponindex;}
+
+    public void ResetWeapons()
+    {
+        foreach (var w in weapons)
+        {
+            w.ResetValues();
+        }
+    }
 }

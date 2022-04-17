@@ -47,10 +47,7 @@ public class Weapon : MasterObject
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        ammo = ammomax;
-        autofireprogress = autofiretime;
-
-        level = GetCurrentLevelIndex();
+        ResetValues();
 
         playerdata = game.GetPlayerData();
         player = game.GetPlayer();
@@ -147,6 +144,18 @@ public class Weapon : MasterObject
     }
 
     // Methods ====================================================
+
+    public void ResetValues()
+    {
+        energy = 0;
+        ammo = ammomax;
+        shotcount = 0;
+        delayprogress = 0;
+        autofireprogress = autofiretime;
+        rechargeprogress = 0;
+
+        level = GetCurrentLevelIndex();
+    }
 
     protected virtual void OnShoot()
     {

@@ -156,10 +156,12 @@ public class Entity_Rattah : Entity
         }
     }
 
-    protected override void OnDefeat()
+    protected override bool OnDefeat()
     {
         base.OnDefeat();
         hitboxcollider.enabled = false;
+
+        return true;
     }
 
     protected override void OnHealthChange(int diff)

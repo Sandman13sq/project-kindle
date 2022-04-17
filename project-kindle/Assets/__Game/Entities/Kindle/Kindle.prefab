@@ -162,7 +162,7 @@ MonoBehaviour:
   dorespawn: 0
   enableinrange: 0
   state: 0
-  health: 20
+  health: 32
   healthmax: 32
   attack: 0
   energy: 0
@@ -170,9 +170,9 @@ MonoBehaviour:
   heartdrop: {fileID: 0}
   destroygraphic: []
   shownumberprefab: {fileID: 850697109702244616, guid: 9edcd6967739f21468e782a98685c4f2, type: 3}
-  jumpheld: 0
-  jumpbuffer: 0
   animator: {fileID: 2403176782087456715}
+  gameover_prefab: {fileID: 5279500421066183884, guid: 59229415a8e31f04586b198abd38be01, type: 3}
+  defeat: 0
 --- !u!70 &350204462260166774
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class Entity_Move_Manual : Entity
 {
-	// Variables =========================================
+	enum State
+	{
+		control,
+		defeat,
+	}
 
+	// Variables =========================================
 	private const float floory = 136.0f;
 
-	public bool jumpheld;
-	public float jumpbuffer;
+	private bool jumpheld;
+	private float jumpbuffer;
     private float jumpbuffertime = 7.0f; // Max number of frames ahead of time where a jump press will still be read
 
 	private PlayerData playerdata;	// Holds health, energy, level, etc.
@@ -25,6 +30,10 @@ public class Entity_Move_Manual : Entity
 	private float iframes = 0.0f;	// Frames of invincibility after taking damage
 	private float iframestime = 150.0f;
 	private bool showplayer;
+
+	[SerializeField] private GameObject gameover_prefab;
+
+	public bool defeat;
 
 	// Movement constants -------------------------------
 	float moveacceleration = 0.4f;
@@ -46,12 +55,15 @@ public class Entity_Move_Manual : Entity
 	protected override void Start()
 	{
 		hsign = 1.0f;
-		Application.targetFrameRate = 60; // Temporary. Will remove later
 
 		playerdata = game.GetPlayerData();
-		playerdata.SetHealth(health);
+		playerdata.SetHealth(health, healthmax);
 
 		showplayer = true;
+
+		state = (int)State.control;
+
+		animator.SetBool("Defeat", false);
 	}
 
 	// Update is called once per frame
@@ -66,108 +78,161 @@ public class Entity_Move_Manual : Entity
 		float lasthsign = hsign;
 		bool controlslocked = game.GameFlagGet(GameHeader.GameFlag.lock_player);
 
-		// Use controls if controls are free
-		if ( !controlslocked )
+		float grav = gravity;
+		
+		switch((State)state)
 		{
-			// Flip sprite if moving left. If shift is held, lock direction
-			if (xlev != 0.0 && !Input.GetKey(KeyCode.LeftShift))
-			{
-				hsign = (xlev > 0.0f)? 1.0f: -1.0f;
-				spriterenderer.flipX = xlev < 0.0f;
-			}
-			vsign = ylev;
-			
-			// Jump buffer
-			if (jumpbuffer >= 0.0f)
-			{
-				jumpbuffer -= 1.0f;
-			}
+			// -------------------------------------------------------------------
+			case(State.control): {
+				animator.SetBool("Defeat", false);
 
-			if (Input.GetButtonDown("Jump"))
-			{
-				jumpbuffer = jumpbuffertime;
-			}
-
-			// Switch Weapon
-			if (Input.GetButtonDown("WeaponNext"))
-			{
-				playerdata.NextWeapon();
-			}
-			
-			if (Input.GetButtonDown("WeaponPrev"))
-			{
-				playerdata.PrevWeapon();
-			}
-		}
-		else
-		{
-			xlev = 0.0f;
-			ylev = 0.0f;
-		}
-
-		// Ground Movement
-		/*
-			When player is moving in the same direction as the input, use acceleration and approach movespeed.
-			When player is moving in the opposing direction as the input, use deceleration and approach movespeed.
-			When no input is held, use deceleration and approach 0.
-		*/
-		if (onground)
-		{
-			yspeed = Mathf.Max(0.0f, yspeed); // Keep upwards movement, if any
-
-			animator.SetBool("InAir", false);
-			animator.SetBool("IgnoreInAir", false);
-			
-			if (xlev > 0.0f) // Moving Right
-			{
-				xspeed = Mathf.Min(xspeed + (xlev==Mathf.Sign(xspeed)? moveacceleration: movedeceleration), movespeedmax);
-			}
-			else if (xlev < 0.0f)   // Moving Left
-			{
-				xspeed = Mathf.Max(xspeed - (xlev==Mathf.Sign(xspeed)? moveacceleration: movedeceleration), -movespeedmax);
-			}
-			else    // No input held
-			{
-				if (Mathf.Abs(xspeed) <= movedeceleration) // Clamp to 0 when speed is small enough
+				// Use controls if controls are free
+				if ( !controlslocked )
 				{
-					xspeed = 0.0f;
+					// Flip sprite if moving left. If shift is held, lock direction
+					if (xlev != 0.0 && !Input.GetKey(KeyCode.LeftShift))
+					{
+						hsign = (xlev > 0.0f)? 1.0f: -1.0f;
+						spriterenderer.flipX = xlev < 0.0f;
+					}
+					vsign = ylev;
+					
+					// Jump buffer
+					if (jumpbuffer >= 0.0f)
+					{
+						jumpbuffer -= 1.0f;
+					}
+
+					if (Input.GetButtonDown("Jump"))
+					{
+						jumpbuffer = jumpbuffertime;
+					}
+
+					// Switch Weapon
+					if (Input.GetButtonDown("WeaponNext"))
+					{
+						playerdata.NextWeapon();
+					}
+					
+					if (Input.GetButtonDown("WeaponPrev"))
+					{
+						playerdata.PrevWeapon();
+					}
 				}
-				else    // Approach 0 with deceleration
+				else
 				{
-					xspeed -= Mathf.Sign(xspeed) * movedeceleration;
+					xlev = 0.0f;
+					ylev = 0.0f;
 				}
-			}
-			
-			// Jump
-            if ( jumpbuffer > 0.0f )
-            {
-				yspeed += jumpstrength;
-				jumpbuffer = 0.0f;
-				jumpheld = true;
 
-				game.PlaySound("Jump");
-			}
-		}
-		// In Air
-		else
-		{
-			animator.SetBool("InAir", true);
+				// Ground Movement
+				/*
+					When player is moving in the same direction as the input, use acceleration and approach movespeed.
+					When player is moving in the opposing direction as the input, use deceleration and approach movespeed.
+					When no input is held, use deceleration and approach 0.
+				*/
+				if (onground)
+				{
+					yspeed = Mathf.Max(0.0f, yspeed); // Keep upwards movement, if any
 
-			jumpheld = jumpheld && Input.GetButton("Jump") && yspeed > 0.0f;
-			if (xlev > 0.0f) // Moving Right
-			{
-				xspeed = Mathf.Min(xspeed + moveaccelerationair, movespeedmax);
+					animator.SetBool("InAir", false);
+					animator.SetBool("IgnoreInAir", false);
+					
+					if (xlev > 0.0f) // Moving Right
+					{
+						xspeed = Mathf.Min(xspeed + (xlev==Mathf.Sign(xspeed)? moveacceleration: movedeceleration), movespeedmax);
+					}
+					else if (xlev < 0.0f)   // Moving Left
+					{
+						xspeed = Mathf.Max(xspeed - (xlev==Mathf.Sign(xspeed)? moveacceleration: movedeceleration), -movespeedmax);
+					}
+					else    // No input held
+					{
+						if (Mathf.Abs(xspeed) <= movedeceleration) // Clamp to 0 when speed is small enough
+						{
+							xspeed = 0.0f;
+						}
+						else    // Approach 0 with deceleration
+						{
+							xspeed -= Mathf.Sign(xspeed) * movedeceleration;
+						}
+					}
+					
+					// Jump
+					if ( jumpbuffer > 0.0f )
+					{
+						yspeed += jumpstrength;
+						jumpbuffer = 0.0f;
+						jumpheld = true;
+
+						game.PlaySound("Jump");
+					}
+				}
+				// In Air
+				else
+				{
+					animator.SetBool("InAir", true);
+
+					jumpheld = jumpheld && Input.GetButton("Jump") && yspeed > 0.0f;
+					if (xlev > 0.0f) // Moving Right
+					{
+						xspeed = Mathf.Min(xspeed + moveaccelerationair, movespeedmax);
+					}
+					else if (xlev < 0.0f)   // Moving Left
+					{
+						xspeed = Mathf.Max(xspeed - moveaccelerationair, -movespeedmax);
+					}
+				}
+
+				// Aiming up and down
+				if (ylev > 0)
+				{
+					animator.SetBool("IgnoreInAir", true);
+					aimingUp = true;
+					aimingDown = false;
+				}
+
+				else if(ylev < 0)
+				{
+					animator.SetBool("IgnoreInAir", true);
+					aimingDown = true;
+					aimingUp = false;
+				}
+
+				else
+				{
+					aimingDown = false;
+					aimingUp = false;
+				}
+
+				animator.SetBool("AimingUp", aimingUp);
+				animator.SetBool("AimingDown", aimingDown);
+
+				grav = jumpheld? gravityjump: gravity;
+
+				
+				break;
 			}
-			else if (xlev < 0.0f)   // Moving Left
-			{
-				xspeed = Mathf.Max(xspeed - moveaccelerationair, -movespeedmax);
+			// -------------------------------------------------------------------
+			case(State.defeat): {
+				grav *= 0.2f;
+
+				if (health > 0)
+				{
+					Start();
+					animator.SetBool("Defeat", false);
+				}
+				break;
 			}
-			
-			// Apply gravity
-			yspeed = Mathf.Max(yspeed+(jumpheld? gravityjump: gravity), -8.0f);
 		}
 
 		// Update speeds
+		if (!onground)
+		{
+			// Apply gravity
+			yspeed = Mathf.Max(yspeed+grav, -8.0f);
+		}
+
 		UpdateMovement();
 
 		// Collision
@@ -178,52 +243,31 @@ public class Entity_Move_Manual : Entity
 			yspeed = Mathf.Max(yspeed, 0.0f);
 		}
 
-		// Aiming up and down
-		if (ylev > 0)
-		{
-			animator.SetBool("IgnoreInAir", true);
-			aimingUp = true;
-			aimingDown = false;
-		}
-
-		else if(ylev < 0)
-		{
-			animator.SetBool("IgnoreInAir", true);
-			aimingDown = true;
-			aimingUp = false;
-		}
-
-		else
-		{
-			aimingDown = false;
-			aimingUp = false;
-		}
-
-		animator.SetBool("AimingUp", aimingUp);
-		animator.SetBool("AimingDown", aimingDown);
-
 		// Hitbox collision
-		if (hurtboxcollider)
+		if (health > 0)
 		{
-			RaycastHit2D[] hitresults = new RaycastHit2D[8];
-			CastHurtbox(hitresults);
-
-			// Iterate through hits
-			foreach (RaycastHit2D hit in hitresults)
+			if (hurtboxcollider)
 			{
-				if (hit.collider != null && hit.collider.enabled)
+				RaycastHit2D[] hitresults = new RaycastHit2D[8];
+				CastHurtbox(hitresults);
+
+				// Iterate through hits
+				foreach (RaycastHit2D hit in hitresults)
 				{
-					Entity e = GetEntityFromCollider(hit.collider);
-					if (e && e.GetAttack() > 0)
+					if (hit.collider != null && hit.collider.enabled)
 					{
-						// Do damage from hitbox
-						DoDamage(e.GetAttack());
+						Entity e = GetEntityFromCollider(hit.collider);
+						if (e && e.GetAttack() > 0)
+						{
+							// Do damage from hitbox
+							DoDamage(e.GetAttack());
+						}
 					}
+					
 				}
-				
 			}
 		}
-
+		
 		// Iframes
 		if (iframes > 0.0f)
 		{
@@ -284,7 +328,7 @@ public class Entity_Move_Manual : Entity
 		if (value != 0 && iframes == 0.0f)
 		{
 			int healthdiff = base.ChangeHealth(value);
-			playerdata.SetHealth(health); // Update HUD
+			playerdata.SetHealth(health, healthmax); // Update HUD
 
 			// Subtract energy when health is lost
 			if (healthdiff < 0)
@@ -314,6 +358,18 @@ public class Entity_Move_Manual : Entity
 			jumpheld = true;
 			onground = false;
 		}
+	}
+
+	protected override bool OnDefeat()
+	{
+		animator.SetBool("Defeat", true);
+		Instantiate(gameover_prefab).transform.parent = null;
+		iframes = 0;
+
+		yspeed = 6.0f;
+		xspeed = -hsign * 2.0f;
+
+		return false;
 	}
 
 	// Utility ================================================================
