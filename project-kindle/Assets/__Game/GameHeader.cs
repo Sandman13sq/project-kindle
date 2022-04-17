@@ -66,7 +66,7 @@ public class GameHeader : MonoBehaviour
         // Player
         player_object = Instantiate(player_prefab).GetComponent<Entity_Move_Manual>();
         DontDestroyOnLoad(player_object.gameObject);
-        
+
         eventmap = new Dictionary<string, List<EventRunner.CommandDef>>();
 
         // Set up game flags
@@ -103,6 +103,9 @@ public class GameHeader : MonoBehaviour
         {
             SetCameraFocus(player_object.gameObject);
         }
+
+        // Reset Scene Flags
+        sceneflags = new int[32];
     }
 
     // Camera -------------------------------------------------
@@ -181,7 +184,7 @@ public class GameHeader : MonoBehaviour
         var evcommands = new List<EventRunner.CommandDef>();
         eventmap[event_key] = evcommands;
 
-        Debug.Log(string.Format("New Event \"{0}\"", event_key));
+        //Debug.Log(string.Format("New Event \"{0}\"", event_key));
         return evcommands;
     }
 

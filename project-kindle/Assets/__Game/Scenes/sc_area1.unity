@@ -64971,6 +64971,10 @@ PrefabInstance:
       propertyPath: eventkey
       value: E2
       objectReference: {fileID: 0}
+    - target: {fileID: 6241962120882235966, guid: 8ecba20af6f0f104bbc6e19987442ae7, type: 3}
+      propertyPath: eventondefeat
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ecba20af6f0f104bbc6e19987442ae7, type: 3}
 --- !u!1001 &79953656
@@ -65227,6 +65231,10 @@ PrefabInstance:
     - target: {fileID: 6241962120882235966, guid: 8ecba20af6f0f104bbc6e19987442ae7, type: 3}
       propertyPath: eventkey
       value: E1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241962120882235966, guid: 8ecba20af6f0f104bbc6e19987442ae7, type: 3}
+      propertyPath: eventondefeat
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ecba20af6f0f104bbc6e19987442ae7, type: 3}
@@ -65586,6 +65594,10 @@ PrefabInstance:
     - target: {fileID: 6241962120882235966, guid: 8ecba20af6f0f104bbc6e19987442ae7, type: 3}
       propertyPath: eventkey
       value: E3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6241962120882235966, guid: 8ecba20af6f0f104bbc6e19987442ae7, type: 3}
+      propertyPath: eventondefeat
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ecba20af6f0f104bbc6e19987442ae7, type: 3}
@@ -65947,78 +65959,70 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   calleventkey: 100
-  eventtext: '// Runs on game startup
+  eventdefs:
+  - key: 100
+    text: '// Runs on game startup
 
-    #100
+      gameFlagSet("lock_player")
 
-    gameFlagSet("lock_player")
+      gameFlagSet("show_player")
 
-    gameFlagSet("show_player")
+      playerMoveTo("start",
+      0, 0)
 
-    playerMoveTo("start",
-    0, 0)
+      bgmPlay("mus_junkyard")
 
-    bgmPlay("mus_junkyard")
+      entityDestroy("start")
 
-    entityDestroy("start")
+      textPrint("Welcome,
+      Player!") adv() textClear()
 
-    playerLock()
+      textPrint("Your mission is to find all 4
+      effigies on the map and destroy them!") adv() textClear()
 
-    textPrint("Welcome,
-    Player!") adv() textClear()
+      textPrint("Good
+      luck!") adv() textClose()
 
-    textPrint("Your mission is to find all 4 effigies
-    on the map and destroy them!") adv() textClear()
+      gameFlagClear("lock_player")
 
-    textPrint("Good luck!")
-    adv() textClose()
+      gameFlagSet("show_gui")'
+  - key: 101
+    text: '// Runs when effigy is destroyed.
 
-    gameFlagClear("lock_player")
+      sceneFlagJump(-1, "") // Exit
+      event if any effigy is NOT destroyed
 
-    gameFlagSet("show_gui")
+      sceneFlagJump(-2, "")
 
+      sceneFlagJump(-3,
+      "")
 
-    //
-    Runs when effigy is destroyed.
+      sceneFlagJump(-4, "")
 
-    #101
+      gameFlagSet("lock_player")
 
-    sceneFlagJump(-1, "") // Exit event
-    if any effigy is NOT destroyed
+      textPrint("CONGRATULATION!")
+      wait(40) adv() textClear()
 
-    sceneFlagJump(-2, "")
+      textPrint("A WINNER ") wait(30) textPrint("IS
+      YOU!") adv() textClear()
 
-    sceneFlagJump(-3,
-    "")
+      textClose()
 
-    sceneFlagJump(-4, "")
+      gameFlagClear("lock_player")'
+  - key: Effigy_Defeat
+    text: '// Set flags when effigy is defeated
 
-    playerLock()
+      #E1 sceneFlagSet(1) jump("101")
 
-    textPrint("CONGRATULATION!")
-    wait(40) adv() textClear()
+      #E2
+      sceneFlagSet(2) jump("101")
 
-    textPrint("A WINNER ") wait(30) textPrint("IS
-    YOU!") adv() textClear()
+      #E3 sceneFlagSet(3) jump("101")
 
-    textClose()
-
-    playerFree()
-
-
-    // Set flags
-    when effigy is defeated
-
-    #E1 sceneFlagSet(1) jump("101")
-
-    #E2 sceneFlagSet(2)
-    jump("101")
-
-    #E3 sceneFlagSet(3) jump("101")
-
-    #E4 sceneFlagSet(4) jump("101")
-
-'
+      #E4
+      sceneFlagSet(4) jump("101")'
+  eventtext: 
 --- !u!4 &970129590
 Transform:
   m_ObjectHideFlags: 0
@@ -131535,6 +131539,10 @@ PrefabInstance:
       propertyPath: eventkey
       value: E4
       objectReference: {fileID: 0}
+    - target: {fileID: 6241962120882235966, guid: 8ecba20af6f0f104bbc6e19987442ae7, type: 3}
+      propertyPath: eventondefeat
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ecba20af6f0f104bbc6e19987442ae7, type: 3}
 --- !u!4 &1548983956 stripped
@@ -131567,7 +131575,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1696349935}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -864, y: 344.9, z: -20}
+  m_LocalPosition: {x: -864, y: 344.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2020132364}

@@ -168,6 +168,7 @@ public class EventRunner : MasterObject
     {
         state = State.zero;
         commanddata = null;
+        commandpos = 0;
     }
 
     public void SetEventCommands(CommandDef[] _commands)
@@ -256,6 +257,11 @@ public class EventRunner : MasterObject
                                 pos++;
                             }
                         }
+                    }
+                    // Reset word on illegal character
+                    else
+                    {
+                        word = "";
                     }
                 }
                     break;
@@ -362,6 +368,7 @@ public class EventRunner : MasterObject
                 default:
                     Debug.Log(string.Format("Unknown/undefined command \"{0}\" at position {1}", activecommand.command, commandpos));
                     goto case(Command.zero);
+
                 case(Command.zero):
                     Clear();
                     break;
@@ -370,8 +377,8 @@ public class EventRunner : MasterObject
 
                 // Switch to a different Event
                 case(Command.jump):
-                    Clear();
                     game.RunEvent(activecommand.text);
+                    return;
                     break;
                 
                 // Advance Event
@@ -409,8 +416,8 @@ public class EventRunner : MasterObject
                     // Test if flag is not set if flag index is negative
                     if (flagindex >= 0? game.GameFlagGet(flagindex): !game.GameFlagGet(-flagindex))
                     {
-                        Clear();
                         game.RunEvent(activecommand.text);
+                        return;
                     }
                     break;
                 }
@@ -429,8 +436,8 @@ public class EventRunner : MasterObject
                     // Test if flag is not set if flag index is negative
                     if (flagindex >= 0? game.SceneFlagGet(flagindex): !game.SceneFlagGet(-flagindex))
                     {
-                        Clear();
                         game.RunEvent(activecommand.text);
+                        return;
                     }
                     break;
                 }
