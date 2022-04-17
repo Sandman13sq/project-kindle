@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 using static DmrMath;
 
@@ -14,8 +15,18 @@ public class Player_GameOver : MasterObject
 
     int state;
 
+    public static Player_GameOver instance;
+
     void Awake()
     {
+        // Enforce singleton behavior
+        if (instance == null) {instance = this;}
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -25,19 +36,23 @@ public class Player_GameOver : MasterObject
         fadestep = 0.0f;
         state = 0;
         game.GameFlagSet(GameHeader.GameFlag.lock_player);
+
+        Update();
     }
 
     // Update is called once per frame
     void Update()
     {
         Vector3 campos = game.GetCameraPosition();
-        transform.position = game.GetCameraPosition();
+        transform.position = new Vector3(
+            campos.x, campos.y, -14.0f
+        );
 
         switch(state)
         {
             // Fade and slowdown
             case(0): {
-                const float steptime = 120.0f;
+                const float steptime = 60.0f;
 
                 Application.targetFrameRate = 30;
                 fadestep += 1.0f;
@@ -62,6 +77,12 @@ public class Player_GameOver : MasterObject
                     fadestep = 0.0f;
 
                     Application.targetFrameRate = 60;
+
+                    game.GetPlayer().ResetHealth();
+                    game.GetPlayerData().ResetWeapons();
+
+                    // Restart scene
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
                 break;
             }
@@ -69,7 +90,7 @@ public class Player_GameOver : MasterObject
             // Fade from white
             case(2): {
                 const float steptime = 60.0f;
-                spriterenderer.color = Color.Lerp(color1, color2, fadestep/steptime);
+                spriterenderer.color = Color.Lerp(color2, color1, fadestep/steptime);
 
                 fadestep += 1.0f;
                 if (fadestep > steptime)

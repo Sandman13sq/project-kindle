@@ -496,6 +496,11 @@ public class Entity : MasterObject
 
     // Utility ================================================================
 
+    public void ResetHealth()
+    {
+        health = healthmax;
+    }
+
     public void PositionSet(float _x, float _y)
     {
         transform.position = new Vector3(_x, _y, 0.0f);
