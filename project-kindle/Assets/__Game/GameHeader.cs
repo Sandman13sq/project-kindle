@@ -12,7 +12,7 @@ public class GameHeader : MonoBehaviour
         zero,
         lock_player,
         show_gui,
-        hide_player,
+        show_player,
     }
 
     // Variables
@@ -23,8 +23,6 @@ public class GameHeader : MonoBehaviour
     [SerializeField] private GameObject playerhud;
     private TextBox textbox_object;
     private Entity_Move_Manual player_object;
-
-    private bool lockplayercontrols;
 
     private GameObject camera_object;
     private EventRunner eventrunner;
@@ -68,14 +66,16 @@ public class GameHeader : MonoBehaviour
         // Player
         player_object = Instantiate(player_prefab).GetComponent<Entity_Move_Manual>();
         DontDestroyOnLoad(player_object.gameObject);
-
-        lockplayercontrols = false;
-
+        
         eventmap = new Dictionary<string, List<EventRunner.CommandDef>>();
 
         // Set up game flags
         gameflags = new int[32];
         sceneflags = new int[32];
+        
+        GameFlagSet(GameFlag.show_player);
+        GameFlagSet(GameFlag.show_gui);
+        GameFlagSet(GameFlag.lock_player);
 
         // Create event runner
         eventrunner = gameObject.AddComponent(typeof(EventRunner)) as EventRunner;
@@ -209,9 +209,6 @@ public class GameHeader : MonoBehaviour
             {eventrunner = (new GameObject("__eventrunner")).GetComponent<EventRunner>();}
         return eventrunner;
     }
-
-    public void SetContolsLocked(bool locked) {lockplayercontrols = locked;}
-    public bool GetContolsLocked() {return lockplayercontrols;}
 
     public Vector3 GetCameraPosition() {return camera_object.transform.position;}
 

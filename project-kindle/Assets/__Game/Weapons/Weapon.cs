@@ -59,7 +59,7 @@ public class Weapon : MasterObject
     // Update is called once per frame
     protected virtual void Update()
     {
-        bool cancontrol = !game.GetContolsLocked();
+        bool cancontrol = !game.GameFlagGet(GameHeader.GameFlag.lock_player);
 
         if (player == null) {return;}
 

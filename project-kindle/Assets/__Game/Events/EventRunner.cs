@@ -439,12 +439,12 @@ public class EventRunner : MasterObject
 
                 // Lock Player Controls
                 case(Command.lock_controls):
-                    game.SetContolsLocked(true);
+                    game.GameFlagSet(GameHeader.GameFlag.lock_player);
                     break;
                 
                 // Free Player Controls
                 case(Command.free_controls):
-                    game.SetContolsLocked(false);
+                    game.GameFlagClear(GameHeader.GameFlag.lock_player);
                     break;
                 
                 // Move Player to Entity

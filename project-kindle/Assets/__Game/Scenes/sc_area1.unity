@@ -65951,7 +65951,12 @@ MonoBehaviour:
 
     #100
 
-    playerMoveTo("start", 0, 0)
+    gameFlagSet("lock_player")
+
+    gameFlagSet("show_player")
+
+    playerMoveTo("start",
+    0, 0)
 
     bgmPlay("mus_junkyard")
 
@@ -65968,13 +65973,13 @@ MonoBehaviour:
     textPrint("Good luck!")
     adv() textClose()
 
-    playerFree()
+    gameFlagClear("lock_player")
 
     gameFlagSet("show_gui")
 
 
-    // Runs
-    when effigy is destroyed.
+    //
+    Runs when effigy is destroyed.
 
     #101
 
