@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class HUDMeter : MonoBehaviour
+public class HUDMeter : MasterObject
 {
     public Color metercolor;
     public Color backcolor;
@@ -22,19 +23,28 @@ public class HUDMeter : MonoBehaviour
     [SerializeField] private GameObject numeratorobj; 
     [SerializeField] private GameObject denominatorobj;
 
+    private Image[] visualcomponents_images;
+    private Text[] visualcomponents_text;
+
     private float flashstep = 0.0f;
     private float flashtime = 20.0f;
 
     private float spritewidth;
+    private bool guiactive;
 
     // Start is called before the first frame update
     void Start()
     {
-        meterobj.GetComponent<UnityEngine.UI.Image>().color = metercolor;
-        meterbackobj.GetComponent<UnityEngine.UI.Image>().color = backcolor;
+        meterobj.GetComponent<Image>().color = metercolor;
+        meterbackobj.GetComponent<Image>().color = backcolor;
 
-        spritewidth = meterobj.GetComponent<UnityEngine.UI.Image>().sprite.rect.width;
+        spritewidth = meterobj.GetComponent<Image>().sprite.rect.width;
         spritewidth -= 15f; // Correct for diagonal part of sprite
+
+        // Find components to hide when GUI is disabled
+        visualcomponents_text = GetComponentsInChildren<Text>();
+        visualcomponents_images = GetComponentsInChildren<Image>();
+        guiactive = true;
     }
 
     // Update is called once per frame
@@ -67,15 +77,26 @@ public class HUDMeter : MonoBehaviour
 
             if (flashstep > 0.0f && Mathf.Repeat(flashstep, 6.0f) < 3.0f)
             {
-                meterobj.GetComponent<UnityEngine.UI.Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+                meterobj.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
             }
             else
             {
-                meterobj.GetComponent<UnityEngine.UI.Image>().color = metercolor;
+                meterobj.GetComponent<Image>().color = metercolor;
             }
         }
 
-        UpdateMeterDisplay();
+        // Hide GUI
+        if (guiactive != game.GameFlagGet(GameHeader.GameFlag.show_gui))
+        {
+            guiactive = game.GameFlagGet(GameHeader.GameFlag.show_gui);
+            foreach (var vis in visualcomponents_images) {vis.enabled = guiactive;}
+            foreach (var vis in visualcomponents_text) {vis.enabled = guiactive;}
+        }
+
+        if (guiactive)
+        {
+            UpdateMeterDisplay();
+        }
     }
 
     // Updates values
@@ -143,7 +164,7 @@ public class HUDMeter : MonoBehaviour
         provisionalobj.transform.localPosition = new Vector2(xx2, 0.0f);   // Move sprite right to correct for parenting
 
         // Update text strings
-        numeratorobj.GetComponent<UnityEngine.UI.Text>().text = metervalue.ToString();
-        denominatorobj.GetComponent<UnityEngine.UI.Text>().text = metermax.ToString();
+        numeratorobj.GetComponent<Text>().text = metervalue.ToString();
+        denominatorobj.GetComponent<Text>().text = metermax.ToString();
     }
 }

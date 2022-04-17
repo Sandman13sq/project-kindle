@@ -496,6 +496,17 @@ MonoBehaviour:
   provisionalmaskobj: {fileID: 188553141486014828}
   numeratorobj: {fileID: 1998428592035040069}
   denominatorobj: {fileID: 3106374863074456552}
+  visualcomponents_images:
+  - {fileID: 4876559241231212980}
+  - {fileID: 6637312040278370435}
+  - {fileID: 7515621086505552018}
+  - {fileID: 1512564859710675893}
+  - {fileID: 767270373193776407}
+  - {fileID: 6504706882387084083}
+  - {fileID: 3342467168178556815}
+  visualcomponents_text:
+  - {fileID: 2927847352585722121}
+  - {fileID: 1575744446486497080}
 --- !u!1 &4892168631294449505
 GameObject:
   m_ObjectHideFlags: 0

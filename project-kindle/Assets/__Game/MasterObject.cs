@@ -17,8 +17,18 @@ public class MasterObject : MonoBehaviour
             // Create game object if not found 
             if(_game == null)
             {
+                GameObject o = GameObject.Find("__game");
+                if (o != null)
+                {
+                    _game = o.GetComponent<GameHeader>();
+                }
+                else
+                {
+                    //_game = (new GameObject("__game")).AddComponent<GameHeader>();
+                }
+
                 //_game = (new GameObject("__game")).AddComponent<GameHeader>();
-                _game = GameObject.Find("__game").GetComponent<GameHeader>();
+                //_game = GameHeader.Instance;
             }
             
             return _game;

@@ -1,12 +1,9 @@
 using UnityEngine;
 using Cinemachine;
 
-public class CamPriority : MonoBehaviour
+public class CamPriority : MasterObject
 {
     //Grab data from kindle to see which direction she is facing
-    Entity_Move_Manual kindle;
-    [SerializeField] GameObject playerEntity;
-
     //Keep track of what direction we're lookin' in
     public float lookingAt = 4;//4 = right, 3 = left, 2 = up, 1 = down
 
@@ -15,9 +12,11 @@ public class CamPriority : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera LeftCam;
     [SerializeField] private CinemachineVirtualCamera UpCam;
     [SerializeField] private CinemachineVirtualCamera DownCam;
+
     // Awake is called as soon as the object shows up in the scene, called before start()
-    void Awake(){
-        kindle = playerEntity.GetComponent<Entity_Move_Manual>();
+    void Awake()
+    {
+        
     }
 
     // Update is called once per frame
@@ -28,8 +27,12 @@ public class CamPriority : MonoBehaviour
     }
 
     void SetLookAt(){
-        float horizontalAim = kindle.GetHSign();
-        float verticalAim = kindle.GetVSign();
+        var p = game.GetPlayer();
+
+        if (p == null) {return;}
+
+        float horizontalAim = p.GetHSign();
+        float verticalAim = p.GetVSign();
 
         if(horizontalAim == 1){
             lookingAt = 4;
