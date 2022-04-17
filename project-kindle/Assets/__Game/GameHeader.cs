@@ -53,6 +53,9 @@ public class GameHeader : MonoBehaviour
             Instance = this; 
         }
 
+        // Set frame rate
+        Application.targetFrameRate = 60;
+
         DontDestroyOnLoad(this.gameObject);
 
         // Find camera

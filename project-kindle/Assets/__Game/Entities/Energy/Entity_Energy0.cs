@@ -43,7 +43,7 @@ public class Entity_Energy0 : Entity
         // Update color
         colorstep = Mathf.Repeat(colorstep + 0.02f, Mathf.PI);
         spriterenderer.color = Color.Lerp(color1, color2, Mathf.Sin(colorstep*colorstep));
-
+        
         // Move
         if (yspeed > terminalvelocity)
         {

@@ -200,7 +200,7 @@ public class Entity : MasterObject
     }
 
     // Called in Defeat() call before destruction
-    protected virtual void OnDefeat()
+    protected virtual bool OnDefeat()
     {
         if (heartdrop && Random.Range(0.0f, 1.0f) < 0.3f)
         {
@@ -212,12 +212,14 @@ public class Entity : MasterObject
         }
 
         ShowDestroyGraphic();
+
+        return true;
     }
 
     // Called when resulting health from ChangeHealth is zero
     public void Defeat()
     {
-        OnDefeat();
+        bool _destroy = OnDefeat();
 
         // Run death event
         if (eventondefeat && game.EventExists(eventkey))
@@ -230,7 +232,7 @@ public class Entity : MasterObject
         {
             respawner.ResetState();
         }
-        else
+        else if (_destroy)
         {
             Destroy(gameObject);
         }
@@ -267,6 +269,8 @@ public class Entity : MasterObject
                 shownumberobj.GetComponent<ShowNumber>().AddValue(ShowNumber.NumberType.HEALTH, value);
             }
 
+            OnHealthChange(health-prehealth);
+
             if (health < 0) 
             {
                 health = 0;
@@ -278,9 +282,9 @@ public class Entity : MasterObject
         {
             health += value;
             if (health > healthmax) {health = healthmax;}
-        }
 
-        OnHealthChange(health-prehealth);
+            OnHealthChange(health-prehealth);
+        }
 
         return health-prehealth; // Return change in health
     }
