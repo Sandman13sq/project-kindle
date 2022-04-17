@@ -18,12 +18,15 @@ public class Entity_Move_Manual : Entity
     private float jumpbuffertime = 7.0f; // Max number of frames ahead of time where a jump press will still be read
 
 	private PlayerData playerdata;	// Holds health, energy, level, etc.
-	//stuff for animation:
+	//======= stuff for animation:
 	[SerializeField] private Animator animator;
 
 	private bool aimingUp; //bool to check if kindle is aiming up
 	private bool aimingDown; //bool to check if kindle is aiming down
 
+	private int ticks; //used to force shooting animation to play for a good bit
+
+	//====================================
 	private float hsign;    // Horizontal sign. {-1, 1}
     private float vsign;    // Vertical sign. {-1, 0, 1} 
 
@@ -65,6 +68,12 @@ public class Entity_Move_Manual : Entity
 	// Update is called once per frame
 	protected override void Update()
 	{
+		ticks += 1;
+		if(ticks == 30){
+			animator.SetBool("ShootingUp", false);
+			animator.SetBool("ShootingSide", false);
+		}
+		
 		animator.SetFloat("Speed", Mathf.Abs(xspeed)); //set animator parameter to xspeed
 
 		// Grab input values
@@ -284,6 +293,8 @@ public class Entity_Move_Manual : Entity
 		//Shooting up from idle
 		if(aimingUp && Mathf.Abs(xspeed) < 0.001 && Mathf.Abs(yspeed) < 0.001)
 		{
+			animator.SetBool("ShootingUp", true);
+			ticks = 0;
 			animator.Play("Base Layer.Kindle_shootup", 0, 0.0f);
 		}
 
@@ -293,9 +304,12 @@ public class Entity_Move_Manual : Entity
 			animator.SetBool("IgnoreInAir", true);
 			animator.Play("Base Layer.Kindle_jump_shootup", 0, 0.0f);
 		}
+
 		//Shooting to the side from idle 
 		else if(Mathf.Abs(xspeed) < 0.001 && Mathf.Abs(yspeed) < 0.001)
 		{
+			animator.SetBool("ShootingSide", true);
+			ticks = 0;
 			animator.Play("Base Layer.Kindle_shootside", 0, 0.0f);
 		}
 
