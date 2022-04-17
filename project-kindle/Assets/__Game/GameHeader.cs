@@ -2,16 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Cinemachine;
+using UnityEngine.SceneManagement;
+
 public class GameHeader : MonoBehaviour
 {
+    public enum GameFlag : int
+    {
+        zero,
+        lock_player,
+        show_gui,
+        show_player,
+    }
+
     // Variables
+    [SerializeField] private GameObject player_prefab;
     [SerializeField] private GameObject textbox_prefab;
     [SerializeField] private AudioManager audiomanager;
     [SerializeField] private PlayerData playerdata;
+    [SerializeField] private GameObject playerhud;
     private TextBox textbox_object;
     private Entity_Move_Manual player_object;
-
-    private bool lockplayercontrols;
 
     private GameObject camera_object;
     private EventRunner eventrunner;
@@ -21,39 +32,61 @@ public class GameHeader : MonoBehaviour
     private int[] gameflags;
     private int[] sceneflags;
     const int FLAGDIV = sizeof(int) * 8;
-    
+
     // =====================================================================
     
     // Functions
 
+    public static GameHeader Instance { get; private set; }
+
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        // Enforce singleton behavior
+        // If there is an instance, and it's not me, delete myself.
+        if (Instance != null && Instance != this) 
+        { 
+            Debug.Log("Enforcing singleton");
+            Destroy(this);
+            return;
+        } 
+        else 
+        { 
+            Instance = this; 
+        }
 
-        //player_object = null;
-        //textbox_object = null;
-        //camera_object = null;
+        DontDestroyOnLoad(this.gameObject);
 
+        // Find camera
         if (camera_object == null)
         {
             camera_object = GameObject.Find("__camera");
             DontDestroyOnLoad(camera_object);
         }
 
-        lockplayercontrols = false;
+        // Player
+        player_object = Instantiate(player_prefab).GetComponent<Entity_Move_Manual>();
+        DontDestroyOnLoad(player_object.gameObject);
 
         eventmap = new Dictionary<string, List<EventRunner.CommandDef>>();
 
+        // Set up game flags
         gameflags = new int[32];
         sceneflags = new int[32];
+        
+        GameFlagSet(GameFlag.show_player);
+        GameFlagSet(GameFlag.show_gui);
+        GameFlagSet(GameFlag.lock_player);
 
+        // Create event runner
         eventrunner = gameObject.AddComponent(typeof(EventRunner)) as EventRunner;
+        
+        SceneManager.sceneLoaded += OnSceneLoad;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -62,7 +95,37 @@ public class GameHeader : MonoBehaviour
         
     }
 
+    void OnSceneLoad(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log(string.Format("New Scene: \"{0}\"", scene.name));
+
+        if (player_object != null)
+        {
+            SetCameraFocus(player_object.gameObject);
+        }
+
+        // Reset Scene Flags
+        sceneflags = new int[32];
+    }
+
+    // Camera -------------------------------------------------
+
+    public void SetCameraFocus(GameObject o)
+    {
+        CinemachineBrain cmachine = camera_object.GetComponent<CinemachineBrain>();
+        
+        foreach (var blend in cmachine.m_CustomBlends.m_CustomBlends)
+        {
+            GameObject.Find(blend.m_To).GetComponent<CinemachineVirtualCamera>().m_Follow = o.transform;
+        }
+    }
+
     // Flags --------------------------------------------------
+
+    public void GameFlagSet(GameFlag flagindex) {GameFlagSet((int)flagindex);}
+    public void GameFlagToggle(GameFlag flagindex) {GameFlagToggle((int)flagindex);}
+    public void GameFlagClear(GameFlag flagindex) {GameFlagClear((int)flagindex);}
+    public bool GameFlagGet(GameFlag flagindex) {return GameFlagGet((int)flagindex);}
 
     public void GameFlagSet(int flagindex) {gameflags[flagindex / FLAGDIV] |= 1 << (flagindex % FLAGDIV);}
     public void GameFlagToggle(int flagindex) {gameflags[flagindex / FLAGDIV] ^= 1 << (flagindex % FLAGDIV);}
@@ -121,7 +184,7 @@ public class GameHeader : MonoBehaviour
         var evcommands = new List<EventRunner.CommandDef>();
         eventmap[event_key] = evcommands;
 
-        Debug.Log(string.Format("New Event \"{0}\"", event_key));
+        //Debug.Log(string.Format("New Event \"{0}\"", event_key));
         return evcommands;
     }
 
@@ -133,8 +196,6 @@ public class GameHeader : MonoBehaviour
 
     public Entity_Move_Manual GetPlayer()
     {
-        if (player_object == null)
-            {player_object = (new GameObject("player")).AddComponent<Entity_Move_Manual>();}
         return player_object;
     }
 
@@ -152,9 +213,6 @@ public class GameHeader : MonoBehaviour
         return eventrunner;
     }
 
-    public void SetContolsLocked(bool locked) {lockplayercontrols = locked;}
-    public bool GetContolsLocked() {return lockplayercontrols;}
-    
     public Vector3 GetCameraPosition() {return camera_object.transform.position;}
 
     public PlayerData GetPlayerData() {return playerdata;}

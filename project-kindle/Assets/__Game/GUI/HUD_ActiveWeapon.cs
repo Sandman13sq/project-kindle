@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class HUD_ActiveWeapon : MonoBehaviour
+public class HUD_ActiveWeapon : MasterObject
 {
     [SerializeField] private int level; 
     [SerializeField] private int ammo; 
@@ -17,12 +18,22 @@ public class HUD_ActiveWeapon : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Image weaponiconrdr;
     [SerializeField] private Sprite[] weaponiconsprites;
 
+    private Image[] visualcomponents_images;
+    private Text[] visualcomponents_text;
+
+    private bool guiactive;
+
     // Start is called before the first frame update
     void Start()
     {
         levelstringtextcomponent = levelstringobj.GetComponent<UnityEngine.UI.Text>();
         numeratortextcomponent = numeratorobj.GetComponent<UnityEngine.UI.Text>();
         denominatortextcomponent = denominatorobj.GetComponent<UnityEngine.UI.Text>();
+
+        // Find components to hide when GUI is disabled
+        visualcomponents_text = GetComponentsInChildren<Text>();
+        visualcomponents_images = GetComponentsInChildren<Image>();
+        guiactive = true;
 
         SetLevel(1);
         SetAmmo(100);
@@ -32,7 +43,12 @@ public class HUD_ActiveWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (guiactive != game.GameFlagGet(GameHeader.GameFlag.show_gui))
+        {
+            guiactive = game.GameFlagGet(GameHeader.GameFlag.show_gui);
+            foreach (var vis in visualcomponents_images) {vis.enabled = guiactive;}
+            foreach (var vis in visualcomponents_text) {vis.enabled = guiactive;}
+        }
     }
 
     // Method ===============================================

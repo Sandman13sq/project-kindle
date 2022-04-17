@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 350204461698224279}
   - component: {fileID: 350204461698224276}
+  - component: {fileID: 2403176782087456715}
   m_Layer: 6
   m_Name: sprite
   m_TagString: Untagged
@@ -82,6 +83,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2403176782087456715
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350204461698224277}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 027dca0f9a07bdf4e85baf290001661d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &350204462260166770
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,11 +111,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 350204462260166775}
+  - component: {fileID: 350204462260166773}
   - component: {fileID: 350204462260166774}
   - component: {fileID: 350204462260166777}
-  - component: {fileID: 350204462260166773}
-  - component: {fileID: 8695970762921383474}
-  - component: {fileID: 5385092575231758291}
   m_Layer: 6
   m_Name: Kindle
   m_TagString: player
@@ -119,6 +137,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &350204462260166773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350204462260166770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4836331f8002d419685ca495f06086, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventkey: 
+  entitytag: player
+  spriterenderer: {fileID: 350204461698224276}
+  hitboxcollider: {fileID: 350204462260166774}
+  hurtboxcollider: {fileID: 4989002298374109868}
+  worldcollider: {fileID: 350204462260166774}
+  rbody: {fileID: 350204462260166777}
+  showdamage: 0
+  isshootable: 0
+  eventondefeat: 0
+  dorespawn: 0
+  enableinrange: 0
+  state: 0
+  health: 20
+  healthmax: 32
+  attack: 0
+  energy: 0
+  energydrops: []
+  heartdrop: {fileID: 0}
+  destroygraphic: []
+  shownumberprefab: {fileID: 850697109702244616, guid: 9edcd6967739f21468e782a98685c4f2, type: 3}
+  jumpheld: 0
+  jumpbuffer: 0
+  animator: {fileID: 2403176782087456715}
 --- !u!70 &350204462260166774
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -156,96 +210,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &350204462260166773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 350204462260166770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a4836331f8002d419685ca495f06086, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventkey: 
-  entitytag: player
-  spriterenderer: {fileID: 350204461698224276}
-  hitboxcollider: {fileID: 350204462260166774}
-  hurtboxcollider: {fileID: 4989002298374109868}
-  worldcollider: {fileID: 350204462260166774}
-  rbody: {fileID: 350204462260166777}
-  showdamage: 0
-  isshootable: 0
-  eventondefeat: 0
-  state: 0
-  health: 20
-  healthmax: 32
-  attack: 0
-  energy: 0
-  energydrops: []
-  heartdrop: {fileID: 0}
-  destroygraphic: []
-  shownumberprefab: {fileID: 850697109702244616, guid: 9edcd6967739f21468e782a98685c4f2, type: 3}
-  jumpheld: 0
-  jumpbuffer: 0
-  playerdata: {fileID: 0}
-  animator: {fileID: 0}
-  weapons:
-  - {fileID: 8695970762921383474}
-  - {fileID: 5385092575231758291}
---- !u!114 &8695970762921383474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 350204462260166770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f64933647f77093428bffc918d3c48ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  energy: 0
-  levelmax: 2
-  ammomax: 32
-  shotcountmax: 2
-  delaytime: 7
-  autofiretime: 16
-  rechargetime: 12
-  projectiles:
-  - {fileID: 3444606476975869836, guid: e3cb67778e59b584bac8716fa3ebb90c, type: 3}
-  - {fileID: 3444606476975869836, guid: 1fcb80f003d19314fb03d1f51ffc78f5, type: 3}
-  - {fileID: 3444606476975869836, guid: 2a43f7bdd7931a041a9c76dac82b9403, type: 3}
-  weaponlvlenergy: 0c0000001c00000028000000
-  activeweaponlvl: {fileID: 0}
-  player: {fileID: 350204462260166773}
-  playerdata: {fileID: 0}
---- !u!114 &5385092575231758291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 350204462260166770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 075162ed74dbffa4f977db6b046dfeb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  energy: 0
-  levelmax: 2
-  ammomax: 40
-  shotcountmax: 1
-  delaytime: 10
-  autofiretime: 20
-  rechargetime: 18
-  projectiles:
-  - {fileID: 6035830911987733133, guid: 67f21c2b76515ef47a4384a81b26bb78, type: 3}
-  weaponlvlenergy: 100000001e00000028000000
-  activeweaponlvl: {fileID: 0}
-  player: {fileID: 0}
-  playerdata: {fileID: 0}
 --- !u!1 &5363778043867703211
 GameObject:
   m_ObjectHideFlags: 0

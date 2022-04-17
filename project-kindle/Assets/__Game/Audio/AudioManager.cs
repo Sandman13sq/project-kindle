@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour
     // initialize stuff
     void Awake()
     {
+        // Enforce singleton behavior
         if (instance == null)
             instance = this;
         else
@@ -31,7 +32,7 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        Play("BackgroundMusic");
+        
     }
 
     public Sound Play (string name)

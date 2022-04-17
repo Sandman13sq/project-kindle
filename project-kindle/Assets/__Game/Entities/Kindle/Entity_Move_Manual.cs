@@ -24,6 +24,7 @@ public class Entity_Move_Manual : Entity
 
 	private float iframes = 0.0f;	// Frames of invincibility after taking damage
 	private float iframestime = 150.0f;
+	private bool showplayer;
 
 	// Movement constants -------------------------------
 	float moveacceleration = 0.4f;
@@ -49,6 +50,8 @@ public class Entity_Move_Manual : Entity
 
 		playerdata = game.GetPlayerData();
 		playerdata.SetHealth(health);
+
+		showplayer = true;
 	}
 
 	// Update is called once per frame
@@ -61,9 +64,10 @@ public class Entity_Move_Manual : Entity
 		float ylev = Input.GetAxisRaw("Vertical");
 		float lastvsign = vsign;
 		float lasthsign = hsign;
+		bool controlslocked = game.GameFlagGet(GameHeader.GameFlag.lock_player);
 
 		// Use controls if controls are free
-		if ( !game.GetContolsLocked() )
+		if ( !controlslocked )
 		{
 			// Flip sprite if moving left. If shift is held, lock direction
 			if (xlev != 0.0 && !Input.GetKey(KeyCode.LeftShift))
@@ -109,7 +113,8 @@ public class Entity_Move_Manual : Entity
 		*/
 		if (onground)
 		{
-			yspeed = 0;
+			yspeed = Mathf.Max(0.0f, yspeed); // Keep upwards movement, if any
+
 			animator.SetBool("InAir", false);
 			animator.SetBool("IgnoreInAir", false);
 			
@@ -232,6 +237,13 @@ public class Entity_Move_Manual : Entity
 			{
 				spriterenderer.enabled = true;
 			}
+		}
+
+		// Hide Player
+		if (showplayer != game.GameFlagGet(GameHeader.GameFlag.show_player))
+		{
+			showplayer = game.GameFlagGet(GameHeader.GameFlag.show_player);
+			spriterenderer.enabled = showplayer;
 		}
 	}
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using System.IO;
+using System;   // Enum
 
 public class EventRunner : MasterObject
 {
@@ -26,6 +27,7 @@ public class EventRunner : MasterObject
         // Player
         lock_controls,  // Lock player controls
         free_controls,  // Enable player cotrols
+        player_moveto,  // Move player to another entity's position
 
         // Text --------------------------------
         text_print,
@@ -36,6 +38,16 @@ public class EventRunner : MasterObject
         entity_create,
         entity_destroy,
         entity_move,
+        entity_moveto,
+
+        // Music --------------------------------
+        bgm_play,
+        bgm_fadeout,
+        bgm_stop,
+
+        sound_play,
+        sound_playat,
+        sound_stop,
     }
 
     // ----------------------------------------------------------------------------
@@ -59,6 +71,7 @@ public class EventRunner : MasterObject
 
         {"playerlock", Command.lock_controls},
         {"playerfree", Command.free_controls},
+        {"playermoveto", Command.player_moveto},
 
         {"textprint", Command.text_print},
         {"textclear", Command.text_clear},
@@ -67,6 +80,9 @@ public class EventRunner : MasterObject
         {"entitycreate", Command.entity_create},
         {"entitydestroy", Command.entity_destroy},
         {"entitymove", Command.entity_move},
+
+        {"bgmplay", Command.bgm_play},
+        {"bgmstop", Command.bgm_stop},
     };
 
     // ----------------------------------------------------------------------------
@@ -152,6 +168,7 @@ public class EventRunner : MasterObject
     {
         state = State.zero;
         commanddata = null;
+        commandpos = 0;
     }
 
     public void SetEventCommands(CommandDef[] _commands)
@@ -240,6 +257,11 @@ public class EventRunner : MasterObject
                                 pos++;
                             }
                         }
+                    }
+                    // Reset word on illegal character
+                    else
+                    {
+                        word = "";
                     }
                 }
                     break;
@@ -346,17 +368,17 @@ public class EventRunner : MasterObject
                 default:
                     Debug.Log(string.Format("Unknown/undefined command \"{0}\" at position {1}", activecommand.command, commandpos));
                     goto case(Command.zero);
+
                 case(Command.zero):
                     Clear();
                     break;
                 
                 // Control ---------------------------------------------------------------
 
-                // Advance Event
+                // Switch to a different Event
                 case(Command.jump):
-                    Clear();
                     game.RunEvent(activecommand.text);
-                    break;
+                    return;
                 
                 // Advance Event
                 case(Command.advance):
@@ -371,10 +393,21 @@ public class EventRunner : MasterObject
                 
                 // Game Flags
                 case(Command.gameflag_set):
-                    game.GameFlagSet((int)activecommand.values[0]);
+                    // Use text
+                    if (activecommand.text != "")
+                        game.GameFlagSet((GameHeader.GameFlag)Enum.Parse(typeof(GameHeader.GameFlag), activecommand.text));
+                    // Use first param
+                    else
+                        game.GameFlagSet((int)activecommand.values[0]);
+                    
                     break;
                 case(Command.gameflag_clear):
-                    game.GameFlagClear((int)activecommand.values[0]);
+                    // Use text
+                    if (activecommand.text != "")
+                        game.GameFlagClear((GameHeader.GameFlag)Enum.Parse(typeof(GameHeader.GameFlag), activecommand.text));
+                    // Use first param
+                    else
+                        game.GameFlagClear((int)activecommand.values[0]);
                     break;
                 case(Command.gameflag_jump): {
                     int flagindex = (int)activecommand.values[0];
@@ -382,8 +415,8 @@ public class EventRunner : MasterObject
                     // Test if flag is not set if flag index is negative
                     if (flagindex >= 0? game.GameFlagGet(flagindex): !game.GameFlagGet(-flagindex))
                     {
-                        Clear();
                         game.RunEvent(activecommand.text);
+                        return;
                     }
                     break;
                 }
@@ -402,8 +435,8 @@ public class EventRunner : MasterObject
                     // Test if flag is not set if flag index is negative
                     if (flagindex >= 0? game.SceneFlagGet(flagindex): !game.SceneFlagGet(-flagindex))
                     {
-                        Clear();
                         game.RunEvent(activecommand.text);
+                        return;
                     }
                     break;
                 }
@@ -412,12 +445,26 @@ public class EventRunner : MasterObject
 
                 // Lock Player Controls
                 case(Command.lock_controls):
-                    game.SetContolsLocked(true);
+                    game.GameFlagSet(GameHeader.GameFlag.lock_player);
                     break;
                 
                 // Free Player Controls
                 case(Command.free_controls):
-                    game.SetContolsLocked(false);
+                    game.GameFlagClear(GameHeader.GameFlag.lock_player);
+                    break;
+                
+                // Move Player to Entity
+                case(Command.player_moveto): {    // entityPosition(xoffset, yoffset, "<tag>")
+                    var e = Entity.FindEntity(activecommand.text);
+                    if (e != null)
+                    {
+                        var pos = e.transform.position;
+                        game.GetPlayer().PositionSet(
+                            pos.x + activecommand.values[0],
+                            pos.y + activecommand.values[1]
+                        );
+                    }
+                }
                     break;
                 
                 // Text ------------------------------------------------------------------
@@ -441,15 +488,20 @@ public class EventRunner : MasterObject
                 
                 // Entities ------------------------------------------------------------
                 case(Command.entity_destroy): {
-                    var entities = FindObjectsOfType<Entity>();
-                    foreach (Entity e in entities)
+                    foreach (Entity e in Entity.FindEntities(activecommand.text))
                     {
-                        if (e.GetTag() == activecommand.text)
-                        {
-                            Destroy(e.gameObject);
-                        }
+                        Destroy(e.gameObject);
                     }
                 }
+                    break;
+                
+                // Sound ---------------------------------------------------------------
+                case(Command.bgm_play):
+                    game.PlaySound(activecommand.text);
+                    break;
+                
+                case(Command.bgm_stop):
+                    //game.PlaySound(activecommand.text);
                     break;
             }
 

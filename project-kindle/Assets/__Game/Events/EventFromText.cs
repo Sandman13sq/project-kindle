@@ -4,14 +4,29 @@ using UnityEngine;
 
 public class EventFromText : MasterObject
 {
-    [SerializeField][TextArea(10, 32)] private string eventtext = "";
+    [System.Serializable]
+    private struct EventDef
+    {
+        public string key;
+        [SerializeField][TextArea(4, 32)] public string text;
+    }
 
+    [SerializeField] private string calleventkey =  "";
+    [SerializeField] private EventDef[] eventdefs;
+    
     // Start is called before the first frame update
     void Start()
     {
-        if (eventtext != "")
+        // Parse text for events
+        foreach (var def in eventdefs)
         {
-            EventRunner.ParseEventText(eventtext);
+            EventRunner.ParseEventText("#" + def.key + "\n" + def.text);
+        }
+
+        // Run Event
+        if (calleventkey != "")
+        {
+            game.RunEvent(calleventkey);
         }
     }
 }

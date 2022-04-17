@@ -584,4 +584,33 @@ public class Entity : MasterObject
     {
         return entitytag;
     }
+
+    // Returns first entity with given tag
+    static public Entity FindEntity(string _tag)
+    {
+        foreach (Entity e in FindObjectsOfType<Entity>())
+        {
+            if (e.GetTag() == _tag)
+            {
+                return e;
+            }
+        }
+
+        return null;
+    }
+
+    // Returns list of entities with given tag
+    static public List<Entity> FindEntities(string _tag)
+    {
+        List<Entity> outentities = new List<Entity>();
+        foreach (Entity e in FindObjectsOfType<Entity>())
+        {
+            if (e.GetTag() == _tag)
+            {
+                outentities.Add(e);
+            }
+        }
+
+        return outentities;
+    }
 }
