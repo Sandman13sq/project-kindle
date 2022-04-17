@@ -24,7 +24,7 @@ public class Entity_Move_Manual : Entity
 	private bool aimingUp; //bool to check if kindle is aiming up
 	private bool aimingDown; //bool to check if kindle is aiming down
 
-	private int ticks; //used to force shooting animation to play for a good bit
+	private int ticks = 0; //used to force shooting animation to play for a good bit
 
 	//====================================
 	private float hsign;    // Horizontal sign. {-1, 1}
@@ -68,8 +68,9 @@ public class Entity_Move_Manual : Entity
 	// Update is called once per frame
 	protected override void Update()
 	{
-		ticks += 1;
-		if(ticks == 30){
+		if(ticks < 30)
+			ticks += 1;
+		else if(ticks == 30){
 			animator.SetBool("ShootingUp", false);
 			animator.SetBool("ShootingSide", false);
 		}
