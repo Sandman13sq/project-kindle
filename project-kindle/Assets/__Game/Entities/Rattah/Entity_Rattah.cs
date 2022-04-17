@@ -158,6 +158,7 @@ public class Entity_Rattah : Entity
 
     protected override void OnDefeat()
     {
+        base.OnDefeat();
         hitboxcollider.enabled = false;
     }
 

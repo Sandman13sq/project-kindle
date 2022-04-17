@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: cf85ea984311eb041a0a792ff8454d13
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - spriterenderer: {instanceID: 0}
+  - hitboxcollider: {instanceID: 0}
+  - hurtboxcollider: {instanceID: 0}
+  - worldcollider: {instanceID: 0}
+  - rbody: {instanceID: 0}
+  - heartdrop: {instanceID: 0}
+  - shownumberprefab: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

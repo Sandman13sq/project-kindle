@@ -44,8 +44,7 @@ public class GameHeader : MonoBehaviour
         // Enforce singleton behavior
         // If there is an instance, and it's not me, delete myself.
         if (Instance != null && Instance != this) 
-        { 
-            Debug.Log("Enforcing singleton");
+        {
             Destroy(this);
             return;
         } 
