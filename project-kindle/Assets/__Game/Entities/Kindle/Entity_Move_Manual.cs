@@ -113,7 +113,8 @@ public class Entity_Move_Manual : Entity
 		*/
 		if (onground)
 		{
-			yspeed = 0;
+			yspeed = Mathf.Max(0.0f, yspeed); // Keep upwards movement, if any
+
 			animator.SetBool("InAir", false);
 			animator.SetBool("IgnoreInAir", false);
 			
