@@ -379,7 +379,6 @@ public class EventRunner : MasterObject
                 case(Command.jump):
                     game.RunEvent(activecommand.text);
                     return;
-                    break;
                 
                 // Advance Event
                 case(Command.advance):

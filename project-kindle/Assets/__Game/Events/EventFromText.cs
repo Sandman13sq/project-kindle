@@ -13,8 +13,7 @@ public class EventFromText : MasterObject
 
     [SerializeField] private string calleventkey =  "";
     [SerializeField] private EventDef[] eventdefs;
-    [SerializeField][TextArea(10, 32)] private string eventtext = "";
-
+    
     // Start is called before the first frame update
     void Start()
     {

@@ -484,18 +484,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80fef0ce983d4ea448aed6c86e5eb3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  calleventkey: 1
-  eventtext: '#1
+  calleventkey: start
+  eventdefs:
+  - key: start
+    text: 'gameFlagClear("show_gui")
 
-    gameFlagClear("show_gui")
+      gameFlagClear("show_player")
 
-    gameFlagClear("show_player")
+      gameFlagSet("lock_player")
 
-    gameFlagSet("lock_player")
+      bgmPlay("mus_title")
 
-    bgmPlay("mus_title")
+      end()'
+  eventtext: '
 
-    end()'
+'
 --- !u!4 &1244004642
 Transform:
   m_ObjectHideFlags: 0
