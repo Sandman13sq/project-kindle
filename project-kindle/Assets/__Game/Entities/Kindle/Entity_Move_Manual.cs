@@ -36,6 +36,8 @@ public class Entity_Move_Manual : Entity
 
 	[SerializeField] private GameObject gameover_prefab;
 
+	public bool defeat;
+
 	// Movement constants -------------------------------
 	float moveacceleration = 0.4f;
 	float movedeceleration = 0.6f;
@@ -58,11 +60,13 @@ public class Entity_Move_Manual : Entity
 		hsign = 1.0f;
 
 		playerdata = game.GetPlayerData();
-		playerdata.SetHealth(health);
+		playerdata.SetHealth(health, healthmax);
 
 		showplayer = true;
 
-		animator.SetBool("GameOver", false);
+		state = (int)State.control;
+
+		animator.SetBool("Defeat", false);
 	}
 
 	// Update is called once per frame
@@ -88,7 +92,10 @@ public class Entity_Move_Manual : Entity
 		
 		switch((State)state)
 		{
+			// -------------------------------------------------------------------
 			case(State.control): {
+				animator.SetBool("Defeat", false);
+
 				// Use controls if controls are free
 				if ( !controlslocked )
 				{
@@ -210,12 +217,21 @@ public class Entity_Move_Manual : Entity
 
 				animator.SetBool("AimingUp", aimingUp);
 				animator.SetBool("AimingDown", aimingDown);
+
+				grav = jumpheld? gravityjump: gravity;
+
+				
 				break;
 			}
-		
+			// -------------------------------------------------------------------
 			case(State.defeat): {
-				animator.Play("Defeat");
-				grav *= 0.5f;
+				grav *= 0.2f;
+
+				if (health > 0)
+				{
+					Start();
+					animator.SetBool("Defeat", false);
+				}
 				break;
 			}
 		}
@@ -224,7 +240,7 @@ public class Entity_Move_Manual : Entity
 		if (!onground)
 		{
 			// Apply gravity
-			yspeed = Mathf.Max(yspeed+(jumpheld? gravityjump: grav), -8.0f);
+			yspeed = Mathf.Max(yspeed+grav, -8.0f);
 		}
 
 		UpdateMovement();
@@ -327,7 +343,7 @@ public class Entity_Move_Manual : Entity
 		if (value != 0 && iframes == 0.0f)
 		{
 			int healthdiff = base.ChangeHealth(value);
-			playerdata.SetHealth(health); // Update HUD
+			playerdata.SetHealth(health, healthmax); // Update HUD
 
 			// Subtract energy when health is lost
 			if (healthdiff < 0)
@@ -362,7 +378,7 @@ public class Entity_Move_Manual : Entity
 	protected override bool OnDefeat()
 	{
 		animator.SetBool("Defeat", true);
-		Instantiate(gameover_prefab);
+		Instantiate(gameover_prefab).transform.parent = null;
 		iframes = 0;
 
 		yspeed = 6.0f;
