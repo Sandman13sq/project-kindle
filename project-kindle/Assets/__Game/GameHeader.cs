@@ -79,9 +79,7 @@ public class GameHeader : MonoBehaviour
 
         // Create event runner
         eventrunner = gameObject.AddComponent(typeof(EventRunner)) as EventRunner;
-
-        GameFlagClear(GameFlag.show_gui);
-
+        
         SceneManager.sceneLoaded += OnSceneLoad;
     }
 

@@ -24,6 +24,7 @@ public class MasterObject : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("Missing Game Object in Scene! Add the prefab!");
                     //_game = (new GameObject("__game")).AddComponent<GameHeader>();
                 }
 

@@ -22,7 +22,7 @@ public class BackgroundParallax : MasterObject
     {
         campos = game.GetCameraPosition();
         var scale = transform.localScale;
-        transform.localPosition = startingposition - new Vector3(
+        transform.position = -new Vector3(
             (loopwidth>0.0f? Mathf.Repeat(campos.x*xspeed, loopwidth*scale.x): (campos.x*xspeed)),
             (loopheight>0.0f? Mathf.Repeat(campos.y*yspeed, loopheight*scale.y): (campos.y*yspeed)),
             0.0f
