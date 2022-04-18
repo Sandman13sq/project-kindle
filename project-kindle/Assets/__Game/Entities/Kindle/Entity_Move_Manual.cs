@@ -19,7 +19,7 @@ public class Entity_Move_Manual : Entity
 
 	private PlayerData playerdata;	// Holds health, energy, level, etc.
 	//======= stuff for animation:
-	[SerializeField] private Animator animator;
+	[SerializeField] Animator animator;
 
 	private bool aimingUp; //bool to check if kindle is aiming up
 	private bool aimingDown; //bool to check if kindle is aiming down
@@ -65,7 +65,6 @@ public class Entity_Move_Manual : Entity
 		showplayer = true;
 
 		state = (int)State.control;
-
 		animator.SetBool("Defeat", false);
 	}
 
@@ -377,6 +376,7 @@ public class Entity_Move_Manual : Entity
 
 	protected override bool OnDefeat()
 	{
+		state = (int)State.defeat;
 		animator.SetBool("Defeat", true);
 		Instantiate(gameover_prefab).transform.parent = null;
 		iframes = 0;
@@ -384,6 +384,7 @@ public class Entity_Move_Manual : Entity
 		yspeed = 6.0f;
 		xspeed = -hsign * 2.0f;
 
+		state = (int)State.defeat;
 		return false;
 	}
 

@@ -40,6 +40,7 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
         {
+            Debug.LogWarning("Cannot find the sound \""+ name +"\". Did you misspell something?");
             return s;
         }
         s.source.Play();

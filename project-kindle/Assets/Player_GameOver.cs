@@ -8,6 +8,7 @@ using static DmrMath;
 public class Player_GameOver : MasterObject
 {
     [SerializeField] private SpriteRenderer spriterenderer;
+    [SerializeField] private Animator animator;
     private Color color1 = new Color(0.0f, 0.0f, 0.0f, 0.0f);
     private Color color2 = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 

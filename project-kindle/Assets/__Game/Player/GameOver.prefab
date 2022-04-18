@@ -92,6 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4981207720178947994}
   - component: {fileID: 5877039055804897850}
+  - component: {fileID: -4430684707597058475}
   m_Layer: 0
   m_Name: GameOver
   m_TagString: Untagged
@@ -127,3 +128,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriterenderer: {fileID: 6606172614100750972}
+  animator: {fileID: -4430684707597058475}
+--- !u!95 &-4430684707597058475
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5279500421066183884}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 027dca0f9a07bdf4e85baf290001661d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
