@@ -55,7 +55,7 @@ public class Player_GameOver : MasterObject
             case(0): {
                 const float steptime = 60.0f;
 
-                Application.targetFrameRate = 30;
+                //Application.targetFrameRate = 30;
                 fadestep += 1.0f;
                 spriterenderer.color = Color.Lerp(color1, color2, fadestep/steptime);
 
@@ -77,7 +77,7 @@ public class Player_GameOver : MasterObject
                     state++;
                     fadestep = 0.0f;
 
-                    Application.targetFrameRate = 60;
+                    //Application.targetFrameRate = 60;
 
                     game.GetPlayer().ResetHealth();
                     game.GetPlayerData().ResetWeapons();

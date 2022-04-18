@@ -34,7 +34,7 @@ public class Entity_Move : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = 60; // Temporary. Will remove later
+        //Application.targetFrameRate = 60; // Temporary. Will remove later
 
         rb = GetComponent<Rigidbody2D>();
         collider2d = GetComponent<Collider2D>();

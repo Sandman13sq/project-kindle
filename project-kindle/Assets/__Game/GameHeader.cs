@@ -55,7 +55,7 @@ public class GameHeader : MonoBehaviour
         }
 
         // Set frame rate
-        Application.targetFrameRate = 60;
+        //Application.targetFrameRate = 60;
 
         DontDestroyOnLoad(this.gameObject);
 
