@@ -299,6 +299,7 @@ public class EventRunner : MasterObject
                             pos++;
                             c = textchar[pos];
                         }
+                        word = word.Replace("\\n", "\n");
                         valuetext = word;
                         //Debug.Log(word);
                     }

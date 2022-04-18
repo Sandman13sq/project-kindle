@@ -101,7 +101,7 @@ MonoBehaviour:
     loop: 1
   - name: VectorShoot
     clip: {fileID: 8300000, guid: 0ba82320354399547a7cafd89d3ab134, type: 3}
-    volume: 0.6
+    volume: 0.3
     pitch: 1
     source: {fileID: 0}
     loop: 0
@@ -513,11 +513,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7229868878053391227, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 207.99998
+      value: 208
       objectReference: {fileID: 0}
     - target: {fileID: 7229868878053391227, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 7229868878053391227, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
       propertyPath: m_LocalRotation.w

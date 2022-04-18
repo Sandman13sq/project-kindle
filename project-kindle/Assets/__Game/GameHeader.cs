@@ -53,7 +53,7 @@ public class GameHeader : MonoBehaviour
         { 
             Instance = this; 
         }
-        
+
         // Set frame rate
         Application.targetFrameRate = 60;
 
@@ -236,8 +236,10 @@ public class GameHeader : MonoBehaviour
             audiosource.Stop();
         }
 
-        audiosource.clip = audiomanager.GetSound(key).clip;
+        Sound s = audiomanager.GetSound(key);
+        audiosource.clip = s.clip;
         audiosource.Play();
+        audiosource.volume = s.volume;
 
         //bgmsound = audiosource.Play(key);
     }
