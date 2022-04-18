@@ -19,6 +19,7 @@ public class GameHeader : MonoBehaviour
     [SerializeField] private GameObject player_prefab;
     [SerializeField] private GameObject textbox_prefab;
     [SerializeField] private AudioManager audiomanager;
+    [SerializeField] private AudioSource audiosource;
     [SerializeField] private PlayerData playerdata;
     [SerializeField] private GameObject playerhud;
     private TextBox textbox_object;
@@ -52,7 +53,7 @@ public class GameHeader : MonoBehaviour
         { 
             Instance = this; 
         }
-
+        
         // Set frame rate
         Application.targetFrameRate = 60;
 
@@ -225,5 +226,19 @@ public class GameHeader : MonoBehaviour
     public Sound PlaySound(string key)
     {
         return audiomanager.Play(key);
+    }
+
+    public void PlayBGM(string key)
+    {
+        if (audiosource.clip != null)
+        {
+            //bgmsound.Stop();
+            audiosource.Stop();
+        }
+
+        audiosource.clip = audiomanager.GetSound(key).clip;
+        audiosource.Play();
+
+        //bgmsound = audiosource.Play(key);
     }
 }

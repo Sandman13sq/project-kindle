@@ -487,7 +487,9 @@ MonoBehaviour:
   calleventkey: start
   eventdefs:
   - key: start
-    text: 'gameFlagClear("show_gui")
+    text: 'bgmPlay("mus_title")
+
+      gameFlagClear("show_gui")
 
       gameFlagClear("show_player")
 
@@ -562,54 +564,6 @@ PrefabInstance:
     - target: {fileID: 1712364249276888927, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2521553371264269455, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
-      propertyPath: sounds.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2521553371264269455, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
-      propertyPath: sounds.Array.data[0].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 439165fd27882df459e4253c6b0991c6, type: 3}
-    - target: {fileID: 2521553371264269455, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
-      propertyPath: sounds.Array.data[0].name
-      value: mus_junkyard
-      objectReference: {fileID: 0}
-    - target: {fileID: 2521553371264269455, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
-      propertyPath: sounds.Array.data[1].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 0ba82320354399547a7cafd89d3ab134, type: 3}
-    - target: {fileID: 2521553371264269455, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
-      propertyPath: sounds.Array.data[1].loop
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2521553371264269455, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
-      propertyPath: sounds.Array.data[1].name
-      value: VectorShoot
-      objectReference: {fileID: 0}
-    - target: {fileID: 2521553371264269455, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
-      propertyPath: sounds.Array.data[2].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 1f0a85512d0da254dbdac5a89f77867d, type: 3}
-    - target: {fileID: 2521553371264269455, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
-      propertyPath: sounds.Array.data[2].name
-      value: DragonShoot
-      objectReference: {fileID: 0}
-    - target: {fileID: 2521553371264269455, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
-      propertyPath: sounds.Array.data[3].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 543ca10382de37344aa4880431cd7b54, type: 3}
-    - target: {fileID: 2521553371264269455, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
-      propertyPath: sounds.Array.data[3].name
-      value: Jump
-      objectReference: {fileID: 0}
-    - target: {fileID: 2521553371264269455, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
-      propertyPath: sounds.Array.data[1].volume
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2521553371264269455, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
-      propertyPath: sounds.Array.data[3].volume
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}

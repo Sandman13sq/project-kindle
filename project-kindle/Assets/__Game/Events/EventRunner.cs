@@ -497,7 +497,7 @@ public class EventRunner : MasterObject
                 
                 // Sound ---------------------------------------------------------------
                 case(Command.bgm_play):
-                    game.PlaySound(activecommand.text);
+                    game.PlayBGM(activecommand.text);
                     break;
                 
                 case(Command.bgm_stop):
