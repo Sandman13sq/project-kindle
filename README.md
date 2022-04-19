@@ -3,6 +3,8 @@ A platformer-shooter where you take control of Kindle and help her defeat evil m
 
 Made in Unity. Semester project for CMSC 493 Spring 2022 at UMBC.
 
+# [==Play It In Your Browser On itch.io!==](https://dreamer13sq.itch.io/project-kindle)
+
 ## Team Members
 - Isaiah Hull (Programmer)
 - David Iraheta (Programmer)
