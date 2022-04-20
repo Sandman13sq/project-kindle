@@ -23,7 +23,7 @@ public class GameHeader : MonoBehaviour
     [SerializeField] private PlayerData playerdata;
     [SerializeField] private GameObject playerhud;
     private TextBox textbox_object;
-    private Entity_Move_Manual player_object;
+    private Entity_Player player_object;
 
     private GameObject camera_object;
     private EventRunner eventrunner;
@@ -67,7 +67,7 @@ public class GameHeader : MonoBehaviour
         }
 
         // Player
-        player_object = Instantiate(player_prefab).GetComponent<Entity_Move_Manual>();
+        player_object = Instantiate(player_prefab).GetComponent<Entity_Player>();
         DontDestroyOnLoad(player_object.gameObject);
 
         eventmap = new Dictionary<string, List<EventRunner.CommandDef>>();
@@ -198,12 +198,12 @@ public class GameHeader : MonoBehaviour
     }
 
     // Get/Set ------------------------------------------------
-    public void SetPlayer(Entity_Move_Manual plyr)
+    public void SetPlayer(Entity_Player plyr)
     {
         player_object = plyr;
     }
 
-    public Entity_Move_Manual GetPlayer()
+    public Entity_Player GetPlayer()
     {
         return player_object;
     }

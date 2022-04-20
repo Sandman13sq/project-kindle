@@ -21,7 +21,7 @@ public class Entity_Heart2 : Entity
     {
         if (c.gameObject.tag == "player")
         {
-            if (c.gameObject.GetComponent<Entity_Move_Manual>().ChangeHealth(health) != 0)
+            if (c.gameObject.GetComponent<Entity_Player>().ChangeHealth(health) != 0)
             {
                 Destroy(gameObject);
             }

@@ -5,7 +5,7 @@ public class CamSwitch : MonoBehaviour
     private Animator animator;//Get the animator so that we can get it's state
 
     //Grab data from kindle to see which direction she is facing
-    Entity_Move_Manual kindle;
+    Entity_Player kindle;
     [SerializeField] GameObject playerEntity;
 
     //Keep track of what direction we're lookin' in
@@ -13,7 +13,7 @@ public class CamSwitch : MonoBehaviour
 
     // Awake is called as soon as the object shows up in the scene, called before start()
     void Awake(){
-        kindle = playerEntity.GetComponent<Entity_Move_Manual>();
+        kindle = playerEntity.GetComponent<Entity_Player>();
     }
 
     // Start is called before the first frame update

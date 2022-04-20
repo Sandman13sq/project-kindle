@@ -33,7 +33,7 @@ public class Weapon : MasterObject
     [SerializeField] public int[] weaponlvlenergy;  // Value of energy checkpoints for levels, each more than the last
     public WeaponLvl activeweaponlvl;
 
-    private Entity_Move_Manual player;
+    private Entity_Player player;
     private float hsign;    // Horizontal sign. {-1, 1}
     private float vsign;    // Vertical sign. {-1, 0, 1}
 
@@ -199,7 +199,7 @@ public class Weapon : MasterObject
         return proj;
     }
 
-    public void SetPlayer(Entity_Move_Manual p) 
+    public void SetPlayer(Entity_Player p) 
     {
         player = p;
         playerdata = player.GetPlayerData();

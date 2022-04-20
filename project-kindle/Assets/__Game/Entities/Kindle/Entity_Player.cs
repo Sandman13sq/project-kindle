@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Entity_Move_Manual : Entity
+public class Entity_Player : Entity
 {
 	enum State
 	{
