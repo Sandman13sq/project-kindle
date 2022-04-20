@@ -84,6 +84,12 @@ public class GameHeader : MonoBehaviour
         eventrunner = gameObject.AddComponent(typeof(EventRunner)) as EventRunner;
         
         SceneManager.sceneLoaded += OnSceneLoad;
+
+        // Set framerate if not on WebGL
+        if (Application.platform != RuntimePlatform.WebGLPlayer)
+        {
+            Application.targetFrameRate = 60;
+        }
     }
 
     // Start is called before the first frame update

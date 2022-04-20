@@ -46,7 +46,7 @@ public class TextBox : MasterObject
         textcomponent.text = "";
 
         boxrect.sizeDelta = new Vector2(0.0f, 0.0f);
-        arrowxstart = arrowsprite.transform.position.x;
+        arrowxstart = arrowsprite.transform.localPosition.x;
         arrowsprite.enabled = false;
 
         statestep = 0.0f;
@@ -123,9 +123,9 @@ public class TextBox : MasterObject
                 textcomponent.enabled = true;
 
                 // Arrow points right
-                arrowsprite.transform.position = new Vector2(
+                arrowsprite.transform.localPosition = new Vector2(
                     arrowxstart + Mathf.Sin(statestep)*4.0f,
-                    arrowsprite.transform.position.y
+                    arrowsprite.transform.localPosition.y
                     );
             }
             break;
