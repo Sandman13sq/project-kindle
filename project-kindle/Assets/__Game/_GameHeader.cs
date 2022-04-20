@@ -5,7 +5,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.SceneManagement;
 
-public class GameHeader : MonoBehaviour
+public class _GameHeader : MonoBehaviour
 {
     public enum GameFlag : int
     {
@@ -38,7 +38,7 @@ public class GameHeader : MonoBehaviour
     
     // Functions
 
-    public static GameHeader Instance { get; private set; }
+    public static _GameHeader Instance { get; private set; }
 
     void Awake()
     {
@@ -163,7 +163,7 @@ public class GameHeader : MonoBehaviour
         {
             Debug.Log(string.Format("Running Event \"{0}\"", eventkey));
             EndEvent();
-            eventrunner.SetEventCommands(eventmap[eventkey].ToArray());
+            eventrunner.StartEvent(eventmap[eventkey].ToArray());
             eventrunner.ContinueEvent();
         }
         else

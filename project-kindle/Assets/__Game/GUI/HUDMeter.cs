@@ -86,9 +86,9 @@ public class HUDMeter : MasterObject
         }
 
         // Hide GUI
-        if (guiactive != game.GameFlagGet(GameHeader.GameFlag.show_gui))
+        if (guiactive != game.GameFlagGet(_GameHeader.GameFlag.show_gui))
         {
-            guiactive = game.GameFlagGet(GameHeader.GameFlag.show_gui);
+            guiactive = game.GameFlagGet(_GameHeader.GameFlag.show_gui);
             foreach (var vis in visualcomponents_images) {vis.enabled = guiactive;}
             foreach (var vis in visualcomponents_text) {vis.enabled = guiactive;}
         }

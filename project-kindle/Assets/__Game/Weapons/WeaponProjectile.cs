@@ -24,14 +24,14 @@ public class WeaponProjectile : MonoBehaviour
 
     [SerializeField] private Weapon sourceweapon = null; // Weapon component that the projectile was fired from
 
-    protected const int LAYER_WORLD = 3;
-    protected const int LAYER_WORLD_BIT = 1 << LAYER_WORLD;
-    protected const int LAYER_ENTITY = 6; 
-    protected const int LAYER_ENTITY_BIT = 1 << LAYER_ENTITY;
-    protected const int LAYER_HITBOX = 7; 
-    protected const int LAYER_HITBOX_BIT = 1 << LAYER_HITBOX;
-    protected const int LAYER_HURTBOX = 8; 
-    protected const int LAYER_HURTBOX_BIT = 1 << LAYER_HURTBOX;
+    protected const int LAYER_WORLD_INDEX = 3;
+    protected const int LAYER_WORLD_BIT = 1 << LAYER_WORLD_INDEX;
+    protected const int LAYER_ENTITY_INDEX = 6; 
+    protected const int LAYER_ENTITY_BIT = 1 << LAYER_ENTITY_INDEX;
+    protected const int LAYER_HITBOX_INDEX = 7; 
+    protected const int LAYER_HITBOX_BIT = 1 << LAYER_HITBOX_INDEX;
+    protected const int LAYER_HURTBOX_INDEX = 8; 
+    protected const int LAYER_HURTBOX_BIT = 1 << LAYER_HURTBOX_INDEX;
 
     // Common ============================================================
     
@@ -104,7 +104,7 @@ public class WeaponProjectile : MonoBehaviour
     void OnCollisionEnter2D(Collision2D c)
     {
         // Interact with world
-        if (c.gameObject.layer == LAYER_WORLD)
+        if (c.gameObject.layer == LAYER_WORLD_INDEX)
         {
             DecrementShotCount();
             Destroy(gameObject);

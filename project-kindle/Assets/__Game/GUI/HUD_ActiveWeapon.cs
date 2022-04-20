@@ -43,9 +43,9 @@ public class HUD_ActiveWeapon : MasterObject
     // Update is called once per frame
     void Update()
     {
-        if (guiactive != game.GameFlagGet(GameHeader.GameFlag.show_gui))
+        if (guiactive != game.GameFlagGet(_GameHeader.GameFlag.show_gui))
         {
-            guiactive = game.GameFlagGet(GameHeader.GameFlag.show_gui);
+            guiactive = game.GameFlagGet(_GameHeader.GameFlag.show_gui);
             foreach (var vis in visualcomponents_images) {vis.enabled = guiactive;}
             foreach (var vis in visualcomponents_text) {vis.enabled = guiactive;}
         }

@@ -28,6 +28,7 @@ public class PlayerData : MonoBehaviour
 
     // Methods ==================================================
 
+    // Sets health UI values
     public int SetHealth(int value, int valuemax)
     {
         healthmeter.SetValueMax(valuemax);
@@ -40,6 +41,7 @@ public class PlayerData : MonoBehaviour
         healthmeter.Flash();
     }
 
+    // Sets energy UI values
     public int SetEnergy(int value, int valuemax, bool matchprovisional = false)
     {
         energymeter.SetValueMax(valuemax);
@@ -68,6 +70,7 @@ public class PlayerData : MonoBehaviour
         return 0;
     }
 
+    // Sets weapon ammo UI values
     public int SetAmmo(int value, int valuemax)
     {
         weaponinfo.SetAmmo(value);
@@ -75,6 +78,7 @@ public class PlayerData : MonoBehaviour
         return 0;
     }
 
+    // Sets active weapon for firing
     public void SetActiveWeapon(int _weaponindex)
     {
         // Set all weapons to inactive
@@ -91,11 +95,13 @@ public class PlayerData : MonoBehaviour
         energymeter.SetValueDirect(activeweapon.CurrentLevelEnergy(), activeweapon.CurrentLevelEnergyMax());
     }
 
+    // Move to next available weapon
     public void NextWeapon()
     {
         SetActiveWeapon((weaponindex+1) % 2);
     }
 
+    // Move to previous available weapon
     public void PrevWeapon()
     {
         SetActiveWeapon(weaponindex==0? weapons.Length-1: weaponindex-1);

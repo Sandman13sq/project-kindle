@@ -15,9 +15,9 @@ public class Entity : MasterObject
         UP = 1 << 1,    // ^ top side
         LEFT = 1 << 2,  // ^ left side
         DOWN = 1 << 3,  // ^ bottom side
-        ALL = 0xF,  // All sides
-        EDGERIGHT = 1 << 4,
-        EDGELEFT = 1 << 5,
+        ALL = RIGHT | UP | LEFT | DOWN,  // All sides
+        EDGERIGHT = 1 << 4, // Set when FINDEDGES is active and a collision is found on the bottom-right
+        EDGELEFT = 1 << 5,  // Set when FINDEDGES is active and a collision is found on the bottom-left
 
         CHANGESPEED = 1 << 0,   // Clamp speeds when a collision is found
         DOUBLEX = 1 << 1,   // Use two raycasts when checking left/right
@@ -25,14 +25,14 @@ public class Entity : MasterObject
         FINDEDGES = 1 << 3, // Check for bottom-right and bottom-left edges
     }
 
-    protected const int LAYER_WORLD = 3;
-    protected const int LAYER_WORLD_BIT = 1 << LAYER_WORLD;
-    protected const int LAYER_ENTITY = 6; 
-    protected const int LAYER_ENTITY_BIT = 1 << LAYER_ENTITY;
-    protected const int LAYER_HITBOX = 7; 
-    protected const int LAYER_HITBOX_BIT = 1 << LAYER_HITBOX;
-    protected const int LAYER_HURTBOX = 8; 
-    protected const int LAYER_HURTBOX_BIT = 1 << LAYER_HURTBOX;
+    protected const int LAYER_WORLD_INDEX = 3;
+    protected const int LAYER_WORLD_BIT = 1 << LAYER_WORLD_INDEX;
+    protected const int LAYER_ENTITY_INDEX = 6; 
+    protected const int LAYER_ENTITY_BIT = 1 << LAYER_ENTITY_INDEX;
+    protected const int LAYER_HITBOX_INDEX = 7; 
+    protected const int LAYER_HITBOX_BIT = 1 << LAYER_HITBOX_INDEX;
+    protected const int LAYER_HURTBOX_INDEX = 8; 
+    protected const int LAYER_HURTBOX_BIT = 1 << LAYER_HURTBOX_INDEX;
 
     // Variables ======================================================
 
@@ -81,7 +81,7 @@ public class Entity : MasterObject
 
     // Common ================================================================
 
-    // Start is called before the first frame update
+    // Called on creation
     void Awake()
     {
         startingstate = state;
@@ -118,6 +118,7 @@ public class Entity : MasterObject
         }
     }
 
+    // Start is called before the first frame update
     protected virtual void Start() {}
     
     // Update is called once per frame
@@ -144,6 +145,7 @@ public class Entity : MasterObject
         //state = startingstate;
     }
 
+    // Disables entity components (Renderer and collision boxes)
     public void DisableComponents()
     {
         if (spriterenderer != null) {spriterenderer.enabled = false;}
@@ -152,6 +154,7 @@ public class Entity : MasterObject
         if (worldcollider != null) {worldcollider.enabled = false;}
     }
 
+    // Called when re activated by the entity respawner
     public void Restore()
     {
         ResetValues();
@@ -164,38 +167,6 @@ public class Entity : MasterObject
         //if (eventkey != "")
         {
             // Run Event
-        }
-    }
-
-    // Drops energy amount
-    protected void DropEnergy()
-    {
-        Entity e;
-        foreach (GameObject obj in energydrops)
-        {
-            e = Instantiate(obj).GetComponent<Entity>();
-            e.transform.position = transform.position;
-            e.SpeedSetDeg(
-                Random.Range(2.0f, 5.0f),
-                Random.Range(80.0f, 100.0f)
-                );
-        }
-    }
-
-    protected void DropHeart()
-    {
-        if (heartdrop)
-        {
-            Entity e = Instantiate(heartdrop).GetComponent<Entity>();
-            e.transform.position = transform.position;
-        }
-    }
-
-    protected void ShowDestroyGraphic()
-    {
-        foreach (GameObject prefab in destroygraphic)
-        {
-            Instantiate(prefab).transform.position = transform.position;
         }
     }
 
@@ -246,6 +217,40 @@ public class Entity : MasterObject
         }
     }
 
+    // Drops energy amount. Called in Defeat()
+    protected void DropEnergy()
+    {
+        Entity e;
+        foreach (GameObject obj in energydrops)
+        {
+            e = Instantiate(obj).GetComponent<Entity>();
+            e.transform.position = transform.position;
+            e.SpeedSetDeg(
+                Random.Range(2.0f, 5.0f),
+                Random.Range(80.0f, 100.0f)
+                );
+        }
+    }
+
+    // Drops heart. Called in Defeat()
+    protected void DropHeart()
+    {
+        if (heartdrop)
+        {
+            Entity e = Instantiate(heartdrop).GetComponent<Entity>();
+            e.transform.position = transform.position;
+        }
+    }
+
+    // Shows destroy graphics. Called in Defeat()
+    protected void ShowDestroyGraphic()
+    {
+        foreach (GameObject prefab in destroygraphic)
+        {
+            Instantiate(prefab).transform.position = transform.position;
+        }
+    }
+
     // Changes health value by amount. Returns change in health
     public virtual int ChangeHealth(int value)
     {
@@ -289,6 +294,7 @@ public class Entity : MasterObject
         return health-prehealth; // Return change in health
     }
 
+    // ChangeHealth() shortcut
     public virtual int DoDamage(int value)
     {
         return ChangeHealth(-value);

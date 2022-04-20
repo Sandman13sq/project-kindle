@@ -49,6 +49,7 @@ public class Entity_Player : Entity
 
 	// Common ===============================================================
 	
+	// Called on creation
 	void Awake()
     {
         game.SetPlayer(this);
@@ -71,9 +72,13 @@ public class Entity_Player : Entity
 	// Update is called once per frame
 	protected override void Update()
 	{
+		// Used to reset shooting animation
 		if(ticks < 30)
+		{
 			ticks += 1;
-		else if(ticks == 30){
+		}
+		else if(ticks == 30)
+		{
 			animator.SetBool("ShootingUp", false);
 			animator.SetBool("ShootingSide", false);
 		}
@@ -81,17 +86,18 @@ public class Entity_Player : Entity
 		animator.SetFloat("Speed", Mathf.Abs(xspeed)); //set animator parameter to xspeed
 
 		// Grab input values
-		float xlev = Input.GetAxisRaw("Horizontal");
-		float ylev = Input.GetAxisRaw("Vertical");
+		float xlev = Input.GetAxisRaw("Horizontal");	// Left/Right player input
+		float ylev = Input.GetAxisRaw("Vertical");		// Up/Down player input
 		float lastvsign = vsign;
 		float lasthsign = hsign;
-		bool controlslocked = game.GameFlagGet(GameHeader.GameFlag.lock_player);
+		bool controlslocked = game.GameFlagGet(_GameHeader.GameFlag.lock_player);
 
 		float grav = gravity;
 		
 		switch((State)state)
 		{
 			// -------------------------------------------------------------------
+			// Control State - Player moves the character
 			case(State.control): {
 				animator.SetBool("Defeat", false);
 
@@ -107,14 +113,18 @@ public class Entity_Player : Entity
 					vsign = ylev;
 					
 					// Jump buffer
+					/*
+						As long as the jump buffer value is non-zero
+						A jump will occur at the next possible frame when player is on ground
+					*/
 					if (jumpbuffer >= 0.0f)
 					{
-						jumpbuffer -= 1.0f;
+						jumpbuffer -= 1.0f;	// Decrement buffer time
 					}
 
 					if (Input.GetButtonDown("Jump"))
 					{
-						jumpbuffer = jumpbuffertime;
+						jumpbuffer = jumpbuffertime; // Reset jump buffer
 					}
 
 					// Switch Weapon
@@ -144,9 +154,7 @@ public class Entity_Player : Entity
 				{
 					yspeed = Mathf.Max(0.0f, yspeed); // Keep upwards movement, if any
 
-					animator.SetBool("InAir", false);
-					animator.SetBool("IgnoreInAir", false);
-					
+					// When current speed and input direction agree, use acceleration, else use deceleration
 					if (xlev > 0.0f) // Moving Right
 					{
 						xspeed = Mathf.Min(xspeed + (xlev==Mathf.Sign(xspeed)? moveacceleration: movedeceleration), movespeedmax);
@@ -171,18 +179,22 @@ public class Entity_Player : Entity
 					if ( jumpbuffer > 0.0f )
 					{
 						yspeed += jumpstrength;
-						jumpbuffer = 0.0f;
+						jumpbuffer = 0.0f;	// Reset jump buffer
 						jumpheld = true;
 
 						game.PlaySound("Jump");
 					}
+
+					animator.SetBool("InAir", false);
+					animator.SetBool("IgnoreInAir", false);
 				}
 				// In Air
 				else
 				{
-					animator.SetBool("InAir", true);
+					// jumpheld variable is true as long as player is rising and holding the JUMP button.
+					// When jumpheld is false, it stays false until set to true when jumping from the ground.
+					jumpheld = jumpheld && (Input.GetButton("Jump") && yspeed > 0.0f);
 
-					jumpheld = jumpheld && Input.GetButton("Jump") && yspeed > 0.0f;
 					if (xlev > 0.0f) // Moving Right
 					{
 						xspeed = Mathf.Min(xspeed + moveaccelerationair, movespeedmax);
@@ -191,6 +203,8 @@ public class Entity_Player : Entity
 					{
 						xspeed = Mathf.Max(xspeed - moveaccelerationair, -movespeedmax);
 					}
+
+					animator.SetBool("InAir", true);
 				}
 
 				// Aiming up and down
@@ -217,14 +231,14 @@ public class Entity_Player : Entity
 				animator.SetBool("AimingUp", aimingUp);
 				animator.SetBool("AimingDown", aimingDown);
 
+				// Set gravity
 				grav = jumpheld? gravityjump: gravity;
-
-				
 				break;
 			}
 			// -------------------------------------------------------------------
+			// Defeat state when health is 0
 			case(State.defeat): {
-				grav *= 0.2f;
+				grav = gravity * 0.2f;
 
 				if (health > 0)
 				{
@@ -242,14 +256,14 @@ public class Entity_Player : Entity
 			yspeed = Mathf.Max(yspeed+grav, -8.0f);
 		}
 
-		UpdateMovement();
+		UpdateMovement();	// Move by xspeed, yspeed
 
 		// Collision
 		CollisionFlag collisionresult = EvaluateCollision(
 			CollisionFlag.CHANGESPEED | CollisionFlag.DOUBLEX);
 		if ( collisionresult.HasFlag(CollisionFlag.DOWN) )
 		{
-			yspeed = Mathf.Max(yspeed, 0.0f);
+			yspeed = Mathf.Max(yspeed, 0.0f);	// When landing, keep upwards speed, if any
 		}
 
 		// Hitbox collision
@@ -280,8 +294,9 @@ public class Entity_Player : Entity
 		// Iframes
 		if (iframes > 0.0f)
 		{
-			iframes = Mathf.Max(0.0f, iframes-1.0f);
+			iframes = Mathf.Max(0.0f, iframes-1.0f); // Decrement
 
+			// 
 			if (iframes > 0.0f)
 			{
 				spriterenderer.enabled = Mathf.Repeat(iframes, 8.0f) < 4.0f;
@@ -293,18 +308,17 @@ public class Entity_Player : Entity
 		}
 
 		// Hide Player
-		if (showplayer != game.GameFlagGet(GameHeader.GameFlag.show_player))
+		if (showplayer != game.GameFlagGet(_GameHeader.GameFlag.show_player))
 		{
-			showplayer = game.GameFlagGet(GameHeader.GameFlag.show_player);
+			showplayer = game.GameFlagGet(_GameHeader.GameFlag.show_player);
 			spriterenderer.enabled = showplayer;
 		}
 	}
 
 	// Methods ===============================================================
-
 	public PlayerData GetPlayerData() {return playerdata;}
 
-	//Can check for animation stuff in OnShoot
+	// Can check for animation stuff in OnShoot
 	public void OnShoot(){
 		//Shooting up from idle
 		if(aimingUp && Mathf.Abs(xspeed) < 0.001 && Mathf.Abs(yspeed) < 0.001)
@@ -337,32 +351,38 @@ public class Entity_Player : Entity
 		}
 	}
 
+	// Called when picking up a heart, taking damage, etc.
 	public override int ChangeHealth(int value)
 	{
-		if (value != 0 && iframes == 0.0f)
+		// Losing health
+		if (value < 0 && iframes == 0.0f)
 		{
 			int healthdiff = base.ChangeHealth(value);
-			playerdata.SetHealth(health, healthmax); // Update HUD
-
 			// Subtract energy when health is lost
 			if (healthdiff < 0)
 			{
 				playerdata.AddEnergy(healthdiff);
+				playerdata.SetHealth(health, healthmax); // Update HUD
 			}
-			// Flash when health is gained
-			else
-			{
-				playerdata.HealthFlashMeter();
-			}
-			
 			return healthdiff;
 		}
-		else
+		// Gaining health
+		else if (value > 0)
 		{
-			return 0;
+			int healthdiff = base.ChangeHealth(value);
+
+			// Flash when health is gained
+			if (healthdiff > 0)
+			{
+				playerdata.HealthFlashMeter();
+				playerdata.SetHealth(health, healthmax); // Update HUD
+			}
 		}
+
+		return 0;
 	}
 
+	// Called after changing health value
 	protected override void OnHealthChange(int diff)
 	{
 		if (diff < 0)
@@ -374,6 +394,7 @@ public class Entity_Player : Entity
 		}
 	}
 
+	// Called when resulting health change results in a health of 0
 	protected override bool OnDefeat()
 	{
 		state = (int)State.defeat;

@@ -36,7 +36,7 @@ public class Player_GameOver : MasterObject
     {
         fadestep = 0.0f;
         state = 0;
-        game.GameFlagSet(GameHeader.GameFlag.lock_player);
+        game.GameFlagSet(_GameHeader.GameFlag.lock_player);
 
         Update();
     }

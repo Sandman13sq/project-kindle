@@ -7,14 +7,53 @@ using System;   // Enum
 
 public class EventRunner : MasterObject
 {
+    // Used when parsing event strings
+    /*
+        X, Y, Z, W refer to command parameter indices 0, 1, 2, and 3 respectively.
+        S refers to the string argument.
+        Ex: gameFlagJump(X, Y) = If game flag X is set, jump to event Y.
+    */
+    static Dictionary<string, Command> cmdmap = new Dictionary<string, Command>() {
+        {"end", Command.zero},  // Exits event
+
+        {"jump", Command.jump}, // Jump to event X
+        {"wait", Command.wait}, // Pauses event for X frames
+        {"advance", Command.advance},   // Waits for player input to advance event
+        {"adv", Command.advance},   // ^
+
+        {"gameflagset", Command.gameflag_set},      // Sets global game flag X
+        {"gameflagclear", Command.gameflag_clear},  // Clears global game flag X
+        {"gameflagjump", Command.gameflag_jump},    // If flag X is set, jump to event Y. If flag -X is NOT set, jump to event Y
+
+        {"sceneflagset", Command.sceneflag_set},    // Sets temporary scene flag X
+        {"sceneflagclear", Command.sceneflag_clear},    // Clears temporary scene flag X
+        {"sceneflagjump", Command.sceneflag_jump},  // If flag X is set, jump to event Y. If flag -X is NOT set, jump to event Y
+
+        {"playerlock", Command.lock_controls},  // Sets game flag to lock player controls
+        {"playerfree", Command.free_controls},  // Clears game flag to free player controls
+        {"playermoveto", Command.player_moveto},    // Move player to entity with tag X with x offset Y and y offset Z
+
+        {"textprint", Command.text_print},  // Add text S to textbox
+        {"textclear", Command.text_clear},  // Clears text box text
+        {"textclose", Command.text_close},  // Closes text box instance
+
+        {"entitycreate", Command.entity_create},    // Creates entity X at position (x = Y, y = Z)
+        {"entitydestroy", Command.entity_destroy},  // Destroys entity with tag X
+        {"entitymove", Command.entity_move},    // Moves entity with tag X to position (x = Y, y = Z)
+
+        {"bgmplay", Command.bgm_play},  // Plays background music with key X
+        {"bgmstop", Command.bgm_stop},  // Stops background music
+    };
+
+    // Command enum. See definitions after
     public enum Command
     {
         zero,
 
         // Control -----------------------------
         jump,
-        advance,    // Go to next event
-        wait,   // Wait X frames
+        advance,
+        wait,
 
         gameflag_set,
         gameflag_clear,
@@ -25,9 +64,9 @@ public class EventRunner : MasterObject
         sceneflag_jump,
 
         // Player
-        lock_controls,  // Lock player controls
-        free_controls,  // Enable player cotrols
-        player_moveto,  // Move player to another entity's position
+        lock_controls,
+        free_controls,
+        player_moveto,
 
         // Text --------------------------------
         text_print,
@@ -49,41 +88,6 @@ public class EventRunner : MasterObject
         sound_playat,
         sound_stop,
     }
-
-    // ----------------------------------------------------------------------------
-
-    // Used when parsing event strings
-    static Dictionary<string, Command> cmdmap = new Dictionary<string, Command>() {
-        {"end", Command.zero},
-
-        {"jump", Command.jump},
-        {"wait", Command.wait},
-        {"advance", Command.advance},
-        {"adv", Command.advance},
-
-        {"gameflagset", Command.gameflag_set},
-        {"gameflagclear", Command.gameflag_clear},
-        {"gameflagjump", Command.gameflag_jump},
-
-        {"sceneflagset", Command.sceneflag_set},
-        {"sceneflagclear", Command.sceneflag_clear},
-        {"sceneflagjump", Command.sceneflag_jump},
-
-        {"playerlock", Command.lock_controls},
-        {"playerfree", Command.free_controls},
-        {"playermoveto", Command.player_moveto},
-
-        {"textprint", Command.text_print},
-        {"textclear", Command.text_clear},
-        {"textclose", Command.text_close},
-
-        {"entitycreate", Command.entity_create},
-        {"entitydestroy", Command.entity_destroy},
-        {"entitymove", Command.entity_move},
-
-        {"bgmplay", Command.bgm_play},
-        {"bgmstop", Command.bgm_stop},
-    };
 
     // ----------------------------------------------------------------------------
 
@@ -159,11 +163,13 @@ public class EventRunner : MasterObject
         }
     }
 
+    // Returns true if event is in progress
     public bool IsRunning()
     {
         return commanddata != null;
     }
 
+    // Resets runner values and stops event
     public void Clear()
     {
         state = State.zero;
@@ -171,13 +177,15 @@ public class EventRunner : MasterObject
         commandpos = 0;
     }
 
-    public void SetEventCommands(CommandDef[] _commands)
+    // Set commands and run event
+    public void StartEvent(CommandDef[] _commands)
     {
         commanddata = _commands;
         commandpos = 0;
         state = State.running;
     }
 
+    // Defines event in _GameHeader from given text
     static public CommandDef[] ParseEventText(string text)
     {
         char[] textchar = text.ToCharArray();
@@ -215,7 +223,7 @@ public class EventRunner : MasterObject
                         }
                     }
 
-                    // Keys
+                    // Event Keys
                     if ( c == '#' )
                     {
                         string eventkey = "";
@@ -334,6 +342,7 @@ public class EventRunner : MasterObject
 
     // ============================================================
 
+    // Move event to next command
     public void ContinueEvent()
     {
         if (commanddata != null)
@@ -344,6 +353,7 @@ public class EventRunner : MasterObject
 
     // ============================================================
 
+    // Execute commands until interrupt or end of event
     private void ProgressEvent()
     {
         state = State.running;
@@ -396,7 +406,7 @@ public class EventRunner : MasterObject
                 case(Command.gameflag_set):
                     // Use text
                     if (activecommand.text != "")
-                        game.GameFlagSet((GameHeader.GameFlag)Enum.Parse(typeof(GameHeader.GameFlag), activecommand.text));
+                        game.GameFlagSet((_GameHeader.GameFlag)Enum.Parse(typeof(_GameHeader.GameFlag), activecommand.text));
                     // Use first param
                     else
                         game.GameFlagSet((int)activecommand.values[0]);
@@ -405,7 +415,7 @@ public class EventRunner : MasterObject
                 case(Command.gameflag_clear):
                     // Use text
                     if (activecommand.text != "")
-                        game.GameFlagClear((GameHeader.GameFlag)Enum.Parse(typeof(GameHeader.GameFlag), activecommand.text));
+                        game.GameFlagClear((_GameHeader.GameFlag)Enum.Parse(typeof(_GameHeader.GameFlag), activecommand.text));
                     // Use first param
                     else
                         game.GameFlagClear((int)activecommand.values[0]);
@@ -446,12 +456,12 @@ public class EventRunner : MasterObject
 
                 // Lock Player Controls
                 case(Command.lock_controls):
-                    game.GameFlagSet(GameHeader.GameFlag.lock_player);
+                    game.GameFlagSet(_GameHeader.GameFlag.lock_player);
                     break;
                 
                 // Free Player Controls
                 case(Command.free_controls):
-                    game.GameFlagClear(GameHeader.GameFlag.lock_player);
+                    game.GameFlagClear(_GameHeader.GameFlag.lock_player);
                     break;
                 
                 // Move Player to Entity

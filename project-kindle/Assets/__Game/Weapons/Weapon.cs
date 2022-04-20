@@ -56,7 +56,7 @@ public class Weapon : MasterObject
     // Update is called once per frame
     protected virtual void Update()
     {
-        bool cancontrol = !game.GameFlagGet(GameHeader.GameFlag.lock_player);
+        bool cancontrol = !game.GameFlagGet(_GameHeader.GameFlag.lock_player);
 
         if (player == null) {return;}
 
@@ -157,11 +157,7 @@ public class Weapon : MasterObject
         level = GetCurrentLevelIndex();
     }
 
-    protected virtual void OnShoot()
-    {
-
-    }
-
+    // Sets active weapon for shooting
     public void SetActive(bool isactive)
     {
         active = isactive;
@@ -175,6 +171,7 @@ public class Weapon : MasterObject
 
     public bool IsActive() {return active;}
 
+    // Shoots weapon projectile
     public virtual void Fire(float dir)
     {
         ShootProjectile(level, dir);
@@ -199,11 +196,11 @@ public class Weapon : MasterObject
         return proj;
     }
 
-    public void SetPlayer(Entity_Player p) 
+    // Called when weapon is fired
+    protected virtual void OnShoot()
     {
-        player = p;
-        playerdata = player.GetPlayerData();
-    } 
+
+    }
 
     // Progress delay timer. Returns true if delay is zero
     protected bool UpdateDelay(float ts = 1.0f)
@@ -317,10 +314,12 @@ public class Weapon : MasterObject
             }
         }
 
+        // Update values
         level = GetCurrentLevelIndex();
         playerdata.SetEnergy(CurrentLevelEnergy(), CurrentLevelEnergyMax(), value > 0);
         playerdata.SetLevel(GetLevel());
 
+        // Update UI
         if (value > 0 && e != value)
         {
             playerdata.EnergyFlashMeter();
