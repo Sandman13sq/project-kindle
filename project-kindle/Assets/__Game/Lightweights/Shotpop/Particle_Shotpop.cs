@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Particle_Shotpop : MonoBehaviour
+public class Particle_Shotpop : MasterObject
 {
     [SerializeField] private SpriteRenderer spriterenderer; 
     [SerializeField] private Sprite[] sprites;
@@ -21,7 +21,7 @@ public class Particle_Shotpop : MonoBehaviour
         if (life < lifemax)
         {
             spriterenderer.sprite = sprites[(int)(sprites.Length * life/lifemax)];
-            life += 1.0f;
+            life += game.TimeStep;
         }
         else
         {

@@ -39,7 +39,7 @@ public class Entity_Tortle : Entity
     // Update is called once per frame
     protected override void Update()
     {
-        yspeed -= 0.1f;
+        yspeed -= ts*0.1f;
 
         UpdateMovement();
         UpdateDamageShake();
@@ -79,10 +79,10 @@ public class Entity_Tortle : Entity
                 // Increase speed to maxspeed
                 if (Mathf.Abs(xspeed) < maxspeed)
                 {
-                    xspeed = Mathf.Min(maxspeed, Mathf.Abs(xspeed)+0.1f) * Mathf.Sign(xspeed);
+                    xspeed = Mathf.Min(maxspeed, ts*Mathf.Abs(xspeed)+0.1f) * Mathf.Sign(xspeed);
                 }
                 
-                if (statestep > 0) {statestep -= 1.0f;}
+                if (statestep > 0) {statestep -= ts;}
                 else
                 {
                     // Circlecast for player
@@ -131,7 +131,7 @@ public class Entity_Tortle : Entity
             // before striking -------------------------------------------------------------
             case((int)State.Steam):
             {
-                xspeed *= speedslowmod;
+                xspeed = ApproachTS(xspeed, 0.0f, 0.1f);
                 GameObject steamObj;
 
                 if(steamSpawned == false){
@@ -143,7 +143,7 @@ public class Entity_Tortle : Entity
 
                 spriterenderer.sprite = sprites[1];
 
-                if (statestep > 0) {statestep -= 1.0f;}
+                if (statestep > 0) {statestep -= ts;}
                 else
                 {
                     steamSpawned = false;
@@ -163,9 +163,9 @@ public class Entity_Tortle : Entity
             // Wait period after striking -----------------------------------------------------
             case((int)State.Strike):
             {
-                xspeed *= speedslowmod;
+                xspeed = ApproachTS(xspeed, 0.0f, 0.1f);
 
-                if (statestep > 0) {statestep -= 1.0f;}
+                if (statestep > 0) {statestep -= ts;}
                 else
                 {
                     state = (int)State.Cruising;

@@ -42,7 +42,7 @@ public class Entity_Rattah : Entity
 
         var p = game.GetPlayer();
 
-        yspeed -= 0.2f; // Gravity
+        yspeed -= ts*0.2f; // Gravity
 
         UpdateDamageShake();
         UpdateMovement();
@@ -53,8 +53,8 @@ public class Entity_Rattah : Entity
         {
             // ==========================================================
             case(State.idle):
-                if (onground) {xspeed = Approach(xspeed, 0.0f, moveacc);}
-                image_index = Mathf.Repeat(image_index + 1.0f/6.0f, sprites_idle.Length);
+                if (onground) {xspeed = ApproachTS(xspeed, 0.0f, moveacc);}
+                image_index = Mathf.Repeat(image_index + ts/6.0f, sprites_idle.Length);
                 spriterenderer.sprite = sprites_idle[(int)image_index];
                 hitboxcollider.enabled = false;
 
@@ -68,9 +68,9 @@ public class Entity_Rattah : Entity
             
             // =========================================================
             case(State.chase):
-                xspeed = Approach(xspeed, movespeed*SignToX(p), moveacc * (onground? 1.0f: 0.9f));
+                xspeed = ApproachTS(xspeed, movespeed*SignToX(p), moveacc * (onground? 1.0f: 0.9f));
                 
-                image_index = Mathf.Repeat(image_index + 1.0f/6.0f, sprites_idle.Length);
+                image_index = Mathf.Repeat(image_index + ts/6.0f, sprites_idle.Length);
                 spriterenderer.sprite = sprites_idle[(int)image_index];
                 spriterenderer.flipX = SignToX(p) < 0.0f;
                 
@@ -100,8 +100,8 @@ public class Entity_Rattah : Entity
             
             // =========================================================
             case(State.attack0):
-                if (onground) {xspeed = Approach(xspeed, 0.0f, moveacc);}
-                statestep += 1.0f;
+                if (onground) {xspeed = ApproachTS(xspeed, 0.0f, moveacc);}
+                statestep += ts;
                 spriterenderer.sprite = sprites_attack[0];
 
                 if (statestep >= 20.0f)
@@ -114,7 +114,7 @@ public class Entity_Rattah : Entity
             // =========================================================
             // Hitbox state
             case(State.attack1):
-                if (onground) {xspeed = Approach(xspeed, 0.0f, moveacc);}
+                if (onground) {xspeed = ApproachTS(xspeed, 0.0f, moveacc);}
                 spriterenderer.sprite = sprites_attack[1];
 
                 // Move to next state
@@ -122,7 +122,7 @@ public class Entity_Rattah : Entity
                 {
                     state = (int)State.attack2;
                     statestep = 0.0f;
-
+                    
                     hitboxcollider.enabled = false;
                 }
                 else
@@ -136,12 +136,12 @@ public class Entity_Rattah : Entity
                     hitboxcollider.enabled = true;
                 }
 
-                statestep += 1.0f;
+                statestep += ts;
                 break;
             
             // =========================================================
             case(State.attack2):
-                if (onground) {xspeed = Approach(xspeed, 0.0f, moveacc);}
+                if (onground) {xspeed = ApproachTS(xspeed, 0.0f, moveacc);}
                 spriterenderer.sprite = sprites_attack[2];
 
                 // Return to idle state
@@ -151,7 +151,7 @@ public class Entity_Rattah : Entity
                     statestep = 0.0f;
                 }
 
-                statestep += 1.0f;
+                statestep += ts;
                 break;
         }
     }

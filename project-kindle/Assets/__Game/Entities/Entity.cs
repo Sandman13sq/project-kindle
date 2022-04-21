@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using static DmrMath;
+
 public class Entity : MasterObject
 {
     // Constants ======================================================
@@ -78,6 +80,8 @@ public class Entity : MasterObject
     private GameObject shownumberobj = null;
     private Entity_Respawner respawner = null;
     private int startingstate;
+
+    protected float ts {get {return game.TimeStep;}}
 
     // Common ================================================================
 
@@ -304,8 +308,8 @@ public class Entity : MasterObject
     public void UpdateMovement()
     {
         transform.position = new Vector3(
-            transform.position.x + xspeed,
-            transform.position.y + yspeed,
+            transform.position.x + xspeed * ts,
+            transform.position.y + yspeed * ts,
             transform.position.z
         );
     }
@@ -315,7 +319,7 @@ public class Entity : MasterObject
     {
         if (damageshake > 0)
         {
-            damageshake = Mathf.Max(0.0f, damageshake - 1.0f);
+            damageshake = ApproachTS(damageshake, 0.0f);
 
             // Exit if there's no sprite renderer set
             if (spriterenderer == null) {return;}
@@ -323,7 +327,7 @@ public class Entity : MasterObject
             // Set x offset
             if (damageshake > 0)
             {
-                float xshift = ((Mathf.Repeat(damageshake, 4.0f) < 2.0f)? -3: 3); // Shift left/right every 4 frames
+                float xshift = (BoolStep(damageshake, 4.0f) == 1.0f? -3: 3); // Shift left/right every 4 frames
                 spriterenderer.transform.localPosition = new Vector3(
                     xshift, 
                     spriterenderer.transform.localPosition.y, 

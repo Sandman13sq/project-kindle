@@ -34,11 +34,14 @@ public class _GameHeader : MonoBehaviour
     private int[] sceneflags;
     const int FLAGDIV = sizeof(int) * 8;
 
+    float timestep, nexttimestep, hitstop;
+
     // =====================================================================
     
     // Functions
 
     public static _GameHeader Instance { get; private set; }
+    public float TimeStep {get {return timestep;} set {nexttimestep = value;}}
 
     void Awake()
     {
@@ -90,6 +93,10 @@ public class _GameHeader : MonoBehaviour
         {
             Application.targetFrameRate = 60;
         }
+
+        timestep = 1.0f;
+        nexttimestep = 1.0f;
+        hitstop = 0.0f;
     }
 
     // Start is called before the first frame update
@@ -102,6 +109,26 @@ public class _GameHeader : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void EarlyUpdate()
+    {
+
+    }
+
+    void LateUpdate()
+    {
+        timestep = nexttimestep;
+
+        if (hitstop > 0.0f)
+        {
+            hitstop = Mathf.Max(0.0f, hitstop-nexttimestep);
+            timestep = 0.0f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.P)) {nexttimestep += 0.1f; Debug.Log("Timestep: "+nexttimestep.ToString());}
+        if (Input.GetKeyDown(KeyCode.O)) {nexttimestep -= 0.1f; Debug.Log("Timestep: "+nexttimestep.ToString());}
+        if (Input.GetKeyDown(KeyCode.I)) {nexttimestep = nexttimestep == 0.0f? 1.0f: 0.0f; Debug.Log("Timestep: "+nexttimestep.ToString());}
     }
 
     void OnSceneLoad(Scene scene, LoadSceneMode mode)

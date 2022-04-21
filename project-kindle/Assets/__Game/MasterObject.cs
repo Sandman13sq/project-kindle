@@ -34,5 +34,10 @@ public class MasterObject : MonoBehaviour
             
             return _game;
         }
-    } 
+    }
+
+    public static float ApproachTS(float x, float target, float step = 1.0f)
+    {
+        return DmrMath.Approach(x, target, step*game.TimeStep);
+    }
 }

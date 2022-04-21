@@ -22,7 +22,7 @@ public class Entity_EyeDrop_Strike : Entity
         UpdateMovement();
 
         spriterenderer.sprite = sprites[(spriteindex > 3.0f)? 0: 1];
-        spriteindex = Mathf.Repeat(spriteindex + 1.0f, 6.0f);
+        spriteindex = Mathf.Repeat(spriteindex + ts, 6.0f);
 
         if (!hit)
         {
@@ -33,7 +33,7 @@ public class Entity_EyeDrop_Strike : Entity
         }
         else if (hitdelay > 0.0f)
         {
-            hitdelay = Mathf.Max(hitdelay-1.0f, 0.0f);
+            hitdelay = Mathf.Max(hitdelay-ts, 0.0f);
         }
         else
         {

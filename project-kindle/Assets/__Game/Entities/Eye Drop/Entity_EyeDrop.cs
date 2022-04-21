@@ -59,13 +59,13 @@ public class Entity_EyeDrop : Entity
                 // Increase speed to maxspeed
                 if (Mathf.Abs(xspeed) < maxspeed)
                 {
-                    xspeed = Approach(xspeed, maxspeed*-Polarize(spriterenderer.flipX), 0.1f);
+                    xspeed = ApproachTS(xspeed, maxspeed*-Polarize(spriterenderer.flipX), 0.1f);
                 }
 
-                hoverstep = Mathf.Repeat(hoverstep+0.05f, 2.0f*Mathf.PI);
+                hoverstep = Mathf.Repeat(hoverstep+ts*0.05f, 2.0f*Mathf.PI);
                 yspeed = Mathf.Sin(hoverstep) * 0.4f;
                 
-                if (statestep > 0) {statestep -= 1.0f;}
+                if (statestep > 0) {statestep -= ts;}
                 else
                 {
                     // Raycast for player
@@ -110,9 +110,9 @@ public class Entity_EyeDrop : Entity
             {
                 xspeed *= speedslowmod;
 
-                spriterenderer.sprite = sprites[(Mathf.Repeat(statestep, 4.0f) < 2.0f)? 1: 0];
+                spriterenderer.sprite = sprites[(int)BoolStep(statestep, 4.0f)];
 
-                if (statestep > 0) {statestep -= 1.0f;}
+                if (statestep > 0) {statestep -= ts;}
                 else
                 {
                     state = (int)State.Strike;

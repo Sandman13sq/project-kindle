@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Particle_Popsmoke : MonoBehaviour
+public class Particle_Popsmoke : MasterObject
 {
     [SerializeField] private Sprite[] sprites;
     [SerializeField] private SpriteRenderer spriterenderer;
@@ -34,7 +34,7 @@ public class Particle_Popsmoke : MonoBehaviour
     {
         if (life > 0.0f)
         {
-            life -= 1.0f;
+            life -= game.TimeStep;
 
             if (spritecount <= 1)
             {

@@ -5,15 +5,19 @@ using UnityEngine;
 
 public static class DmrMath
 {
+    // Returns sign of number
     public static float Sign(float x) { return x == 0.0f? 0.0f: x > 0.0f ? 1.0f : -1.0f; }
 
+    // Returns 1 if true, -1 if false
     public static float Polarize(bool x) { return x? 1.0f: -1.0f; }
     public static float Polarize(float x) { return x > 0.0f ? 1.0f : -1.0f; }
 
+    // Returns true when value is in an odd interval
+    public static float BoolStep(float x, float step) {return (x % (step * 2.0f)) / step;}
+    
+    // Returns value closest to a factor of step
     public static float Quantize(float x, float step) { return (float)Math.Floor(x / step) * step; }
-
     public static float QuantizeRound(float x, float step) { return (float)Math.Round(x / step) * step; }
-
     public static float QuantizeCeil(float x, float step) { return (float)Math.Ceiling(x / step) * step; }
 
 
