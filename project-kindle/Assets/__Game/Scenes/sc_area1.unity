@@ -64845,6 +64845,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: b053705e20597b6418278566e9486f7e, type: 2}
   - m_RefCount: 279
     m_Data: {fileID: 11400000, guid: 4f1454edf295da04083b535c97855782, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -66429,6 +66431,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7742138843082028748, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
+      propertyPath: m_FollowOffset.y
+      value: -47
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742138843287361443, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
+      propertyPath: m_FollowOffset.x
+      value: -70
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742138843835149041, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
+      propertyPath: m_FollowOffset.x
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 7742138844259772201, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 999.8934
@@ -66436,6 +66450,10 @@ PrefabInstance:
     - target: {fileID: 7742138844259772201, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
       propertyPath: m_LocalPosition.y
       value: 460.13055
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742138844745897128, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
+      propertyPath: m_FollowOffset.y
+      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
