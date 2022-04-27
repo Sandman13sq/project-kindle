@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Entity_Player : Entity
 {
 	enum State
@@ -41,7 +40,7 @@ public class Entity_Player : Entity
 	// Movement constants -------------------------------
 	float moveacceleration = 0.4f;
 	float movedeceleration = 0.6f;
-	float moveaccelerationair = 0.25f;
+	float moveaccelerationair = 0.15f;
 	float movespeedmax = 5.0f;
 	float jumpstrength = 5.5f;
 	float gravity = -0.26f;
