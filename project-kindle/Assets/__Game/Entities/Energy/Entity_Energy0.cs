@@ -41,13 +41,13 @@ public class Entity_Energy0 : Entity
     protected override void Update()
     {
         // Update color
-        colorstep = Mathf.Repeat(colorstep + 0.02f, Mathf.PI);
+        colorstep = Mathf.Repeat(colorstep + ts*0.02f, Mathf.PI);
         spriterenderer.color = Color.Lerp(color1, color2, Mathf.Sin(colorstep*colorstep));
         
         // Move
         if (yspeed > terminalvelocity)
         {
-            yspeed = Mathf.Max(yspeed+gravity, terminalvelocity);
+            yspeed = Mathf.Max(yspeed+gravity*ts, terminalvelocity);
         }
 
         // If ground collision...
@@ -74,7 +74,7 @@ public class Entity_Energy0 : Entity
             {
                 if (hit.collider.gameObject.tag == "player")
                 {
-                    xspeed += attractspeed * Mathf.Sign(
+                    xspeed += ts * attractspeed * Mathf.Sign(
                         hit.collider.gameObject.transform.position.x-transform.position.x);
                 }
             }
@@ -87,7 +87,7 @@ public class Entity_Energy0 : Entity
         {
             if (life > 0.0f)
             {
-                life -= 1.0f;
+                life -= ts;
                 
                 // Sprite flicker
                 spriterenderer.enabled = life > (lifemax/3.0f) || Mathf.Repeat(life, 6.0f) < 3.0f;

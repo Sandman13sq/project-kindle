@@ -32,7 +32,7 @@ public class Entity_Heart2 : Entity
     protected override void Update()
     {
         // Pulse heart
-        scalestep = Mathf.Repeat(scalestep + 0.04f, 2.0f*Mathf.PI);
+        scalestep = Mathf.Repeat(scalestep + 0.04f*ts, 2.0f*Mathf.PI);
         const float f = 10.0f;
         float amt = Mathf.Max(0.0f, f*(Mathf.Sin(scalestep)-(1.0f-(1.0f/f))));
 

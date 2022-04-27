@@ -48,12 +48,12 @@ public class Entity_Crawler : Entity
                         // To the left of player, move right
                         if (transform.position.x < ptransform.x)
                         {
-                            xspeed = Mathf.Min(xspeed+acc, maxspeed);
+                            xspeed = Mathf.Min(xspeed+acc*ts, maxspeed);
                         }
                         // To the right of player, move left
                         else
                         {
-                            xspeed = Mathf.Max(xspeed-acc, -maxspeed);
+                            xspeed = Mathf.Max(xspeed-acc*ts, -maxspeed);
                         }
 
                         // Update sprite direction

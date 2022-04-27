@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Projectile fired from player weapon
-public class WeaponProjectile : MonoBehaviour
+public class WeaponProjectile : MasterObject
 {
     public SpriteRenderer spriterenderer;
     [SerializeField] private Sprite[] sprites;
@@ -45,7 +45,7 @@ public class WeaponProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateMovement();
+        UpdateMovement(game.TimeStep);
 
         // Enemy Collision
         if (hitboxcollider)
@@ -82,11 +82,11 @@ public class WeaponProjectile : MonoBehaviour
         if (sprites.Length > 0)
         {
             spriterenderer.sprite = sprites[Mathf.FloorToInt(Mathf.Clamp(image_index, 0.0f, sprites.Length-1))];
-            image_index = Mathf.Repeat(image_index+image_speed, sprites.Length);
+            image_index = Mathf.Repeat(image_index+image_speed*game.TimeStep, sprites.Length);
         }
 
         // Progress life
-        life -= 1.0f;
+        life -= game.TimeStep;
         if (life <= 0.0)
         {
             DecrementShotCount();

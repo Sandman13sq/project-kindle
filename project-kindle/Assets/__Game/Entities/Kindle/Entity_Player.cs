@@ -157,11 +157,11 @@ public class Entity_Player : Entity
 					// When current speed and input direction agree, use acceleration, else use deceleration
 					if (xlev > 0.0f) // Moving Right
 					{
-						xspeed = Mathf.Min(xspeed + (xlev==Mathf.Sign(xspeed)? moveacceleration: movedeceleration), movespeedmax);
+						xspeed = Mathf.Min(xspeed + ts * (xlev==Mathf.Sign(xspeed)? moveacceleration: movedeceleration), movespeedmax);
 					}
 					else if (xlev < 0.0f)   // Moving Left
 					{
-						xspeed = Mathf.Max(xspeed - (xlev==Mathf.Sign(xspeed)? moveacceleration: movedeceleration), -movespeedmax);
+						xspeed = Mathf.Max(xspeed - ts * (xlev==Mathf.Sign(xspeed)? moveacceleration: movedeceleration), -movespeedmax);
 					}
 					else    // No input held
 					{
@@ -171,7 +171,7 @@ public class Entity_Player : Entity
 						}
 						else    // Approach 0 with deceleration
 						{
-							xspeed -= Mathf.Sign(xspeed) * movedeceleration;
+							xspeed -= Mathf.Sign(xspeed) * movedeceleration * ts;
 						}
 					}
 					
@@ -197,11 +197,11 @@ public class Entity_Player : Entity
 
 					if (xlev > 0.0f) // Moving Right
 					{
-						xspeed = Mathf.Min(xspeed + moveaccelerationair, movespeedmax);
+						xspeed = Mathf.Min(xspeed + moveaccelerationair * ts, movespeedmax);
 					}
 					else if (xlev < 0.0f)   // Moving Left
 					{
-						xspeed = Mathf.Max(xspeed - moveaccelerationair, -movespeedmax);
+						xspeed = Mathf.Max(xspeed - moveaccelerationair * ts, -movespeedmax);
 					}
 
 					animator.SetBool("InAir", true);
@@ -253,7 +253,7 @@ public class Entity_Player : Entity
 		if (!onground)
 		{
 			// Apply gravity
-			yspeed = Mathf.Max(yspeed+grav, -8.0f);
+			yspeed = Mathf.Max(yspeed+grav*ts, -8.0f);
 		}
 
 		UpdateMovement();	// Move by xspeed, yspeed
@@ -294,9 +294,9 @@ public class Entity_Player : Entity
 		// Iframes
 		if (iframes > 0.0f)
 		{
-			iframes = Mathf.Max(0.0f, iframes-1.0f); // Decrement
+			iframes = ApproachTS(iframes, 0.0f); // Decrement
 
-			// 
+			// Flicker
 			if (iframes > 0.0f)
 			{
 				spriterenderer.enabled = Mathf.Repeat(iframes, 8.0f) < 4.0f;
@@ -313,6 +313,8 @@ public class Entity_Player : Entity
 			showplayer = game.GameFlagGet(_GameHeader.GameFlag.show_player);
 			spriterenderer.enabled = showplayer;
 		}
+
+		animator.speed = ts;
 	}
 
 	// Methods ===============================================================
