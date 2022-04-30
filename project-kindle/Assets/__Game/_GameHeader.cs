@@ -278,7 +278,7 @@ public class _GameHeader : MonoBehaviour
         audiomanager.Stop(key);
     }
 
-    public void StopMusic(string key)
+    public void StopBGM(string key)
     {
         if (audiosource.clip != null)
         {

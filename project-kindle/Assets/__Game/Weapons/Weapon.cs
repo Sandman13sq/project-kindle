@@ -72,6 +72,8 @@ public class Weapon : MasterObject
         if ( cancontrol && Input.GetButtonDown("Fire1") )
         {
             firebuffer = firebuffertime;
+            if(!HasAmmo())
+                game.PlaySound("EmptyWeapon");
         }
 
         // Autofire
@@ -84,9 +86,13 @@ public class Weapon : MasterObject
                 {
                     autofireprogress = autofiretime;
                     firebuffer = 10.0f;
+
+                    if(!HasAmmo())
+                        game.PlaySound("EmptyWeapon");
                 }
             }
         }
+
         // No recharge if key is held down
         else
         {
@@ -138,7 +144,6 @@ public class Weapon : MasterObject
                     player.OnShoot();
                 }
             }
-
             playerdata.SetAmmo(ammo, ammomax);  // Update Ammo Counts
         }
     }

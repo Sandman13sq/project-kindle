@@ -66519,7 +66519,7 @@ PrefabInstance:
     - target: {fileID: 2521553371264269455, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
       propertyPath: sounds.Array.data[10].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 347c25bd694c27b499c26a05564df83a, type: 3}
+      objectReference: {fileID: 8300000, guid: 171ecc2d19f5203478d7e3654d40b33c, type: 3}
     - target: {fileID: 2521553371264269455, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
       propertyPath: sounds.Array.data[10].name
       value: EyedropCharge
@@ -66666,7 +66666,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2521553371264269455, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
       propertyPath: sounds.Array.data[1].volume
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2521553371264269455, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
       propertyPath: sounds.Array.data[20].pitch
