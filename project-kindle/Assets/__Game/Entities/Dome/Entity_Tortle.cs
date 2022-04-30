@@ -151,7 +151,8 @@ public class Entity_Tortle : Entity
                     statestep = 20.0f;
 
                     //Spawn 5 bullets, set each with a unique number
-                    for(int i = 0; i < 5; i++){ 
+                    for(int i = 0; i < 5; i++){
+                        game.PlaySound("DomeAttack"); 
                         GameObject obj = Instantiate(strikeobj);
                         obj.transform.position = transform.position + new Vector3(0, -16.0f, 0.0f);
                         obj.GetComponent<Entity_Dome_projectiles>().bulletNum = i;

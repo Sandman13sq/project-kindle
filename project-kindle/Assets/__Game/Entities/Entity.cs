@@ -83,6 +83,10 @@ public class Entity : MasterObject
 
     protected float ts {get {return game.TimeStep;}}
 
+    // =============== Audio stuff ===============
+    private bool soundPlayed = false;
+    //============================================
+
     // Common ================================================================
 
     // Called on creation
