@@ -19,7 +19,7 @@ public class _GameHeader : MonoBehaviour
     [SerializeField] private GameObject player_prefab;
     [SerializeField] private GameObject textbox_prefab;
     [SerializeField] private AudioManager audiomanager;
-    [SerializeField] private AudioSource audiosource;
+    [SerializeField] public AudioSource audiosource;
     [SerializeField] private PlayerData playerdata;
     [SerializeField] private GameObject playerhud;
     private TextBox textbox_object;
@@ -263,7 +263,7 @@ public class _GameHeader : MonoBehaviour
 
     public void PlayBGM(string key)
     {
-        /*if (audiosource.clip != null)
+        if (audiosource.clip != null)
         {
             audiosource.Stop();
         }
@@ -271,8 +271,7 @@ public class _GameHeader : MonoBehaviour
         Sound s = audiomanager.GetSound(key);
         audiosource.clip = s.clip;
         audiosource.Play();
-        audiosource.volume = s.volume;*/
-        audiomanager.Play(key);
+        audiosource.volume = s.volume;
     }
 
     public void StopSound(string key){
