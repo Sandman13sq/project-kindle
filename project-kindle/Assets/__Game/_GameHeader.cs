@@ -263,7 +263,7 @@ public class _GameHeader : MonoBehaviour
 
     public void PlayBGM(string key)
     {
-        if (audiosource.clip != null)
+        /*if (audiosource.clip != null)
         {
             audiosource.Stop();
         }
@@ -271,7 +271,8 @@ public class _GameHeader : MonoBehaviour
         Sound s = audiomanager.GetSound(key);
         audiosource.clip = s.clip;
         audiosource.Play();
-        audiosource.volume = s.volume;
+        audiosource.volume = s.volume;*/
+        audiomanager.Play(key);
     }
 
     public void StopSound(string key){
