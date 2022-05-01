@@ -27,7 +27,7 @@ public class Entity_Player : Entity
 
 	//====================================
 	//======== Audio stuff ==================
-	private bool landingSoundPlayed = true;
+	private bool landingSoundPlayed = false;
 	//======================================
 
 	private float hsign;    // Horizontal sign. {-1, 1}
@@ -191,7 +191,6 @@ public class Entity_Player : Entity
 						jumpheld = true;
 
 						game.PlaySound("Jump");
-						landingSoundPlayed = false;
 					}
 
 					animator.SetBool("InAir", false);
@@ -200,6 +199,7 @@ public class Entity_Player : Entity
 				// In Air
 				else
 				{
+					landingSoundPlayed = false;
 					// jumpheld variable is true as long as player is rising and holding the JUMP button.
 					// When jumpheld is false, it stays false until set to true when jumping from the ground.
 					jumpheld = jumpheld && (Input.GetButton("Jump") && yspeed > 0.0f);
