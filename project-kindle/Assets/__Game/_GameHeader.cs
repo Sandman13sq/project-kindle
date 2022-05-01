@@ -19,7 +19,7 @@ public class _GameHeader : MonoBehaviour
     [SerializeField] private GameObject player_prefab;
     [SerializeField] private GameObject textbox_prefab;
     [SerializeField] private AudioManager audiomanager;
-    [SerializeField] public AudioSource audiosource;
+    [SerializeField] private AudioSource audiosource;
     [SerializeField] private PlayerData playerdata;
     [SerializeField] private GameObject playerhud;
     private TextBox textbox_object;
@@ -284,5 +284,10 @@ public class _GameHeader : MonoBehaviour
         {
             audiosource.Stop();
         }
+    }
+
+    public void SetBGMVolume(float volume)
+    {
+        audiosource.volume = volume;
     }
 }

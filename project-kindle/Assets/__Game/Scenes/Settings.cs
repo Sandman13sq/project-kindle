@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Settings : MonoBehaviour
+public class Settings : MasterObject
 {
-    [SerializeField] private _GameHeader header;
     public void SetBGMVolume(float volume)
     {
         FindObjectOfType<AudioManager>().SetBGMVolume(volume);
-        header.audiosource.volume = volume;
+        game.SetBGMVolume(volume);
     }
 
     public void SetSFXVolume(float volume)
