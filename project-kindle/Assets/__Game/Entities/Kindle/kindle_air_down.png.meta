@@ -1,31 +1,19 @@
 fileFormatVersion: 2
-guid: 62eb557f9e231a94e9f64d254ab4d7c3
+guid: b4c9f5ce01bb4474185719b5bfd87af8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1600164473263688581
-    second: kindle_vector_0
+      213: 2428291139014916167
+    second: kindle_air_down_0
   - first:
-      213: 7092806492854255017
-    second: kindle_vector_1
+      213: 4187677436078442470
+    second: kindle_air_down_1
   - first:
-      213: 2447039086281458597
-    second: kindle_vector_2
+      213: 3503230217474215075
+    second: kindle_air_down_2
   - first:
-      213: -7116219985446798858
-    second: kindle_vector_3
-  - first:
-      213: -1635582504652792733
-    second: kindle_vector_4
-  - first:
-      213: -4553369653161914842
-    second: kindle_vector_5
-  - first:
-      213: -2252140618510573974
-    second: kindle_vector_6
-  - first:
-      213: 2212714366450486161
-    second: kindle_vector_7
+      213: -3942854810224777747
+    second: kindle_air_down_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -67,7 +55,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 1
@@ -111,11 +99,23 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: kindle_vector_0
+      name: kindle_air_down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -129,14 +129,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58b05134c1de43610800000000000000
-      internalID: 1600164473263688581
+      spriteID: 7487630ece503b120800000000000000
+      internalID: 2428291139014916167
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kindle_vector_1
+      name: kindle_air_down_1
       rect:
         serializedVersion: 2
         x: 96
@@ -150,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ad792b0de5be6260800000000000000
-      internalID: 7092806492854255017
+      spriteID: 6e7cf5bd07e9d1a30800000000000000
+      internalID: 4187677436078442470
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kindle_vector_2
+      name: kindle_air_down_2
       rect:
         serializedVersion: 2
         x: 192
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a38d418511a5f120800000000000000
-      internalID: 2447039086281458597
+      spriteID: 3ac07f66259fd9030800000000000000
+      internalID: 3503230217474215075
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kindle_vector_3
+      name: kindle_air_down_3
       rect:
         serializedVersion: 2
         x: 288
@@ -192,92 +192,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f978e760ab1e3d90800000000000000
-      internalID: -7116219985446798858
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: kindle_vector_4
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 36c9351b06e3d49e0800000000000000
-      internalID: -1635582504652792733
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: kindle_vector_5
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 0
-        width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 62e8d3cdc6e2fc0c0800000000000000
-      internalID: -4553369653161914842
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: kindle_vector_6
-      rect:
-        serializedVersion: 2
-        x: 576
-        y: 0
-        width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a6ed2713a0aceb0e0800000000000000
-      internalID: -2252140618510573974
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: kindle_vector_7
-      rect:
-        serializedVersion: 2
-        x: 672
-        y: 0
-        width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 19b4fa92ef325be10800000000000000
-      internalID: 2212714366450486161
+      spriteID: de5ac93b07a2849c0800000000000000
+      internalID: -3942854810224777747
       vertices: []
       indices: 
       edges: []

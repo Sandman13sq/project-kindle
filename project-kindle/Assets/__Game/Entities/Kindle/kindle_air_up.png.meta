@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 72ef523ef003ee0458048c5616276612
+guid: 151559981edc62c4b90cc144e2e7f611
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6623860009016570111
-    second: kindle_vector_air_down_0
+      213: 1579906174003843549
+    second: kindle_air_up_0
   - first:
-      213: 7136238611124284483
-    second: kindle_vector_air_down_1
+      213: -5620666266045397257
+    second: kindle_air_up_1
   - first:
-      213: -6332023493836841058
-    second: kindle_vector_air_down_2
+      213: -6333878519334129962
+    second: kindle_air_up_2
   - first:
-      213: -1394274524503916219
-    second: kindle_vector_air_down_3
+      213: -7049759475345277463
+    second: kindle_air_up_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -99,11 +99,23 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: kindle_vector_air_down_0
+      name: kindle_air_up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -117,14 +129,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ff0395f559daceb50800000000000000
-      internalID: 6623860009016570111
+      spriteID: dd112f76b44fce510800000000000000
+      internalID: 1579906174003843549
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kindle_vector_air_down_1
+      name: kindle_air_up_1
       rect:
         serializedVersion: 2
         x: 96
@@ -138,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34c6d781533090360800000000000000
-      internalID: 7136238611124284483
+      spriteID: 7f6c7538fc16ff1b0800000000000000
+      internalID: -5620666266045397257
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kindle_vector_air_down_2
+      name: kindle_air_up_2
       rect:
         serializedVersion: 2
         x: 192
@@ -159,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9f5d6c4e222028a0800000000000000
-      internalID: -6332023493836841058
+      spriteID: 6deac948b0b8918a0800000000000000
+      internalID: -6333878519334129962
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kindle_vector_air_down_3
+      name: kindle_air_up_3
       rect:
         serializedVersion: 2
         x: 288
@@ -180,8 +192,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 541419705ba86ace0800000000000000
-      internalID: -1394274524503916219
+      spriteID: 9edb910cb193a2e90800000000000000
+      internalID: -7049759475345277463
       vertices: []
       indices: 
       edges: []

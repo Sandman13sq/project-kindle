@@ -1,19 +1,31 @@
 fileFormatVersion: 2
-guid: 5abe2a36ff84783459978890a7294e44
+guid: fe122d8e8d536e94fba437bc8267eb4b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4759466861702402321
-    second: kindle_vector_jumprise_0
+      213: -5979178276209447890
+    second: kindle_idle_0
   - first:
-      213: -4086442229960039745
-    second: kindle_vector_jumprise_1
+      213: 7147478188956336486
+    second: kindle_idle_1
   - first:
-      213: -8693804080568704104
-    second: kindle_vector_jumprise_2
+      213: -4223147835609705730
+    second: kindle_idle_2
   - first:
-      213: 8288605598918841644
-    second: kindle_vector_jumprise_3
+      213: -1622351862983311165
+    second: kindle_idle_3
+  - first:
+      213: -5240090014146310211
+    second: kindle_idle_4
+  - first:
+      213: 7749695201337108300
+    second: kindle_idle_5
+  - first:
+      213: 6979190524514601561
+    second: kindle_idle_6
+  - first:
+      213: 2304468435852486511
+    second: kindle_idle_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -55,7 +67,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 1
@@ -99,11 +111,23 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: kindle_vector_jumprise_0
+      name: kindle_idle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -117,14 +141,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fee2cf32b1af2fdb0800000000000000
-      internalID: -4759466861702402321
+      spriteID: e2cadcd6901b50da0800000000000000
+      internalID: -5979178276209447890
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kindle_vector_jumprise_1
+      name: kindle_idle_1
       rect:
         serializedVersion: 2
         x: 96
@@ -138,14 +162,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb2a318517a0a47c0800000000000000
-      internalID: -4086442229960039745
+      spriteID: 661489c3b81f03360800000000000000
+      internalID: 7147478188956336486
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kindle_vector_jumprise_2
+      name: kindle_idle_2
       rect:
         serializedVersion: 2
         x: 192
@@ -159,14 +183,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8936cde1047695780800000000000000
-      internalID: -8693804080568704104
+      spriteID: ef216803b6d5465c0800000000000000
+      internalID: -4223147835609705730
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: kindle_vector_jumprise_3
+      name: kindle_idle_3
       rect:
         serializedVersion: 2
         x: 288
@@ -180,8 +204,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c251fd690ea070370800000000000000
-      internalID: 8288605598918841644
+      spriteID: 3c0cf22839f3c79e0800000000000000
+      internalID: -1622351862983311165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kindle_idle_4
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbfccb335e57747b0800000000000000
+      internalID: -5240090014146310211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kindle_idle_5
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c476f39d9b27c8b60800000000000000
+      internalID: 7749695201337108300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kindle_idle_6
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95a07710ec01bd060800000000000000
+      internalID: 6979190524514601561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kindle_idle_7
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 0
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f67661335dd1bff10800000000000000
+      internalID: 2304468435852486511
       vertices: []
       indices: 
       edges: []
