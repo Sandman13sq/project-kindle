@@ -285,7 +285,7 @@ public class Entity : MasterObject
             }
 
             OnHealthChange(health-prehealth);
-
+            
             if (health < 0) 
             {
                 health = 0;

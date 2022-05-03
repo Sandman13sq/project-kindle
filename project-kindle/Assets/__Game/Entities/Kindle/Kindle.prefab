@@ -171,7 +171,7 @@ MonoBehaviour:
   hurtboxcollider: {fileID: 4989002298374109868}
   worldcollider: {fileID: 350204462260166774}
   rbody: {fileID: 350204462260166777}
-  showdamage: 0
+  showdamage: 1
   isshootable: 0
   eventondefeat: 0
   dorespawn: 0

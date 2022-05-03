@@ -71,6 +71,7 @@ public class Entity_Player : Entity
 
 		state = (int)State.control;
 		animator.SetBool("Defeat", false);
+		game.SetTimeStep(1.0f);
 	}
 
 	// Update is called once per frame
@@ -103,7 +104,10 @@ public class Entity_Player : Entity
 			// -------------------------------------------------------------------
 			// Control State - Player moves the character
 			case(State.control): {
-				animator.SetBool("Defeat", false);
+				if (game.GetTrueTimeStep() > 0.0f)
+				{
+					animator.SetBool("Defeat", false);
+				}
 
 				// Use controls if controls are free
 				if ( !controlslocked )
@@ -309,11 +313,15 @@ public class Entity_Player : Entity
 			// Flicker
 			if (iframes > 0.0f)
 			{
-				spriterenderer.enabled = Mathf.Repeat(iframes, 8.0f) < 4.0f;
+				const float iframecolor = 0.7f;
+				Color c_dim = new Vector4(iframecolor, iframecolor, iframecolor, 1.0f);
+				Color c_lit = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+				spriterenderer.color = Mathf.Repeat(iframes, 14.0f) < 7.0f? c_dim: c_lit;
 			}
 			else
 			{
 				spriterenderer.enabled = true;
+				spriterenderer.color = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
 			}
 		}
 
@@ -385,6 +393,7 @@ public class Entity_Player : Entity
 			}
 			return healthdiff;
 		}
+
 		// Gaining health
 		else if (value > 0)
 		{
@@ -410,6 +419,10 @@ public class Entity_Player : Entity
 			yspeed = 5.0f;
 			jumpheld = true;
 			onground = false;
+
+			animator.Play("anim_kindle.defeat");
+			animator.SetBool("Defeat", true);
+			game.SetHitStop(13f); // Pause speed for a short duration
 		}
 	}
 
@@ -421,10 +434,13 @@ public class Entity_Player : Entity
 		Instantiate(gameover_prefab).transform.parent = null;
 		iframes = 0;
 
-		yspeed = 6.0f;
+		yspeed = 3.0f;
 		xspeed = -hsign * 2.0f;
 
 		state = (int)State.defeat;
+
+		game.SetHitStop(20f);
+		game.SetTimeStep(0.5f);
 		return false;
 	}
 

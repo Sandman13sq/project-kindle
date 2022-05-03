@@ -290,4 +290,17 @@ public class _GameHeader : MonoBehaviour
     {
         audiosource.volume = volume;
     }
+
+    // Timestep ------------------------------------------
+    public float GetTimeStep() {return nexttimestep;}
+    public float GetTrueTimeStep() {return timestep;}
+    public void SetTimeStep(float ts)
+    {
+        nexttimestep = ts;
+    }
+
+    public void SetHitStop(float frames)
+    {
+        hitstop = Mathf.Max(hitstop, frames);
+    }
 }
