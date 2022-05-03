@@ -19,6 +19,7 @@ public class Entity_Rattah : Entity
     [SerializeField] private Sprite[] sprites_attack;
     float image_index;
     float statestep;
+    //bool bonkPlayed = false;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -97,6 +98,7 @@ public class Entity_Rattah : Entity
                 }
                 
                 break;
+
             
             // =========================================================
             case(State.attack0):
@@ -106,6 +108,7 @@ public class Entity_Rattah : Entity
 
                 if (statestep >= 20.0f)
                 {
+                    game.PlaySound("RattahMiss");
                     state = (int)State.attack1;
                     statestep = 0.0f;
                 }
@@ -155,7 +158,7 @@ public class Entity_Rattah : Entity
                 break;
         }
     }
-
+    
     protected override bool OnDefeat()
     {
         base.OnDefeat();
