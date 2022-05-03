@@ -144,6 +144,6 @@ MonoBehaviour:
   speed: 18
   damage: 1
   lifemax: 12
-  obj_on_hit: {fileID: 0}
-  obj_on_miss: {fileID: 5660040404222689485, guid: 6f75a49ece4f7f84e82d0b7688f336f8, type: 3}
+  obj_on_hit: {fileID: 5660040404222689485, guid: 6f75a49ece4f7f84e82d0b7688f336f8, type: 3}
+  obj_on_miss: {fileID: 754851644026325277, guid: dd035dfdac2d84e4098ccc8abac334cd, type: 3}
   sourceweapon: {fileID: 0}

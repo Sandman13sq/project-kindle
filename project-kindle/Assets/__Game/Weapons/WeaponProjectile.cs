@@ -64,6 +64,8 @@ public class WeaponProjectile : MasterObject
                     {
                         e.ChangeHealth(-damage);
                         DecrementShotCount();
+
+                        // Create hit graphic
                         if (obj_on_hit)
                         {
                             Instantiate(obj_on_hit).transform.position = transform.position;
@@ -92,6 +94,7 @@ public class WeaponProjectile : MasterObject
             DecrementShotCount();
             Destroy(gameObject);
 
+            // Create miss graphic
             if (obj_on_miss)
             {
                 Instantiate(obj_on_miss).transform.position = transform.position;
@@ -107,6 +110,13 @@ public class WeaponProjectile : MasterObject
         if (c.gameObject.layer == LAYER_WORLD_INDEX)
         {
             DecrementShotCount();
+
+            // Create miss graphic
+            if (obj_on_miss)
+            {
+                Instantiate(obj_on_miss).transform.position = transform.position;
+            }
+
             Destroy(gameObject);
         }
     }

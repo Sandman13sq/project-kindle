@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Particle_Shotpop : MasterObject
+public class Particle_ShotMiss : MasterObject
 {
     [SerializeField] private SpriteRenderer spriterenderer; 
     [SerializeField] private Sprite[] sprites;
-    float lifemax = 6.0f;
+    float lifemax = 7.0f;
     float life = 0.0f;
 
     // Start is called before the first frame update
