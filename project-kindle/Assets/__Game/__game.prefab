@@ -537,6 +537,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f64933647f77093428bffc918d3c48ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  primaryColor: {r: 0.2403227, g: 0.22855109, b: 0.4528302, a: 1}
+  accentColor: {r: 1, g: 0.13679248, b: 0.33129358, a: 1}
   energy: 0
   levelmax: 2
   ammomax: 32
@@ -562,6 +564,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 075162ed74dbffa4f977db6b046dfeb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  primaryColor: {r: 0.94509804, g: 0.36862743, b: 0.39119887, a: 1}
+  accentColor: {r: 1, g: 0.90907556, b: 0, a: 1}
   energy: 0
   levelmax: 2
   ammomax: 40
@@ -642,11 +646,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7229868878053391227, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 620
+      value: 240.10663
       objectReference: {fileID: 0}
     - target: {fileID: 7229868878053391227, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 208
+      value: -44.13057
       objectReference: {fileID: 0}
     - target: {fileID: 7229868878053391227, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
       propertyPath: m_LocalPosition.z
