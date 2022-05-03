@@ -11,7 +11,7 @@ public class Entity_EyeDrop : Entity
     private const float maxspeed = 1.5f;
     private const float speedslowmod = 0.95f;
     private float hoverstep = 0.0f;
-
+    private bool chargePlaying = false;
     [SerializeField] private Sprite[] sprites;
     [SerializeField] private GameObject strikeobj;
 
@@ -96,6 +96,8 @@ public class Entity_EyeDrop : Entity
                                     )
                                 )
                             {
+                                game.PlaySound("EyedropCharge");
+                                chargePlaying = true;
                                 state = (int)State.Flash;
                                 statestep = 40.0f;
                             }
@@ -120,6 +122,9 @@ public class Entity_EyeDrop : Entity
 
                     GameObject obj = Instantiate(strikeobj);
                     obj.transform.position = transform.position + new Vector3(0.0f, -16.0f, 0.0f);
+                    game.StopSound("EyedropCharge");
+                    chargePlaying = false;
+                    game.PlaySound("EyedropAttack");
                 }
                 break;
             }
@@ -137,8 +142,12 @@ public class Entity_EyeDrop : Entity
                 }
                 break;
             }
-        }
+        }    
+    }
 
-        
+    void OnDisable() 
+    {
+        if(chargePlaying == true)
+            game.StopSound("EyedropCharge");
     }
 }

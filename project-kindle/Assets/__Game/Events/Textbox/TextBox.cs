@@ -33,6 +33,8 @@ public class TextBox : MasterObject
 
     private float arrowxstart;
 
+    private int ticks;
+
     // ====================================================================
 
     // Functions
@@ -51,6 +53,8 @@ public class TextBox : MasterObject
 
         statestep = 0.0f;
         state = State.zero;
+
+        ticks = 0;
     }
 
     // Update is called once per frame
@@ -89,6 +93,17 @@ public class TextBox : MasterObject
                 arrowsprite.enabled = false;
                 textcomponent.enabled = true;
 
+                //Play printing sound while we are printing the text
+                if(ticks == 0)
+                {
+                    game.PlaySound("TextPrint");
+                }
+
+                else if(ticks == 3)
+                {
+                    ticks = -1;
+                }
+
                 // Increase text position every frame
                 if (textpos < textstring.Length)
                 {
@@ -112,6 +127,7 @@ public class TextBox : MasterObject
 
                     game.ContinueEvent();
                 }
+                ticks += 1;
             }
             break;
 
@@ -121,6 +137,8 @@ public class TextBox : MasterObject
                 statestep += 0.1f;
                 arrowsprite.enabled = true;
                 textcomponent.enabled = true;
+                ticks = 0;
+                game.StopSound("TextPrint");
 
                 // Arrow points right
                 arrowsprite.transform.localPosition = new Vector2(

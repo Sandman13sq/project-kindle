@@ -83,6 +83,10 @@ public class Entity : MasterObject
 
     protected float ts {get {return game.TimeStep;}}
 
+    // =============== Audio stuff ===============
+    //private bool soundPlayed = false;
+    //============================================
+
     // Common ================================================================
 
     // Called on creation
@@ -186,6 +190,7 @@ public class Entity : MasterObject
             DropEnergy();
         }
 
+        game.PlaySound("DefeatExplosion");
         ShowDestroyGraphic();
 
         return true;
@@ -263,6 +268,7 @@ public class Entity : MasterObject
         // Losing health
         if (value < 0)
         {
+            game.PlaySound("EnemyImpact");
             health += value;
 
             // Show damage

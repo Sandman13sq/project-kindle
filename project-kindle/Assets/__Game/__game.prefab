@@ -93,30 +93,147 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
     loop: 1
+    type: 0
   - name: mus_junkyard
     clip: {fileID: 8300000, guid: 439165fd27882df459e4253c6b0991c6, type: 3}
     volume: 0.5
     pitch: 1
     source: {fileID: 0}
     loop: 1
+    type: 0
   - name: VectorShoot
-    clip: {fileID: 8300000, guid: 0ba82320354399547a7cafd89d3ab134, type: 3}
-    volume: 0.3
+    clip: {fileID: 8300000, guid: fe1418e17f02a2842b33165fbb3f5b12, type: 3}
+    volume: 1
     pitch: 1
     source: {fileID: 0}
     loop: 0
+    type: 1
   - name: DragonShoot
-    clip: {fileID: 8300000, guid: 1f0a85512d0da254dbdac5a89f77867d, type: 3}
-    volume: 0.6
+    clip: {fileID: 8300000, guid: 23353b9712d69ee48911c9f4575230de, type: 3}
+    volume: 1
     pitch: 1
     source: {fileID: 0}
     loop: 0
+    type: 1
   - name: Jump
     clip: {fileID: 8300000, guid: 543ca10382de37344aa4880431cd7b54, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
     loop: 0
+    type: 1
+  - name: TextPrint
+    clip: {fileID: 8300000, guid: ed1a43a6ee5c816458abfadef3cba494, type: 3}
+    volume: 1
+    pitch: 1.8
+    source: {fileID: 0}
+    loop: 0
+    type: 1
+  - name: Footstep1
+    clip: {fileID: 8300000, guid: 717ad7ae78a084d4fb66421c5c03a382, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    type: 1
+  - name: Footstep2
+    clip: {fileID: 8300000, guid: c554b532dbb2f044ab709d182adbf769, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    type: 1
+  - name: FootstepMetal
+    clip: {fileID: 8300000, guid: 61eac18f796156f4b9b98bb6c9642a43, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    type: 1
+  - name: DomeAttack
+    clip: {fileID: 8300000, guid: 824bba5d54b839a4797cc956d6b6a8df, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    type: 1
+  - name: EyedropCharge
+    clip: {fileID: 8300000, guid: 171ecc2d19f5203478d7e3654d40b33c, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    type: 1
+  - name: EyedropAttack
+    clip: {fileID: 8300000, guid: bd550c98a9fe54b4bbae5e1f1d107bf7, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    type: 1
+  - name: EmptyWeapon
+    clip: {fileID: 8300000, guid: 5a4b43e16e217ba4f967f683320db3f8, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    type: 1
+  - name: WingFlap
+    clip: {fileID: 8300000, guid: ed1a43a6ee5c816458abfadef3cba494, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    type: 1
+  - name: DefeatExplosion
+    clip: {fileID: 8300000, guid: 883c98359583859458da0ee63c75ed60, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    type: 1
+  - name: EnemyImpact
+    clip: {fileID: 8300000, guid: de9648d37cbd3ff40a280d6882da1502, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    type: 1
+  - name: Landing
+    clip: {fileID: 8300000, guid: a1591e03279dba4469639b09383fcb69, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    type: 1
+  - name: MackAttack
+    clip: {fileID: 8300000, guid: 47c97f88445889f4c8cd95e8edb242e1, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    type: 1
+  - name: RattahMiss
+    clip: {fileID: 8300000, guid: 12e96e4c067061f4fb5acba21c7c0595, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    type: 1
+  - name: RattahAttack
+    clip: {fileID: 8300000, guid: 464882e165ee815469566f8da2d83b47, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    type: 1
+  - name: StorkDrop
+    clip: {fileID: 8300000, guid: 79aa204c8fb46e34a96495e026bc8fe3, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    type: 1
 --- !u!82 &252792683710757966
 AudioSource:
   m_ObjectHideFlags: 0
@@ -467,6 +584,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1712364249276888927}
     m_Modifications:
+    - target: {fileID: 69329551, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
+      propertyPath: m_BoundingShape2D
+      value: 
+      objectReference: {fileID: 6548388224841776249}
+    - target: {fileID: 250594901, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
+      propertyPath: m_BoundingShape2D
+      value: 
+      objectReference: {fileID: 6548388224841776249}
+    - target: {fileID: 781872750, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
+      propertyPath: m_BoundingShape2D
+      value: 
+      objectReference: {fileID: 6548388224841776249}
+    - target: {fileID: 1099188389, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
+      propertyPath: m_BoundingShape2D
+      value: 
+      objectReference: {fileID: 6548388224841776249}
     - target: {fileID: 2006935218, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
       propertyPath: targetobj
       value: 

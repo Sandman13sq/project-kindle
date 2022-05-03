@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Entity_Player : Entity
 {
 	enum State
@@ -18,7 +17,7 @@ public class Entity_Player : Entity
     private float jumpbuffertime = 7.0f; // Max number of frames ahead of time where a jump press will still be read
 
 	private PlayerData playerdata;	// Holds health, energy, level, etc.
-	//======= stuff for animation:
+	//======= stuff for animation: ============
 	[SerializeField] Animator animator;
 	[SerializeField] SpriteRenderer[] spriterenderer_weapon; // Size = 2
 
@@ -28,6 +27,10 @@ public class Entity_Player : Entity
 	private int ticks = 0; //used to force shooting animation to play for a good bit
 
 	//====================================
+	//======== Audio stuff ==================
+	private bool landingSoundPlayed = false;
+	//======================================
+
 	private float hsign;    // Horizontal sign. {-1, 1}
     private float vsign;    // Vertical sign. {-1, 0, 1} 
 
@@ -42,7 +45,7 @@ public class Entity_Player : Entity
 	// Movement constants -------------------------------
 	float moveacceleration = 0.4f;
 	float movedeceleration = 0.6f;
-	float moveaccelerationair = 0.25f;
+	float moveaccelerationair = 0.15f;
 	float movespeedmax = 5.0f;
 	float jumpstrength = 5.5f;
 	float gravity = -0.26f;
@@ -153,6 +156,11 @@ public class Entity_Player : Entity
 				*/
 				if (onground)
 				{
+					if(landingSoundPlayed == false)
+					{
+						landingSoundPlayed = true;
+						game.PlaySound("Landing");
+					}
 					yspeed = Mathf.Max(0.0f, yspeed); // Keep upwards movement, if any
 
 					// When current speed and input direction agree, use acceleration, else use deceleration
@@ -192,6 +200,7 @@ public class Entity_Player : Entity
 				// In Air
 				else
 				{
+					landingSoundPlayed = false;
 					// jumpheld variable is true as long as player is rising and holding the JUMP button.
 					// When jumpheld is false, it stays false until set to true when jumping from the ground.
 					jumpheld = jumpheld && (Input.GetButton("Jump") && yspeed > 0.0f);

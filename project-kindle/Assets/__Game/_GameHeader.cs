@@ -265,7 +265,6 @@ public class _GameHeader : MonoBehaviour
     {
         if (audiosource.clip != null)
         {
-            //bgmsound.Stop();
             audiosource.Stop();
         }
 
@@ -273,7 +272,22 @@ public class _GameHeader : MonoBehaviour
         audiosource.clip = s.clip;
         audiosource.Play();
         audiosource.volume = s.volume;
+    }
 
-        //bgmsound = audiosource.Play(key);
+    public void StopSound(string key){
+        audiomanager.Stop(key);
+    }
+
+    public void StopBGM(string key)
+    {
+        if (audiosource.clip != null)
+        {
+            audiosource.Stop();
+        }
+    }
+
+    public void SetBGMVolume(float volume)
+    {
+        audiosource.volume = volume;
     }
 }

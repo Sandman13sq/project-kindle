@@ -16,4 +16,7 @@ public class Sound
     public AudioSource source;
 
     public bool loop;
+
+    //0 = BGM, 1 = SFX
+    public int type;
 }
