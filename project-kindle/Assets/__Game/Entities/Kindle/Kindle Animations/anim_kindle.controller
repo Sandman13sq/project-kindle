@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Kindle_jump_shootdown
+  m_Name: air_down
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -109,7 +109,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Kindle_shootup
+  m_Name: up_shoot
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -135,7 +135,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Air
+  m_Name: AIR
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -248,7 +248,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Kindle_defeat
+  m_Name: defeat
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -321,7 +321,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Kindle_run_aimup
+  m_Name: run_up
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -347,7 +347,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Kindle_run
+  m_Name: run
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -400,7 +400,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Kindle
+  m_Name: anim_kindle
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Defeat
@@ -471,7 +471,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Kindle_idle
+  m_Name: neutral
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -522,7 +522,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Kindle_aimup
+  m_Name: neutral_up
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -588,7 +588,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Kindle_jump_shootup
+  m_Name: air_up
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -780,7 +780,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Kindle_jump
+  m_Name: air_neutral
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -881,7 +881,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Base Layer
+  m_Name: anim_kindle
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 386959395182534042}
@@ -989,7 +989,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Kindle_shootside
+  m_Name: neutral_shoot
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

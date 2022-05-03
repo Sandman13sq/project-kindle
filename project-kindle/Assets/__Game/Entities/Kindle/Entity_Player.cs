@@ -20,6 +20,7 @@ public class Entity_Player : Entity
 	private PlayerData playerdata;	// Holds health, energy, level, etc.
 	//======= stuff for animation:
 	[SerializeField] Animator animator;
+	[SerializeField] SpriteRenderer[] spriterenderer_weapon; // Size = 2
 
 	private bool aimingUp; //bool to check if kindle is aiming up
 	private bool aimingDown; //bool to check if kindle is aiming down
@@ -315,6 +316,13 @@ public class Entity_Player : Entity
 		}
 
 		animator.speed = ts;
+
+		// Update Weapon Sprites
+		var animstate = animator.GetCurrentAnimatorStateInfo(0);
+		if (animstate.IsName("neutral"))
+		{
+			//spriterenderer_weapon[0] = 
+		}
 	}
 
 	// Methods ===============================================================
@@ -327,14 +335,14 @@ public class Entity_Player : Entity
 		{
 			animator.SetBool("ShootingUp", true);
 			ticks = 0;
-			animator.Play("Base Layer.Kindle_shootup", 0, 0.0f);
+			animator.Play("anim_kindle.up_shoot", 0, 0.0f);
 		}
 
 		//Shooting up while jumping 
 		else if(aimingUp && Mathf.Abs(yspeed) > 0.001)
 		{
 			animator.SetBool("IgnoreInAir", true);
-			animator.Play("Base Layer.Kindle_jump_shootup", 0, 0.0f);
+			animator.Play("anim_kindle.air_up", 0, 0.0f);
 		}
 
 		//Shooting to the side from idle 
@@ -342,14 +350,14 @@ public class Entity_Player : Entity
 		{
 			animator.SetBool("ShootingSide", true);
 			ticks = 0;
-			animator.Play("Base Layer.Kindle_shootside", 0, 0.0f);
+			animator.Play("anim_kindle.neutral_shoot", 0, 0.0f);
 		}
 
 		//Shooting down (can only be done when jumping!)
 		else if(aimingDown && Mathf.Abs(yspeed) > 0.001)
 		{
 			animator.SetBool("IgnoreInAir", true);
-			animator.Play("Base Layer.Kindle_jump_shootdown", 0, 0.0f);
+			animator.Play("anim_kindle.air_down", 0, 0.0f);
 		}
 	}
 

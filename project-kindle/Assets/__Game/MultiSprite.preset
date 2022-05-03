@@ -250,7 +250,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_PlatformSettings.Array.size
-    value: 2
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_PlatformSettings.Array.data[0].m_BuildTarget
@@ -341,447 +341,51 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: m_PlatformSettings.Array.data[2].m_BuildTarget
+    value: WebGL
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_PlatformSettings.Array.data[2].m_MaxTextureSize
+    value: 2048
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_PlatformSettings.Array.data[2].m_ResizeAlgorithm
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_PlatformSettings.Array.data[2].m_TextureFormat
+    value: -1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_PlatformSettings.Array.data[2].m_TextureCompression
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_PlatformSettings.Array.data[2].m_CompressionQuality
+    value: 50
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_PlatformSettings.Array.data[2].m_CrunchedCompression
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_PlatformSettings.Array.data[2].m_AllowsAlphaSplitting
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_PlatformSettings.Array.data[2].m_Overridden
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_PlatformSettings.Array.data[2].m_AndroidETC2FallbackOverride
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_PlatformSettings.Array.data[2].m_ForceMaximumCompressionQuality_BC6H_BC7
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: m_SpriteSheet.m_Sprites.Array.size
-    value: 5
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_Name
-    value: spr_shotpop_0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_Rect.x
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_Rect.y
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_Rect.width
-    value: 32
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_Rect.height
-    value: 32
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_Alignment
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_Pivot.x
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_Pivot.y
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_Border.x
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_Border.y
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_Border.z
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_Border.w
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_Outline.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_PhysicsShape.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_TessellationDetail
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_Bones.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_SpriteID
-    value: 0104fe7285cc14f90800000000000000
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_InternalID
-    value: -6971066069193637872
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_Vertices.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_Indices.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_Edges.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[0].m_Weights.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_Name
-    value: spr_shotpop_1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_Rect.x
-    value: 32
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_Rect.y
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_Rect.width
-    value: 32
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_Rect.height
-    value: 32
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_Alignment
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_Pivot.x
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_Pivot.y
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_Border.x
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_Border.y
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_Border.z
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_Border.w
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_Outline.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_PhysicsShape.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_TessellationDetail
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_Bones.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_SpriteID
-    value: ccd8ed7b6bba9bd10800000000000000
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_InternalID
-    value: 2141931899048594892
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_Vertices.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_Indices.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_Edges.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[1].m_Weights.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_Name
-    value: spr_shotpop_2
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_Rect.x
-    value: 64
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_Rect.y
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_Rect.width
-    value: 32
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_Rect.height
-    value: 32
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_Alignment
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_Pivot.x
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_Pivot.y
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_Border.x
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_Border.y
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_Border.z
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_Border.w
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_Outline.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_PhysicsShape.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_TessellationDetail
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_Bones.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_SpriteID
-    value: 8eea0f329bb0f6930800000000000000
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_InternalID
-    value: 4138539472376606440
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_Vertices.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_Indices.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_Edges.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[2].m_Weights.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_Name
-    value: spr_shotpop_3
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_Rect.x
-    value: 96
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_Rect.y
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_Rect.width
-    value: 32
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_Rect.height
-    value: 32
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_Alignment
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_Pivot.x
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_Pivot.y
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_Border.x
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_Border.y
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_Border.z
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_Border.w
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_Outline.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_PhysicsShape.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_TessellationDetail
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_Bones.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_SpriteID
-    value: c56d265a689ecb340800000000000000
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_InternalID
-    value: 4881032860672382556
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_Vertices.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_Indices.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_Edges.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[3].m_Weights.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_Name
-    value: spr_shotpop_4
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_Rect.x
-    value: 128
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_Rect.y
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_Rect.width
-    value: 32
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_Rect.height
-    value: 32
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_Alignment
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_Pivot.x
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_Pivot.y
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_Border.x
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_Border.y
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_Border.z
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_Border.w
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_Outline.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_PhysicsShape.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_TessellationDetail
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_Bones.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_SpriteID
-    value: c9b7dbc2b93e23050800000000000000
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_InternalID
-    value: 5778931527479819164
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_Vertices.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_Indices.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_Edges.Array.size
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SpriteSheet.m_Sprites.Array.data[4].m_Weights.Array.size
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}

@@ -1,31 +1,25 @@
 fileFormatVersion: 2
-guid: 22cc55bdff7ad36409c52ebf077ab2ca
+guid: 4a68ad4e4ccc9a84690e83b52336f2ec
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5888403426854495138
-    second: weapon_idle1_0
+      213: 9006437300239860191
+    second: kindle_run_up_0
   - first:
-      213: -8807722054779505472
-    second: weapon_idle1_1
+      213: 5506183073962477289
+    second: kindle_run_up_1
   - first:
-      213: 1561864998707426525
-    second: weapon_idle1_2
+      213: 379993612833921644
+    second: kindle_run_up_2
   - first:
-      213: 3009463440125888408
-    second: weapon_idle1_3
+      213: -1970870575281570705
+    second: kindle_run_up_3
   - first:
-      213: -3540174425307301970
-    second: weapon_idle1_4
+      213: 7131313797718362431
+    second: kindle_run_up_4
   - first:
-      213: 3371608856822237002
-    second: weapon_idle1_5
-  - first:
-      213: 8608686743204237508
-    second: weapon_idle1_6
-  - first:
-      213: 3213202445236368181
-    second: weapon_idle1_7
+      213: 360168087926381012
+    second: kindle_run_up_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -127,7 +121,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: weapon_idle1_0
+      name: kindle_run_up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,14 +135,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a3ead7f7bfc7b150800000000000000
-      internalID: 5888403426854495138
+      spriteID: fd100a4a10b4dfc70800000000000000
+      internalID: 9006437300239860191
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: weapon_idle1_1
+      name: kindle_run_up_1
       rect:
         serializedVersion: 2
         x: 96
@@ -162,14 +156,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c47e7cd47fa4c580800000000000000
-      internalID: -8807722054779505472
+      spriteID: 9e64dcf2554e96c40800000000000000
+      internalID: 5506183073962477289
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: weapon_idle1_2
+      name: kindle_run_up_2
       rect:
         serializedVersion: 2
         x: 192
@@ -183,14 +177,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd47213f0fbdca510800000000000000
-      internalID: 1561864998707426525
+      spriteID: c6a12e57d22064500800000000000000
+      internalID: 379993612833921644
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: weapon_idle1_3
+      name: kindle_run_up_3
       rect:
         serializedVersion: 2
         x: 288
@@ -204,14 +198,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8978a31dd03c3c920800000000000000
-      internalID: 3009463440125888408
+      spriteID: f6c721667af06a4e0800000000000000
+      internalID: -1970870575281570705
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: weapon_idle1_4
+      name: kindle_run_up_4
       rect:
         serializedVersion: 2
         x: 384
@@ -225,14 +219,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea7b2a8ed16cedec0800000000000000
-      internalID: -3540174425307301970
+      spriteID: f3948de9d1487f260800000000000000
+      internalID: 7131313797718362431
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: weapon_idle1_5
+      name: kindle_run_up_5
       rect:
         serializedVersion: 2
         x: 480
@@ -246,50 +240,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a474378446c5ace20800000000000000
-      internalID: 3371608856822237002
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: weapon_idle1_6
-      rect:
-        serializedVersion: 2
-        x: 576
-        y: 0
-        width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4c09d4f6bf2387770800000000000000
-      internalID: 8608686743204237508
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: weapon_idle1_7
-      rect:
-        serializedVersion: 2
-        x: 672
-        y: 0
-        width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 533fab38996979c20800000000000000
-      internalID: 3213202445236368181
+      spriteID: 4d9984cb7f29ff400800000000000000
+      internalID: 360168087926381012
       vertices: []
       indices: 
       edges: []

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Kindle_idle_aimup
+  m_Name: defeat
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,12 +20,16 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -4553369653161914842, guid: 62eb557f9e231a94e9f64d254ab4d7c3, type: 3}
+      value: {fileID: -4694264898429042577, guid: 42d3ca4733014524da96fe3cb10ab983, type: 3}
+    - time: 0.05
+      value: {fileID: -8928486918785953775, guid: 42d3ca4733014524da96fe3cb10ab983, type: 3}
+    - time: 0.1
+      value: {fileID: -8928486918785953775, guid: 42d3ca4733014524da96fe3cb10ab983, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 10
+  m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -40,13 +44,15 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -4553369653161914842, guid: 62eb557f9e231a94e9f64d254ab4d7c3, type: 3}
+    - {fileID: -4694264898429042577, guid: 42d3ca4733014524da96fe3cb10ab983, type: 3}
+    - {fileID: -8928486918785953775, guid: 42d3ca4733014524da96fe3cb10ab983, type: 3}
+    - {fileID: -8928486918785953775, guid: 42d3ca4733014524da96fe3cb10ab983, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.1
+    m_StopTime: 0.11666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
