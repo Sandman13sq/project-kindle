@@ -10,6 +10,9 @@ public class Weapon : MasterObject
 {
     // Internal
     private bool active;
+
+    [SerializeField] private Color primaryColor, accentColor;
+
     [SerializeField] private int energy;  // Amount of energy weapon has
     [SerializeField] private int levelmax;   // Max weapon level
     private int level;   // Current weapon level (Index 0 = Level 1)
@@ -353,4 +356,6 @@ public class Weapon : MasterObject
 
     // Utility ====================================================
 
+    public Color GetColorPrimary() {return primaryColor;}
+    public Color GetColorAccent() {return accentColor;}
 }

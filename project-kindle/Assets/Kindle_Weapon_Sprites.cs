@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class Kindle_Weapon_Sprites : MonoBehaviour
+public class Kindle_Weapon_Sprites : MasterObject
 {
     [System.Serializable]
     public struct SpriteDef
@@ -41,6 +41,9 @@ public class Kindle_Weapon_Sprites : MonoBehaviour
             spriterenderer.enabled = true;
             spriterenderer.flipX = kindlespriterenderer.flipX;
             spriterenderer.sprite = spritedict[spritename];
+            spriterenderer.color = colorindex == 0?
+                game.GetPlayerData().GetActiveWeapon().GetColorPrimary() :
+                game.GetPlayerData().GetActiveWeapon().GetColorAccent();
         }
         // Hide sprite
         else
