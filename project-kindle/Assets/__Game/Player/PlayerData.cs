@@ -23,7 +23,10 @@ public class PlayerData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            AddEnergy(5);
+        }
     }
 
     // Methods ==================================================

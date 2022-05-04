@@ -30,7 +30,6 @@ public class Weapon : MasterObject
 
     [SerializeField] private int ammomax = 0; // Max amount of ammo a weapon can have
     private int ammo;    // Current weapon ammo
-    [SerializeField] private int shotcountmax = 0;
     private int shotcount = 0;
 
     private float delayprogress;    // Used to delay shots
@@ -236,7 +235,7 @@ public class Weapon : MasterObject
     protected bool NoDelay() {return delayprogress == 0.0f;}
 
     // Returns true if shot count is less than max, or if there is no shot limit (max <= 0)
-    protected bool BelowShotCount() {return (shotcountmax <= 0) || (shotcount < ActiveProperties.shotcountmax);}
+    protected bool BelowShotCount() {return (ActiveProperties.shotcountmax <= 0) || (shotcount < ActiveProperties.shotcountmax);}
 
     // Return true if weapon has ammo or infinite ammo (ammomax is <= 0)
     protected bool HasAmmo() {return ammomax <= 0 || ammo > 0;}

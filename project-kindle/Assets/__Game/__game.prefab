@@ -544,7 +544,6 @@ MonoBehaviour:
   primaryColor: {r: 0.2403227, g: 0.22855109, b: 0.4528302, a: 1}
   accentColor: {r: 1, g: 0.13679248, b: 0.33129358, a: 1}
   ammomax: 32
-  shotcountmax: 2
   projectiles:
   - {fileID: 3444606476975869836, guid: e3cb67778e59b584bac8716fa3ebb90c, type: 3}
   - {fileID: 3444606476975869836, guid: 1fcb80f003d19314fb03d1f51ffc78f5, type: 3}
@@ -580,7 +579,6 @@ MonoBehaviour:
   primaryColor: {r: 0.94509804, g: 0.36862743, b: 0.39119887, a: 1}
   accentColor: {r: 1, g: 0.90907556, b: 0, a: 1}
   ammomax: 40
-  shotcountmax: 1
   projectiles:
   - {fileID: 6035830911987733133, guid: 67f21c2b76515ef47a4384a81b26bb78, type: 3}
   levelProperties:
@@ -614,7 +612,6 @@ MonoBehaviour:
   primaryColor: {r: 0.27184942, g: 0.38679248, b: 0.36279085, a: 1}
   accentColor: {r: 0.2027857, g: 0.8773585, b: 0.49667096, a: 1}
   ammomax: 10
-  shotcountmax: 2
   projectiles:
   - {fileID: 2333406479992756237, guid: c72c6783675b2ac4c9e77d06296dd5fa, type: 3}
   - {fileID: 8446460567528264951, guid: 5ebf58003705b4946a4d6e4ad325b0ca, type: 3}
@@ -650,23 +647,25 @@ MonoBehaviour:
   primaryColor: {r: 0.18792273, g: 0.46544766, b: 0.9716981, a: 1}
   accentColor: {r: 0.7311321, g: 0.85585517, b: 1, a: 1}
   ammomax: 0
-  shotcountmax: 10
-  projectiles: []
+  projectiles:
+  - {fileID: 441835728927297283, guid: 59cf520c2ac04c64fac8f8ad6077d269, type: 3}
+  - {fileID: 6787093374690118123, guid: 70b5cd33b0e1978469b7e57782000517, type: 3}
+  - {fileID: 7787591635550382390, guid: 1e909972bf05fea469f4e640073d68fe, type: 3}
   levelProperties:
   - shotcountmax: 10
-    delaytime: 4
-    autofiretime: 4
-    rechargetime: 4
+    delaytime: 8
+    autofiretime: 8
+    rechargetime: 8
     levelenergy: 20
   - shotcountmax: 10
-    delaytime: 4
-    autofiretime: 4
-    rechargetime: 4
+    delaytime: 7
+    autofiretime: 7
+    rechargetime: 7
     levelenergy: 40
   - shotcountmax: 10
-    delaytime: 4
-    autofiretime: 4
-    rechargetime: 4
+    delaytime: 6
+    autofiretime: 6
+    rechargetime: 6
     levelenergy: 50
 --- !u!1001 &1091064295575084114
 PrefabInstance:
@@ -737,11 +736,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7229868878053391227, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 240.10663
+      value: 550
       objectReference: {fileID: 0}
     - target: {fileID: 7229868878053391227, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -44.13057
+      value: 208
       objectReference: {fileID: 0}
     - target: {fileID: 7229868878053391227, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
       propertyPath: m_LocalPosition.z
