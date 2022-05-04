@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Weapon_Meteor : Weapon
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Fire(float dir)
     {
-        base.Start();
+        ShootProjectile(GetLevelIndex(), dir);
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    protected override void OnShoot()
     {
-        
+        game.PlaySound("DragonShoot");
     }
 }

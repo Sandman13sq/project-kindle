@@ -6,32 +6,23 @@ using UnityEngine;
 public class WeaponProjectile : MasterObject
 {
     public SpriteRenderer spriterenderer;
-    [SerializeField] private Sprite[] sprites;
-    [SerializeField] private float image_index = 0.0f;
-    [SerializeField] private float image_speed = 0.0f;
+    [SerializeField] protected Sprite[] sprites;
+    [SerializeField] protected float image_index = 0.0f;
+    [SerializeField] protected float image_speed = 0.0f;
     public Collider2D worldcollider;    // Used to interact with the world
     public Collider2D hitboxcollider;  // Used for hitbox collisions
     public Rigidbody2D rbody;  // Necessary for collision detection
 
-    [SerializeField] private float speed;
-    [SerializeField] private int damage;
+    [SerializeField] protected float speed;
+    [SerializeField] protected int damage;
 
-    [SerializeField] float lifemax;
-    float life;
+    [SerializeField] protected float lifemax;
+    protected float life;
 
-    [SerializeField] private GameObject obj_on_hit; // Object to create on hit. (a particle)
-    [SerializeField] private GameObject obj_on_miss; // Object to create when life timer expires (a particle)
+    [SerializeField] protected GameObject obj_on_hit; // Object to create on hit. (a particle)
+    [SerializeField] protected GameObject obj_on_miss; // Object to create when life timer expires (a particle)
 
-    [SerializeField] private Weapon sourceweapon = null; // Weapon component that the projectile was fired from
-
-    protected const int LAYER_WORLD_INDEX = 3;
-    protected const int LAYER_WORLD_BIT = 1 << LAYER_WORLD_INDEX;
-    protected const int LAYER_ENTITY_INDEX = 6; 
-    protected const int LAYER_ENTITY_BIT = 1 << LAYER_ENTITY_INDEX;
-    protected const int LAYER_HITBOX_INDEX = 7; 
-    protected const int LAYER_HITBOX_BIT = 1 << LAYER_HITBOX_INDEX;
-    protected const int LAYER_HURTBOX_INDEX = 8; 
-    protected const int LAYER_HURTBOX_BIT = 1 << LAYER_HURTBOX_INDEX;
+    protected Weapon sourceweapon = null; // Weapon component that the projectile was fired from
 
     // Common ============================================================
     
@@ -50,61 +41,55 @@ public class WeaponProjectile : MasterObject
         // Enemy Collision
         if (hitboxcollider)
         {
-            RaycastHit2D[] hitresults = new RaycastHit2D[8];
-            CastHitbox(hitresults);
-
-            foreach (RaycastHit2D hit in hitresults)
-            {
-                Entity e = GetEntityFromCollider(hit.collider);
-                
-                if (e = GetEntityFromCollider(hit.collider))
-                {
-                    // Entity has the shootable flag set
-                    if (e.isshootable)
-                    {
-                        e.ChangeHealth(-damage);
-                        DecrementShotCount();
-
-                        // Create hit graphic
-                        if (obj_on_hit)
-                        {
-                            Instantiate(obj_on_hit).transform.position = transform.position;
-                        }
-                        
-                        Destroy(gameObject);
-                        return;
-                    }
-                }
-
-                
-            }
+            CastForEnemy(hitboxcollider);
         }
 
+        UpdateSprite();
+        UpdateLife();    
+    }
+
+    protected void UpdateSprite()
+    {
         // Update sprite if array is populated
         if (sprites.Length > 0)
         {
             spriterenderer.sprite = sprites[Mathf.FloorToInt(Mathf.Clamp(image_index, 0.0f, sprites.Length-1))];
             image_index = Mathf.Repeat(image_index+image_speed*game.TimeStep, sprites.Length);
         }
+    }
 
+    protected void UpdateLife()
+    {
         // Progress life
         life -= game.TimeStep;
         if (life <= 0.0)
         {
-            DecrementShotCount();
-            Destroy(gameObject);
+            OnExpire();
+        }
+    }
 
-            // Create miss graphic
-            if (obj_on_miss)
-            {
-                Instantiate(obj_on_miss).transform.position = transform.position;
-            }
+    protected void CastForEnemy(Collider2D collider)
+    {
+        RaycastHit2D[] hitresults = new RaycastHit2D[8];
+        CastHitbox(hitresults);
+        
+        foreach (RaycastHit2D hit in hitresults)
+        {
+            Entity e = GetEntityFromCollider(hit.collider);
             
-            return;
+            if (e)
+            {
+                // Entity has the shootable flag set
+                if (e.isshootable)
+                {
+                    OnEnemyHit(e);
+                    break;
+                }
+            }
         }
     }
     
-    void OnCollisionEnter2D(Collision2D c)
+    protected void OnCollisionEnter2D(Collision2D c)
     {
         // Interact with world
         if (c.gameObject.layer == LAYER_WORLD_INDEX)
@@ -121,7 +106,7 @@ public class WeaponProjectile : MasterObject
         }
     }
 
-    void DecrementShotCount()
+    protected void DecrementShotCount()
     {
         if (sourceweapon != null)
         {
@@ -129,10 +114,39 @@ public class WeaponProjectile : MasterObject
         }
     }
 
+    // Called on collision with enemy. Return true if object is to be destroyed afterwards
+    protected void OnEnemyHit(Entity e)
+    {
+        e.ChangeHealth(-damage);
+        DecrementShotCount();
+
+        // Create hit graphic
+        if (obj_on_hit)
+        {
+            Instantiate(obj_on_hit).transform.position = transform.position;
+        }
+        
+        Destroy(gameObject);
+    }
+
+    // Called when life expires. Return true if object is to be destroyed afterwards
+    protected void OnExpire()
+    {
+        DecrementShotCount();
+
+        // Create miss graphic
+        if (obj_on_miss)
+        {
+            Instantiate(obj_on_miss).transform.position = transform.position;
+        }
+
+        Destroy(gameObject);
+    }
+
     // Methods ===========================================================
 
     // Update position
-    void UpdateMovement(float ts = 1.0f)
+    protected void UpdateMovement(float ts = 1.0f)
     {
         float directionradians = transform.localRotation.eulerAngles[2] * Mathf.Deg2Rad;
 
@@ -176,6 +190,8 @@ public class WeaponProjectile : MasterObject
     public void SetSpeed(float _speed) {speed = _speed;}
     public void AddSpeed(float _speed) {speed += _speed;}
     public void MultiplySpeed(float _speed) {speed *= _speed;}
+
+    public void SetDamage(int _damage) {damage = _damage;}
 
     public void SetSourceWeapon(Weapon _weapon)
     {

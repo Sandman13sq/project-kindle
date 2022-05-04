@@ -8,6 +8,17 @@ using UnityEngine;
 */
 public class MasterObject : MonoBehaviour
 {
+    // Layer constants
+    protected const int LAYER_WORLD_INDEX = 3;
+    protected const int LAYER_WORLD_BIT = 1 << LAYER_WORLD_INDEX;
+    protected const int LAYER_ENTITY_INDEX = 6; 
+    protected const int LAYER_ENTITY_BIT = 1 << LAYER_ENTITY_INDEX;
+    protected const int LAYER_HITBOX_INDEX = 7; 
+    protected const int LAYER_HITBOX_BIT = 1 << LAYER_HITBOX_INDEX;
+    protected const int LAYER_HURTBOX_INDEX = 8; 
+    protected const int LAYER_HURTBOX_BIT = 1 << LAYER_HURTBOX_INDEX;
+
+
     // Save me from Object Oriented Hell
     static private _GameHeader _game = null;
     public static _GameHeader game

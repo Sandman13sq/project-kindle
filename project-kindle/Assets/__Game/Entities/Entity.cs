@@ -26,16 +26,7 @@ public class Entity : MasterObject
         DOUBLEY = 1 << 2,   // Use two raycasts when checking up/down
         FINDEDGES = 1 << 3, // Check for bottom-right and bottom-left edges
     }
-
-    protected const int LAYER_WORLD_INDEX = 3;
-    protected const int LAYER_WORLD_BIT = 1 << LAYER_WORLD_INDEX;
-    protected const int LAYER_ENTITY_INDEX = 6; 
-    protected const int LAYER_ENTITY_BIT = 1 << LAYER_ENTITY_INDEX;
-    protected const int LAYER_HITBOX_INDEX = 7; 
-    protected const int LAYER_HITBOX_BIT = 1 << LAYER_HITBOX_INDEX;
-    protected const int LAYER_HURTBOX_INDEX = 8; 
-    protected const int LAYER_HURTBOX_BIT = 1 << LAYER_HURTBOX_INDEX;
-
+    
     // Variables ======================================================
 
     [SerializeField] protected string eventkey = ""; // Key for event

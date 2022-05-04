@@ -600,7 +600,10 @@ MonoBehaviour:
   delaytime: 13
   autofiretime: 30
   rechargetime: 27
-  projectiles: []
+  projectiles:
+  - {fileID: 2333406479992756237, guid: c72c6783675b2ac4c9e77d06296dd5fa, type: 3}
+  - {fileID: 2333406479992756237, guid: c72c6783675b2ac4c9e77d06296dd5fa, type: 3}
+  - {fileID: 2333406479992756237, guid: c72c6783675b2ac4c9e77d06296dd5fa, type: 3}
   weaponlvlenergy: 1e0000002d00000031000000
   activeweaponlvl: {fileID: 0}
 --- !u!1001 &1091064295575084114
