@@ -2,21 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Particle_ShotMiss : MasterObject
+public class Particle_Simple : MasterObject
 {
-    [SerializeField] private SpriteRenderer spriterenderer; 
-    [SerializeField] private Sprite[] sprites;
-    float lifemax = 7.0f;
-    float life = 0.0f;
+    [SerializeField] protected SpriteRenderer spriterenderer; 
+    [SerializeField] protected Sprite[] sprites;
+    [SerializeField] protected float lifemax = 7.0f;
+    protected float life = 0.0f;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
-        
+        life = 0.0f;
+        spriterenderer.sprite = sprites[0];
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (life < lifemax)
         {

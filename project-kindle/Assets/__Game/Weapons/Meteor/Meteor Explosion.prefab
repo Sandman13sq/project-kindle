@@ -58,6 +58,9 @@ MonoBehaviour:
   lifemax: 0
   obj_on_hit: {fileID: 4741169176835607102, guid: c57ff7aa1b78aa1438e4acf55e7d6486, type: 3}
   obj_on_miss: {fileID: 0}
+  sparkleparticle:
+  - {fileID: 9116922551533956030, guid: b155ff42a43159c4987c56ab3506f787, type: 3}
+  - {fileID: 5098268255589649645, guid: 3f968defb1b58714aa33697c8b802ae2, type: 3}
 --- !u!58 &215184362316106969
 CircleCollider2D:
   m_ObjectHideFlags: 0

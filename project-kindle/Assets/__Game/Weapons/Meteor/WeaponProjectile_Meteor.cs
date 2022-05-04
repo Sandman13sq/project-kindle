@@ -14,12 +14,14 @@ public class WeaponProjectile_Meteor : WeaponProjectile
 
     RaycastHit2D[] castresults = new RaycastHit2D[8];
     [SerializeField] CircleCollider2D explosionradius;
+    [SerializeField] GameObject tailprefab;
+    [SerializeField] GameObject[] sparkleparticle;
 
     void Start()
     {
         life = lifemax;
         float radians = transform.localRotation.eulerAngles[2] * Mathf.Deg2Rad;
-        xspeed = Mathf.Cos(radians) * speed + Mathf.Sin(radians);
+        xspeed = Mathf.Cos(radians) * speed;
         yspeed = Mathf.Sin(radians) * speed;
         radius = (worldcollider as CircleCollider2D).radius;
         explosiondamage = damage;
@@ -29,7 +31,7 @@ public class WeaponProjectile_Meteor : WeaponProjectile
     // Update is called once per frame
     void Update()
     {
-        // Gravity
+        // Update Speeds
         yspeed += gravity;
 
         xspeed = Mathf.Clamp(xspeed, -6f, 6f);
@@ -40,6 +42,10 @@ public class WeaponProjectile_Meteor : WeaponProjectile
             transform.position.y + yspeed * game.TimeStep,
             transform.position.z
         );
+
+        // Set image speed to some factor of xspeed 
+        image_speed = Mathf.Abs(xspeed) * 0.07f;
+        spriterenderer.flipX = xspeed < 0.0f;
 
         // Bounce off world
         Array.Clear(castresults, 0, castresults.Length);
@@ -75,6 +81,23 @@ public class WeaponProjectile_Meteor : WeaponProjectile
                 );
             }
         }
+
+        // Create tail particle
+        if (tailprefab)
+        {
+            Instantiate(tailprefab).transform.position = transform.position + new Vector3(0f, 0f, 1f);
+
+            if (UnityEngine.Random.Range(0f, 1f) < 0.1f)
+            {
+                Instantiate(sparkleparticle[UnityEngine.Random.Range(0f, 1f) < 0.5f? 0: 1]).transform.position = 
+                    transform.position + new Vector3(
+                        UnityEngine.Random.Range(-radius, radius),
+                        UnityEngine.Random.Range(-radius, radius),
+                        -1.0f
+                    );
+            }
+        }
+        
 
         CastForEnemy(hitboxcollider);
 

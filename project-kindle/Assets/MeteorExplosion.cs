@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MeteorExplosion : WeaponProjectile
 {
+    [SerializeField] GameObject[] sparkleparticle;
+
     // Update is called once per frame
     void Update()
     {
@@ -39,7 +41,16 @@ public class MeteorExplosion : WeaponProjectile
                 Random.Range(-r, r),
                 0.0f
             );
+
+            Instantiate(sparkleparticle[UnityEngine.Random.Range(0f, 1f) < 0.5f? 0: 1]).transform.position = 
+                transform.position + new Vector3(
+                    UnityEngine.Random.Range(-r, r),
+                    UnityEngine.Random.Range(-r, r),
+                    -1.0f
+                );
         }
+
+        
         
         Destroy(gameObject);
     }
