@@ -62,6 +62,8 @@ MonoBehaviour:
   weaponiconsprites:
   - {fileID: -7004541991922038333, guid: 76c55dc77e5ac854fad90a19126ed7bd, type: 3}
   - {fileID: -8391128497883425709, guid: 76c55dc77e5ac854fad90a19126ed7bd, type: 3}
+  - {fileID: -424857073061879456, guid: 76c55dc77e5ac854fad90a19126ed7bd, type: 3}
+  - {fileID: 3519789055408952070, guid: 76c55dc77e5ac854fad90a19126ed7bd, type: 3}
 --- !u!1 &6797948237568200988
 GameObject:
   m_ObjectHideFlags: 0

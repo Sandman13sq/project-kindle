@@ -8,38 +8,45 @@ using UnityEngine;
 */
 public class Weapon : MasterObject
 {
+    // Level Stats
+    [System.Serializable]
+    public struct LevelProperties
+    {
+        [SerializeField] public int shotcountmax;
+        [SerializeField] public float delaytime;    // Time between shots
+        [SerializeField] public float autofiretime;    // Time between automatically shooting again
+        [SerializeField] public float rechargetime;    // Time between adding ammo
+        [SerializeField] public int levelenergy;
+    }
+
     // Internal
     private bool active;
 
     [SerializeField] private Color primaryColor, accentColor;
 
-    [SerializeField] private int energy;  // Amount of energy weapon has
-    [SerializeField] private int levelmax;   // Max weapon level
+    private int energy;  // Amount of energy weapon has
+    private int levelmax;   // Max weapon level
     private int level;   // Current weapon level (Index 0 = Level 1)
 
     [SerializeField] private int ammomax = 0; // Max amount of ammo a weapon can have
     private int ammo;    // Current weapon ammo
-    [SerializeField] private int shotcountmax = 0;
     private int shotcount = 0;
 
-    [SerializeField] private float delaytime;    // Time between shots
     private float delayprogress;    // Used to delay shots
-    [SerializeField] private float autofiretime;    // Time between automatically shooting again
     private float autofireprogress;    // Used to delay shots
-    [SerializeField] private float rechargetime;    // Time between adding ammo
     private float rechargeprogress;    // Used to delay shots
     
     private float firebuffer;
     private float firebuffertime = 5.0f;
 
     [SerializeField] public GameObject[] projectiles;
-    [SerializeField] public int[] weaponlvlenergy;  // Value of energy checkpoints for levels, each more than the last
-    public WeaponLvl activeweaponlvl;
+    [SerializeField] public LevelProperties[] levelProperties;
 
     private Entity_Player player;
     private float hsign;    // Horizontal sign. {-1, 1}
     private float vsign;    // Vertical sign. {-1, 0, 1}
 
+    // Projectile instantiation offsets
     private float shootoffset_leftright = 40.0f;
     private float shootoffset_centery = -16.0f;
     private float shootoffset_up = 56.0f;
@@ -47,11 +54,18 @@ public class Weapon : MasterObject
 
     private PlayerData playerdata;
 
+    // =======================================================================
+
+    protected LevelProperties ActiveProperties {get {return levelProperties[GetLevelIndex()];}}
+
+    // =======================================================================
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
         ResetValues();
 
+        levelmax = levelProperties.Length;
         playerdata = game.GetPlayerData();
         player = game.GetPlayer();
     }
@@ -87,7 +101,7 @@ public class Weapon : MasterObject
                 autofireprogress = Mathf.Max(0.0f, autofireprogress-1.0f);
                 if (autofireprogress == 0.0f)
                 {
-                    autofireprogress = autofiretime;
+                    autofireprogress = ActiveProperties.autofiretime;
                     firebuffer = 10.0f;
 
                     if(!HasAmmo())
@@ -101,7 +115,7 @@ public class Weapon : MasterObject
         {
             if ( ammo < ammomax )   // Ammo is not at max
             {
-                if (rechargeprogress < rechargetime)
+                if (rechargeprogress < ActiveProperties.rechargetime)
                 {
                     rechargeprogress += 1.0f;
                 }
@@ -112,7 +126,7 @@ public class Weapon : MasterObject
                 }
             }
 
-            autofireprogress = autofiretime;
+            autofireprogress = ActiveProperties.autofiretime;
         }
 
         // Check for fire projectile
@@ -124,7 +138,7 @@ public class Weapon : MasterObject
                 if (firebuffer > 0.0f)
                 {
                     firebuffer = 0.0f;
-                    delayprogress = delaytime;
+                    delayprogress = ActiveProperties.delaytime;
 
                     float xaim, yaim;
 
@@ -159,7 +173,7 @@ public class Weapon : MasterObject
         ammo = ammomax;
         shotcount = 0;
         delayprogress = 0;
-        autofireprogress = autofiretime;
+        autofireprogress = ActiveProperties.autofiretime;
         rechargeprogress = 0;
 
         level = GetCurrentLevelIndex();
@@ -221,7 +235,7 @@ public class Weapon : MasterObject
     protected bool NoDelay() {return delayprogress == 0.0f;}
 
     // Returns true if shot count is less than max, or if there is no shot limit (max <= 0)
-    protected bool BelowShotCount() {return (shotcountmax <= 0) || (shotcount < shotcountmax);}
+    protected bool BelowShotCount() {return (ActiveProperties.shotcountmax <= 0) || (shotcount < ActiveProperties.shotcountmax);}
 
     // Return true if weapon has ammo or infinite ammo (ammomax is <= 0)
     protected bool HasAmmo() {return ammomax <= 0 || ammo > 0;}
@@ -236,26 +250,26 @@ public class Weapon : MasterObject
     // Returns total amount of energy needed for level
     int CalcLevelEnergy(int _level)
     {
-        return (GetLevelIndex() > 0)? energy - weaponlvlenergy[GetLevelIndex()]: energy;
+        return (GetLevelIndex() > 0)? energy - ActiveProperties.levelenergy: energy;
     }
 
     public int GetMaxEnergy()
     {
-        return weaponlvlenergy[levelmax];
+        return levelProperties[levelmax-1].levelenergy;
     }
 
     // Returns energy value for level (displayed in meter)
     public int CurrentLevelEnergy()
     {
-        return (GetLevelIndex() > 0)? energy - weaponlvlenergy[GetLevelIndex()-1]: energy;
+        return (GetLevelIndex() > 0)? energy - levelProperties[GetLevelIndex()-1].levelenergy: energy;
     }
     
     // Returns energy value for level (displayed in meter)
     public int CurrentLevelEnergyMax()
     {
         return (GetLevelIndex() == 0)? 
-            weaponlvlenergy[0]: 
-            weaponlvlenergy[GetLevelIndex()]-weaponlvlenergy[GetLevelIndex()-1];
+            levelProperties[0].levelenergy: 
+            levelProperties[GetLevelIndex()].levelenergy-levelProperties[GetLevelIndex()-1].levelenergy;
     }
 
     // Returns level using energy
@@ -266,9 +280,9 @@ public class Weapon : MasterObject
         
         for (int i = 0; i < levelmax; i++)
         {
-            if (e < weaponlvlenergy[i]) {return i;}
+            if (e < levelProperties[i].levelenergy) {return i;}
         }
-        return levelmax;
+        return levelmax-1;
     }
 
     // Adds to current ammo count
@@ -296,10 +310,10 @@ public class Weapon : MasterObject
         // Value is positive
         if (value > 0)
         {
-            if (energy+value > weaponlvlenergy[GetLevelMax()])
+            if (energy+value > GetMaxEnergy())
             {
-                e -= weaponlvlenergy[GetLevelMax()]-energy;
-                energy = weaponlvlenergy[GetLevelMax()];
+                e -= GetMaxEnergy()-energy;
+                energy = GetMaxEnergy();
             }
             else
             {

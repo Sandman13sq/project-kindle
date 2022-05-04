@@ -74,6 +74,8 @@ MonoBehaviour:
   weapons:
   - {fileID: 543963899502257081}
   - {fileID: 416659573601586833}
+  - {fileID: 2982205914285039398}
+  - {fileID: 3098837365095549148}
 --- !u!114 &2521553371264269455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,6 +506,8 @@ GameObject:
   - component: {fileID: 5896152862093588936}
   - component: {fileID: 543963899502257081}
   - component: {fileID: 416659573601586833}
+  - component: {fileID: 2982205914285039398}
+  - component: {fileID: 3098837365095549148}
   m_Layer: 0
   m_Name: Weapons
   m_TagString: Untagged
@@ -539,19 +543,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   primaryColor: {r: 0.2403227, g: 0.22855109, b: 0.4528302, a: 1}
   accentColor: {r: 1, g: 0.13679248, b: 0.33129358, a: 1}
-  energy: 0
-  levelmax: 2
   ammomax: 32
-  shotcountmax: 2
-  delaytime: 7
-  autofiretime: 16
-  rechargetime: 12
   projectiles:
   - {fileID: 3444606476975869836, guid: e3cb67778e59b584bac8716fa3ebb90c, type: 3}
   - {fileID: 3444606476975869836, guid: 1fcb80f003d19314fb03d1f51ffc78f5, type: 3}
   - {fileID: 3444606476975869836, guid: 2a43f7bdd7931a041a9c76dac82b9403, type: 3}
-  weaponlvlenergy: 0c0000001c00000028000000
-  activeweaponlvl: {fileID: 0}
+  levelProperties:
+  - shotcountmax: 2
+    delaytime: 7
+    autofiretime: 16
+    rechargetime: 12
+    levelenergy: 12
+  - shotcountmax: 2
+    delaytime: 7
+    autofiretime: 16
+    rechargetime: 12
+    levelenergy: 28
+  - shotcountmax: 2
+    delaytime: 7
+    autofiretime: 16
+    rechargetime: 12
+    levelenergy: 40
 --- !u!114 &416659573601586833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,17 +578,95 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   primaryColor: {r: 0.94509804, g: 0.36862743, b: 0.39119887, a: 1}
   accentColor: {r: 1, g: 0.90907556, b: 0, a: 1}
-  energy: 0
-  levelmax: 2
   ammomax: 40
-  shotcountmax: 1
-  delaytime: 10
-  autofiretime: 20
-  rechargetime: 18
   projectiles:
   - {fileID: 6035830911987733133, guid: 67f21c2b76515ef47a4384a81b26bb78, type: 3}
-  weaponlvlenergy: 100000001e00000028000000
-  activeweaponlvl: {fileID: 0}
+  levelProperties:
+  - shotcountmax: 1
+    delaytime: 10
+    autofiretime: 20
+    rechargetime: 18
+    levelenergy: 16
+  - shotcountmax: 1
+    delaytime: 10
+    autofiretime: 20
+    rechargetime: 18
+    levelenergy: 30
+  - shotcountmax: 1
+    delaytime: 10
+    autofiretime: 20
+    rechargetime: 18
+    levelenergy: 40
+--- !u!114 &2982205914285039398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8919943307281603106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 953e337d5e3813f468eb6135e4044ca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  primaryColor: {r: 0.27184942, g: 0.38679248, b: 0.36279085, a: 1}
+  accentColor: {r: 0.2027857, g: 0.8773585, b: 0.49667096, a: 1}
+  ammomax: 10
+  projectiles:
+  - {fileID: 2333406479992756237, guid: c72c6783675b2ac4c9e77d06296dd5fa, type: 3}
+  - {fileID: 8446460567528264951, guid: 5ebf58003705b4946a4d6e4ad325b0ca, type: 3}
+  - {fileID: 945237292320465679, guid: ac78cd490e193bd4483e45ee11af40dd, type: 3}
+  levelProperties:
+  - shotcountmax: 2
+    delaytime: 13
+    autofiretime: 30
+    rechargetime: 27
+    levelenergy: 30
+  - shotcountmax: 2
+    delaytime: 13
+    autofiretime: 30
+    rechargetime: 27
+    levelenergy: 50
+  - shotcountmax: 2
+    delaytime: 13
+    autofiretime: 30
+    rechargetime: 27
+    levelenergy: 55
+--- !u!114 &3098837365095549148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8919943307281603106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edda533519acd8349b95dc4f27e9ce76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  primaryColor: {r: 0.18792273, g: 0.46544766, b: 0.9716981, a: 1}
+  accentColor: {r: 0.7311321, g: 0.85585517, b: 1, a: 1}
+  ammomax: 0
+  projectiles:
+  - {fileID: 441835728927297283, guid: 59cf520c2ac04c64fac8f8ad6077d269, type: 3}
+  - {fileID: 6787093374690118123, guid: 70b5cd33b0e1978469b7e57782000517, type: 3}
+  - {fileID: 7787591635550382390, guid: 1e909972bf05fea469f4e640073d68fe, type: 3}
+  levelProperties:
+  - shotcountmax: 10
+    delaytime: 8
+    autofiretime: 8
+    rechargetime: 8
+    levelenergy: 20
+  - shotcountmax: 10
+    delaytime: 7
+    autofiretime: 7
+    rechargetime: 7
+    levelenergy: 40
+  - shotcountmax: 10
+    delaytime: 6
+    autofiretime: 6
+    rechargetime: 6
+    levelenergy: 50
 --- !u!1001 &1091064295575084114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -646,11 +736,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7229868878053391227, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 240.10663
+      value: 550
       objectReference: {fileID: 0}
     - target: {fileID: 7229868878053391227, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -44.13057
+      value: 208
       objectReference: {fileID: 0}
     - target: {fileID: 7229868878053391227, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
       propertyPath: m_LocalPosition.z

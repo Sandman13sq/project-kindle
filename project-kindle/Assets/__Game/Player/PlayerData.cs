@@ -23,7 +23,10 @@ public class PlayerData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            AddEnergy(5);
+        }
     }
 
     // Methods ==================================================
@@ -98,7 +101,7 @@ public class PlayerData : MonoBehaviour
     // Move to next available weapon
     public void NextWeapon()
     {
-        SetActiveWeapon((weaponindex+1) % 2);
+        SetActiveWeapon((weaponindex+1) % (weapons.Length));
     }
 
     // Move to previous available weapon
