@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class MeteorExplosion : WeaponProjectile
 {
-    float radius;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -23,8 +15,6 @@ public class MeteorExplosion : WeaponProjectile
             0.0f,
             true
         );
-
-        Debug.Log(spriterenderer.transform.localScale);
 
         // Attack enemies in explosion range
         foreach (var hit in castresults)
@@ -45,18 +35,18 @@ public class MeteorExplosion : WeaponProjectile
         for (var i = 0; i < 5; i++)
         {
             Instantiate(obj_on_hit).transform.position = transform.position + new Vector3(
-                Random.Range(r*0.5f, r),
-                Random.Range(r*0.5f, r),
+                Random.Range(-r, r),
+                Random.Range(-r, r),
                 0.0f
             );
         }
-
+        
         Destroy(gameObject);
     }
 
     public void SetRadius(float r) 
     {
         (hitboxcollider as CircleCollider2D).radius = r;
-        spriterenderer.transform.localScale = new Vector3(r*2f, r*2f, 1.0f); // TODO
+        spriterenderer.transform.localScale = new Vector3(r*2f, r*2f, 1.0f);
     }
 }

@@ -115,7 +115,7 @@ public class WeaponProjectile : MasterObject
     }
 
     // Called on collision with enemy. Return true if object is to be destroyed afterwards
-    protected void OnEnemyHit(Entity e)
+    protected virtual void OnEnemyHit(Entity e)
     {
         e.ChangeHealth(-damage);
         DecrementShotCount();
@@ -130,7 +130,7 @@ public class WeaponProjectile : MasterObject
     }
 
     // Called when life expires. Return true if object is to be destroyed afterwards
-    protected void OnExpire()
+    protected virtual void OnExpire()
     {
         DecrementShotCount();
 

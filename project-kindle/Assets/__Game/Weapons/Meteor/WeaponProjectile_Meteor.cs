@@ -82,22 +82,19 @@ public class WeaponProjectile_Meteor : WeaponProjectile
         UpdateLife();
     }
 
-    protected void OnEnemyHit(Entity e)
+    protected override void OnEnemyHit(Entity e)
     {
-        MeteorExplosion explosion = Instantiate(obj_on_hit).GetComponent<MeteorExplosion>();
-        explosion.transform.position = transform.position;
-        explosion.SetRadius(explosionradius.radius);
-        explosion.SetDamage(explosiondamage);
-
-        Destroy(gameObject);
+        OnExpire();
     }
 
-    protected void OnExpire()
+    protected override void OnExpire()
     {
         MeteorExplosion explosion = Instantiate(obj_on_hit).GetComponent<MeteorExplosion>();
         explosion.transform.position = transform.position;
         explosion.SetRadius(explosionradius.radius);
         explosion.SetDamage(explosiondamage);
+
+        DecrementShotCount();
 
         Destroy(gameObject);
     }
