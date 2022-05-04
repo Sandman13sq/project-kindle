@@ -8,6 +8,12 @@ TextureImporter:
   - first:
       213: -8391128497883425709
     second: weaponicon_1
+  - first:
+      213: -424857073061879456
+    second: weaponicon_2
+  - first:
+      213: 3519789055408952070
+    second: weaponicon_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -134,6 +140,48 @@ TextureImporter:
       bones: []
       spriteID: 354500bd619bc8b80800000000000000
       internalID: -8391128497883425709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: weaponicon_2
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 0
+        width: 42
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 061a5d73eba9a1af0800000000000000
+      internalID: -424857073061879456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: weaponicon_3
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 0
+        width: 42
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60355fb4f7dc8d030800000000000000
+      internalID: 3519789055408952070
       vertices: []
       indices: 
       edges: []

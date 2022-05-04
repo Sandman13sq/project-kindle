@@ -74,6 +74,7 @@ MonoBehaviour:
   weapons:
   - {fileID: 543963899502257081}
   - {fileID: 416659573601586833}
+  - {fileID: 2982205914285039398}
 --- !u!114 &2521553371264269455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,6 +505,7 @@ GameObject:
   - component: {fileID: 5896152862093588936}
   - component: {fileID: 543963899502257081}
   - component: {fileID: 416659573601586833}
+  - component: {fileID: 2982205914285039398}
   m_Layer: 0
   m_Name: Weapons
   m_TagString: Untagged
@@ -576,6 +578,30 @@ MonoBehaviour:
   projectiles:
   - {fileID: 6035830911987733133, guid: 67f21c2b76515ef47a4384a81b26bb78, type: 3}
   weaponlvlenergy: 100000001e00000028000000
+  activeweaponlvl: {fileID: 0}
+--- !u!114 &2982205914285039398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8919943307281603106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 953e337d5e3813f468eb6135e4044ca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  primaryColor: {r: 0.28123888, g: 0.754717, b: 0.39786285, a: 1}
+  accentColor: {r: 0.6458704, g: 0.7735849, b: 0.73983467, a: 1}
+  energy: 0
+  levelmax: 2
+  ammomax: 10
+  shotcountmax: 3
+  delaytime: 13
+  autofiretime: 30
+  rechargetime: 27
+  projectiles: []
+  weaponlvlenergy: 1e0000002d00000031000000
   activeweaponlvl: {fileID: 0}
 --- !u!1001 &1091064295575084114
 PrefabInstance:
