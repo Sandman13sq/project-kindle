@@ -190,6 +190,7 @@ MonoBehaviour:
   - {fileID: 7838825847082716042}
   - {fileID: 0}
   gameover_prefab: {fileID: 5279500421066183884, guid: 59229415a8e31f04586b198abd38be01, type: 3}
+  damagespark_prefab: {fileID: 2134288655100435208, guid: 3c4df8d7ec6439143a88e4c3ca8d62f6, type: 3}
   defeat: 0
 --- !u!70 &350204462260166774
 CapsuleCollider2D:

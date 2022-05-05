@@ -32,9 +32,11 @@ public class Particle_Popsmoke : MasterObject
     // Update is called once per frame
     void Update()
     {
+        float ts = game.GetTrueTimeStep();
+
         if (life > 0.0f)
         {
-            life -= game.TimeStep;
+            life -= ts;
 
             if (spritecount <= 1)
             {
@@ -55,8 +57,8 @@ public class Particle_Popsmoke : MasterObject
         }
 
         transform.position = new Vector3(
-            transform.position.x + xspeed,
-            transform.position.y + yspeed,
+            transform.position.x + xspeed * ts,
+            transform.position.y + yspeed * ts,
             transform.position.z
         );
     }

@@ -39,6 +39,7 @@ public class Entity_Player : Entity
 	private bool showplayer;
 
 	[SerializeField] private GameObject gameover_prefab;
+	[SerializeField] private GameObject damagespark_prefab;
 
 	public bool defeat;
 
@@ -104,7 +105,7 @@ public class Entity_Player : Entity
 			// -------------------------------------------------------------------
 			// Control State - Player moves the character
 			case(State.control): {
-				if (game.GetTrueTimeStep() > 0.0f)
+				if (game.GetActiveTimeStep() > 0.0f)
 				{
 					animator.SetBool("Defeat", false);
 				}
@@ -271,6 +272,7 @@ public class Entity_Player : Entity
 		}
 
 		UpdateMovement();	// Move by xspeed, yspeed
+		UpdateDamageShake();
 
 		// Collision
 		CollisionFlag collisionresult = EvaluateCollision(
@@ -422,7 +424,10 @@ public class Entity_Player : Entity
 
 			animator.Play("anim_kindle.defeat");
 			animator.SetBool("Defeat", true);
-			game.SetHitStop(13f); // Pause speed for a short duration
+			game.SetHitStop(13f); // Pause game speed for a short duration
+			damageshake = 13f;
+
+			Instantiate(damagespark_prefab).transform.position = transform.position + new Vector3(0f, 0f, 1f);
 		}
 	}
 

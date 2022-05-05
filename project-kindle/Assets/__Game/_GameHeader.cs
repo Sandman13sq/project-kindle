@@ -13,6 +13,7 @@ public class _GameHeader : MonoBehaviour
         lock_player,
         show_gui,
         show_player,
+        pause,
     }
 
     // Variables
@@ -110,22 +111,25 @@ public class _GameHeader : MonoBehaviour
     {
         
     }
-
-    void EarlyUpdate()
-    {
-
-    }
-
+    
     void LateUpdate()
     {
         timestep = nexttimestep;
 
+        // Decrement hitstop
         if (hitstop > 0.0f)
         {
             hitstop = Mathf.Max(0.0f, hitstop-nexttimestep);
             timestep = 0.0f;
         }
 
+        // Game paused
+        if (GameFlagGet(GameFlag.pause))
+        {
+            timestep = 0.0f;
+        }
+
+        // Timestep debugging
         if (Input.GetKeyDown(KeyCode.P)) {nexttimestep += 0.1f; Debug.Log("Timestep: "+nexttimestep.ToString());}
         if (Input.GetKeyDown(KeyCode.O)) {nexttimestep -= 0.1f; Debug.Log("Timestep: "+nexttimestep.ToString());}
         if (Input.GetKeyDown(KeyCode.I)) {nexttimestep = nexttimestep == 0.0f? 1.0f: 0.0f; Debug.Log("Timestep: "+nexttimestep.ToString());}
@@ -292,8 +296,8 @@ public class _GameHeader : MonoBehaviour
     }
 
     // Timestep ------------------------------------------
-    public float GetTimeStep() {return nexttimestep;}
-    public float GetTrueTimeStep() {return timestep;}
+    public float GetTrueTimeStep() {return nexttimestep;}   // Real game speed
+    public float GetActiveTimeStep() {return timestep;} // Time step for speed updates
     public void SetTimeStep(float ts)
     {
         nexttimestep = ts;

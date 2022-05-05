@@ -65911,14 +65911,14 @@ MonoBehaviour:
   calleventkey: 100
   eventdefs:
   - key: 100
-    text: "// Runs on game startup\r\ngameFlagSet(\"lock_player\")\r\ngameFlagSet(\"show_player\")\r\nplayerMoveTo(\"start\",
-      0, 0)\r\nbgmPlay(\"mus_junkyard\")\r\nentityDestroy(\"start\")\r\ntextPrint(\"Welcome,
+    text: "// Runs on game startup\r\ngameFlagSet(\"lock_player\")\r\ngameFlagSet(\"show_player\")\r\ngameFlagClear(\"show_gui\")\nplayerMoveTo(\"start\",
+      0, 0)\r\nbgmPlay(\"mus_junkyard\")\r\nentityDestroy(\"start\")\r\n\nwait(30)\ngameFlagSet(\"pause\")\ntextPrint(\"Welcome,
       Player!\") adv() textClear()\r\ntextPrint(\"Your mission is to find all 4 effigies
       on the map and destroy them!\") adv() textClear()\r\ntextPrint(\"Move left
       and right with the arrow keys.\") adv() \r\ntextPrint(\"\\nJump with Z and
       shoot with X.\") adv() textClear()\r\ntextPrint(\"Press A and S to switch weapons.\")
       adv()\r\ntextPrint(\"\\nCollect energy to level up your held weapon.\") adv()
-      textClear()\r\ntextPrint(\"Good luck!\") adv() textClose()\r\ngameFlagClear(\"lock_player\")\r\ngameFlagSet(\"show_gui\")"
+      textClear()\r\ntextPrint(\"Good luck!\") adv() textClose()\r\ngameFlagClear(\"lock_player\")\r\ngameFlagSet(\"show_gui\")\ngameFlagClear(\"pause\")"
   - key: 101
     text: '// Runs when effigy is destroyed.
 
@@ -65934,6 +65934,8 @@ MonoBehaviour:
 
       gameFlagSet("lock_player")
 
+      gameFlagSet("pause")
+
       textPrint("CONGRATULATION!")
       wait(40) adv() textClear()
 
@@ -65942,7 +65944,9 @@ MonoBehaviour:
 
       textClose()
 
-      gameFlagClear("lock_player")'
+      gameFlagClear("lock_player")
+
+      gameFlagClear("pause")'
   - key: Effigy_Defeat
     text: '// Set flags when effigy is defeated
 
@@ -66786,11 +66790,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7742138844259772201, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 240.10663
+      value: 550
       objectReference: {fileID: 0}
     - target: {fileID: 7742138844259772201, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -44.13057
+      value: 208
       objectReference: {fileID: 0}
     - target: {fileID: 7742138844745897128, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
       propertyPath: m_FollowOffset.y

@@ -312,11 +312,12 @@ public class Entity : MasterObject
     }
 
     // Updates shaking when taking damage
-    protected void UpdateDamageShake()
+    protected void UpdateDamageShake(bool ignore_timestep = false)
     {
         if (damageshake > 0)
         {
-            damageshake = ApproachTS(damageshake, 0.0f);
+            if (ignore_timestep) {damageshake = ApproachTS(damageshake, 0.0f);}
+            else {damageshake = Approach(damageshake, 0f, game.GetTrueTimeStep());}
 
             // Exit if there's no sprite renderer set
             if (spriterenderer == null) {return;}

@@ -49,7 +49,7 @@ public class Player_GameOver : MasterObject
             campos.x, campos.y, -14.0f
         );
 
-        float ts = game.GetTimeStep();
+        float ts = game.GetTrueTimeStep();
 
         switch(state)
         {
