@@ -64,6 +64,8 @@ MonoBehaviour:
   - {fileID: -8391128497883425709, guid: 76c55dc77e5ac854fad90a19126ed7bd, type: 3}
   - {fileID: -424857073061879456, guid: 76c55dc77e5ac854fad90a19126ed7bd, type: 3}
   - {fileID: 3519789055408952070, guid: 76c55dc77e5ac854fad90a19126ed7bd, type: 3}
+  textcolor_value: {r: 1, g: 1, b: 1, a: 1}
+  textcolor_empty: {r: 0.8773585, g: 0, b: 0, a: 1}
 --- !u!1 &6797948237568200988
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,10 +401,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 10
+    m_FontSize: 13
     m_FontStyle: 3
     m_BestFit: 0
-    m_MinSize: 1
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 6
     m_AlignByGeometry: 0
