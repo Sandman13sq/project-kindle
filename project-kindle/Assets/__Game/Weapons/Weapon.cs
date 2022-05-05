@@ -31,6 +31,7 @@ public class Weapon : MasterObject
     [SerializeField] private int ammomax = 0; // Max amount of ammo a weapon can have
     private int ammo;    // Current weapon ammo
     private int shotcount = 0;
+    [SerializeField] private bool shotCountIsAmmo = false;  // Uses shot count as ammo value
 
     private float delayprogress;    // Used to delay shots
     private float autofireprogress;    // Used to delay shots
@@ -109,24 +110,27 @@ public class Weapon : MasterObject
                 }
             }
         }
-
         // No recharge if key is held down
         else
         {
-            if ( ammo < ammomax )   // Ammo is not at max
+            if (ActiveProperties.rechargetime > 0)
             {
-                if (rechargeprogress < ActiveProperties.rechargetime)
+                if ( ammo < ammomax )   // Ammo is not at max
                 {
-                    rechargeprogress += 1.0f;
+                    if (rechargeprogress < ActiveProperties.rechargetime)
+                    {
+                        rechargeprogress += 1.0f;
+                    }
+                    else
+                    {
+                        rechargeprogress = 0.0f;
+                        AddAmmo(1);
+                    }
                 }
-                else
-                {
-                    rechargeprogress = 0.0f;
-                    AddAmmo(1);
-                }
-            }
 
-            autofireprogress = ActiveProperties.autofiretime;
+                autofireprogress = ActiveProperties.autofiretime;
+            }
+            
         }
 
         // Check for fire projectile
@@ -162,6 +166,13 @@ public class Weapon : MasterObject
                 }
             }
             playerdata.SetAmmo(ammo, ammomax);  // Update Ammo Counts
+        }
+
+        // Use shot count as ammo
+        if (shotCountIsAmmo)
+        {
+            ammo = ActiveProperties.shotcountmax - shotcount;
+            ammomax = ActiveProperties.shotcountmax;
         }
     }
 
