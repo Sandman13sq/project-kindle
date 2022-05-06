@@ -13,7 +13,7 @@ public static class DmrMath
     public static float Polarize(float x) { return x > 0.0f ? 1.0f : -1.0f; }
 
     // Returns true when value is in an odd interval
-    public static float BoolStep(float x, float step) {return (x % (step * 2.0f)) / step;}
+    public static bool BoolStep(float x, float step) {return ( (x % (step * 2.0f)) / step ) != 0f;}
     
     // Returns value closest to a factor of step
     public static float Quantize(float x, float step) { return (float)Math.Floor(x / step) * step; }

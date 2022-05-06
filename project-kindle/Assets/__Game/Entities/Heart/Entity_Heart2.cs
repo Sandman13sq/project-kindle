@@ -8,6 +8,9 @@ public class Entity_Heart2 : Entity
     private Color color2 = new Color(1.0f, 1.0f, 1.0f);
 
     private float scalestep = 0.0f;
+    private float life;
+    [SerializeField] private float lifemax;
+    [SerializeField] private GameObject healpulse_prefab;
 
     // Common ======================================================
 
@@ -15,6 +18,7 @@ public class Entity_Heart2 : Entity
     protected override void Start()
     {
         scalestep = Random.Range(0.0f, 1.0f);
+        life = lifemax;
     }
 
     void OnCollisionEnter2D(Collision2D c)
@@ -23,7 +27,11 @@ public class Entity_Heart2 : Entity
         {
             if (c.gameObject.GetComponent<Entity_Player>().ChangeHealth(health) != 0)
             {
-                Destroy(gameObject);
+                GameObject o = Instantiate(healpulse_prefab);
+                o.transform.position = transform.position;
+                o.transform.localScale *= UnityEngine.Random.Range(0.9f, 1.0f);
+
+                Defeat();
             }
         }
     }
@@ -31,6 +39,20 @@ public class Entity_Heart2 : Entity
     // Update is called once per frame
     protected override void Update()
     {
+        // Progress Life
+        if (life > 0f) {life -= ts;}
+        else
+        {
+            Defeat();
+            return;
+        }
+
+        // Flicker
+        if (life < lifemax*0.3)
+        {
+            spriterenderer.enabled = DmrMath.BoolStep(life, 4f);
+        }
+
         // Pulse heart
         scalestep = Mathf.Repeat(scalestep + 0.04f*ts, 2.0f*Mathf.PI);
         const float f = 10.0f;

@@ -112,7 +112,7 @@ public class Entity_EyeDrop : Entity
             {
                 xspeed *= speedslowmod;
 
-                spriterenderer.sprite = sprites[(int)BoolStep(statestep, 4.0f)];
+                spriterenderer.sprite = sprites[BoolStep(statestep, 4f)? 1: 0];
 
                 if (statestep > 0) {statestep -= ts;}
                 else

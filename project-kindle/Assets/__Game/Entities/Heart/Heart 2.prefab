@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2947504084412027000}
+  - component: {fileID: 3496357481225547877}
   - component: {fileID: 7336412358944654655}
   - component: {fileID: 5767018644069807880}
-  - component: {fileID: 3496357481225547877}
   m_Layer: 6
   m_Name: Heart 2
   m_TagString: Untagged
@@ -33,6 +33,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3496357481225547877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7930945488634972734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eecd32122464b0c41b28098602194f21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventkey: 
+  entitytag: 
+  spriterenderer: {fileID: 7336412358944654655}
+  hitboxcollider: {fileID: 0}
+  hurtboxcollider: {fileID: 0}
+  worldcollider: {fileID: 5767018644069807880}
+  rbody: {fileID: 0}
+  showdamage: 0
+  isshootable: 0
+  eventondefeat: 0
+  dorespawn: 0
+  enableinrange: 0
+  state: 0
+  health: 2
+  healthmax: 2
+  attack: 0
+  energy: 0
+  energydrops: []
+  heartdrop: {fileID: 0}
+  destroygraphic: []
+  shownumberprefab: {fileID: 0}
+  lifemax: 480
+  healpulse_prefab: {fileID: 3871962885102328089, guid: f863ce9c4b75d0b4391a3e2e341819ec, type: 3}
 --- !u!212 &7336412358944654655
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -100,33 +135,3 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 10
---- !u!114 &3496357481225547877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7930945488634972734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eecd32122464b0c41b28098602194f21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriterenderer: {fileID: 7336412358944654655}
-  worldcollider: {fileID: 5767018644069807880}
-  hitboxcollider: {fileID: 0}
-  rbody: {fileID: 0}
-  entityindex: 0
-  entitytype: 0
-  eventkey: 
-  solid: 0
-  ishostile: 0
-  showdamage: 0
-  isshootable: 0
-  eventondefeat: 0
-  state: 0
-  health: 2
-  healthmax: 2
-  attack: 0
-  energy: 0
-  energydrops: []

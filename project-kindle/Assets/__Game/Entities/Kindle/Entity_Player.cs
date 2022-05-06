@@ -407,6 +407,8 @@ public class Entity_Player : Entity
 				playerdata.HealthFlashMeter();
 				playerdata.SetHealth(health, healthmax); // Update HUD
 			}
+
+			return healthdiff;
 		}
 
 		return 0;

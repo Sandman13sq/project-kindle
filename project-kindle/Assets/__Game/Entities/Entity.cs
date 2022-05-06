@@ -72,7 +72,7 @@ public class Entity : MasterObject
     private Entity_Respawner respawner = null;
     private int startingstate;
 
-    protected float ts {get {return game.TimeStep;}}
+    protected float ts {get {return game.GetActiveTimeStep();}}
 
     // =============== Audio stuff ===============
     //private bool soundPlayed = false;
@@ -316,7 +316,7 @@ public class Entity : MasterObject
     {
         if (damageshake > 0)
         {
-            if (ignore_timestep) {damageshake = ApproachTS(damageshake, 0.0f);}
+            if (ignore_timestep) {damageshake = ApproachTS(damageshake, 0f);}
             else {damageshake = Approach(damageshake, 0f, game.GetTrueTimeStep());}
 
             // Exit if there's no sprite renderer set
@@ -325,7 +325,7 @@ public class Entity : MasterObject
             // Set x offset
             if (damageshake > 0)
             {
-                float xshift = (BoolStep(damageshake, 4.0f) == 1.0f? -3: 3); // Shift left/right every 4 frames
+                float xshift = BoolStep(damageshake, 4f)? -3f: 3f; // Shift left/right every 4 frames
                 spriterenderer.transform.localPosition = new Vector3(
                     xshift, 
                     spriterenderer.transform.localPosition.y, 
