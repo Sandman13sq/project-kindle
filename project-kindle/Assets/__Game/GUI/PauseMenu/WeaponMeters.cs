@@ -13,6 +13,15 @@ public class WeaponMeters : MasterObject
     [SerializeField] private HUDMeter meteorMeter;
     [SerializeField] private GameObject meteorLevel;
 
+    [SerializeField] private GameObject vectorEntry;
+    [SerializeField] private GameObject dragonEntry;
+    [SerializeField] private GameObject tempestEntry;
+    [SerializeField] private GameObject meteorEntry;
+    [SerializeField] private GameObject unknownEntry1;
+    [SerializeField] private GameObject unknownEntry2;
+    [SerializeField] private GameObject unknownEntry3;
+    [SerializeField] private GameObject unknownEntry4;
+
     private UnityEngine.UI.Text vectorLevelText;
     private UnityEngine.UI.Text dragonLevelText;
     private UnityEngine.UI.Text tempestLevelText;
@@ -34,6 +43,39 @@ public class WeaponMeters : MasterObject
     // Update is called once per frame
     void Update()
     {
+        //Constantly Check the player's weapons array to check if they have unlocked the weapon or not
+        int index = 0;
+        foreach(Weapon gun in weapons)
+        {
+            gun.SetIsUnlocked(true);
+            bool unlocked = gun.GetIsUnlocked();
+            if(unlocked == true)
+            {
+                //0 = vector, 1 = dragon, 2 = meteor, 3 = tempest
+                if(index == 0)
+                {
+                    vectorEntry.SetActive(true);
+                    unknownEntry1.SetActive(false);
+                }
+                else if(index == 1)
+                {
+                    dragonEntry.SetActive(true);
+                    unknownEntry2.SetActive(false);
+                }
+                else if(index == 2)
+                {
+                    meteorEntry.SetActive(true);
+                    unknownEntry3.SetActive(false);
+                }
+                else if(index == 3)
+                {
+                    tempestEntry.SetActive(true);
+                    unknownEntry4.SetActive(false);
+                }
+            }
+            index++;
+        }
+
         //Debug.Log("Vector energy is: " + playerdata.GetWeapons()[0].CurrentLevelEnergy());
         vectorMeter.SetValueMax(weapons[0].CurrentLevelEnergyMax());
         vectorMeter.SetValue(weapons[0].CurrentLevelEnergy());

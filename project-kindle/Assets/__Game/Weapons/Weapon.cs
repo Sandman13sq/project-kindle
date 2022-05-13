@@ -40,6 +40,8 @@ public class Weapon : MasterObject
     private float firebuffer;
     private float firebuffertime = 5.0f;
 
+    private bool isUnlocked = false;
+
     [SerializeField] public GameObject[] projectiles;
     [SerializeField] public LevelProperties[] levelProperties;
 
@@ -388,4 +390,8 @@ public class Weapon : MasterObject
 
     public Color GetColorPrimary() {return primaryColor;}
     public Color GetColorAccent() {return accentColor;}
+
+    public bool GetIsUnlocked() {return isUnlocked;}
+
+    public void SetIsUnlocked(bool cond) {isUnlocked = cond;}
 }
