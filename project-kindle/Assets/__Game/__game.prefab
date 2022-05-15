@@ -236,6 +236,27 @@ MonoBehaviour:
     source: {fileID: 0}
     loop: 0
     type: 1
+  - name: MeteorThwoop
+    clip: {fileID: 8300000, guid: 1387a7983c8306948b2cb087d1d019d1, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    type: 1
+  - name: TempestPew
+    clip: {fileID: 8300000, guid: 1f12e83579eb43c4ebe356eb8b157e14, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    type: 1
+  - name: MeteorBoomla
+    clip: {fileID: 8300000, guid: f95c972411671554da5ce5f54f125ad4, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    type: 1
 --- !u!82 &252792683710757966
 AudioSource:
   m_ObjectHideFlags: 0
@@ -744,7 +765,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7229868878053391227, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 208
+      value: 207.99998
       objectReference: {fileID: 0}
     - target: {fileID: 7229868878053391227, guid: 391a479d6abf2bb4f90395f9d151ced4, type: 3}
       propertyPath: m_LocalPosition.z

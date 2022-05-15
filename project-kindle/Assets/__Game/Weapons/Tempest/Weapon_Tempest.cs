@@ -12,6 +12,6 @@ public class Weapon_Tempest : Weapon
     
     protected override void OnShoot()
     {
-        game.PlaySound("DragonShoot");
+        game.PlaySound("TempestPew");
     }
 }

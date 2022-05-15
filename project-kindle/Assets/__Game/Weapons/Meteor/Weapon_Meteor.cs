@@ -11,6 +11,6 @@ public class Weapon_Meteor : Weapon
     
     protected override void OnShoot()
     {
-        game.PlaySound("DragonShoot");
+        game.PlaySound("MeteorThwoop");
     }
 }
