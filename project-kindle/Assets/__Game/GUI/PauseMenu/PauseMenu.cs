@@ -7,12 +7,16 @@ public class PauseMenu : MasterObject
 {
     public static bool isPaused = false;
     private int currentTab = 1; //0 = Goals, 1 = Weapons, 2 = Enemies
+    private int currentEnemyPage = 1;
     [SerializeField] GameObject pauseMenuUI;
     [SerializeField] GameObject weaponPage;
     [SerializeField] GameObject weaponPage1;
     [SerializeField] GameObject weaponPage2;
     [SerializeField] GameObject goalsPage;
     [SerializeField] GameObject enemiesPage;
+    [SerializeField] GameObject enemiesPage1;
+    [SerializeField] GameObject enemiesPage2;
+    [SerializeField] GameObject enemiesPage3;
     [SerializeField] Button weaponsButton;
     [SerializeField] Button goalsButton;
     [SerializeField] Button enemiesButton;
@@ -77,6 +81,37 @@ public class PauseMenu : MasterObject
         else if(currentTab == 2)
         {
             enemiesButton.Select();
+            if(Input.GetKeyDown("down"))
+            {
+                if(currentEnemyPage == 1)
+                {
+                    enemiesPage1.SetActive(false);
+                    enemiesPage2.SetActive(true);
+                    currentEnemyPage = 2;
+                }
+                else if(currentEnemyPage == 2)
+                {
+                    enemiesPage2.SetActive(false);
+                    enemiesPage3.SetActive(true);
+                    currentEnemyPage = 3;
+                }
+            }
+
+            if(Input.GetKeyDown("up"))
+            {
+                if(currentEnemyPage == 2)
+                {
+                    enemiesPage1.SetActive(true);
+                    enemiesPage2.SetActive(false);
+                    currentEnemyPage = 1;
+                }
+                else if(currentEnemyPage == 3)
+                {
+                    enemiesPage2.SetActive(true);
+                    enemiesPage3.SetActive(false);
+                    currentEnemyPage = 2;
+                }
+            }
         }
 
         //navigate to the correct page
