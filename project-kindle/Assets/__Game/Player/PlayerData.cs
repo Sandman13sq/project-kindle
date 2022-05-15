@@ -8,9 +8,10 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private HUDMeter energymeter;
     [SerializeField] private HUD_ActiveWeapon weaponinfo;
 
+    //0 = Vector, 1 = Dragons Breath, 2 = Meteor, 3 = Tempest
     [SerializeField] private Weapon[] weapons;
     private Weapon activeweapon;
-    private int weaponindex; //0 = Vector, 1 = Dragons Breath
+    private int weaponindex;
 
     // Common ==================================================
 
@@ -112,6 +113,7 @@ public class PlayerData : MonoBehaviour
 
     public Weapon GetActiveWeapon() {return activeweapon;}
     public int GetWeaponIndex() {return weaponindex;}
+    public Weapon[] GetWeapons() {return weapons;}
 
     public void ResetWeapons()
     {
