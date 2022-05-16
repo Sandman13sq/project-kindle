@@ -8,6 +8,16 @@ using UnityEngine;
 */
 public class MasterObject : MonoBehaviour
 {
+    // Game Flags
+    public enum GameFlag : int
+    {
+        zero,
+        lock_player,
+        show_gui,
+        show_player,
+        pause,
+    }
+
     // Layer constants
     protected const int LAYER_WORLD_INDEX = 3;
     protected const int LAYER_WORLD_BIT = 1 << LAYER_WORLD_INDEX;
