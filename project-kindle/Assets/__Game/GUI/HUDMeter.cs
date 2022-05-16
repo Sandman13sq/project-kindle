@@ -30,7 +30,8 @@ public class HUDMeter : MasterObject
     private float flashtime = 20.0f;
 
     private float spritewidth;
-    private bool guiactive;
+    private bool visible;
+    private bool lastvisible;
 
     // Start is called before the first frame update
     void Start()
@@ -44,11 +45,13 @@ public class HUDMeter : MasterObject
         // Find components to hide when GUI is disabled
         visualcomponents_text = GetComponentsInChildren<Text>();
         visualcomponents_images = GetComponentsInChildren<Image>();
-        guiactive = true;
+        
+        visible = true;
+        lastvisible = true;
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         // Sync up to real value if provisional is low
         if (provisionalvalue < metervalue)
@@ -86,18 +89,23 @@ public class HUDMeter : MasterObject
         }
 
         // Hide GUI
-        if (guiactive != game.GameFlagGet(_GameHeader.GameFlag.show_gui))
+        bool _currentvisible = visible && game.GameFlagGet(GameFlag.show_gui);
+
+        if (_currentvisible != lastvisible)
         {
-            guiactive = game.GameFlagGet(_GameHeader.GameFlag.show_gui);
-            foreach (var vis in visualcomponents_images) {vis.enabled = guiactive;}
-            foreach (var vis in visualcomponents_text) {vis.enabled = guiactive;}
+            lastvisible = _currentvisible;
+            
+            foreach (var vis in visualcomponents_images) {vis.enabled = lastvisible;}
+            foreach (var vis in visualcomponents_text) {vis.enabled = lastvisible;}
         }
 
-        if (guiactive)
+        if (_currentvisible)
         {
             UpdateMeterDisplay();
         }
     }
+
+    public void SetVisible(bool _isvisible) {visible = _isvisible;}
 
     // Updates values
     public void SetValue(int _value, bool matchprovisional = false)

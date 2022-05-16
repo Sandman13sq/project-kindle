@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 public class Entity_Player : Entity
 {
@@ -20,11 +21,13 @@ public class Entity_Player : Entity
 	//======= stuff for animation: ============
 	[SerializeField] Animator animator;
 	[SerializeField] SpriteRenderer[] spriterenderer_weapon; // Size = 2
+	[SerializeField] Kindle_Searchmarker searchmark_object;
+	private Entity searchtarget;
 
 	private bool aimingUp; //bool to check if kindle is aiming up
 	private bool aimingDown; //bool to check if kindle is aiming down
 
-	private int ticks = 0; //used to force shooting animation to play for a good bit
+	private float ticks = 0f; //used to force shooting animation to play for a good bit
 
 	//====================================
 	//======== Audio stuff ==================
@@ -79,11 +82,11 @@ public class Entity_Player : Entity
 	protected override void Update()
 	{
 		// Used to reset shooting animation
-		if(ticks < 30)
+		if(ticks < 30f)
 		{
-			ticks += 1;
+			ticks += ts;
 		}
-		else if(ticks == 30)
+		else if(ticks >= 30f)
 		{
 			animator.SetBool("ShootingUp", false);
 			animator.SetBool("ShootingSide", false);
@@ -96,7 +99,7 @@ public class Entity_Player : Entity
 		float ylev = Input.GetAxisRaw("Vertical");		// Up/Down player input
 		float lastvsign = vsign;
 		float lasthsign = hsign;
-		bool controlslocked = game.GameFlagGet(_GameHeader.GameFlag.lock_player);
+		bool controlslocked = game.GameFlagGet(GameFlag.lock_player);
 
 		float grav = gravity;
 		
@@ -119,7 +122,6 @@ public class Entity_Player : Entity
 						hsign = (xlev > 0.0f)? 1.0f: -1.0f;
 						spriterenderer.flipX = xlev < 0.0f;
 					}
-					vsign = ylev;
 					
 					// Jump buffer
 					/*
@@ -146,6 +148,52 @@ public class Entity_Player : Entity
 					{
 						playerdata.PrevWeapon();
 					}
+
+					// Find Search Target
+					searchtarget = null;
+					if (onground)
+					{
+						CastHurtbox(castresults, LAYER_HURTBOX_BIT);
+
+						foreach (var hit in castresults)
+						{
+							Entity e = GetEntityFromCollider(hit.collider);
+							if (e != null)
+							{
+								if (e == this) {continue;}	// Skip if self
+								
+								// Run interact script
+								if (e.CanInteract())
+								{
+									searchtarget = e;
+									break;
+								}
+							}
+						}
+					}
+					
+					// Interact with target
+					if (searchtarget != null)
+					{
+						// Update search marker
+						searchmark_object.SetActive(true);
+
+						// Down is pressed and hasn't been held on last frame
+						if (ylev < 0.0f && vsign != ylev)	
+						{
+							// Run interact script
+							searchtarget.Interact();
+							searchtarget = null;
+
+							ylev = 0f;
+						}
+					}
+					else
+					{
+						searchmark_object.SetActive(false);
+					}
+
+					vsign = ylev;
 				}
 				else
 				{
@@ -248,6 +296,7 @@ public class Entity_Player : Entity
 
 				// Set gravity
 				grav = jumpheld? gravityjump: gravity;
+
 				break;
 			}
 			// -------------------------------------------------------------------
@@ -328,9 +377,9 @@ public class Entity_Player : Entity
 		}
 
 		// Hide Player
-		if (showplayer != game.GameFlagGet(_GameHeader.GameFlag.show_player))
+		if (showplayer != game.GameFlagGet(GameFlag.show_player))
 		{
-			showplayer = game.GameFlagGet(_GameHeader.GameFlag.show_player);
+			showplayer = game.GameFlagGet(GameFlag.show_player);
 			spriterenderer.enabled = showplayer;
 		}
 
@@ -452,7 +501,12 @@ public class Entity_Player : Entity
 	}
 
 	// Utility ================================================================
-
+	public void AddHealthMax(int _health)
+	{
+		healthmax += _health;
+		ChangeHealth(healthmax);
+		Debug.Log(healthmax);
+	}
 	public float GetHSign() {return hsign;}
 	public float GetVSign() {return vsign;}
 	public bool GetOnGround() {return onground;}

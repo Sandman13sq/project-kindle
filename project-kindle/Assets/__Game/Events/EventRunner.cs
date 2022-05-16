@@ -33,6 +33,8 @@ public class EventRunner : MasterObject
         {"playerfree", Command.free_controls},  // Clears game flag to free player controls
         {"playermoveto", Command.player_moveto},    // Move player to entity with tag X with x offset Y and y offset Z
 
+        {"healthaddmax", Command.health_add_max},    // Adds X to max health
+
         {"textprint", Command.text_print},  // Add text S to textbox
         {"textclear", Command.text_clear},  // Clears text box text
         {"textclose", Command.text_close},  // Closes text box instance
@@ -67,6 +69,7 @@ public class EventRunner : MasterObject
         lock_controls,
         free_controls,
         player_moveto,
+        health_add_max,
 
         // Text --------------------------------
         text_print,
@@ -154,7 +157,10 @@ public class EventRunner : MasterObject
             // Continue event when JUMP is pressed
             case(State.advance):
             {
-                if ( Input.GetButtonDown("Jump") )
+                if ( 
+                    Input.GetButtonDown("Jump") ||  // Advance on press
+                    (Input.GetButton("Jump") && Input.GetButton("Menu"))  // Advance on hold
+                    )
                 {
                     ContinueEvent();
                 }
@@ -406,7 +412,7 @@ public class EventRunner : MasterObject
                 case(Command.gameflag_set):
                     // Use text
                     if (activecommand.text != "")
-                        game.GameFlagSet((_GameHeader.GameFlag)Enum.Parse(typeof(_GameHeader.GameFlag), activecommand.text));
+                        game.GameFlagSet((GameFlag)Enum.Parse(typeof(GameFlag), activecommand.text));
                     // Use first param
                     else
                         game.GameFlagSet((int)activecommand.values[0]);
@@ -415,7 +421,7 @@ public class EventRunner : MasterObject
                 case(Command.gameflag_clear):
                     // Use text
                     if (activecommand.text != "")
-                        game.GameFlagClear((_GameHeader.GameFlag)Enum.Parse(typeof(_GameHeader.GameFlag), activecommand.text));
+                        game.GameFlagClear((GameFlag)Enum.Parse(typeof(GameFlag), activecommand.text));
                     // Use first param
                     else
                         game.GameFlagClear((int)activecommand.values[0]);
@@ -431,7 +437,6 @@ public class EventRunner : MasterObject
                     }
                     break;
                 }
-                    
                 
                 // Scene Flags -----------------------------------------------------------
                 case(Command.sceneflag_set):
@@ -456,12 +461,12 @@ public class EventRunner : MasterObject
 
                 // Lock Player Controls
                 case(Command.lock_controls):
-                    game.GameFlagSet(_GameHeader.GameFlag.lock_player);
+                    game.GameFlagSet(GameFlag.lock_player);
                     break;
                 
                 // Free Player Controls
                 case(Command.free_controls):
-                    game.GameFlagClear(_GameHeader.GameFlag.lock_player);
+                    game.GameFlagClear(GameFlag.lock_player);
                     break;
                 
                 // Move Player to Entity
@@ -476,6 +481,11 @@ public class EventRunner : MasterObject
                         );
                     }
                 }
+                    break;
+                
+                // Add X to Max Health
+                case(Command.health_add_max):
+                    game.GetPlayerData().AddHealthMax((int)activecommand.values[0]);
                     break;
                 
                 // Text ------------------------------------------------------------------

@@ -110,9 +110,15 @@ public class TextBox : MasterObject
                     float tspd = textspeed;
 
                     // Increase print speed if FIRE is held
-                    if ( Input.GetButton("Fire1") )
+                    if ( Input.GetButton("Fire1") || Input.GetButton("Fire2") )
                     {
-                        tspd *= 3.0f;
+                        tspd *= 5.0f;
+                    }
+
+                    // Skip text if FIRE and MENU are held
+                    if ( ( Input.GetButton("Fire1") || Input.GetButton("Fire2") ) && Input.GetButton("Menu") )
+                    {
+                        tspd = textstring.Length;
                     }
 
                     textpos = Mathf.Min(textpos + tspd, textstring.Length);

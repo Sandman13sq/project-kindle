@@ -21,7 +21,7 @@ public class HUD_ActiveWeapon : MasterObject
     private Image[] visualcomponents_images;
     private Text[] visualcomponents_text;
 
-    private bool guiactive;
+    private bool visible, lastvisible;
 
     [SerializeField] Color textcolor_value, textcolor_empty;
 
@@ -35,25 +35,32 @@ public class HUD_ActiveWeapon : MasterObject
         // Find components to hide when GUI is disabled
         visualcomponents_text = GetComponentsInChildren<Text>();
         visualcomponents_images = GetComponentsInChildren<Image>();
-        guiactive = true;
-
+        
         SetLevel(1);
         SetAmmo(100);
         SetAmmoMax(100);
+
+        visible = true;
+        lastvisible = true;
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        if (guiactive != game.GameFlagGet(_GameHeader.GameFlag.show_gui))
+        bool _currentvisible = visible && game.GameFlagGet(GameFlag.show_gui);
+
+        if (_currentvisible != lastvisible)
         {
-            guiactive = game.GameFlagGet(_GameHeader.GameFlag.show_gui);
-            foreach (var vis in visualcomponents_images) {vis.enabled = guiactive;}
-            foreach (var vis in visualcomponents_text) {vis.enabled = guiactive;}
+            lastvisible = _currentvisible;
+            
+            foreach (var vis in visualcomponents_images) {vis.enabled = lastvisible;}
+            foreach (var vis in visualcomponents_text) {vis.enabled = lastvisible;}
         }
     }
 
     // Method ===============================================
+
+    public void SetVisible(bool _isvisible) {visible = _isvisible;}
 
     public void SetLevel(int _value)
     {

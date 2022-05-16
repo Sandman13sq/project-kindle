@@ -5,17 +5,8 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.SceneManagement;
 
-public class _GameHeader : MonoBehaviour
+public class _GameHeader : MasterObject
 {
-    public enum GameFlag : int
-    {
-        zero,
-        lock_player,
-        show_gui,
-        show_player,
-        pause,
-    }
-
     // Variables
     [SerializeField] private GameObject player_prefab;
     [SerializeField] private GameObject textbox_prefab;
@@ -98,6 +89,9 @@ public class _GameHeader : MonoBehaviour
         timestep = 1.0f;
         nexttimestep = 1.0f;
         hitstop = 0.0f;
+
+        // Enable Vector
+        playerdata.GetWeapons()[0].SetIsUnlocked(true);
     }
 
     // Start is called before the first frame update
@@ -124,7 +118,7 @@ public class _GameHeader : MonoBehaviour
         }
 
         // Game paused
-        if (GameFlagGet(GameFlag.pause))
+        if (GameFlagGet(GameFlag.zerotimestep) || GameFlagGet(GameFlag.pause))
         {
             timestep = 0.0f;
         }
