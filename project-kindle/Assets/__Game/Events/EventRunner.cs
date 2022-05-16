@@ -157,7 +157,10 @@ public class EventRunner : MasterObject
             // Continue event when JUMP is pressed
             case(State.advance):
             {
-                if ( Input.GetButtonDown("Jump") )
+                if ( 
+                    Input.GetButtonDown("Jump") ||  // Advance on press
+                    (Input.GetButton("Jump") && Input.GetButton("Menu"))  // Advance on hold
+                    )
                 {
                     ContinueEvent();
                 }

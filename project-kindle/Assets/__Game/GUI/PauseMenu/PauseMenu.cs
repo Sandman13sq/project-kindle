@@ -45,7 +45,7 @@ public class PauseMenu : MasterObject
         if (game.EventIsRunning()) {return;}
 
         // Enter pause menu
-        if(Input.GetKeyDown("c") || Input.GetKeyDown("return"))
+        if(Input.GetButtonDown("Menu") || Input.GetKeyDown("return"))
         {
             if(isPaused)
             {
