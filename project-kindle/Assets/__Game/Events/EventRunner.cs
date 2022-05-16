@@ -33,6 +33,8 @@ public class EventRunner : MasterObject
         {"playerfree", Command.free_controls},  // Clears game flag to free player controls
         {"playermoveto", Command.player_moveto},    // Move player to entity with tag X with x offset Y and y offset Z
 
+        {"healthaddmax", Command.health_add_max},    // Adds X to max health
+
         {"textprint", Command.text_print},  // Add text S to textbox
         {"textclear", Command.text_clear},  // Clears text box text
         {"textclose", Command.text_close},  // Closes text box instance
@@ -67,6 +69,7 @@ public class EventRunner : MasterObject
         lock_controls,
         free_controls,
         player_moveto,
+        health_add_max,
 
         // Text --------------------------------
         text_print,
@@ -431,7 +434,6 @@ public class EventRunner : MasterObject
                     }
                     break;
                 }
-                    
                 
                 // Scene Flags -----------------------------------------------------------
                 case(Command.sceneflag_set):
@@ -476,6 +478,11 @@ public class EventRunner : MasterObject
                         );
                     }
                 }
+                    break;
+                
+                // Add X to Max Health
+                case(Command.health_add_max):
+                    game.GetPlayerData().AddHealthMax((int)activecommand.values[0]);
                     break;
                 
                 // Text ------------------------------------------------------------------

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerData : MonoBehaviour
+public class PlayerData : MasterObject
 {
     [SerializeField] private HUDMeter healthmeter;
     [SerializeField] private HUDMeter energymeter;
@@ -56,6 +56,11 @@ public class PlayerData : MonoBehaviour
     public int AddEnergy(int e)
     {
         return activeweapon.AddEnergy(e);
+    }
+
+    public void AddHealthMax(int _health)
+    {
+        game.GetPlayer().AddHealthMax(_health);
     }
 
     public void EnergyMaximizeProvisional()

@@ -181,11 +181,11 @@ public class Entity_Player : Entity
 						// Down is pressed and hasn't been held on last frame
 						if (ylev < 0.0f && vsign != ylev)	
 						{
-							vsign = 0f;
-
 							// Run interact script
 							searchtarget.Interact();
 							searchtarget = null;
+
+							ylev = 0f;
 						}
 					}
 					else
@@ -501,7 +501,12 @@ public class Entity_Player : Entity
 	}
 
 	// Utility ================================================================
-
+	public void AddHealthMax(int _health)
+	{
+		healthmax += _health;
+		ChangeHealth(healthmax);
+		Debug.Log(healthmax);
+	}
 	public float GetHSign() {return hsign;}
 	public float GetVSign() {return vsign;}
 	public bool GetOnGround() {return onground;}

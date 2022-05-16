@@ -65961,8 +65961,8 @@ MonoBehaviour:
       sceneFlagSet(4) jump("101")'
   - key: health3
     text: "// Adds 3 points to max health\ngameFlagSet(\"lock_player\")\r\ngameFlagSet(\"pause\")\nentityDestroy(\"healthA\")\r\ntextPrint(\"You
-      collected a health pack!\\n\") adv()\n\ntextPrint(\"Max health increased by
-      3.\") adv() \ntextClose()\ngameFlagClear(\"lock_player\")\ngameFlagClear(\"pause\")"
+      collected a health pack!\\n\") adv()\nhealthAddMax(3)\ntextPrint(\"Max health
+      increased by 3.\") adv() \ntextClose()\ngameFlagClear(\"lock_player\")\ngameFlagClear(\"pause\")"
 --- !u!4 &970129590
 Transform:
   m_ObjectHideFlags: 0
