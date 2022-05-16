@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -163,9 +164,10 @@ public class Entity : MasterObject
     // Called when pressing down on an entity
     public virtual void Interact()
     {
-        //if (eventkey != "")
+        if (eventkey != "")
         {
             // Run Event
+            game.RunEvent(eventkey);
         }
     }
 
@@ -178,7 +180,7 @@ public class Entity : MasterObject
     // Called in Defeat() call before destruction
     protected virtual bool OnDefeat()
     {
-        if (heartdrop && Random.Range(0.0f, 1.0f) < 0.3f)
+        if (heartdrop && UnityEngine.Random.Range(0.0f, 1.0f) < 0.3f)
         {
             DropHeart();
         }
@@ -232,8 +234,8 @@ public class Entity : MasterObject
             e = Instantiate(obj).GetComponent<Entity>();
             e.transform.position = transform.position;
             e.SpeedSetDeg(
-                Random.Range(2.0f, 5.0f),
-                Random.Range(80.0f, 100.0f)
+                UnityEngine.Random.Range(2.0f, 5.0f),
+                UnityEngine.Random.Range(80.0f, 100.0f)
                 );
         }
     }
@@ -583,9 +585,14 @@ public class Entity : MasterObject
     }
 
     // Casts hurtbox against hitboxes and populates results in given variable. Returns number of results
-    protected int CastHurtbox(RaycastHit2D[] hitresults, int mask = LAYER_HITBOX_BIT)
+    protected int CastHurtbox(RaycastHit2D[] hitresults, int mask = LAYER_HITBOX_BIT, bool _cleararray = true)
     {
         if (hurtboxcollider == null) {return 0;}
+
+        if (_cleararray)
+        {
+            Array.Clear(hitresults, 0, hitresults.Length);
+        }
 
         hurtboxcollider.Cast(
             new Vector2(0.0f, 0.0f),

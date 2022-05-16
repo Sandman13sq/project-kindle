@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 public class Entity_Player : Entity
 {
@@ -149,12 +150,13 @@ public class Entity_Player : Entity
 					}
 
 					// Find Search Target
+					searchtarget = null;
 					if (onground)
 					{
-						searchtarget = null;
+						CastHurtbox(castresults, LAYER_HURTBOX_BIT);
+
 						foreach (var hit in castresults)
 						{
-							CastHurtbox(castresults, LAYER_HURTBOX_BIT);
 							Entity e = GetEntityFromCollider(hit.collider);
 							if (e != null)
 							{
@@ -171,7 +173,7 @@ public class Entity_Player : Entity
 					}
 					
 					// Interact with target
-					if (searchtarget)
+					if (searchtarget != null)
 					{
 						// Update search marker
 						searchmark_object.SetActive(true);
@@ -179,6 +181,8 @@ public class Entity_Player : Entity
 						// Down is pressed and hasn't been held on last frame
 						if (ylev < 0.0f && vsign != ylev)	
 						{
+							vsign = 0f;
+
 							// Run interact script
 							searchtarget.Interact();
 							searchtarget = null;
