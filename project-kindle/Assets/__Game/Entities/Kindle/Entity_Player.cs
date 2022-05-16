@@ -20,6 +20,8 @@ public class Entity_Player : Entity
 	//======= stuff for animation: ============
 	[SerializeField] Animator animator;
 	[SerializeField] SpriteRenderer[] spriterenderer_weapon; // Size = 2
+	[SerializeField] Kindle_Searchmarker searchmark_object;
+	private Entity searchtarget;
 
 	private bool aimingUp; //bool to check if kindle is aiming up
 	private bool aimingDown; //bool to check if kindle is aiming down
@@ -119,7 +121,6 @@ public class Entity_Player : Entity
 						hsign = (xlev > 0.0f)? 1.0f: -1.0f;
 						spriterenderer.flipX = xlev < 0.0f;
 					}
-					vsign = ylev;
 					
 					// Jump buffer
 					/*
@@ -146,6 +147,49 @@ public class Entity_Player : Entity
 					{
 						playerdata.PrevWeapon();
 					}
+
+					// Find Search Target
+					if (onground)
+					{
+						searchtarget = null;
+						foreach (var hit in castresults)
+						{
+							CastHurtbox(castresults, LAYER_HURTBOX_BIT);
+							Entity e = GetEntityFromCollider(hit.collider);
+							if (e != null)
+							{
+								if (e == this) {continue;}	// Skip if self
+								
+								// Run interact script
+								if (e.CanInteract())
+								{
+									searchtarget = e;
+									break;
+								}
+							}
+						}
+					}
+					
+					// Interact with target
+					if (searchtarget)
+					{
+						// Update search marker
+						searchmark_object.SetActive(true);
+
+						// Down is pressed and hasn't been held on last frame
+						if (ylev < 0.0f && vsign != ylev)	
+						{
+							// Run interact script
+							searchtarget.Interact();
+							searchtarget = null;
+						}
+					}
+					else
+					{
+						searchmark_object.SetActive(false);
+					}
+
+					vsign = ylev;
 				}
 				else
 				{
@@ -248,6 +292,7 @@ public class Entity_Player : Entity
 
 				// Set gravity
 				grav = jumpheld? gravityjump: gravity;
+
 				break;
 			}
 			// -------------------------------------------------------------------

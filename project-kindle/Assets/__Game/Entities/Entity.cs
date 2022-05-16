@@ -169,6 +169,12 @@ public class Entity : MasterObject
         }
     }
 
+    // Returns true if entity is interactable
+    public bool CanInteract()
+    {
+        return eventkey != "";
+    }
+
     // Called in Defeat() call before destruction
     protected virtual bool OnDefeat()
     {
