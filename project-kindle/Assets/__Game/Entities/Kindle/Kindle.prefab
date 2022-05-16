@@ -178,8 +178,8 @@ MonoBehaviour:
   dorespawn: 0
   enableinrange: 0
   state: 0
-  health: 32
-  healthmax: 32
+  health: 20
+  healthmax: 20
   attack: 0
   energy: 0
   energydrops: []

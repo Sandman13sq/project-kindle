@@ -27,7 +27,7 @@ public class Entity_Player : Entity
 	private bool aimingUp; //bool to check if kindle is aiming up
 	private bool aimingDown; //bool to check if kindle is aiming down
 
-	private int ticks = 0; //used to force shooting animation to play for a good bit
+	private float ticks = 0f; //used to force shooting animation to play for a good bit
 
 	//====================================
 	//======== Audio stuff ==================
@@ -82,11 +82,11 @@ public class Entity_Player : Entity
 	protected override void Update()
 	{
 		// Used to reset shooting animation
-		if(ticks < 30)
+		if(ticks < 30f)
 		{
-			ticks += 1;
+			ticks += ts;
 		}
-		else if(ticks == 30)
+		else if(ticks >= 30f)
 		{
 			animator.SetBool("ShootingUp", false);
 			animator.SetBool("ShootingSide", false);
