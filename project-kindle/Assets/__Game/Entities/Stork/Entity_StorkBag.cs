@@ -42,6 +42,7 @@ public class Entity_StorkBag : Entity
     protected override bool OnDefeat()
     {
         Instantiate(explosion_prefab).transform.position = transform.position;
+        game.PlaySound("DragonShoot");
         return true;    // Return true to destroy object after
     }
 }

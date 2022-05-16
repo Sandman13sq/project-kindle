@@ -117,6 +117,8 @@ public class WeaponProjectile_Meteor : WeaponProjectile
         explosion.SetRadius(explosionradius.radius);
         explosion.SetDamage(explosiondamage);
 
+        game.PlaySound("MeteorBoomla");
+
         DecrementShotCount();
 
         Destroy(gameObject);

@@ -10,6 +10,7 @@ public class Entity_Stork : Entity
     float image_index = 0f;
     float reloadtime = 200f;
     float reloadprogress = 0f;
+    bool flapPlayed = false;
     [SerializeField] private GameObject bag_prefab;
     [SerializeField] private Collider2D scan_collider;
     float xspeedsign;
@@ -33,6 +34,25 @@ public class Entity_Stork : Entity
         // Sprite Update
         image_index = Mathf.Repeat(image_index + 0.13f*ts, sprites.Length);
         spriterenderer.sprite = sprites[(int)image_index];
+
+        //Play wingflap audio *once* every 3 animation frame
+        if((int)image_index == 2 && flapPlayed == false)
+        {
+            //Check to see if kindle is in the sound radius
+            Collider2D[] soundRadius = Physics2D.OverlapCircleAll(transform.position, 500.0f);
+            foreach(Collider2D obj in soundRadius)
+            {
+                if (obj.tag == "player")
+                {
+                    game.PlaySound("WingFlap");
+                    flapPlayed = true;  
+                }
+            }
+        }
+
+        if((int)image_index == 0)
+            flapPlayed = false;
+
 
         // Regenerate Bag
         if (reloadprogress > 0f)
@@ -85,6 +105,7 @@ public class Entity_Stork : Entity
                         Instantiate(bag_prefab).transform.position = bagrenderer.transform.position;
                         bagrenderer.enabled = false;
                         reloadprogress = reloadtime;
+                        game.PlaySound("StorkDrop");
                     }
                 }
             }

@@ -19,7 +19,6 @@ public class Entity_Rattah : Entity
     [SerializeField] private Sprite[] sprites_attack;
     float image_index;
     float statestep;
-    //bool bonkPlayed = false;
 
     // Start is called before the first frame update
     protected override void Start()
