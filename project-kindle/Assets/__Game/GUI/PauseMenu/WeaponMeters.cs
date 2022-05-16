@@ -38,6 +38,8 @@ public class WeaponMeters : MasterObject
         tempestLevelText = tempestLevel.GetComponent<UnityEngine.UI.Text>();
         meteorLevelText = meteorLevel.GetComponent<UnityEngine.UI.Text>();
         weapons = playerdata.GetWeapons();
+
+        Update(); // Update weapon values
     }
 
     // Update is called once per frame
@@ -45,11 +47,13 @@ public class WeaponMeters : MasterObject
     {
         //Constantly Check the player's weapons array to check if they have unlocked the weapon or not
         int index = 0;
+
         foreach(Weapon gun in weapons)
         {
-            gun.SetIsUnlocked(true);
+            //gun.SetIsUnlocked(true);
             bool unlocked = gun.GetIsUnlocked();
-            if(unlocked == true)
+
+            if (unlocked == true)
             {
                 //0 = vector, 1 = dragon, 2 = meteor, 3 = tempest
                 if(index == 0)

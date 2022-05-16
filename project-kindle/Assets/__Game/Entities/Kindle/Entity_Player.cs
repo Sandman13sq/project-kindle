@@ -99,7 +99,7 @@ public class Entity_Player : Entity
 		float ylev = Input.GetAxisRaw("Vertical");		// Up/Down player input
 		float lastvsign = vsign;
 		float lasthsign = hsign;
-		bool controlslocked = game.GameFlagGet(_GameHeader.GameFlag.lock_player);
+		bool controlslocked = game.GameFlagGet(GameFlag.lock_player);
 
 		float grav = gravity;
 		
@@ -377,9 +377,9 @@ public class Entity_Player : Entity
 		}
 
 		// Hide Player
-		if (showplayer != game.GameFlagGet(_GameHeader.GameFlag.show_player))
+		if (showplayer != game.GameFlagGet(GameFlag.show_player))
 		{
-			showplayer = game.GameFlagGet(_GameHeader.GameFlag.show_player);
+			showplayer = game.GameFlagGet(GameFlag.show_player);
 			spriterenderer.enabled = showplayer;
 		}
 

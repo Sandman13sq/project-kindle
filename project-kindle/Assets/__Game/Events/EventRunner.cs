@@ -409,7 +409,7 @@ public class EventRunner : MasterObject
                 case(Command.gameflag_set):
                     // Use text
                     if (activecommand.text != "")
-                        game.GameFlagSet((_GameHeader.GameFlag)Enum.Parse(typeof(_GameHeader.GameFlag), activecommand.text));
+                        game.GameFlagSet((GameFlag)Enum.Parse(typeof(GameFlag), activecommand.text));
                     // Use first param
                     else
                         game.GameFlagSet((int)activecommand.values[0]);
@@ -418,7 +418,7 @@ public class EventRunner : MasterObject
                 case(Command.gameflag_clear):
                     // Use text
                     if (activecommand.text != "")
-                        game.GameFlagClear((_GameHeader.GameFlag)Enum.Parse(typeof(_GameHeader.GameFlag), activecommand.text));
+                        game.GameFlagClear((GameFlag)Enum.Parse(typeof(GameFlag), activecommand.text));
                     // Use first param
                     else
                         game.GameFlagClear((int)activecommand.values[0]);
@@ -458,12 +458,12 @@ public class EventRunner : MasterObject
 
                 // Lock Player Controls
                 case(Command.lock_controls):
-                    game.GameFlagSet(_GameHeader.GameFlag.lock_player);
+                    game.GameFlagSet(GameFlag.lock_player);
                     break;
                 
                 // Free Player Controls
                 case(Command.free_controls):
-                    game.GameFlagClear(_GameHeader.GameFlag.lock_player);
+                    game.GameFlagClear(GameFlag.lock_player);
                     break;
                 
                 // Move Player to Entity

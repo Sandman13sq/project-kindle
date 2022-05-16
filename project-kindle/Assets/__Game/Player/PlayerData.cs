@@ -28,6 +28,10 @@ public class PlayerData : MasterObject
         {
             AddEnergy(5);
         }
+
+        // Hide energy meter when paused
+        energymeter.SetVisible(!game.GameFlagGet(GameFlag.pause));
+        weaponinfo.SetVisible(!game.GameFlagGet(GameFlag.pause));
     }
 
     // Methods ==================================================

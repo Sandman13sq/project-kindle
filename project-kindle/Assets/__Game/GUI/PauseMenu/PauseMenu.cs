@@ -31,26 +31,38 @@ public class PauseMenu : MasterObject
             arrowystart.Add(arrowsprites[i].transform.localPosition.y);
         }
         currentTab = 1;
+
+        // Reset all pages
+        goalsPage.SetActive(currentTab==0);
+        weaponPage.SetActive(currentTab==1);
+        enemiesPage.SetActive(currentTab==2);
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Exit 
+        if (game.EventIsRunning()) {return;}
+
+        // Enter pause menu
         if(Input.GetKeyDown("c") || Input.GetKeyDown("return"))
         {
             if(isPaused)
             {
                 Resume();
-                game.GameFlagClear(_GameHeader.GameFlag.pause);
-                game.GameFlagClear(_GameHeader.GameFlag.lock_player);
+                game.GameFlagClear(GameFlag.pause);
+                game.GameFlagClear(GameFlag.lock_player);
             }
             else
             {
                 Pause();
-                game.GameFlagSet(_GameHeader.GameFlag.lock_player);
-                game.GameFlagSet(_GameHeader.GameFlag.pause);
+                game.GameFlagSet(GameFlag.lock_player);
+                game.GameFlagSet(GameFlag.pause);
             }
         }
+
+        // Exit if not paused
+        if (!isPaused) {return;}
 
         //Goals Page
         if(currentTab == 0)

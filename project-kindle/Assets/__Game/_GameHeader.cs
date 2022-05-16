@@ -89,6 +89,9 @@ public class _GameHeader : MasterObject
         timestep = 1.0f;
         nexttimestep = 1.0f;
         hitstop = 0.0f;
+
+        // Enable Vector
+        playerdata.GetWeapons()[0].SetIsUnlocked(true);
     }
 
     // Start is called before the first frame update
@@ -115,7 +118,7 @@ public class _GameHeader : MasterObject
         }
 
         // Game paused
-        if (GameFlagGet(GameFlag.pause))
+        if (GameFlagGet(GameFlag.zerotimestep) || GameFlagGet(GameFlag.pause))
         {
             timestep = 0.0f;
         }

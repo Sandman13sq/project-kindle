@@ -16,6 +16,7 @@ public class MasterObject : MonoBehaviour
         show_gui,
         show_player,
         pause,
+        zerotimestep,
     }
 
     // Layer constants
