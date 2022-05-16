@@ -19,14 +19,14 @@ public class Entity_Stork : Entity
     // ==========================================================
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         xspeedsign = spriterenderer.flipX? -1f: 1f;
         bagrenderer.enabled = true;
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         float ts = game.GetActiveTimeStep();
 

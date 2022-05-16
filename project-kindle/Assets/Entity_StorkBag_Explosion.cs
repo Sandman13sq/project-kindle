@@ -10,7 +10,7 @@ public class Entity_StorkBag_Explosion : Entity
     private float radius;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         radius = circlecollider.radius;
         
@@ -25,7 +25,7 @@ public class Entity_StorkBag_Explosion : Entity
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         if (life > 0.0f) {life -= game.GetTrueTimeStep();}
         else
