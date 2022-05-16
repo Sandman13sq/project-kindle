@@ -5,17 +5,8 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.SceneManagement;
 
-public class _GameHeader : MonoBehaviour
+public class _GameHeader : MasterObject
 {
-    public enum GameFlag : int
-    {
-        zero,
-        lock_player,
-        show_gui,
-        show_player,
-        pause,
-    }
-
     // Variables
     [SerializeField] private GameObject player_prefab;
     [SerializeField] private GameObject textbox_prefab;
