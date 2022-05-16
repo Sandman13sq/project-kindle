@@ -89,7 +89,7 @@ public class Weapon : MasterObject
         }
 
         // Shoot
-        if ( cancontrol && Input.GetButtonDown("Fire1") )
+        if ( cancontrol && ( Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2") ) )
         {
             firebuffer = firebuffertime;
             if(!HasAmmo())
@@ -97,7 +97,7 @@ public class Weapon : MasterObject
         }
 
         // Autofire
-        if ( cancontrol && Input.GetButton("Fire1") )
+        if ( cancontrol && ( Input.GetButton("Fire1") || Input.GetButton("Fire2") ) )
         {
             if (autofireprogress > 0.0f)
             {
