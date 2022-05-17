@@ -27,6 +27,7 @@ public class Entity_EyeDrop : Entity
     protected override void Start()
     {
         state = (int)State.Floating;
+        xspeed = -Polarize(spriterenderer.flipX);
     }
 
     // Update is called once per frame

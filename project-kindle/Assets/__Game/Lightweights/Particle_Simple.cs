@@ -14,6 +14,11 @@ public class Particle_Simple : MasterObject
     {
         life = 0.0f;
         spriterenderer.sprite = sprites[0];
+        transform.position = new Vector3(
+            transform.position.x,
+            transform.position.y,
+            -9f
+        );
     }
 
     // Update is called once per frame
