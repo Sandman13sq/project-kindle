@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PauseMenu : MasterObject
 {
@@ -24,8 +25,10 @@ public class PauseMenu : MasterObject
     private Button weaponsButton;
     private Button goalsButton;
     private Button enemiesButton;
+    public TMP_Text goalsText;
     private float statestep;
     private List<float> arrowystart = new List<float>();
+    public List<string> objectives = new List<string>();
 
     void Start() {
         int len = arrowsprites.Length;
@@ -43,6 +46,11 @@ public class PauseMenu : MasterObject
         weaponsButton = weaponsButtonPreFab.GetComponent<Button>();
         goalsButton = goalsButtonPreFab.GetComponent<Button>();
         enemiesButton = enemiesButtonPreFab.GetComponent<Button>();
+
+        //Populate objectives with starting goals
+        objectives.Add("Find the effigies and destroy them.");
+        objectives.Add("Explore to find new objectives and resources!");
+        objectives.Add("Survive...");
     }
 
     // Update is called once per frame
@@ -198,6 +206,13 @@ public class PauseMenu : MasterObject
         Time.timeScale = 0f;
         isPaused = true;
         statestep = 0.0f;
+
+        //Rewrite goals everytime game is paused so it is always up to date
+        goalsText.text = ""; //clear text
+        foreach(string goal in objectives)
+        {
+            goalsText.text += "- " + goal + "\n";
+        }
     }
 
     //Mouse Controls
@@ -220,5 +235,10 @@ public class PauseMenu : MasterObject
         weaponPage.SetActive(false);
         enemiesPage.SetActive(true);
         goalsPage.SetActive(false);
+    }
+
+    public void CompleteObjective(int goalIndex)
+    {
+        objectives.RemoveAt(goalIndex);
     }
 }

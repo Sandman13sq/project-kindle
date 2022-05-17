@@ -268,7 +268,6 @@ public class Entity_Player : Entity
 					}
 
 					animator.SetBool("InAir", true);
-					Debug.Log("IgnoreInAir = " + animator.GetBool("IgnoreInAir"));
 				}
 
 				// Aiming up and down

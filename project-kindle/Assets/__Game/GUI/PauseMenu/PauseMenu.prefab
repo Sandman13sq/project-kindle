@@ -3227,12 +3227,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- Find the effigies and destroy them.
-
-    - Explore to find new objectives
-    and resources!
-
-    - Survive...'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4dcd063b7ba26fe4585f80e9812de937, type: 2}
   m_sharedMaterial: {fileID: -2391894399414952426, guid: 4dcd063b7ba26fe4585f80e9812de937, type: 2}
@@ -3566,7 +3561,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6439321013263931204
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4099,7 +4094,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6439321013428945995
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4538,6 +4533,7 @@ MonoBehaviour:
   - {fileID: 2822970292731288388}
   - {fileID: 9144497642272972347}
   - {fileID: 4038132686029993191}
+  goalsText: {fileID: 6439321012867697995}
 --- !u!1 &6476019025564453547
 GameObject:
   m_ObjectHideFlags: 0
