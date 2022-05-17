@@ -32,6 +32,7 @@ public class Entity : MasterObject
 
     [SerializeField] protected string eventkey = ""; // Key for event
     [SerializeField] protected string entitytag = ""; // Tag used to reference by event/entity
+    public bool isinteractable; // Player can press down for event
     
     public SpriteRenderer spriterenderer;
     public Collider2D hitboxcollider;  // Used for damaging player on contact
@@ -174,7 +175,7 @@ public class Entity : MasterObject
     // Returns true if entity is interactable
     public bool CanInteract()
     {
-        return eventkey != "";
+        return isinteractable;
     }
 
     // Called in Defeat() call before destruction

@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventkey: 
   entitytag: 
+  isinteractable: 1
   spriterenderer: {fileID: 8161011055410540137}
   hitboxcollider: {fileID: 0}
   hurtboxcollider: {fileID: 6580540385396494264}
