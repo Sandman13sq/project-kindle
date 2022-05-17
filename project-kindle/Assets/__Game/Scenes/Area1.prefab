@@ -13432,6 +13432,8 @@ MonoBehaviour:
 
       sceneFlagJump(-4, "")
 
+      sceneFlagJump(-5, "")
+
       gameFlagSet("lock_player")
 
       gameFlagSet("zerotimestep")
@@ -13460,7 +13462,9 @@ MonoBehaviour:
       #E3 sceneFlagSet(3) jump("101")
 
       #E4
-      sceneFlagSet(4) jump("101")'
+      sceneFlagSet(4) jump("101")
+
+      #E5 sceneFlagSet(5) jump("101")'
   - key: health3
     text: "// Adds 3 points to max health\ngameFlagSet(\"lock_player\")\r\ngameFlagSet(\"zerotimestep\")\nentityDestroy(\"healthA\")\r\ntextPrint(\"You
       collected a health pack!\\n\") adv()\nhealthAddMax(3)\ntextPrint(\"Max health
@@ -90497,7 +90501,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6241962120882235966, guid: 8ecba20af6f0f104bbc6e19987442ae7, type: 3}
       propertyPath: eventkey
-      value: E3
+      value: E5
       objectReference: {fileID: 0}
     - target: {fileID: 6241962120882235966, guid: 8ecba20af6f0f104bbc6e19987442ae7, type: 3}
       propertyPath: eventondefeat
