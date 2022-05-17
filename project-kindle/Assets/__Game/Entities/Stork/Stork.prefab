@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventkey: 
   entitytag: 
+  isinteractable: 0
   spriterenderer: {fileID: 3168204681755873102}
   hitboxcollider: {fileID: 2556157342023311347}
   hurtboxcollider: {fileID: 5543498792207947452}
@@ -60,8 +61,8 @@ MonoBehaviour:
   dorespawn: 1
   enableinrange: 1
   state: 0
-  health: 12
-  healthmax: 12
+  health: 30
+  healthmax: 30
   attack: 2
   energy: 0
   energydrops:

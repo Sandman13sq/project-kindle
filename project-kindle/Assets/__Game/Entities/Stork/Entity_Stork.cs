@@ -16,6 +16,8 @@ public class Entity_Stork : Entity
     float xspeedsign;
     private float strikerange = 200.0f;
     private RaycastHit2D playercast;
+    private float maxspeed = 3f; 
+    private float chasedistance = 400.0f;
 
     // ==========================================================
 
@@ -52,7 +54,6 @@ public class Entity_Stork : Entity
 
         if((int)image_index == 0)
             flapPlayed = false;
-
 
         // Regenerate Bag
         if (reloadprogress > 0f)
@@ -102,7 +103,9 @@ public class Entity_Stork : Entity
                             )
                         )
                     {
-                        Instantiate(bag_prefab).transform.position = bagrenderer.transform.position;
+                        Entity_StorkBag e = Instantiate(bag_prefab).GetComponent<Entity_StorkBag>();
+                        e.transform.position = bagrenderer.transform.position;
+                        e.SpeedSetX(xspeed);
                         bagrenderer.enabled = false;
                         reloadprogress = reloadtime;
                         game.PlaySound("StorkDrop");
@@ -125,7 +128,15 @@ public class Entity_Stork : Entity
             spriterenderer.flipX = xspeedsign < 0f;
         }
 
-        xspeed = ApproachTS(xspeed, 2f*xspeedsign);
+        // Fly towards player
+        float dist = game.GetPlayer().transform.position.x - transform.position.x;
+        if (Mathf.Abs(dist) >= chasedistance)
+        {
+            xspeedsign = Mathf.Sign(dist);
+            spriterenderer.flipX = xspeedsign < 0f;
+        }
+
+        xspeed = ApproachTS(xspeed, maxspeed*xspeedsign, 0.1f);
 
         UpdateMovement();
     }
