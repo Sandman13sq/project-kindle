@@ -384,7 +384,6 @@ public class Entity_Player : Entity
 		}
 
 		animator.speed = ts;
-
 	}
 
 	// Methods ===============================================================
