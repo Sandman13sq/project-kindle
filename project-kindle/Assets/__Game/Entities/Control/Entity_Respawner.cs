@@ -6,6 +6,7 @@ public class Entity_Respawner : MasterObject
 {
     private Entity entity = null;
     private Vector3 entityposition;
+    private Vector3 initialposition;
     private float ignorerange = 2000.0f;
     private float triggerrange = 800.0f;
     private bool cantrigger = false;
@@ -15,7 +16,7 @@ public class Entity_Respawner : MasterObject
     // Start is called before the first frame update
     void Start()
     {
-        
+        initialposition = transform.position;
     }
 
     // Update is called once per frame
@@ -28,12 +29,12 @@ public class Entity_Respawner : MasterObject
             // Reactivate entity
             if (cantrigger && !entityactive)
             {
-                if ( p.DistanceTo(transform.position) <= triggerrange )
+                if ( p.DistanceTo(initialposition) <= triggerrange )
                 {
                     cantrigger = false;
                     entityactive = true;
                     entity.enabled = true;
-                    entity.PositionSet(entityposition.x, entityposition.y);
+                    entity.PositionSet(initialposition.x, initialposition.y);
                     entity.Restore();
 
                     if (onlyonce)
@@ -46,7 +47,7 @@ public class Entity_Respawner : MasterObject
             // Wait until player is out of range
             else
             {
-                if ( p.DistanceTo(transform.position) > ignorerange )
+                if ( p.DistanceTo(entityposition) > ignorerange )
                 {
                     cantrigger = true;
                 }
