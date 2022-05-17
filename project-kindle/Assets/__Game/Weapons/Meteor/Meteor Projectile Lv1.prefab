@@ -72,6 +72,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7619713148694697046, guid: 5ebf58003705b4946a4d6e4ad325b0ca, type: 3}
+      propertyPath: weaponprojtype
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7619713148694697046, guid: 5ebf58003705b4946a4d6e4ad325b0ca, type: 3}
       propertyPath: sprites.Array.size
       value: 4
       objectReference: {fileID: 0}

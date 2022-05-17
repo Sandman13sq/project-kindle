@@ -32,6 +32,7 @@ public class Entity : MasterObject
 
     [SerializeField] protected string eventkey = ""; // Key for event
     [SerializeField] protected string entitytag = ""; // Tag used to reference by event/entity
+    public bool isinteractable; // Player can press down for event
     
     public SpriteRenderer spriterenderer;
     public Collider2D hitboxcollider;  // Used for damaging player on contact
@@ -174,7 +175,7 @@ public class Entity : MasterObject
     // Returns true if entity is interactable
     public bool CanInteract()
     {
-        return eventkey != "";
+        return isinteractable;
     }
 
     // Called in Defeat() call before destruction
@@ -217,9 +218,9 @@ public class Entity : MasterObject
         }
     }
 
-    protected virtual void OnHealthChange(int change)
+    protected virtual void OnHealthChange(int change, int weaponprojtype)
     {
-        if (change < 0)
+        if (change < 0 || healthmax == 0)
         {
             damageshake = damageshaketime;
         }
@@ -260,7 +261,7 @@ public class Entity : MasterObject
     }
 
     // Changes health value by amount. Returns change in health
-    public virtual int ChangeHealth(int value)
+    public virtual int ChangeHealth(int value, int weaponprojtype = -1)
     {
         int prehealth = health;
 
@@ -283,9 +284,9 @@ public class Entity : MasterObject
                 shownumberobj.GetComponent<ShowNumber>().AddValue(ShowNumber.NumberType.HEALTH, value);
             }
 
-            OnHealthChange(health-prehealth);
+            OnHealthChange(health-prehealth, weaponprojtype);
             
-            if (health < 0) 
+            if (health < 0 && healthmax > 0)
             {
                 health = 0;
                 Defeat();
@@ -297,7 +298,7 @@ public class Entity : MasterObject
             health += value;
             if (health > healthmax) {health = healthmax;}
 
-            OnHealthChange(health-prehealth);
+            OnHealthChange(health-prehealth, weaponprojtype);
         }
 
         return health-prehealth; // Return change in health

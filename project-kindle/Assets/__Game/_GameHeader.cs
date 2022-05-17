@@ -90,8 +90,9 @@ public class _GameHeader : MasterObject
         nexttimestep = 1.0f;
         hitstop = 0.0f;
 
-        // Enable Vector
+        // Enable Vector & Dragon Breath
         playerdata.GetWeapons()[0].SetIsUnlocked(true);
+        playerdata.GetWeapons()[1].SetIsUnlocked(true);
     }
 
     // Start is called before the first frame update
