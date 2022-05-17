@@ -186,6 +186,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7488149953ab6b4ea1a249a54ef401e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventkey: 
+  entitytag: 
+  isinteractable: 0
   spriterenderer: {fileID: 7756702849767331452}
   hitboxcollider: {fileID: 7756702849994193192}
   hurtboxcollider: {fileID: 7756702851183029920}
@@ -194,9 +197,11 @@ MonoBehaviour:
   showdamage: 1
   isshootable: 1
   eventondefeat: 0
+  dorespawn: 0
+  enableinrange: 0
   state: 0
-  health: 10
-  healthmax: 10
+  health: 16
+  healthmax: 16
   attack: 1
   energy: 0
   energydrops:

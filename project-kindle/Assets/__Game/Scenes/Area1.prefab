@@ -13589,7 +13589,8 @@ MonoBehaviour:
       adv()\r\ntextPrint(\"\\nUse C to view goals, weapons, and enemy info.\") adv()
       textClear()\r\ntextPrint(\"Collect energy to level up your held weapon.\")
       adv()\r\ntextPrint(\"\\nFind health packs to increase your max health.\") adv()
-      textClear()\r\ntextPrint(\"Have fun!\") adv() textClose()\r\ngameFlagClear(\"lock_player\")\r\ngameFlagSet(\"show_gui\")\ngameFlagClear(\"zerotimestep\")"
+      textClear()\r\ntextPrint(\"When a ''!'' appears above Kindle's head,\\npress
+      down to interact.\") adv() textClear()\r\ntextPrint(\"Have fun!\") adv() textClose()\r\ngameFlagClear(\"lock_player\")\r\ngameFlagSet(\"show_gui\")\ngameFlagClear(\"zerotimestep\")"
   - key: 101
     text: '// Runs when effigy is destroyed.
 

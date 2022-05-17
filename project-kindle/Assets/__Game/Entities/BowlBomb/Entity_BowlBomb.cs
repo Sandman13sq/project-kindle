@@ -6,7 +6,6 @@ public class Entity_BowlBomb : Entity
 {
     [SerializeField] private Sprite[] sprites;
     private float detonatetime = 100f;
-    [SerializeField] private GameObject explosion_prefab;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -22,7 +21,6 @@ public class Entity_BowlBomb : Entity
             detonatetime -= ts;
             if (detonatetime <= 0f)
             {
-                //Instantiate(explosion_prefab).transform.position = transform.position;
                 Defeat();
                 return;
             }
@@ -42,6 +40,17 @@ public class Entity_BowlBomb : Entity
         if (state == 0 && weaponprojtype == 1)
         {
             state = 1;
+        }
+
+        // Hit by Tempest
+        if (state == 1 && weaponprojtype == 3)
+        {
+            state = 0;
+            spriterenderer.sprite = sprites[0];
+            Vector3 pos = spriterenderer.transform.localPosition;
+            spriterenderer.transform.localPosition = new Vector3(0f, pos.y, pos.z);
+
+            detonatetime = 100f;
         }
 
         damageshake = damageshaketime;

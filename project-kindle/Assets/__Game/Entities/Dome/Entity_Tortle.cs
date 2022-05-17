@@ -7,7 +7,7 @@ public class Entity_Tortle : Entity
     private RaycastHit2D playercast;
     private float strikeradius = 100.0f;
     private float statestep = 0.0f;
-    private const float maxspeed = 0.7f;
+    private const float maxspeed = 1f;
     private const float speedslowmod = 0.95f;
 
     //animator for steam animation
@@ -51,7 +51,6 @@ public class Entity_Tortle : Entity
         {
             if (coll.HasFlag(CollisionFlag.RIGHT) || !coll.HasFlag(CollisionFlag.EDGERIGHT))
             {
-                spriterenderer.flipX = true;
                 xspeed = -1.0f;
             }
         }
@@ -59,7 +58,6 @@ public class Entity_Tortle : Entity
         {
             if (coll.HasFlag(CollisionFlag.LEFT) || !coll.HasFlag(CollisionFlag.EDGELEFT))
             {
-                spriterenderer.flipX = false;
                 xspeed = 1.0f;
             }
         }
@@ -67,7 +65,13 @@ public class Entity_Tortle : Entity
         {
             yspeed = 0.0f;
         }
-
+        
+        // Set sprite flip
+        if (xspeed != 0f)
+        {
+            spriterenderer.flipX = xspeed < 0f;
+        }
+        
         spriterenderer.sprite = sprites[0];
 
         switch(state)

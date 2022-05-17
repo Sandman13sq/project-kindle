@@ -36,9 +36,9 @@ public class Entity_Rattah : Entity
         const float chaserange = 400.0f;
         const float ignorerange = chaserange * 1.5f;
         const float attackrange = 64.0f;
-        const float movespeed = 2.8f;
+        const float movespeed = 3.0f;
         const float moveacc = 0.13f;
-        const float jumpheight = 4.0f;
+        const float jumpheight = 4.2f;
 
         var p = game.GetPlayer();
 
