@@ -13442,6 +13442,8 @@ MonoBehaviour:
       textPrint("A WINNER ") wait(30) textPrint("IS
       YOU!") adv() textClear()
 
+      jump("tempest")
+
       textClose()
 
       gameFlagClear("lock_player")
@@ -13498,7 +13500,7 @@ MonoBehaviour:
 
       entityDestroy("tempest")
 
-      weaponUnlock(2)
+      weaponUnlock(3)
 
       textPrint("You
       unlocked the Tempest!\n") adv()
