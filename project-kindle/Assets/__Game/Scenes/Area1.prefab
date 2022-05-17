@@ -13444,6 +13444,8 @@ MonoBehaviour:
       textPrint("A WINNER ") wait(30) textPrint("IS
       YOU!") adv() textClear()
 
+      objectiveComplete(0)
+
       jump("tempest")
 
       textClose()
@@ -13467,16 +13469,16 @@ MonoBehaviour:
       #E5 sceneFlagSet(5) jump("101")'
   - key: health3
     text: "// Adds 3 points to max health\ngameFlagSet(\"lock_player\")\r\ngameFlagSet(\"zerotimestep\")\nentityDestroy(\"healthA\")\r\ntextPrint(\"You
-      collected a health pack!\\n\") adv()\nhealthAddMax(3)\ntextPrint(\"Max health
-      increased by 3.\") adv() \ntextClose()\ngameFlagClear(\"lock_player\")\ngameFlagClear(\"zerotimestep\")"
+      collected a health pack!\\n\") adv()\nhealthAddMax(3)\nsceneFlagSet(10)\ntextPrint(\"Max
+      health increased by 3.\") adv() \ntextClose()\ngameFlagClear(\"lock_player\")\ngameFlagClear(\"zerotimestep\")\njump(\"allhealth\")"
   - key: health5
     text: "// Adds 5 points to max health\ngameFlagSet(\"lock_player\")\r\ngameFlagSet(\"zerotimestep\")\nentityDestroy(\"healthB\")\r\ntextPrint(\"You
-      collected a health pack!\\n\") adv()\nhealthAddMax(5)\ntextPrint(\"Max health
-      increased by 5.\") adv() \ntextClose()\ngameFlagClear(\"lock_player\")\ngameFlagClear(\"zerotimestep\")"
+      collected a health pack!\\n\") adv()\nhealthAddMax(5)\nsceneFlagSet(11)\ntextPrint(\"Max
+      health increased by 5.\") adv() \ntextClose()\ngameFlagClear(\"lock_player\")\ngameFlagClear(\"zerotimestep\")\njump(\"allhealth\")"
   - key: health8
     text: "// Adds 8 points to max health\ngameFlagSet(\"lock_player\")\r\ngameFlagSet(\"zerotimestep\")\nentityDestroy(\"healthC\")\r\ntextPrint(\"You
-      found a health pack in the trash!\\n\") adv()\nhealthAddMax(8)\ntextPrint(\"Max
-      health increased by 8.\") adv() \ntextClose()\ngameFlagClear(\"lock_player\")\ngameFlagClear(\"zerotimestep\")"
+      found a health pack in the trash!\\n\") adv()\nhealthAddMax(8)\nsceneFlagSet(12)\ntextPrint(\"Max
+      health increased by 8.\") adv() \ntextClose()\ngameFlagClear(\"lock_player\")\ngameFlagClear(\"zerotimestep\")\njump(\"allhealth\")"
   - key: meteor
     text: 'gameFlagSet("lock_player")
 
@@ -13485,6 +13487,8 @@ MonoBehaviour:
       entityDestroy("meteor")
 
       weaponUnlock(2)
+
+      objectiveComplete(2)
 
       textPrint("You
       unlocked the Meteor!\n") adv()
@@ -13511,6 +13515,38 @@ MonoBehaviour:
 
       textPrint("Shoot cutting whirlpools!")
       adv()
+
+      textClose()
+
+      gameFlagClear("lock_player")
+
+      gameFlagClear("zerotimestep")'
+  - key: allhealth
+    text: '// Runs when all health is collected.
+
+      sceneFlagJump(-10, "") //
+      Exit event if any health is NOT collected
+
+      sceneFlagJump(-11, "")
+
+      sceneFlagJump(-12,
+      "")
+
+      gameFlagSet("lock_player")
+
+      gameFlagSet("zerotimestep")
+
+      textClear()
+
+      textPrint("You
+      found all health packs!") wait(40) adv() textClear()
+
+      healthAddMax(9)
+
+      textPrint("Here''s
+      some more health for your troubles. ") adv() textClear()
+
+      objectiveComplete(1)
 
       textClose()
 

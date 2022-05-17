@@ -48,9 +48,9 @@ public class PauseMenu : MasterObject
         enemiesButton = enemiesButtonPreFab.GetComponent<Button>();
 
         //Populate objectives with starting goals
-        objectives.Add("Find the effigies and destroy them.");
-        objectives.Add("Explore to find new objectives and resources!");
-        objectives.Add("Survive...");
+        objectives.Add("Destroy the 5 effigies located around the map.");
+        objectives.Add("Collect all 3 health upgrades.");
+        objectives.Add("Obtain the Meteor weapon.");
     }
 
     // Update is called once per frame
@@ -239,6 +239,6 @@ public class PauseMenu : MasterObject
 
     public void CompleteObjective(int goalIndex)
     {
-        objectives.RemoveAt(goalIndex);
+        //objectives.RemoveAt(goalIndex);
     }
 }

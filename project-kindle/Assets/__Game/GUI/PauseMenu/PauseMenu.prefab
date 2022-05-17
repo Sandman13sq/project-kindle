@@ -4534,6 +4534,7 @@ MonoBehaviour:
   - {fileID: 9144497642272972347}
   - {fileID: 4038132686029993191}
   goalsText: {fileID: 6439321012867697995}
+  objectives: []
 --- !u!1 &6476019025564453547
 GameObject:
   m_ObjectHideFlags: 0

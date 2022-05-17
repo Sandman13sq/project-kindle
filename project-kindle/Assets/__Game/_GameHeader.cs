@@ -14,6 +14,7 @@ public class _GameHeader : MasterObject
     [SerializeField] private AudioSource audiosource;
     [SerializeField] private PlayerData playerdata;
     [SerializeField] private GameObject playerhud;
+    [SerializeField] private PauseMenu pausemenu;
     private TextBox textbox_object;
     private Entity_Player player_object;
 
@@ -252,6 +253,7 @@ public class _GameHeader : MasterObject
 
     public PlayerData GetPlayerData() {return playerdata;}
     public AudioManager GetAudioManager() {return audiomanager;}
+    public PauseMenu GetPauseMenu() {return pausemenu;}
 
     // Events --------------------------------------------------
 
