@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 212647174899173010}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2180.0378, y: 17.34082, z: -16}
+  m_LocalPosition: {x: 2180.0378, y: 17.34082, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1612136917114203214}
@@ -107,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363728357053290537}
   m_LocalRotation: {x: -0, y: -0, z: 0.3961926, w: 0.9181674}
-  m_LocalPosition: {x: -1002.1, y: 178.4, z: -16}
+  m_LocalPosition: {x: -1002.1, y: 178.4, z: 0}
   m_LocalScale: {x: 0.68953437, y: 0.63954604, z: 1}
   m_Children: []
   m_Father: {fileID: 1612136917114203214}
@@ -273,7 +273,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612136916888057609}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 20}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1612136918823209889}
@@ -12663,7 +12663,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612136917114203209}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2652.9377, y: -831.1408, z: 16}
+  m_LocalPosition: {x: -2652.9377, y: -831.1408, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1612136917125609634}
@@ -13443,7 +13443,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612136917902730122}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2652.9377, y: -831.1408, z: 2044.8057}
+  m_LocalPosition: {x: -2652.9377, y: -831.1408, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1612136917205043511}
@@ -13581,7 +13581,9 @@ MonoBehaviour:
   eventdefs:
   - key: 100
     text: "// Runs on game startup\r\ngameFlagSet(\"lock_player\")\r\ngameFlagSet(\"show_player\")\r\ngameFlagClear(\"show_gui\")\nplayerMoveTo(\"start\",
-      0, 0)\r\nbgmPlay(\"mus_junkyard\")\r\nentityDestroy(\"start\")\r\n\nwait(30)\ngameFlagSet(\"zerotimestep\")\ntextPrint(\"Welcome,
+      0, 0)\r\nbgmPlay(\"mus_junkyard\")\r\nentityDestroy(\"start\")\r\n\n// Effigy
+      flags\nsceneFlagClear(1)\nsceneFlagClear(2)\nsceneFlagClear(3)\nsceneFlagClear(4)\nsceneFlagClear(5)\n//
+      Health Pack flags\nsceneFlagClear(11)\nsceneFlagClear(12)\nsceneFlagClear(13)\n\nweaponLock(2)\nweaponLock(3)\n\nwait(30)\ngameFlagSet(\"zerotimestep\")\ntextPrint(\"Welcome,
       Player!\") adv() textClear()\r\ntextPrint(\"Your mission is to find all 5 effigies
       on the map \\nand destroy them!\") adv() textClear()\r\ntextPrint(\"Move left
       and right with the arrow keys.\") adv() \r\ntextPrint(\"\\nJump with Z and
@@ -13916,7 +13918,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612136918561409474}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -16}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1612136918823209889}
@@ -90050,7 +90052,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612136918743724828}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2007.5106, y: -913.3074, z: -15}
+  m_LocalPosition: {x: -2007.5106, y: -913.3074, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1612136917138372160}

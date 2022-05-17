@@ -35,6 +35,7 @@ public class EventRunner : MasterObject
 
         {"healthaddmax", Command.health_add_max},    // Adds X to max health
         {"weaponunlock", Command.weapon_unlock},    // Unlocks weapon X
+        {"weaponlock", Command.weapon_lock},    // Locks weapon X
         {"objectivecomplete", Command.objective_complete},    // Marks objective X as complete
 
         {"textprint", Command.text_print},  // Add text S to textbox
@@ -73,6 +74,7 @@ public class EventRunner : MasterObject
         player_moveto,
         health_add_max,
         weapon_unlock,
+        weapon_lock,
         objective_complete,
 
         // Text --------------------------------
@@ -495,6 +497,11 @@ public class EventRunner : MasterObject
                 // Unlocks weapon X
                 case(Command.weapon_unlock):
                     game.GetPlayerData().UnlockWeapon((int)activecommand.values[0]);
+                    break;
+                
+                // Unlocks weapon X
+                case(Command.weapon_lock):
+                    game.GetPlayerData().LockWeapon((int)activecommand.values[0]);
                     break;
                 
                 // Marks objective X as complete

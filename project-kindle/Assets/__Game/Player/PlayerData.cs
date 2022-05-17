@@ -141,6 +141,15 @@ public class PlayerData : MasterObject
         weapons[index].SetIsUnlocked(true);
     }
 
+    public void LockWeapon(int index)
+    {
+        weapons[index].SetIsUnlocked(false);
+        if (activeweapon.GetIsUnlocked() == false)
+        {
+            NextWeapon();
+        }
+    }
+
     public Weapon GetActiveWeapon() {return activeweapon;}
     public int GetWeaponIndex() {return weaponindex;}
     public Weapon[] GetWeapons() {return weapons;}

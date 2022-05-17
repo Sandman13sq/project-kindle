@@ -81,7 +81,7 @@ public class Entity_Crawler : Entity
 
         if (diff < 0)
         {
-            xspeed *= 0.3f;
+            xspeed *= 0.5f;
         }
     }
 }

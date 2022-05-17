@@ -46,10 +46,8 @@ public class Player_GameOver : MasterObject
     {
         Vector3 campos = game.GetCameraPosition();
         transform.position = new Vector3(
-            campos.x, campos.y, -14.0f
+            campos.x, campos.y, -10.0f
         );
-
-        float ts = game.GetTrueTimeStep();
 
         switch(state)
         {
@@ -58,7 +56,7 @@ public class Player_GameOver : MasterObject
                 const float steptime = 60.0f;
 
                 //Application.targetFrameRate = 30;
-                fadestep += ts;
+                fadestep += game.GetActiveTimeStep();
                 spriterenderer.color = Color.Lerp(color1, color2, fadestep/steptime);
 
                 if (fadestep > steptime)
@@ -73,7 +71,7 @@ public class Player_GameOver : MasterObject
             case(1): {
                 const float steptime = 60.0f;
 
-                fadestep += ts;
+                fadestep += game.GetTrueTimeStep();
                 if (fadestep > steptime)
                 {
                     state++;
@@ -95,7 +93,7 @@ public class Player_GameOver : MasterObject
                 const float steptime = 60.0f;
                 spriterenderer.color = Color.Lerp(color2, color1, fadestep/steptime);
 
-                fadestep += ts;
+                fadestep += game.GetTrueTimeStep();
                 if (fadestep > steptime)
                 {
                     state++;
