@@ -105,9 +105,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- Shoots out orbs
+  m_text: '- Rapidly jets out water elements
 
-    - Coolness increases with level'
+    - Fire rate increases with level'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4dcd063b7ba26fe4585f80e9812de937, type: 2}
   m_sharedMaterial: {fileID: -2391894399414952426, guid: 4dcd063b7ba26fe4585f80e9812de937, type: 2}
@@ -1199,7 +1199,10 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Rattah
 
-    - Large rat with a thick hide that will bonk ya with its club.'
+    - Large rat with a thick hide that will bonk ya with its club.
+
+    -
+    Will jump over low heights when giving chase.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4dcd063b7ba26fe4585f80e9812de937, type: 2}
   m_sharedMaterial: {fileID: -2391894399414952426, guid: 4dcd063b7ba26fe4585f80e9812de937, type: 2}
@@ -1302,7 +1305,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -359.5548, y: -0.0020084}
+  m_AnchoredPosition: {x: -359.5548, y: 30.68}
   m_SizeDelta: {x: 336.2704, y: 215.84}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2401197965496818837
@@ -1448,9 +1451,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- Fires out explosive meteors (Kaboom!)
+  m_text: '- Launches exploding meteors
 
-    - Coolness increases with
+    - Damage and size \n  increase with
     level'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4dcd063b7ba26fe4585f80e9812de937, type: 2}
@@ -2502,8 +2505,10 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Dome
 
-    - Turtle with a metal shell that can attack with a spray of
-    projectiles.'
+    - Uses a metal colander for a shell.
+
+    - Attack with a spray
+    of projectiles when Kindle is close.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4dcd063b7ba26fe4585f80e9812de937, type: 2}
   m_sharedMaterial: {fileID: -2391894399414952426, guid: 4dcd063b7ba26fe4585f80e9812de937, type: 2}
@@ -2846,7 +2851,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "- Fires a wave of flames. \n- Number of flames fired increases with level"
+  m_text: '- Fires a wave of flames
+
+    - Flame count increases with level
+
+    -
+    Short range but wide coverage'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4dcd063b7ba26fe4585f80e9812de937, type: 2}
   m_sharedMaterial: {fileID: -2391894399414952426, guid: 4dcd063b7ba26fe4585f80e9812de937, type: 2}
@@ -3399,10 +3409,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Crawler
-
-    -Basic enemy that will relentlessly try to bite you. Looks
-    scarier than it actually is.'
+  m_text: "Crawler\n- Will relentlessly try to bite you. \n- Looks scarier than it
+    actually is.\n- Movement is stalled when shot."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4dcd063b7ba26fe4585f80e9812de937, type: 2}
   m_sharedMaterial: {fileID: -2391894399414952426, guid: 4dcd063b7ba26fe4585f80e9812de937, type: 2}
@@ -4209,8 +4217,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "- A pistol that fires beams of energy. \n- Damage and thickness increases
-    with level"
+  m_text: '- Shoots beams of energy
+
+    - Damage increases with level
+
+    - Beams
+    travel a far distance'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4dcd063b7ba26fe4585f80e9812de937, type: 2}
   m_sharedMaterial: {fileID: -2391894399414952426, guid: 4dcd063b7ba26fe4585f80e9812de937, type: 2}
@@ -4677,8 +4689,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Stork
 
-    - Bird that will attack by dropping trash bombs on its prey.
-    Look out!'
+    - Bird that drops trash bombs on its prey.\n  Look out!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4dcd063b7ba26fe4585f80e9812de937, type: 2}
   m_sharedMaterial: {fileID: -2391894399414952426, guid: 4dcd063b7ba26fe4585f80e9812de937, type: 2}
@@ -4946,10 +4957,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Eye Drop
-
-    - About as weak as an eyeball can be. Patrols an area and
-    shoots down lighting.'
+  m_text: "Eye Drop\n- About as weak as an eyeball can be. \n- Patrols an area and
+    shoots down powerful lighting."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4dcd063b7ba26fe4585f80e9812de937, type: 2}
   m_sharedMaterial: {fileID: -2391894399414952426, guid: 4dcd063b7ba26fe4585f80e9812de937, type: 2}
@@ -5759,7 +5768,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -371, y: 0.0000019087}
+  m_AnchoredPosition: {x: -371, y: 45.46}
   m_SizeDelta: {x: 264.49, y: 215.84}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5638329768765046918
