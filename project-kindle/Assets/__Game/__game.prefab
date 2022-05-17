@@ -92,7 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: mus_title
-    clip: {fileID: 8300000, guid: bb0ac7c1752d0aa428eb1f051ff5b68c, type: 3}
+    clip: {fileID: 8300000, guid: ff79a6d4fb811ae488b9a11f09d78ddc, type: 3}
     volume: 0.5
     pitch: 1
     source: {fileID: 0}
