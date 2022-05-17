@@ -23,6 +23,7 @@ public class WeaponProjectile : MasterObject
     [SerializeField] protected GameObject obj_on_miss; // Object to create when life timer expires (a particle)
 
     protected Weapon sourceweapon = null; // Weapon component that the projectile was fired from
+    [SerializeField] protected int weaponprojtype = -1;   // Specifies which weapon the projectile came from
 
     // Common ============================================================
     
@@ -117,7 +118,7 @@ public class WeaponProjectile : MasterObject
     // Called on collision with enemy. Return true if object is to be destroyed afterwards
     protected virtual void OnEnemyHit(Entity e)
     {
-        e.ChangeHealth(-damage);
+        e.ChangeHealth(-damage, weaponprojtype);
         DecrementShotCount();
 
         // Create hit graphic

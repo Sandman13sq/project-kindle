@@ -111,13 +111,34 @@ public class PlayerData : MasterObject
     // Move to next available weapon
     public void NextWeapon()
     {
-        SetActiveWeapon((weaponindex+1) % (weapons.Length));
+        for (var i = 0; i < weapons.Length; i++)
+        {
+            weaponindex = (weaponindex+1) % (weapons.Length);
+            if (weapons[weaponindex].GetIsUnlocked())
+            {
+                SetActiveWeapon(weaponindex);
+                return;
+            }
+        }
     }
 
     // Move to previous available weapon
     public void PrevWeapon()
     {
-        SetActiveWeapon(weaponindex==0? weapons.Length-1: weaponindex-1);
+        for (var i = 0; i < weapons.Length; i++)
+        {
+            weaponindex = weaponindex == 0? weapons.Length-1: weaponindex-1;
+            if (weapons[weaponindex].GetIsUnlocked())
+            {
+                SetActiveWeapon(weaponindex);
+                return;
+            }
+        }
+    }
+
+    public void UnlockWeapon(int index)
+    {
+        weapons[index].SetIsUnlocked(false);
     }
 
     public Weapon GetActiveWeapon() {return activeweapon;}

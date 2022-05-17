@@ -67,6 +67,7 @@ MonoBehaviour:
   lifemax: 200
   obj_on_hit: {fileID: 7686472034411174745, guid: b20ad0f220e2cfd4ca1c60f57b46714e, type: 3}
   obj_on_miss: {fileID: 7686472034411174745, guid: b20ad0f220e2cfd4ca1c60f57b46714e, type: 3}
+  weaponprojtype: 2
   explosionradius: {fileID: 8208506387460593462}
   tailprefab: {fileID: 4238736459435534345, guid: c9790762c02af8142a4bfefba16bcb26, type: 3}
   sparkleparticle:
