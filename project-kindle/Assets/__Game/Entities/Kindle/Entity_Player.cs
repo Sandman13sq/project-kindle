@@ -214,7 +214,7 @@ public class Entity_Player : Entity
 						landingSoundPlayed = true;
 						game.PlaySound("Landing");
 					}
-					yspeed = Mathf.Max(0.0f, yspeed); // Keep upwards movement, if any
+					yspeed = Mathf.Max(-1.0f, yspeed); // Keep upwards movement, if any
 
 					// When current speed and input direction agree, use acceleration, else use deceleration
 					if (xlev > 0.0f) // Moving Right
