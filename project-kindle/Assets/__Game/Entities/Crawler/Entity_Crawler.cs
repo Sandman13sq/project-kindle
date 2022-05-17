@@ -75,9 +75,9 @@ public class Entity_Crawler : Entity
 		}
     }
 
-    protected override void OnHealthChange(int diff)
+    protected override void OnHealthChange(int diff, int weaponprojtype)
     {
-        base.OnHealthChange(diff);
+        base.OnHealthChange(diff, weaponprojtype);
 
         if (diff < 0)
         {

@@ -214,7 +214,7 @@ public class Entity_Player : Entity
 						landingSoundPlayed = true;
 						game.PlaySound("Landing");
 					}
-					yspeed = Mathf.Max(0.0f, yspeed); // Keep upwards movement, if any
+					yspeed = Mathf.Max(-1.0f, yspeed); // Keep upwards movement, if any
 
 					// When current speed and input direction agree, use acceleration, else use deceleration
 					if (xlev > 0.0f) // Moving Right
@@ -423,12 +423,12 @@ public class Entity_Player : Entity
 	}
 
 	// Called when picking up a heart, taking damage, etc.
-	public override int ChangeHealth(int value)
+	public override int ChangeHealth(int value, int weaponprojtype = -1)
 	{
 		// Losing health
 		if (value < 0 && iframes == 0.0f)
 		{
-			int healthdiff = base.ChangeHealth(value);
+			int healthdiff = base.ChangeHealth(value, weaponprojtype);
 			// Subtract energy when health is lost
 			if (healthdiff < 0)
 			{
@@ -441,7 +441,7 @@ public class Entity_Player : Entity
 		// Gaining health
 		else if (value > 0)
 		{
-			int healthdiff = base.ChangeHealth(value);
+			int healthdiff = base.ChangeHealth(value, weaponprojtype);
 
 			// Flash when health is gained
 			if (healthdiff > 0)
@@ -457,7 +457,7 @@ public class Entity_Player : Entity
 	}
 
 	// Called after changing health value
-	protected override void OnHealthChange(int diff)
+	protected override void OnHealthChange(int diff, int weaponprojtype)
 	{
 		if (diff < 0)
 		{

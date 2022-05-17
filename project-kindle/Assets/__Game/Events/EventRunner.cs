@@ -34,6 +34,7 @@ public class EventRunner : MasterObject
         {"playermoveto", Command.player_moveto},    // Move player to entity with tag X with x offset Y and y offset Z
 
         {"healthaddmax", Command.health_add_max},    // Adds X to max health
+        {"weaponunlock", Command.weapon_unlock},    // Unlocks weapon X
 
         {"textprint", Command.text_print},  // Add text S to textbox
         {"textclear", Command.text_clear},  // Clears text box text
@@ -70,6 +71,7 @@ public class EventRunner : MasterObject
         free_controls,
         player_moveto,
         health_add_max,
+        weapon_unlock,
 
         // Text --------------------------------
         text_print,
@@ -486,6 +488,11 @@ public class EventRunner : MasterObject
                 // Add X to Max Health
                 case(Command.health_add_max):
                     game.GetPlayerData().AddHealthMax((int)activecommand.values[0]);
+                    break;
+                
+                // Unlocks weapon X
+                case(Command.weapon_unlock):
+                    game.GetPlayerData().UnlockWeapon((int)activecommand.values[0]);
                     break;
                 
                 // Text ------------------------------------------------------------------

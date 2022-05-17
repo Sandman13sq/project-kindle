@@ -27,7 +27,7 @@ public class MeteorExplosion : WeaponProjectile
                 // Entity has the shootable flag set
                 if (e.isshootable)
                 {
-                    e.ChangeHealth(-damage);
+                    e.ChangeHealth(-damage, weaponprojtype);
                 }
             }
         }
