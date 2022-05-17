@@ -17,10 +17,13 @@ public class PauseMenu : MasterObject
     [SerializeField] GameObject enemiesPage1;
     [SerializeField] GameObject enemiesPage2;
     [SerializeField] GameObject enemiesPage3;
-    [SerializeField] Button weaponsButton;
-    [SerializeField] Button goalsButton;
-    [SerializeField] Button enemiesButton;
+    [SerializeField] GameObject weaponsButtonPreFab;
+    [SerializeField] GameObject goalsButtonPreFab;
+    [SerializeField] GameObject enemiesButtonPreFab;
     [SerializeField] UnityEngine.UI.Image[] arrowsprites;
+    private Button weaponsButton;
+    private Button goalsButton;
+    private Button enemiesButton;
     private float statestep;
     private List<float> arrowystart = new List<float>();
 
@@ -36,6 +39,10 @@ public class PauseMenu : MasterObject
         goalsPage.SetActive(currentTab==0);
         weaponPage.SetActive(currentTab==1);
         enemiesPage.SetActive(currentTab==2);
+
+        weaponsButton = weaponsButtonPreFab.GetComponent<Button>();
+        goalsButton = goalsButtonPreFab.GetComponent<Button>();
+        enemiesButton = enemiesButtonPreFab.GetComponent<Button>();
     }
 
     // Update is called once per frame

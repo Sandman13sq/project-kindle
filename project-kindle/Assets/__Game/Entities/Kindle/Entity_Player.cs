@@ -268,6 +268,7 @@ public class Entity_Player : Entity
 					}
 
 					animator.SetBool("InAir", true);
+					Debug.Log("IgnoreInAir = " + animator.GetBool("IgnoreInAir"));
 				}
 
 				// Aiming up and down
@@ -384,13 +385,6 @@ public class Entity_Player : Entity
 		}
 
 		animator.speed = ts;
-
-		// Update Weapon Sprites
-		var animstate = animator.GetCurrentAnimatorStateInfo(0);
-		if (animstate.IsName("neutral"))
-		{
-			//spriterenderer_weapon[0] = 
-		}
 	}
 
 	// Methods ===============================================================
