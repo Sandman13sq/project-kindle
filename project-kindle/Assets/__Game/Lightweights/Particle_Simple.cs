@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Particle_Simple : MasterObject
 {
+    [SerializeField] protected float zstart = -9f;
     [SerializeField] protected SpriteRenderer spriterenderer; 
     [SerializeField] protected Sprite[] sprites;
     [SerializeField] protected float lifemax = 7.0f;
@@ -17,7 +18,7 @@ public class Particle_Simple : MasterObject
         transform.position = new Vector3(
             transform.position.x,
             transform.position.y,
-            -9f
+            zstart
         );
     }
 
