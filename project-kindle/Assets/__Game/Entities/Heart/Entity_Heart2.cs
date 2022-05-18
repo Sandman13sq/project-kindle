@@ -64,5 +64,8 @@ public class Entity_Heart2 : Entity
     }
 
     // Method ======================================================
-
+    protected override bool OnDefeat()
+    {
+        return true;
+    }
 }

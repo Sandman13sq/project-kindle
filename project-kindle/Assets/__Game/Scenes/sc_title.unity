@@ -2054,7 +2054,7 @@ MonoBehaviour:
 
       gameFlagSet("lock_player")
 
-      gameFlagSet("")
+      wait(13169)
 
       end()'
 --- !u!4 &1244004642
@@ -2388,11 +2388,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7742138844259772201, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 620
+      value: 550
       objectReference: {fileID: 0}
     - target: {fileID: 7742138844259772201, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 208
+      value: 207.99998
       objectReference: {fileID: 0}
     - target: {fileID: 7742138844451166155, guid: db66d3cb92991064eb95f992e7639fc3, type: 3}
       propertyPath: m_IsActive
