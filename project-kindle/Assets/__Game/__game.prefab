@@ -240,7 +240,7 @@ MonoBehaviour:
     type: 1
   - name: MeteorThwoop
     clip: {fileID: 8300000, guid: 1387a7983c8306948b2cb087d1d019d1, type: 3}
-    volume: 0.4
+    volume: 0.2
     pitch: 1
     source: {fileID: 0}
     loop: 0
