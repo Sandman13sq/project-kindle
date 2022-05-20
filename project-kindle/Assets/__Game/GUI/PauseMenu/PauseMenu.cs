@@ -30,6 +30,11 @@ public class PauseMenu : MasterObject
     private List<float> arrowystart = new List<float>();
     public List<string> objectives = new List<string>();
 
+    bool leftHolding = false;
+    bool rightHolding = false;
+    bool upHolding = false;
+    bool downHolding = false;
+
     void Start() {
         int len = arrowsprites.Length;
         for (int i = 0; i < len; i++)
@@ -56,6 +61,20 @@ public class PauseMenu : MasterObject
     // Update is called once per frame
     void Update()
     {
+        //input vars
+        float xaxis = Input.GetAxisRaw("Horizontal");
+        float yaxis = Input.GetAxisRaw("Vertical");
+
+        //when the player stops holding a direction, reset the holding variable
+        if (xaxis > -0.5)
+            leftHolding = false;
+        if (xaxis < 0.5)
+            rightHolding = false;
+        if (yaxis > -0.5)
+            downHolding = false;
+        if (yaxis < 0.5)
+            upHolding = false;
+        
         // Exit 
         if (game.EventIsRunning()) {return;}
 
@@ -89,14 +108,14 @@ public class PauseMenu : MasterObject
         else if(currentTab == 1)
         {
             weaponsButton.Select();
-            if(Input.GetKeyDown("down"))
+            if(yaxis < -0.5)
             {
                 weaponPage1.SetActive(false);
                 weaponPage2.SetActive(true);
                 statestep = 0.0f;
             }
 
-            else if(Input.GetKeyDown("up"))
+            else if(yaxis > 0.5)
             {
                 weaponPage2.SetActive(false);
                 weaponPage1.SetActive(true);
@@ -108,8 +127,9 @@ public class PauseMenu : MasterObject
         else if(currentTab == 2)
         {
             enemiesButton.Select();
-            if(Input.GetKeyDown("down"))
+            if(yaxis < -0.5 && downHolding == false)
             {
+                downHolding = true;
                 if(currentEnemyPage == 1)
                 {
                     enemiesPage1.SetActive(false);
@@ -124,8 +144,9 @@ public class PauseMenu : MasterObject
                 }
             }
 
-            if(Input.GetKeyDown("up"))
+            if(yaxis > 0.5 && upHolding == false)
             {
+                upHolding = true;
                 if(currentEnemyPage == 2)
                 {
                     enemiesPage1.SetActive(true);
@@ -142,8 +163,9 @@ public class PauseMenu : MasterObject
         }
 
         //navigate to the correct page
-        if(Input.GetKeyDown("left"))
+        if(xaxis < -0.5 && leftHolding == false)
         {
+            leftHolding = true;
             //From weapons page, go to the goals page
             if(currentTab == 1)
             {
@@ -161,8 +183,9 @@ public class PauseMenu : MasterObject
             }
         }
 
-        if(Input.GetKeyDown("right"))
+        if(xaxis > 0.5 && rightHolding == false)
         {
+            rightHolding = true;
             //From weapons page, go to enemies page
             if(currentTab == 1)
             {
