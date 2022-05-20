@@ -82,8 +82,10 @@ public class _GameHeader : MasterObject
         SceneManager.sceneLoaded += OnSceneLoad;
 
         // Set framerate if not on WebGL
+
         if (Application.platform != RuntimePlatform.WebGLPlayer)
         {
+            QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;
         }
 

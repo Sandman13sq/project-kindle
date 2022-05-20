@@ -13,7 +13,7 @@ public class ShowMenu : MasterObject
 
     void Update()
     {
-        if(Input.anyKeyDown)
+        if(Input.anyKeyDown && mainMenu.enabled == false)
         {
             mainMenu.enabled = true;
             anim.Play("Base Layer.MenuBackground", 0, 0.0f);

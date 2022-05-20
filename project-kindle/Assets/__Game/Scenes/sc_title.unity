@@ -272,7 +272,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 604796664}
+      - m_Target: {fileID: 1077437898}
         m_TargetAssemblyTypeName: TitlescreenMenus, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
@@ -575,7 +575,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 604796664}
+      - m_Target: {fileID: 1077437898}
         m_TargetAssemblyTypeName: TitlescreenMenus, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
@@ -659,7 +659,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 252.82}
+  m_AnchoredPosition: {x: 0, y: 226}
   m_SizeDelta: {x: 501.9473, y: 86.3663}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &234895214
@@ -1193,7 +1193,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 604796663}
-  - component: {fileID: 604796664}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -1223,21 +1222,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -163}
   m_SizeDelta: {x: 1057.2876, y: 116.3839}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &604796664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 604796662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 739f009a05131e04fa43c556db7dafac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transition: {fileID: 673489128}
-  background: {fileID: 1557289523}
-  transitionTime: 1
 --- !u!1 &671139637
 GameObject:
   m_ObjectHideFlags: 0
@@ -1692,6 +1676,7 @@ GameObject:
   - component: {fileID: 1077437896}
   - component: {fileID: 1077437895}
   - component: {fileID: 1077437894}
+  - component: {fileID: 1077437898}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1782,6 +1767,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1077437898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077437893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 739f009a05131e04fa43c556db7dafac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transition: {fileID: 673489128}
+  background: {fileID: 1557289523}
+  transitionTime: 1
 --- !u!1 &1141396138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1964,7 +1964,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 604796664}
+      - m_Target: {fileID: 1077437898}
         m_TargetAssemblyTypeName: TitlescreenMenus, Assembly-CSharp
         m_MethodName: BackButton
         m_Mode: 1
@@ -2257,8 +2257,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2293,7 +2293,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: -455.38425}
+  m_margin: {x: 0, y: 14.773895, z: 0, w: -397.7661}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2551,7 +2551,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 604796664}
+      - m_Target: {fileID: 1077437898}
         m_TargetAssemblyTypeName: TitlescreenMenus, Assembly-CSharp
         m_MethodName: OptionsMenu
         m_Mode: 1
@@ -2889,7 +2889,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 12, y: -1}
-  m_SizeDelta: {x: -897.2876, y: -85.38391}
+  m_SizeDelta: {x: -897.2876, y: -85.3839}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1761392224
 MonoBehaviour:
@@ -3383,7 +3383,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 356, y: -241}
+  m_AnchoredPosition: {x: 356, y: -210}
   m_SizeDelta: {x: -1058, y: -561}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1882653382

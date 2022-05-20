@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TitlescreenMenus : MonoBehaviour
+public class TitlescreenMenus : MasterObject
 {
     public Animator transition;
     public Animator background;
     public float transitionTime = 1f;
+
     public void StartGame()
     {
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
@@ -16,6 +17,7 @@ public class TitlescreenMenus : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+        Debug.Log("Game Has Quit!");
     }
 
     public void OptionsMenu()
